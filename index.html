@@ -5,6 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Jiang (BlueDarkUP) - 全栈开发者 & AI 机器人工程师</title>
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🔑</text></svg>">
+    <meta name="description" content="Jiang (BlueDarkUP) 的个人作品集，一位专注于全栈开发与 AI 机器人工程的学生开发者。展示了我的开源项目、技术文章以及在 FTC 机器人竞赛中的贡献。">
+    <meta name="author" content="Jiang (BlueDarkUP)">
+    <!-- 美化: 技术栈图标库 -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@v2.15.1/devicon.min.css">
     <style>
         :root {
@@ -320,6 +323,11 @@
             color: var(--text-color-dark);
             flex-grow: 1;
         }
+        .card h4 {
+            color: var(--text-color-light);
+            margin-top: 0;
+        }
+
         .card-footer {
             margin-top: 20px;
         }
@@ -481,13 +489,13 @@
 </head>
 <body>
     
-    <!-- 美化: 鼠标辉光效果 -->
     <div id="cursor-glow"></div>
 
     <nav class="navbar">
         <a href="#hero" class="logo">-BlueDarkUP-</a>
         <ul class="nav-links">
             <li><a href="#about">关于我</a></li>
+            <li><a href="#philosophy">我的理念</a></li>
             <li><a href="#articles">精选文章</a></li>
             <li><a href="#community">社区贡献</a></li>
             <li><a href="#projects">开源项目</a></li>
@@ -495,6 +503,7 @@
             <li><a href="#contact">联系方式</a></li>
         </ul>
         <div class="hamburger">
+            <span class="bar"></span>
             <span class="bar"></span>
             <span class="bar"></span>
         </div>
@@ -510,8 +519,6 @@
             <a href="https://github.com/BlueDarkUP" target="_blank" class="cta-button">查看我的开源项目</a>
         </section>
 
-        <!-- [此处省略与之前版本相同的 about, articles, community, projects 部分的HTML] -->
-        <!-- The HTML for sections: about, articles, community, projects remains the same. -->
         <section id="about" class="fade-in">
             <h2 class="section-title">关于我</h2>
             <div class="about-content">
@@ -533,6 +540,40 @@
                 </div>
             </div>
         </section>
+        
+        <section id="philosophy" class="fade-in">
+            <h2 class="section-title">我的理念与愿景</h2>
+            <div class="card-grid">
+                <div class="card fade-in">
+                    <h4><span style="color: var(--secondary-color); margin-right: 10px;">Q1:</span> 您为什么对机器人和 AI 充满热情？</h4>
+                    <p>
+                        对我而言，AI 与机器人的最大魅力在于它们是<strong>连接虚拟世界与物理世界的桥梁</strong>。我的热情始于一个简单的生活观察：初中校门口一个即使无车也漫长等待的红绿灯。为此，我编写了第一个视觉程序——“基于OpenCV的行人检测系统”，旨在动态调整信号灯时长，这个项目也荣幸地获得了北京市金鹏科技论坛二等奖。
+                    </p>
+                    <p>
+                        从那一刻起我便着迷于此：一行代码不再仅是屏幕上的逻辑，它能驱动机械臂精准抓取，能引导小车在赛场上自主导航。当看到自己的想法变为现实，那种成就感是我不断探索的根本动力。
+                    </p>
+                </div>
+                <div class="card fade-in">
+                    <h4><span style="color: var(--secondary-color); margin-right: 10px;">Q2:</span> 您认为好的软件工程是怎样的？</h4>
+                    <p>
+                        我追求的不仅是“能用”的代码，更是<strong>优雅、可读、可维护的工程艺术</strong>。这意味着深思熟虑的命名、高度模块化的结构和清晰的文档。
+                    </p>
+                    <p>
+                        在 FTC 团队项目中，我主导了代码架构的重构，将视觉、控制、导航等核心模块完全解耦。这确保了任何成员都能快速上手、修改特定功能，而不会引发系统性崩溃。一个好的系统，应当像一本清晰的书，任何人翻开都能轻松理解脉络，并充满信心地添写新的篇章。
+                    </p>
+                </div>
+                <div class="card fade-in">
+                    <h4><span style="color: var(--secondary-color); margin-right: 10px;">Q3:</span> 您希望未来用技术解决什么样的问题？</h4>
+                    <p>
+                        我的长期愿景是成为一名“**工具的创造者**”。我发现，许多创想难以落地，并非因为缺乏智慧，而是被繁琐的底层技术流程所束缚。
+                    </p>
+                    <p>
+                        因此，我希望能继续构建更多像 <code>Zero-to-YOLO-Yard</code> 和 <code>FTC-Easy-TFLITE</code> 这样的工具。我的目标是降低技术门槛，让更多的工程师、设计师乃至学生能将宝贵的精力聚焦于“创造”本身，而非重复性的技术配置。技术应赋能于人，我希望成为那个打造高效工具的人，去帮助更多人解决更多有价值的问题。
+                    </p>
+                </div>
+            </div>
+        </section>
+        
         <section id="articles" class="fade-in">
             <h2 class="section-title">精选技术文章与教程</h2>
             <div class="card-grid">
@@ -587,6 +628,7 @@
                 </div>
             </div>
         </section>
+        
         <section id="community" class="fade-in">
             <h2 class="section-title">社区贡献与影响力</h2>
             <div class="card-grid">
@@ -604,6 +646,7 @@
                 </div>
             </div>
         </section>
+
         <section id="projects" class="fade-in">
             <h2 class="section-title">开源项目</h2>
             <div class="card-grid">
@@ -709,7 +752,12 @@
                     <span class="tech-item"><i class="devicon-flask-original"></i> Flask</span>
                     <span class="tech-item"><i class="devicon-docker-plain"></i> Docker</span>
                     <span class="tech-item"><i class="devicon-androidstudio-plain"></i> Android Studio</span>
-                    <span class="tech-item"><i class="devicon-ros-plain"></i> ROS</span>
+                    <span class="tech-item">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="1.5em" height="1.5em" viewBox="0 0 24 24" fill="none" style="color: var(--text-color-dark);">
+                            <path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm-2.5-7.5c.83 0 1.5-.67 1.5-1.5s-.67-1.5-1.5-1.5-1.5.67-1.5 1.5.67 1.5 1.5 1.5zM12 12c.83 0 1.5-.67 1.5-1.5S12.83 9 12 9s-1.5.67-1.5 1.5.67 1.5 1.5 1.5zm2.5 1.5c.83 0 1.5-.67 1.5-1.5s-.67-1.5-1.5-1.5-1.5.67-1.5 1.5.67 1.5 1.5 1.5zm-5 1.5c.83 0 1.5-.67 1.5-1.5s-.67-1.5-1.5-1.5S8 12.67 8 13.5s.67 1.5 1.5 1.5zm4 0c.83 0 1.5-.67 1.5-1.5S14.33 12 13.5 12s-1.5.67-1.5 1.5.67 1.5 1.5 1.5z" fill="currentColor"></path>
+                        </svg>
+                        ROS
+                    </span>
                 </div>
             </div>
             <div class="tech-category">
@@ -717,7 +765,7 @@
                 <div class="tech-grid">
                     <span class="tech-item"><i class="devicon-javascript-plain"></i> JavaScript</span>
                     <span class="tech-item"><i class="devicon-sqlite-plain"></i> SQLite</span>
-                    <span class="tech-item"><i>󰗟</i> REST API</span> <!-- Using a generic API icon -->
+                    <span class="tech-item"><i>󰗟</i> REST API</span>
                     <span class="tech-item"><i class="devicon-anaconda-original"></i> Conda</span>
                 </div>
             </div>
@@ -727,7 +775,6 @@
             <h2 class="section-title" style="margin: 0 auto;">联系方式</h2>
             <p>我对新的机遇和挑战总是充满热情。欢迎随时通过以下方式与我交流、探讨技术或寻求合作！</p>
             <div class="contact-links">
-                 <!-- [此处省略与之前版本相同的联系方式部分HTML] -->
                 <a href="https://github.com/BlueDarkUP" target="_blank" title="GitHub" aria-label="访问我的GitHub主页">
                     <svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><title>GitHub</title><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.12-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.665 1.653.255 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
                 </a>
@@ -768,7 +815,6 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            // 1. 汉堡菜单功能
             const hamburger = document.querySelector('.hamburger');
             const navLinks = document.querySelector('.nav-links');
             const navLinksItems = document.querySelectorAll('.nav-links li a');
@@ -787,19 +833,16 @@
                 });
             });
 
-            // 2. 滚动相关功能
             const backToTopButton = document.querySelector('.back-to-top');
             const navbar = document.querySelector('.navbar');
 
             window.addEventListener('scroll', () => {
-                // “返回顶部”按钮逻辑
                 if (window.pageYOffset > 300) {
                     backToTopButton.classList.add('visible');
                 } else {
                     backToTopButton.classList.remove('visible');
                 }
                 
-                // 动态导航栏逻辑
                 if (window.pageYOffset > 50) {
                     navbar.classList.add('scrolled');
                 } else {
@@ -815,7 +858,6 @@
                 });
             });
 
-            // 3. 滚动加载动画功能
             const animatedElements = document.querySelectorAll('.fade-in');
             const observer = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
@@ -831,11 +873,9 @@
                 observer.observe(element);
             });
 
-            // 4. 美化: 鼠标辉光效果
             const glow = document.getElementById('cursor-glow');
-            if (glow) { // 检查元素是否存在
+            if (glow) {
                 window.addEventListener('mousemove', (e) => {
-                    // 使用 top/left 更新位置，因为 transform 已用于缩放
                     glow.style.left = e.clientX + 'px';
                     glow.style.top = e.clientY + 'px';
                 });
