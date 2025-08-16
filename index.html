@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Jiang (BlueDarkUP) - 全栈开发者 & AI 机器人工程师</title>
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🧑‍💻</text></svg>">
+    <!-- 美化: 技术栈图标库 -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@v2.15.1/devicon.min.css">
     <style>
         :root {
             --primary-color: #2A4730;
@@ -21,7 +23,9 @@
 
         body {
             font-family: var(--font-sans);
-            background-color: var(--primary-color);
+            /* 美化: 背景渐变 */
+            background: linear-gradient(180deg, #315139 0%, var(--primary-color) 100%);
+            background-attachment: fixed;
             color: var(--text-color-light);
             margin: 0;
             padding: 0;
@@ -39,8 +43,24 @@
             background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 250 250' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
             opacity: 0.03;
             pointer-events: none;
-            z-index: -1;
+            z-index: 0;
         }
+
+        /* 美化: 鼠标辉光效果 */
+        #cursor-glow {
+            pointer-events: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 600px;
+            height: 600px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(216, 226, 94, 0.05), transparent 60%);
+            transform: translate(-50%, -50%);
+            transition: top 0.1s ease-out, left 0.1s ease-out; /* 使用top/left以避免transform冲突 */
+            z-index: 0;
+        }
+
 
         /* 美化: 自定义滚动条 */
         ::-webkit-scrollbar {
@@ -61,6 +81,8 @@
             max-width: 1100px;
             margin: 0 auto;
             padding: 0 40px;
+            position: relative; /* 确保内容在辉光之上 */
+            z-index: 1;
         }
 
         .navbar {
@@ -74,11 +96,9 @@
             background-color: rgba(42, 71, 48, 0.85);
             backdrop-filter: blur(10px);
             z-index: 1000;
-            /* 美化: 为动态导航栏添加过渡 */
             transition: padding 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
         }
         
-        /* 美化: 动态导航栏滚动后的样式 */
         .navbar.scrolled {
             padding-top: 10px;
             padding-bottom: 10px;
@@ -100,8 +120,7 @@
             margin: 0;
             padding: 0;
         }
-
-        /* 美化: 导航链接动画下划线 */
+        
         .nav-links a {
             color: var(--text-color-light);
             text-decoration: none;
@@ -166,12 +185,11 @@
             margin-bottom: 50px;
             position: relative;
             display: inline-block;
-            /* 美化: 标题渐变文字 */
             background: linear-gradient(90deg, var(--text-color-light), var(--secondary-color));
             -webkit-background-clip: text;
             background-clip: text;
             -webkit-text-fill-color: transparent;
-            color: var(--text-color-light); /* Fallback */
+            color: var(--text-color-light);
         }
 
         .section-title::after {
@@ -179,7 +197,7 @@
             display: block;
             width: 50%;
             height: 3px;
-            background-color: var(--secondary-color); /* 保持下划线为纯色 */
+            background-color: var(--secondary-color);
             margin-top: 10px;
         }
 
@@ -198,12 +216,11 @@
         }
         
         #hero .highlight {
-            /* 美化: 标题渐变文字 */
             background: linear-gradient(90deg, var(--text-color-light), var(--secondary-color));
             -webkit-background-clip: text;
             background-clip: text;
             -webkit-text-fill-color: transparent;
-            color: var(--secondary-color); /* Fallback */
+            color: var(--secondary-color);
         }
 
         #hero p.subtitle {
@@ -262,17 +279,31 @@
             gap: 20px;
         }
 
+        /* 美化: 精致的卡片悬停效果 */
         .card {
             background-color: var(--background-light);
             padding: 25px;
             border-radius: 5px;
             display: flex;
             flex-direction: column;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 1px solid transparent;
+            transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
         }
         .card:hover {
             transform: translateY(-7px);
             box-shadow: 0 10px 30px -15px rgba(0,0,0,0.7);
+            border-color: rgba(216, 226, 94, 0.5);
+        }
+        .card h3 a::after {
+            content: ' →';
+            opacity: 0;
+            transform: translateX(-10px);
+            transition: all 0.3s ease;
+            display: inline-block;
+        }
+        .card:hover h3 a::after {
+            opacity: 1;
+            transform: translateX(0);
         }
 
         .card h3 {
@@ -314,10 +345,19 @@
             flex-wrap: wrap;
             gap: 15px;
         }
+        /* 美化: 技术栈图标样式 */
         .tech-item {
             background-color: var(--background-light);
             padding: 8px 18px;
             border-radius: 5px;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.1em;
+        }
+        .tech-item i {
+            font-size: 1.5em; /* 让图标稍大一些 */
+            color: var(--text-color-dark);
         }
 
         #contact {
@@ -433,10 +473,17 @@
             .hamburger.active .bar:nth-child(3) {
                 transform: translateY(-8px) rotate(-45deg);
             }
+            
+            #cursor-glow {
+                display: none; /* 在移动端禁用辉光效果以提高性能 */
+            }
         }
     </style>
 </head>
 <body>
+    
+    <!-- 美化: 鼠标辉光效果 -->
+    <div id="cursor-glow"></div>
 
     <nav class="navbar">
         <a href="#hero" class="logo">-BlueDarkUP-</a>
@@ -449,7 +496,6 @@
             <li><a href="#contact">联系方式</a></li>
         </ul>
         <div class="hamburger">
-            <span class="bar"></span>
             <span class="bar"></span>
             <span class="bar"></span>
         </div>
@@ -465,6 +511,8 @@
             <a href="https://github.com/BlueDarkUP" target="_blank" class="cta-button">查看我的开源项目</a>
         </section>
 
+        <!-- [此处省略与之前版本相同的 about, articles, community, projects 部分的HTML] -->
+        <!-- The HTML for sections: about, articles, community, projects remains the same. -->
         <section id="about" class="fade-in">
             <h2 class="section-title">关于我</h2>
             <div class="about-content">
@@ -486,9 +534,6 @@
                 </div>
             </div>
         </section>
-
-        <!-- [剩余的 HTML 内容保持不变，因此省略以节省篇幅] -->
-        <!-- The rest of the HTML content for sections: articles, community, projects, tech-stack, contact remains exactly the same as your provided code. -->
         <section id="articles" class="fade-in">
             <h2 class="section-title">精选技术文章与教程</h2>
             <div class="card-grid">
@@ -543,7 +588,6 @@
                 </div>
             </div>
         </section>
-
         <section id="community" class="fade-in">
             <h2 class="section-title">社区贡献与影响力</h2>
             <div class="card-grid">
@@ -561,7 +605,6 @@
                 </div>
             </div>
         </section>
-        
         <section id="projects" class="fade-in">
             <h2 class="section-title">开源项目</h2>
             <div class="card-grid">
@@ -650,33 +693,33 @@
             <div class="tech-category">
                 <h4>精通 (Proficient)</h4>
                 <div class="tech-grid">
-                    <span class="tech-item">Python</span>
-                    <span class="tech-item">Java</span>
-                    <span class="tech-item">TensorFlow</span>
-                    <span class="tech-item">OpenCV</span>
-                    <span class="tech-item">YOLO</span>
-                    <span class="tech-item">Git</span>
+                    <span class="tech-item"><i class="devicon-python-plain"></i> Python</span>
+                    <span class="tech-item"><i class="devicon-java-plain"></i> Java</span>
+                    <span class="tech-item"><i class="devicon-tensorflow-original"></i> TensorFlow</span>
+                    <span class="tech-item"><i class="devicon-opencv-plain"></i> OpenCV</span>
+                    <span class="tech-item"><i class="devicon-fastapi-plain"></i> YOLO</span> <!-- Using FastAPI as a placeholder for YOLO -->
+                    <span class="tech-item"><i class="devicon-git-plain"></i> Git</span>
                 </div>
             </div>
             <div class="tech-category">
                 <h4>熟练 (Experienced)</h4>
                 <div class="tech-grid">
-                    <span class="tech-item">C++</span>
-                    <span class="tech-item">Bash</span>
-                    <span class="tech-item">PyTorch</span>
-                    <span class="tech-item">Flask</span>
-                    <span class="tech-item">Docker</span>
-                    <span class="tech-item">Android Studio</span>
-                    <span class="tech-item">ROS</span>
+                    <span class="tech-item"><i class="devicon-cplusplus-plain"></i> C++</span>
+                    <span class="tech-item"><i class="devicon-bash-plain"></i> Bash</span>
+                    <span class="tech-item"><i class="devicon-pytorch-plain"></i> PyTorch</span>
+                    <span class="tech-item"><i class="devicon-flask-original"></i> Flask</span>
+                    <span class="tech-item"><i class="devicon-docker-plain"></i> Docker</span>
+                    <span class="tech-item"><i class="devicon-androidstudio-plain"></i> Android Studio</span>
+                    <span class="tech-item"><i class="devicon-ros-plain"></i> ROS</span>
                 </div>
             </div>
             <div class="tech-category">
                 <h4>了解 (Familiar with)</h4>
                 <div class="tech-grid">
-                    <span class="tech-item">JavaScript</span>
-                    <span class="tech-item">SQLite</span>
-                    <span class="tech-item">REST API</span>
-                    <span class="tech-item">Conda</span>
+                    <span class="tech-item"><i class="devicon-javascript-plain"></i> JavaScript</span>
+                    <span class="tech-item"><i class="devicon-sqlite-plain"></i> SQLite</span>
+                    <span class="tech-item"><i>󰗟</i> REST API</span> <!-- Using a generic API icon -->
+                    <span class="tech-item"><i class="devicon-anaconda-original"></i> Conda</span>
                 </div>
             </div>
         </section>
@@ -685,6 +728,7 @@
             <h2 class="section-title" style="margin: 0 auto;">联系方式</h2>
             <p>我对新的机遇和挑战总是充满热情。欢迎随时通过以下方式与我交流、探讨技术或寻求合作！</p>
             <div class="contact-links">
+                 <!-- [此处省略与之前版本相同的联系方式部分HTML] -->
                 <a href="https://github.com/BlueDarkUP" target="_blank" title="GitHub" aria-label="访问我的GitHub主页">
                     <svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><title>GitHub</title><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.12-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.665 1.653.255 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
                 </a>
@@ -744,7 +788,7 @@
                 });
             });
 
-            // 2. 滚动相关功能 (返回顶部 & 动态导航栏)
+            // 2. 滚动相关功能
             const backToTopButton = document.querySelector('.back-to-top');
             const navbar = document.querySelector('.navbar');
 
@@ -756,7 +800,7 @@
                     backToTopButton.classList.remove('visible');
                 }
                 
-                // 美化: 动态导航栏逻辑
+                // 动态导航栏逻辑
                 if (window.pageYOffset > 50) {
                     navbar.classList.add('scrolled');
                 } else {
@@ -774,7 +818,6 @@
 
             // 3. 滚动加载动画功能
             const animatedElements = document.querySelectorAll('.fade-in');
-
             const observer = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
@@ -785,10 +828,19 @@
             }, {
                 threshold: 0.1
             });
-
             animatedElements.forEach(element => {
                 observer.observe(element);
             });
+
+            // 4. 美化: 鼠标辉光效果
+            const glow = document.getElementById('cursor-glow');
+            if (glow) { // 检查元素是否存在
+                window.addEventListener('mousemove', (e) => {
+                    // 使用 top/left 更新位置，因为 transform 已用于缩放
+                    glow.style.left = e.clientX + 'px';
+                    glow.style.top = e.clientY + 'px';
+                });
+            }
         });
     </script>
 </body>
