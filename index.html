@@ -4,10 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Jiang (BlueDarkUP) - 全栈开发者 & AI 机器人工程师</title>
-    <!-- Favicon: 浏览器标签页图标 -->
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🧑‍💻</text></svg>">
-    <!-- Devicon CDN for tech stack icons -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@v2.15.1/devicon.min.css">
     <style>
         :root {
             --primary-color: #2A4730;
@@ -24,28 +21,40 @@
 
         body {
             font-family: var(--font-sans);
-            /* background-color: var(--primary-color); */
-            background: linear-gradient(180deg, #315139 0%, var(--primary-color) 100%);
-            background-attachment: fixed;
+            background-color: var(--primary-color);
             color: var(--text-color-light);
             margin: 0;
             padding: 0;
             line-height: 1.6;
         }
 
-        /* Cursor Follow Glow Effect */
-        #cursor-glow {
-            pointer-events: none;
+        /* 美化: 背景噪点纹理 */
+        body::before {
+            content: '';
             position: fixed;
             top: 0;
             left: 0;
-            width: 600px;
-            height: 600px;
-            border-radius: 50%;
-            background: radial-gradient(circle, rgba(216, 226, 94, 0.05), transparent 60%);
-            transform: translate(-50%, -50%);
-            transition: transform 0.1s ease-out;
-            z-index: 0;
+            width: 100vw;
+            height: 100vh;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 250 250' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+            opacity: 0.03;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        /* 美化: 自定义滚动条 */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: var(--primary-color);
+        }
+        ::-webkit-scrollbar-thumb {
+            background-color: var(--background-light);
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background-color: var(--text-color-dark);
         }
 
         .container {
@@ -65,6 +74,15 @@
             background-color: rgba(42, 71, 48, 0.85);
             backdrop-filter: blur(10px);
             z-index: 1000;
+            /* 美化: 为动态导航栏添加过渡 */
+            transition: padding 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+        }
+        
+        /* 美化: 动态导航栏滚动后的样式 */
+        .navbar.scrolled {
+            padding-top: 10px;
+            padding-bottom: 10px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
         }
 
         .logo {
@@ -72,7 +90,7 @@
             font-size: 1.8em;
             color: var(--secondary-color);
             text-decoration: none;
-            z-index: 1001; /* 确保Logo在移动菜单之上 */
+            z-index: 1001;
         }
 
         .nav-links {
@@ -83,19 +101,36 @@
             padding: 0;
         }
 
+        /* 美化: 导航链接动画下划线 */
         .nav-links a {
             color: var(--text-color-light);
             text-decoration: none;
             transition: color 0.3s ease;
             font-size: 0.95em;
+            position: relative;
+            padding: 5px 0;
         }
-
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 2px;
+            background-color: var(--secondary-color);
+            bottom: 0;
+            left: 0;
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.3s ease-in-out;
+        }
         .nav-links a:hover {
-            color: var(--secondary-color);
+            color: var(--text-color-light);
+        }
+        .nav-links a:hover::after {
+            transform: scaleX(1);
         }
 
         .hamburger {
-            display: none; /* 默认隐藏 */
+            display: none;
             cursor: pointer;
             z-index: 1001;
         }
@@ -115,7 +150,6 @@
             min-height: 80vh;
         }
         
-        /* 优化: 滚动动画的初始状态 */
         .fade-in {
             opacity: 0;
             transform: translateY(20px);
@@ -129,10 +163,15 @@
 
         .section-title {
             font-size: 2.5em;
-            color: var(--text-color-light);
             margin-bottom: 50px;
             position: relative;
             display: inline-block;
+            /* 美化: 标题渐变文字 */
+            background: linear-gradient(90deg, var(--text-color-light), var(--secondary-color));
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            color: var(--text-color-light); /* Fallback */
         }
 
         .section-title::after {
@@ -140,7 +179,7 @@
             display: block;
             width: 50%;
             height: 3px;
-            background-color: var(--secondary-color);
+            background-color: var(--secondary-color); /* 保持下划线为纯色 */
             margin-top: 10px;
         }
 
@@ -159,7 +198,12 @@
         }
         
         #hero .highlight {
-            color: var(--secondary-color);
+            /* 美化: 标题渐变文字 */
+            background: linear-gradient(90deg, var(--text-color-light), var(--secondary-color));
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            color: var(--secondary-color); /* Fallback */
         }
 
         #hero p.subtitle {
@@ -224,13 +268,11 @@
             border-radius: 5px;
             display: flex;
             flex-direction: column;
-            border: 1px solid transparent; /* Refined hover effect */
-            transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
         .card:hover {
             transform: translateY(-7px);
             box-shadow: 0 10px 30px -15px rgba(0,0,0,0.7);
-            border-color: var(--secondary-color); /* Refined hover effect */
         }
 
         .card h3 {
@@ -243,20 +285,6 @@
         .card h3 a:hover {
             color: var(--secondary-color);
         }
-        
-        /* Refined hover effect for card title */
-        .card h3 a::after {
-            content: ' →';
-            display: inline-block;
-            opacity: 0;
-            transform: translateX(-10px);
-            transition: all 0.3s ease;
-        }
-        .card:hover h3 a::after {
-            opacity: 1;
-            transform: translateX(0);
-        }
-
         .card p {
             font-size: 0.95em;
             color: var(--text-color-dark);
@@ -290,9 +318,6 @@
             background-color: var(--background-light);
             padding: 8px 18px;
             border-radius: 5px;
-            display: inline-flex; /* For icon alignment */
-            align-items: center; /* For icon alignment */
-            gap: 8px; /* Space between icon and text */
         }
 
         #contact {
@@ -331,7 +356,6 @@
             text-decoration: none;
         }
 
-        /* 优化: “返回顶部”按钮样式 */
         .back-to-top {
             position: fixed;
             bottom: 20px;
@@ -367,7 +391,6 @@
             font-weight: bold;
         }
 
-        /* 优化: 响应式设计 - 移动端适配 */
         @media (max-width: 768px) {
             .about-content {
                 grid-template-columns: 1fr;
@@ -375,7 +398,7 @@
 
             .nav-links {
                 position: fixed;
-                left: -100%; /* 初始状态在屏幕外 */
+                left: -100%;
                 top: 0;
                 flex-direction: column;
                 background-color: var(--primary-color);
@@ -388,7 +411,7 @@
             }
 
             .nav-links.active {
-                left: 0; /* 激活时移入屏幕 */
+                left: 0;
             }
 
             .nav-links a {
@@ -396,7 +419,7 @@
             }
 
             .hamburger {
-                display: block; /* 在移动端显示汉堡菜单 */
+                display: block;
             }
             
             .hamburger.active .bar:nth-child(2) {
@@ -415,8 +438,6 @@
 </head>
 <body>
 
-    <div id="cursor-glow"></div>
-
     <nav class="navbar">
         <a href="#hero" class="logo">-BlueDarkUP-</a>
         <ul class="nav-links">
@@ -427,7 +448,6 @@
             <li><a href="#tech-stack">技术栈</a></li>
             <li><a href="#contact">联系方式</a></li>
         </ul>
-        <!-- 优化: 汉堡菜单HTML结构 -->
         <div class="hamburger">
             <span class="bar"></span>
             <span class="bar"></span>
@@ -467,10 +487,11 @@
             </div>
         </section>
 
+        <!-- [剩余的 HTML 内容保持不变，因此省略以节省篇幅] -->
+        <!-- The rest of the HTML content for sections: articles, community, projects, tech-stack, contact remains exactly the same as your provided code. -->
         <section id="articles" class="fade-in">
             <h2 class="section-title">精选技术文章与教程</h2>
             <div class="card-grid">
-                <!-- 为每个卡片添加 fade-in 类以实现动画 -->
                 <div class="card fade-in">
                     <h3><a href="https://grizzly-treatment-ac4.notion.site/FTC-27570-TeleOp-250969a5284d8075b144dca6f421e9b8?pvs=73" target="_blank">课程 1: 你的第一个竞赛级 TeleOp</a></h3>
                     <p>学习 LinearOpMode 的基本结构，如何映射硬件，并为Mecanum底盘实现稳健的驱动控制。</p>
@@ -544,7 +565,6 @@
         <section id="projects" class="fade-in">
             <h2 class="section-title">开源项目</h2>
             <div class="card-grid">
-                <!-- 为每个卡片添加 fade-in 类以实现动画 -->
                 <div class="card fade-in">
                     <h3><a href="https://github.com/BlueDarkUP/FTC-27570-INTOTHEDEEP-WRC" target="_blank">FTC 27570 Team Code (WRC)</a></h3>
                     <p>27570队赛季核心代码库。<b>亮点:</b> 集成了先进的自主导航、L3级辅助驾驶和智能视觉抓取系统，是赢得控制奖的关键。</p>
@@ -630,33 +650,33 @@
             <div class="tech-category">
                 <h4>精通 (Proficient)</h4>
                 <div class="tech-grid">
-                    <span class="tech-item"><i class="devicon-python-plain"></i> Python</span>
-                    <span class="tech-item"><i class="devicon-java-plain"></i> Java</span>
-                    <span class="tech-item"><i class="devicon-tensorflow-original"></i> TensorFlow</span>
-                    <span class="tech-item"><i class="devicon-opencv-plain"></i> OpenCV</span>
+                    <span class="tech-item">Python</span>
+                    <span class="tech-item">Java</span>
+                    <span class="tech-item">TensorFlow</span>
+                    <span class="tech-item">OpenCV</span>
                     <span class="tech-item">YOLO</span>
-                    <span class="tech-item"><i class="devicon-git-plain"></i> Git</span>
+                    <span class="tech-item">Git</span>
                 </div>
             </div>
             <div class="tech-category">
                 <h4>熟练 (Experienced)</h4>
                 <div class="tech-grid">
-                    <span class="tech-item"><i class="devicon-cplusplus-plain"></i> C++</span>
-                    <span class="tech-item"><i class="devicon-bash-plain"></i> Bash</span>
-                    <span class="tech-item"><i class="devicon-pytorch-original"></i> PyTorch</span>
-                    <span class="tech-item"><i class="devicon-flask-original"></i> Flask</span>
-                    <span class="tech-item"><i class="devicon-docker-plain"></i> Docker</span>
-                    <span class="tech-item"><i class="devicon-androidstudio-plain"></i> Android Studio</span>
+                    <span class="tech-item">C++</span>
+                    <span class="tech-item">Bash</span>
+                    <span class="tech-item">PyTorch</span>
+                    <span class="tech-item">Flask</span>
+                    <span class="tech-item">Docker</span>
+                    <span class="tech-item">Android Studio</span>
                     <span class="tech-item">ROS</span>
                 </div>
             </div>
             <div class="tech-category">
                 <h4>了解 (Familiar with)</h4>
                 <div class="tech-grid">
-                    <span class="tech-item"><i class="devicon-javascript-plain"></i> JavaScript</span>
-                    <span class="tech-item"><i class="devicon-sqlite-plain"></i> SQLite</span>
+                    <span class="tech-item">JavaScript</span>
+                    <span class="tech-item">SQLite</span>
                     <span class="tech-item">REST API</span>
-                    <span class="tech-item"><i class="devicon-anaconda-original"></i> Conda</span>
+                    <span class="tech-item">Conda</span>
                 </div>
             </div>
         </section>
@@ -665,7 +685,6 @@
             <h2 class="section-title" style="margin: 0 auto;">联系方式</h2>
             <p>我对新的机遇和挑战总是充满热情。欢迎随时通过以下方式与我交流、探讨技术或寻求合作！</p>
             <div class="contact-links">
-                <!-- 优化: 为链接添加aria-label以提升可访问性 -->
                 <a href="https://github.com/BlueDarkUP" target="_blank" title="GitHub" aria-label="访问我的GitHub主页">
                     <svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><title>GitHub</title><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.12-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.665 1.653.255 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
                 </a>
@@ -673,7 +692,7 @@
                     <svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><title>Email</title><path d="M22 6c0-1.1-.9-2-2-2H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6zm-2 0l-8 5-8-5h16zm0 12H4V8l8 5 8-5v10z"/></svg>
                 </a>
                 <a href="https://www.youtube.com/@BlueDarkUP" target="_blank" title="YouTube" aria-label="访问我的YouTube频道">
-                     <svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><title>YouTube</title><path d="M21.582 7.336c-.2-.736-.77-1.306-1.506-1.506C18.66 5.5 12 5.5 12 5.5s-6.66 0-8.076.33c-.736.2-1.306.77-1.506 1.506C2.088 8.752 2 12 2 12s.088 3.248.418 4.664c.2.736.77 1.306 1.506 1.506C5.34 18.5 12 18.5 12 18.5s6.66 0 8.076-.33c.736-.2 1.306.77 1.506-1.506C21.912 15.248 22 12 22 12s-.088-3.248-.418-4.664zM9.75 14.885V9.115l4.985 2.885-4.985 2.885z"/></svg>
+                     <svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><title>YouTube</title><path d="M21.582 7.336c-.2-.736-.77-1.306-1.506-1.506C18.66 5.5 12 5.5 12 5.5s-6.66 0-8.076.33c-.736.2-1.306.77-1.506 1.506C2.088 8.752 2 12 2 12s.088 3.248.418 4.664c.2.736.77 1.306 1.506 1.506C5.34 18.5 12 18.5 12 18.5s6.66 0 8.076-.33c.736-.2 1.306-.77 1.506-1.506C21.912 15.248 22 12 22 12s-.088-3.248-.418-4.664zM9.75 14.885V9.115l4.985 2.885-4.985 2.885z"/></svg>
                 </a>
                 <a href="https://www.instagram.com/bluedarkup/" target="_blank" title="Instagram" aria-label="访问我的Instagram">
                      <svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><title>Instagram</title><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.85s-.012 3.584-.07 4.85c-.148 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07s-3.584-.012-4.85-.07c-3.252-.148-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.85s.012-3.584.07-4.85c.148-3.227 1.664-4.771 4.919-4.919C8.356 2.175 8.741 2.163 12 2.163m0-2.163C8.741 0 8.333.014 7.053.072 2.82.266.202 2.883 0 7.117.058 8.397.072 8.804.072 12s-.014 3.603-.072 4.883c-.194 4.233 2.812 6.852 7.046 7.046 1.28.058 1.687.072 4.947.072s3.667-.014 4.947-.072c4.233-.194 6.852-2.812 7.046-7.046.058-1.28.072-1.687.072-4.883s-.014-3.603-.072-4.883C23.798 2.883 21.18.266 16.947.072 15.667.014 15.259 0 12 0zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.162 6.162 6.162 6.162-2.759 6.162-6.162-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4s1.791-4 4-4 4 1.79 4 4-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.441 1.441 1.441 1.441-.645 1.441-1.441-.645-1.44-1.441-1.44z"/></svg>
@@ -695,7 +714,6 @@
 
     </main>
     
-    <!-- 优化: “返回顶部”按钮HTML结构 -->
     <a class="back-to-top" aria-label="返回页面顶部"></a>
     
     <footer>
@@ -705,7 +723,6 @@
         </p>
     </footer>
 
-    <!-- 优化: 全站功能的JavaScript -->
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             // 1. 汉堡菜单功能
@@ -718,7 +735,6 @@
                 navLinks.classList.toggle('active');
             });
 
-            // 点击移动菜单链接后，自动关闭菜单
             navLinksItems.forEach(link => {
                 link.addEventListener('click', () => {
                     if (navLinks.classList.contains('active')) {
@@ -728,14 +744,23 @@
                 });
             });
 
-            // 2. “返回顶部”按钮功能
+            // 2. 滚动相关功能 (返回顶部 & 动态导航栏)
             const backToTopButton = document.querySelector('.back-to-top');
+            const navbar = document.querySelector('.navbar');
 
             window.addEventListener('scroll', () => {
-                if (window.pageYOffset > 300) { // 滚动超过300px后显示
+                // “返回顶部”按钮逻辑
+                if (window.pageYOffset > 300) {
                     backToTopButton.classList.add('visible');
                 } else {
                     backToTopButton.classList.remove('visible');
+                }
+                
+                // 美化: 动态导航栏逻辑
+                if (window.pageYOffset > 50) {
+                    navbar.classList.add('scrolled');
+                } else {
+                    navbar.classList.remove('scrolled');
                 }
             });
             
@@ -754,25 +779,16 @@
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
                         entry.target.classList.add('is-visible');
-                        observer.unobserve(entry.target); // 动画只播放一次
+                        observer.unobserve(entry.target);
                     }
                 });
             }, {
-                threshold: 0.1 // 元素进入视口10%时触发
+                threshold: 0.1
             });
 
             animatedElements.forEach(element => {
                 observer.observe(element);
             });
-            
-            // 4. 鼠标光标跟随辉光效果
-            const glow = document.getElementById('cursor-glow');
-            if (glow) {
-                window.addEventListener('mousemove', (e) => {
-                    // We offset by half the width/height of the glow element to center it
-                    glow.style.transform = `translate(${e.clientX - 300}px, ${e.clientY - 300}px)`;
-                });
-            }
         });
     </script>
 </body>
