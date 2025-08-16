@@ -31,71 +31,74 @@
             padding: 0;
             line-height: 1.6;
         }
-        
-        body.loading-state {
-            overflow: hidden;
-        }
 
-        #main-content {
-            transition: opacity 0.5s ease-in;
-        }
-
-        body.loading-state #main-content {
-            opacity: 0;
-        }
-
-        #splash-screen {
+        /* --- 新增：启动动画样式 --- */
+        #preloader {
             position: fixed;
             top: 0;
             left: 0;
-            width: 100vw;
-            height: 100vh;
-            background: var(--primary-color);
+            width: 100%;
+            height: 100%;
+            background-color: var(--primary-color);
             z-index: 9999;
             display: flex;
             justify-content: center;
             align-items: center;
-            flex-direction: column;
-            gap: 20px;
-            transition: opacity 0.8s ease-out 0.2s;
+            transition: opacity 0.8s ease-in-out, visibility 0.8s ease-in-out;
+            visibility: visible;
             opacity: 1;
         }
 
-        #splash-screen.hidden {
+        #preloader.loaded {
             opacity: 0;
+            visibility: hidden;
             pointer-events: none;
         }
 
-        .splash-rocket {
+        .rocket-container {
+            text-align: center;
+            animation: takeOff 2.8s ease-in-out forwards;
+        }
+
+        .rocket-container svg {
             width: 150px;
             height: 150px;
-            opacity: 0;
-            animation: launch 1.5s 0.2s ease-out forwards;
+            margin-bottom: 20px;
         }
 
-        .splash-text {
+        .loading-text {
             color: var(--text-color-light);
             font-size: 1.2em;
-            font-family: var(--font-sans);
+            letter-spacing: 2px;
             opacity: 0;
-            animation: fadeIn 1s 1s ease-out forwards;
+            animation: fadeInText 1s ease-in 0.5s forwards;
         }
 
-        @keyframes launch {
+        @keyframes takeOff {
             0% {
-                transform: translateY(80px) scale(0.8);
+                transform: translateY(60px);
                 opacity: 0;
             }
-            100% {
-                transform: translateY(0) scale(1);
+            25% {
+                transform: translateY(0);
                 opacity: 1;
             }
+            80% {
+                transform: translateY(0);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-120px);
+                opacity: 0;
+            }
         }
+        
+        @keyframes fadeInText {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        /* --- 启动动画样式结束 --- */
 
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
 
         body::before {
             content: '';
@@ -433,6 +436,7 @@
             flex-wrap: wrap;
             gap: 15px;
         }
+
         .tech-item {
             background-color: var(--background-light);
             padding: 8px 18px;
@@ -568,359 +572,353 @@
     </style>
 </head>
 <body>
-
-    <div id="splash-screen">
-        <svg class="splash-rocket" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" version="1.1"><path d="M512 301.2m-10 0a10 10 0 1 0 20 0 10 10 0 1 0-20 0Z" fill="#E73B37"/><path d="M400.3 744.5c2.1-0.7 4.1-1.4 6.2-2-2 0.6-4.1 1.3-6.2 2z m0 0c2.1-0.7 4.1-1.4 6.2-2-2 0.6-4.1 1.3-6.2 2z" fill="#39393A"/><path d="M511.8 256.6c24.4 0 44.2 19.8 44.2 44.2S536.2 345 511.8 345s-44.2-19.8-44.2-44.2 19.9-44.2 44.2-44.2m0-20c-35.5 0-64.2 28.7-64.2 64.2s28.7 64.2 64.2 64.2 64.2-28.7 64.2-64.2-28.7-64.2-64.2-64.2z" fill="#E73B37"/><path d="M730.7 529.5c0.4-8.7 0.6-17.4 0.6-26.2 0-179.6-86.1-339.1-219.3-439.5-133.1 100.4-219.2 259.9-219.2 439.5 0 8.8 0.2 17.5 0.6 26.1-56 56-90.6 133.3-90.6 218.7 0 61.7 18 119.1 49.1 167.3 30.3-49.8 74.7-90.1 127.7-115.3 39-18.6 82.7-29 128.8-29 48.3 0 93.9 11.4 134.3 31.7 52.5 26.3 96.3 67.7 125.6 118.4 33.4-49.4 52.9-108.9 52.9-173.1 0-85.4-34.6-162.6-90.5-218.6zM351.1 383.4c9.2-37.9 22.9-74.7 40.6-109.5a502.1 502.1 0 0 1 63.6-95.9c17.4-20.6 36.4-39.9 56.8-57.5 20.4 17.6 39.4 36.9 56.8 57.5 24.8 29.5 46.2 61.8 63.6 95.9 17.7 34.8 31.4 71.6 40.6 109.5 8.7 35.8 13.5 72.7 14.2 109.9C637.4 459 577 438.9 512 438.9c-65 0-125.3 20.1-175.1 54.4 0.7-37.2 5.5-74.1 14.2-109.9z m-90.6 449.2c-9.1-27-13.7-55.5-13.7-84.4 0-35.8 7-70.6 20.8-103.2 8.4-19.8 19-38.4 31.9-55.5 9.7 61.5 29.5 119.7 57.8 172.6-36.4 17.8-69 41.6-96.8 70.5z m364.2-85.3c-0.7-0.3-1.5-0.5-2.2-0.8-0.4-0.2-0.9-0.3-1.3-0.5-0.6-0.2-1.3-0.5-1.9-0.7-0.8-0.3-1.5-0.5-2.3-0.8-0.8-0.3-1.5-0.5-2.3-0.7l-0.9-0.3c-1-0.3-2.1-0.7-3.1-1-1.2-0.4-2.4-0.7-3.5-1.1l-3-0.9c-0.2-0.1-0.4-0.1-0.7-0.2-1.1-0.3-2.3-0.7-3.4-1-1.2-0.3-2.4-0.6-3.5-0.9l-3.6-0.9-3.6-0.9c-1-0.3-2.1-0.5-3.1-0.7-1.2-0.3-2.4-0.5-3.6-0.8-1.3-0.3-2.5-0.6-3.8-0.8h-0.3c-0.9-0.2-1.9-0.4-2.8-0.6-0.4-0.1-0.7-0.1-1.1-0.2-1.1-0.2-2.2-0.4-3.4-0.6-1.2-0.2-2.4-0.4-3.6-0.7l-5.4-0.9c-0.9-0.1-1.9-0.3-2.8-0.4-0.8-0.1-1.6-0.3-2.5-0.4-2.6-0.4-5.1-0.7-7.7-1-1.2-0.1-2.3-0.3-3.5-0.4h-0.4c-0.9-0.1-1.8-0.2-2.8-0.3-1.1-0.1-2.1-0.2-3.2-0.3-1.7-0.2-3.4-0.3-5.1-0.4-0.8-0.1-1.5-0.1-2.3-0.2-0.9-0.1-1.9-0.1-2.8-0.2-0.4 0-0.8 0-1.2-0.1-1.1-0.1-2.1-0.1-3.2-0.2-0.5 0-1-0.1-1.5-0.1-1.3-0.1-2.6-0.1-3.9-0.1-0.8 0-1.5-0.1-2.3-0.1-1.2 0-2.4 0-3.5-0.1h-13.9c-2.3 0-4.6 0.1-6.9 0.2-0.9 0-1.9 0.1-2.8 0.1-0.8 0-1.5 0.1-2.3 0.1-1.4 0.1-2.8 0.2-4.1 0.3-1.4 0.1-2.7 0.2-4.1 0.3-1.4 0.1-2.7 0.2-4.1 0.4-0.6 0-1.2 0.1-1.8 0.2l-7.8 0.9c-1.1 0.1-2.1 0.3-3.2 0.4-1 0.1-2.1 0.3-3.1 0.4-3.2 0.5-6.4 0.9-9.5 1.5-0.7 0.1-1.4 0.2-2.1 0.4-0.9 0.1-1.7 0.3-2.6 0.5-1.1 0.2-2.3 0.4-3.4 0.6-0.9 0.2-1.7 0.3-2.6 0.5-0.4 0.1-0.8 0.1-1.1 0.2-0.7 0.1-1.4 0.3-2.1 0.4-1.2 0.3-2.4 0.5-3.6 0.8-1.2 0.3-2.4 0.5-3.6 0.8-0.2 0-0.4 0.1-0.6 0.1-0.5 0.1-1 0.2-1.5 0.4-1.1 0.3-2.3 0.6-3.5 0.9-1.3 0.3-2.5 0.6-3.8 1-0.4 0.1-0.9 0.2-1.4 0.4-1.3 0.4-2.7 0.7-4 1.1-1.5 0.4-3 0.9-4.6 1.3-1 0.3-2.1 0.6-3.1 1-2.1 0.6-4.1 1.3-6.2 2-0.7 0.2-1.4 0.5-2.1 0.7-15-27.5-27.4-56.4-37-86.2-11.7-36.1-19.2-73.6-22.5-111.6-0.6-6.7-1-13.3-1.3-20-0.1-1.2-0.1-2.4-0.1-3.6-0.1-1.2-0.1-2.4-0.1-3.6 0-1.2-0.1-2.4-0.1-3.6 0-1.2-0.1-2.4-0.1-3.7 18.8-14 39.2-25.8 61-35 36.1-15.3 74.5-23 114.1-23 39.6 0 78 7.8 114.1 23 21.8 9.2 42.2 20.9 61 35v0.1c0 1 0 1.9-0.1 2.9 0 1.4-0.1 2.8-0.1 4.3 0 0.7 0 1.3-0.1 2-0.1 1.8-0.1 3.5-0.2 5.3-0.3 6.7-0.8 13.3-1.3 20-3.3 38.5-11 76.5-23 113-9.7 30.3-22.3 59.4-37.6 87.1z m136.8 90.9a342.27 342.27 0 0 0-96.3-73.2c29.1-53.7 49.5-112.8 59.4-175.5 12.8 17.1 23.4 35.6 31.8 55.5 13.8 32.7 20.8 67.4 20.8 103.2 0 31-5.3 61.3-15.7 90z" fill="#39393A"/><path d="M512 819.3c8.7 0 24.7 22.9 24.7 60.4s-16 60.4-24.7 60.4-24.7-22.9-24.7-60.4 16-60.4 24.7-60.4m0-20c-24.7 0-44.7 36-44.7 80.4 0 44.4 20 80.4 44.7 80.4s44.7-36 44.7-80.4c0-44.4-20-80.4-44.7-80.4z" fill="#E73B37"/></svg>
-        <p class="splash-text">Connecting virtual and physical worlds...</p>
-    </div>
     
-    <div id="main-content">
-        <div id="cursor-glow"></div>
+    <div id="preloader">
+        <div class="rocket-container">
+            <svg xmlns="http://www.w3.org/2000/svg" width="800px" height="800px" viewBox="0 0 1024 1024" class="icon" version="1.1">
+                <path d="M512 301.2m-10 0a10 10 0 1 0 20 0 10 10 0 1 0-20 0Z" fill="#D8E25E"/>
+                <path d="M400.3 744.5c2.1-0.7 4.1-1.4 6.2-2-2 0.6-4.1 1.3-6.2 2z m0 0c2.1-0.7 4.1-1.4 6.2-2-2 0.6-4.1 1.3-6.2 2z" fill="#E8E8D8"/>
+                <path d="M511.8 256.6c24.4 0 44.2 19.8 44.2 44.2S536.2 345 511.8 345s-44.2-19.8-44.2-44.2 19.9-44.2 44.2-44.2m0-20c-35.5 0-64.2 28.7-64.2 64.2s28.7 64.2 64.2 64.2 64.2-28.7 64.2-64.2-28.7-64.2-64.2-64.2z" fill="#D8E25E"/>
+                <path d="M730.7 529.5c0.4-8.7 0.6-17.4 0.6-26.2 0-179.6-86.1-339.1-219.3-439.5-133.1 100.4-219.2 259.9-219.2 439.5 0 8.8 0.2 17.5 0.6 26.1-56 56-90.6 133.3-90.6 218.7 0 61.7 18 119.1 49.1 167.3 30.3-49.8 74.7-90.1 127.7-115.3 39-18.6 82.7-29 128.8-29 48.3 0 93.9 11.4 134.3 31.7 52.5 26.3 96.3 67.7 125.6 118.4 33.4-49.4 52.9-108.9 52.9-173.1 0-85.4-34.6-162.6-90.5-218.6zM351.1 383.4c9.2-37.9 22.9-74.7 40.6-109.5a502.1 502.1 0 0 1 63.6-95.9c17.4-20.6 36.4-39.9 56.8-57.5 20.4 17.6 39.4 36.9 56.8 57.5 24.8 29.5 46.2 61.8 63.6 95.9 17.7 34.8 31.4 71.6 40.6 109.5 8.7 35.8 13.5 72.7 14.2 109.9C637.4 459 577 438.9 512 438.9c-65 0-125.3 20.1-175.1 54.4 0.7-37.2 5.5-74.1 14.2-109.9z m-90.6 449.2c-9.1-27-13.7-55.5-13.7-84.4 0-35.8 7-70.6 20.8-103.2 8.4-19.8 19-38.4 31.9-55.5 9.7 61.5 29.5 119.7 57.8 172.6-36.4 17.8-69 41.6-96.8 70.5z m364.2-85.3c-0.7-0.3-1.5-0.5-2.2-0.8-0.4-0.2-0.9-0.3-1.3-0.5-0.6-0.2-1.3-0.5-1.9-0.7-0.8-0.3-1.5-0.5-2.3-0.8-0.8-0.3-1.5-0.5-2.3-0.7l-0.9-0.3c-1-0.3-2.1-0.7-3.1-1-1.2-0.4-2.4-0.7-3.5-1.1l-3-0.9c-0.2-0.1-0.4-0.1-0.7-0.2-1.1-0.3-2.3-0.7-3.4-1-1.2-0.3-2.4-0.6-3.5-0.9l-3.6-0.9-3.6-0.9c-1-0.3-2.1-0.5-3.1-0.7-1.2-0.3-2.4-0.5-3.6-0.8-1.3-0.3-2.5-0.6-3.8-0.8h-0.3c-0.9-0.2-1.9-0.4-2.8-0.6-0.4-0.1-0.7-0.1-1.1-0.2-1.1-0.2-2.2-0.4-3.4-0.6-1.2-0.2-2.4-0.4-3.6-0.7l-5.4-0.9c-0.9-0.1-1.9-0.3-2.8-0.4-0.8-0.1-1.6-0.3-2.5-0.4-2.6-0.4-5.1-0.7-7.7-1-1.2-0.1-2.3-0.3-3.5-0.4h-0.4c-0.9-0.1-1.8-0.2-2.8-0.3-1.1-0.1-2.1-0.2-3.2-0.3-1.7-0.2-3.4-0.3-5.1-0.4-0.8-0.1-1.5-0.1-2.3-0.2-0.9-0.1-1.9-0.1-2.8-0.2-0.4 0-0.8 0-1.2-0.1-1.1-0.1-2.1-0.1-3.2-0.2-0.5 0-1-0.1-1.5-0.1-1.3-0.1-2.6-0.1-3.9-0.1-0.8 0-1.5-0.1-2.3-0.1-1.2 0-2.4 0-3.5-0.1h-13.9c-2.3 0-4.6 0.1-6.9 0.2-0.9 0-1.9 0.1-2.8 0.1-0.8 0-1.5 0.1-2.3 0.1-1.4 0.1-2.8 0.2-4.1 0.3-1.4 0.1-2.7 0.2-4.1 0.3-1.4 0.1-2.7 0.2-4.1 0.4-0.6 0-1.2 0.1-1.8 0.2l-7.8 0.9c-1.1 0.1-2.1 0.3-3.2 0.4-1 0.1-2.1 0.3-3.1 0.4-3.2 0.5-6.4 0.9-9.5 1.5-0.7 0.1-1.4 0.2-2.1 0.4-0.9 0.1-1.7 0.3-2.6 0.5-1.1 0.2-2.3 0.4-3.4 0.6-0.9 0.2-1.7 0.3-2.6 0.5-0.4 0.1-0.8 0.1-1.1 0.2-0.7 0.1-1.4 0.3-2.1 0.4-1.2 0.3-2.4 0.5-3.6 0.8-1.2 0.3-2.4 0.5-3.6 0.8-0.2 0-0.4 0.1-0.6 0.1-0.5 0.1-1 0.2-1.5 0.4-1.1 0.3-2.3 0.6-3.5 0.9-1.3 0.3-2.5 0.6-3.8 1-0.4 0.1-0.9 0.2-1.4 0.4-1.3 0.4-2.7 0.7-4 1.1-1.5 0.4-3 0.9-4.6 1.3-1 0.3-2.1 0.6-3.1 1-2.1 0.6-4.1 1.3-6.2 2-0.7 0.2-1.4 0.5-2.1 0.7-15-27.5-27.4-56.4-37-86.2-11.7-36.1-19.2-73.6-22.5-111.6-0.6-6.7-1-13.3-1.3-20-0.1-1.2-0.1-2.4-0.1-3.6-0.1-1.2-0.1-2.4-0.1-3.6 0-1.2-0.1-2.4-0.1-3.6 0-1.2-0.1-2.4-0.1-3.7 18.8-14 39.2-25.8 61-35 36.1-15.3 74.5-23 114.1-23 39.6 0 78 7.8 114.1 23 21.8 9.2 42.2 20.9 61 35v0.1c0 1 0 1.9-0.1 2.9 0 1.4-0.1 2.8-0.1 4.3 0 0.7 0 1.3-0.1 2-0.1 1.8-0.1 3.5-0.2 5.3-0.3 6.7-0.8 13.3-1.3 20-3.3 38.5-11 76.5-23 113-9.7 30.3-22.3 59.4-37.6 87.1z m136.8 90.9a342.27 342.27 0 0 0-96.3-73.2c29.1-53.7 49.5-112.8 59.4-175.5 12.8 17.1 23.4 35.6 31.8 55.5 13.8 32.7 20.8 67.4 20.8 103.2 0 31-5.3 61.3-15.7 90z" fill="#E8E8D8"/>
+                <path d="M512 819.3c8.7 0 24.7 22.9 24.7 60.4s-16 60.4-24.7 60.4-24.7-22.9-24.7-60.4 16-60.4 24.7-60.4m0-20c-24.7 0-44.7 36-44.7 80.4 0 44.4 20 80.4 44.7 80.4s44.7-36 44.7-80.4c0-44.4-20-80.4-44.7-80.4z" fill="#D8E25E"/>
+            </svg>
+            <p class="loading-text">Building the Future...</p>
+        </div>
+    </div>
 
-        <nav class="navbar">
-            <a href="#hero" class="logo">BlueDarkUP  -  JiangJinCH</a>
-            <ul class="nav-links">
-                <li><a href="#about">关于我</a></li>
-                <li><a href="#philosophy">我的理念</a></li>
-                <li><a href="#articles">精选文章</a></li>
-                <li><a href="#community">社区贡献</a></li>
-                <li><a href="#projects">开源项目</a></li>
-                <li><a href="#tech-stack">技术栈</a></li>
-                <li><a href="#contact">联系方式</a></li>
-            </ul>
-            <div class="hamburger">
-                <span class="bar"></span>
-                <span class="bar"></span>
-                <span class="bar"></span>
+    <div id="cursor-glow"></div>
+
+    <nav class="navbar">
+        <a href="#hero" class="logo">BlueDarkUP  -  JiangJinCH</a>
+        <ul class="nav-links">
+            <li><a href="#about">关于我</a></li>
+            <li><a href="#philosophy">我的理念</a></li>
+            <li><a href="#articles">精选文章</a></li>
+            <li><a href="#community">社区贡献</a></li>
+            <li><a href="#projects">开源项目</a></li>
+            <li><a href="#tech-stack">技术栈</a></li>
+            <li><a href="#contact">联系方式</a></li>
+        </ul>
+        <div class="hamburger">
+            <span class="bar"></span>
+            <span class="bar"></span>
+            <span class="bar"></span>
+        </div>
+    </nav>
+    
+    <section id="hero">
+        <div id="particles-js"></div>
+        <div class="container">
+            <div class="fade-in">
+                <p style="color: var(--secondary-color); font-size: 1.1em; margin-bottom: 10px;">Hi, my name is</p>
+                <h1>Jiang (BlueDarkUP)</h1>
+                <h1 class="highlight">全栈开发者 & AI 机器人工程师</h1>
+                <p class="subtitle">构建从想法到部署的端到端系统，致力于用技术解决现实世界难题。</p>
+                <a href="https://github.com/BlueDarkUP" target="_blank" class="cta-button">查看我的开源项目</a>
             </div>
-        </nav>
+        </div>
+    </section>
+
+    <main class="container">
+
+        <section id="about" class="fade-in">
+            <h2 class="section-title">关于我</h2>
+            <div class="about-content">
+                <div>
+                    <p>我是一名来自北京市八一学校 Grade 11 的学生，也是机器人竞赛团队 <strong>FTC Team 27570</strong> 的核心成员。我对人工智能/机器学习、机器人学和全栈开发充满热情。</p>
+                    <p>我的工程理念是超越单纯的“写代码”，专注于“构建工具”和系统。我坚信系统性思维的力量，致力于打造可复用、可扩展、易于维护的解决方案，将复杂的想法转化为现实世界中稳定可靠的系统。</p>
+                </div>
+                <div class="milestones">
+                    <h4>荣誉与里程碑</h4>
+                    <ul>
+                        <li>FTC 设计奖第一名 (Design Award), 2024-2025 赛季</li>
+                        <li>FTC 思维奖第三名 (Think Award), 2024-2025 赛季</li>
+                        <li>FTC 控制奖 (Control Award), 2024-2025 赛季</li>
+                        <li>FTC 中国区总决赛晋级者</li>
+                        <li>北京市金鹏科技论坛项目二等奖</li>
+                        <li>FTC 休斯顿世锦赛特邀技术贡献者</li>
+                        <li>CSDN 机器人与计算机视觉领域博主</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
         
-        <section id="hero">
-            <div id="particles-js"></div>
-            <div class="container">
-                <div class="fade-in">
-                    <p style="color: var(--secondary-color); font-size: 1.1em; margin-bottom: 10px;">Hi, my name is</p>
-                    <h1>Jiang (BlueDarkUP)</h1>
-                    <h1 class="highlight">全栈开发者 & AI 机器人工程师</h1>
-                    <p class="subtitle">构建从想法到部署的端到端系统，致力于用技术解决现实世界难题。</p>
-                    <a href="https://github.com/BlueDarkUP" target="_blank" class="cta-button">查看我的开源项目</a>
+        <section id="philosophy" class="fade-in">
+            <h2 class="section-title">我的理念与愿景</h2>
+            <div class="card-grid">
+                <div class="card">
+                    <h4><span style="color: var(--secondary-color); margin-right: 10px;">Q1:</span> 您为什么对机器人和 AI 充满热情？</h4>
+                    <p>
+                        对我而言，AI 与机器人的最大魅力在于它们是<strong>连接虚拟世界与物理世界的桥梁</strong>。我的热情始于一个简单的生活观察：初中校门口一个即使无车也漫长等待的红绿灯。为此，我编写了第一个视觉程序——“基于OpenCV的行人检测系统”，旨在动态调整信号灯时长，这个项目也荣幸地获得了北京市金鹏科技论坛二等奖。
+                    </p>
+                    <p>
+                        从那一刻起我便着迷于此：一行代码不再仅是屏幕上的逻辑，它能驱动机械臂精准抓取，能引导小车在赛场上自主导航。当看到自己的想法变为现实，那种成就感是我不断探索的根本动力。
+                    </p>
+                </div>
+                <div class="card">
+                    <h4><span style="color: var(--secondary-color); margin-right: 10px;">Q2:</span> 您认为好的软件工程是怎样的？</h4>
+                    <p>
+                        我追求的不仅是“能用”的代码，更是<strong>优雅、可读、可维护的工程艺术</strong>。这意味着深思熟虑的命名、高度模块化的结构和清晰的文档。
+                    </p>
+                    <p>
+                        在 FTC 团队项目中，我主导了代码架构的重构，将视觉、控制、导航等核心模块完全解耦。这确保了任何成员都能快速上手、修改特定功能，而不会引发系统性崩溃。一个好的系统，应当像一本清晰的书，任何人翻开都能轻松理解脉络，并充满信心地添写新的篇章。
+                    </p>
+                </div>
+                <div class="card">
+                    <h4><span style="color: var(--secondary-color); margin-right: 10px;">Q3:</span> 您希望未来用技术解决什么样的问题？</h4>
+                    <p>
+                        我的长期愿景是成为一名“**工具的创造者**”。我发现，许多创想难以落地，并非因为缺乏智慧，而是被繁琐的底层技术流程所束缚。
+                    </p>
+                    <p>
+                        因此，我希望能继续构建更多像 <code>Zero-to-YOLO-Yard</code> 和 <code>FTC-Easy-TFLITE</code> 这样的工具。我的目标是降低技术门槛，让更多的工程师、设计师乃至学生能将宝贵的精力聚焦于“创造”本身，而非重复性的技术配置。技术应赋能于人，我希望成为那个打造高效工具的人，去帮助更多人解决更多有价值的问题。
+                    </p>
+                </div>
+            </div>
+        </section>
+        
+        <section id="articles" class="fade-in">
+            <h2 class="section-title">精选技术文章与教程</h2>
+            <div class="card-grid">
+                <div class="card">
+                    <h3><a href="https://grizzly-treatment-ac4.notion.site/FTC-27570-TeleOp-250969a5284d8075b144dca6f421e9b8?pvs=73" target="_blank">课程 1: 你的第一个竞赛级 TeleOp</a></h3>
+                    <p>学习 LinearOpMode 的基本结构，如何映射硬件，并为Mecanum底盘实现稳健的驱动控制。</p>
+                    <div class="card-footer">
+                        <span class="tag">硬件映射</span><span class="tag">场地中心驱动</span><span class="tag">状态机</span>
+                    </div>
+                </div>
+                <div class="card">
+                    <h3><a href="https://grizzly-treatment-ac4.notion.site/FTC-27570-250969a5284d8098bb35c9c637ac0fa3?pvs=73" target="_blank">课程 2: 集成 Road Runner 的高级 TeleOp</a></h3>
+                    <p>学习如何将 Road Runner 集成到 TeleOp 中，实现强大的半自动功能，如“一键返回”。</p>
+                    <div class="card-footer">
+                        <span class="tag">Road Runner</span><span class="tag">Pose2d</span><span class="tag">运动序列</span>
+                    </div>
+                </div>
+                 <div class="card">
+                    <h3><a href="https://grizzly-treatment-ac4.notion.site/FTC-27570-API-250969a5284d8039bb4ee5f524f3279f?pvs=73" target="_blank">课程 3: 构建视觉 API (入门)</a></h3>
+                    <p>介绍如何设计一个独立的视觉系统。本课程涵盖了可被任何 OpMode 使用的视觉管线的初始架构。</p>
+                    <div class="card-footer">
+                        <span class="tag">API 设计</span><span class="tag">OpenCvPipeline</span><span class="tag">颜色分割</span>
+                    </div>
+                </div>
+                <div class="card">
+                    <h3><a href="https://grizzly-treatment-ac4.notion.site/FTC-27570-API-250969a5284d808380a8ea220da47436?pvs=73" target="_blank">课程 4: 生产级视觉系统架构</a></h3>
+                    <p>一堂关于软件架构的大师课，将初始API重构为一个高度模块化、可维护的强大系统。</p>
+                    <div class="card-footer">
+                        <span class="tag">SoC</span><span class="tag">配置管理</span><span class="tag">运动学建模</span>
+                    </div>
+                </div>
+                <div class="card">
+                    <h3><a href="https://grizzly-treatment-ac4.notion.site/FTC-27570-250969a5284d802eabe6de3f2173870d?pvs=73" target="_blank">课程 5: FLL AquaHunter (自主ROV)</a></h3>
+                    <p>学习如何从零开始构建一个完整的单脚本AI系统，涵盖实时对象跟踪和水下机器人的视觉伺服。</p>
+                    <div class="card-footer">
+                        <span class="tag">YOLOv8</span><span class="tag">SORT算法</span><span class="tag">串口通信</span>
+                    </div>
+                </div>
+                <div class="card">
+                    <h3><a href="https://grizzly-treatment-ac4.notion.site/FTC-27570-AI-250969a5284d80aa8ccfe5e2bc11e73e?pvs=73" target="_blank">课程 6: 构建你自己的数据引擎</a></h3>
+                    <p>学习如何架构和构建一个用于管理整个机器学习数据生命周期的全栈Web应用。</p>
+                    <div class="card-footer">
+                        <span class="tag">Flask</span><span class="tag">SQLite</span><span class="tag">REST API</span><span class="tag">SAM 2.1</span>
+                    </div>
+                </div>
+                <div class="card">
+                    <h3><a href="https://grizzly-treatment-ac4.notion.site/FTC-27570-AI-250969a5284d8001ab71c9365a4827e8?pvs=73" target="_blank">课程 7: 打造你自己的AI工厂</a></h3>
+                    <p>创建一个标准化、自动化和可复现的MLOps流水线，用于训练和部署FTC兼容的模型。</p>
+                    <div class="card-footer">
+                        <span class="tag">MLOps</span><span class="tag">自动化</span><span class="tag">模型量化</span><span class="tag">TFLite</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section id="community" class="fade-in">
+            <h2 class="section-title">社区贡献与影响力</h2>
+            <div class="card-grid">
+                <div class="card">
+                    <h3>开源工具的普惠价值</h3>
+                    <p>我开发的 `FTC-Easy-TFLITE` 和 `Zero-to-YOLO-Yard` 等工具，通过 CSDN 等平台帮助了许多非竞赛背景的开发者，简化了 AI 模型的训练与数据标注流程，致力于降低技术门槛。</p>
+                </div>
+                <div class="card">
+                    <h3>知识分享与技术布道</h3>
+                    <p>我坚信分享是技术进步的催化剂。通过撰写深度技术文章、开源全部核心代码，以及为新队伍（如 28119 队）提供技术讲解，我希望将实战中积累的知识回馈给社区。</p>
+                </div>
+                <div class="card">
+                    <h3>跨团队与跨赛事协作</h3>
+                    <p>为 FTC 19705 (红心机器人) 开发的视觉系统助力其在休斯顿世锦赛取得佳绩。同时，将技术经验成功应用于 FLL 水下机器人及 RoboMaster 青年赛项目中，探索技术融合创新。</p>
                 </div>
             </div>
         </section>
 
-        <main class="container">
+        <section id="projects" class="fade-in">
+            <h2 class="section-title">开源项目</h2>
+            <div class="card-grid">
+                <div class="card">
+                    <h3><a href="https://github.com/BlueDarkUP/FTC-27570-INTOTHEDEEP-WRC" target="_blank">FTC 27570 Team Code (WRC)</a></h3>
+                    <p>27570队赛季核心代码库。<b>亮点:</b> 集成了先进的自主导航、L3级辅助驾驶和智能视觉抓取系统，作为赛季总结和技术沉淀，为社区提供参考和学习。</p>
+                    <div class="card-footer">
+                        <span class="tag">Java</span><span class="tag">FTC SDK</span><span class="tag">RoadRunner</span><span class="tag">Robotics</span>
+                    </div>
+                </div>
+                <div class="card">
+                    <h3><a href="https://github.com/BlueDarkUP/FTC-INTO-THE-DEEP-VISION-for-19705" target="_blank">Vision System for FTC Team 19705</a></h3>
+                    <p>为红心机器人19705队开发的竞赛级视觉系统。<b>亮点:</b> 在休斯顿世锦赛实战验证，实现平均2秒/次的抓取速度与高稳定性。</p>
+                    <div class="card-footer">
+                        <span class="tag">Java</span><span class="tag">FTC</span><span class="tag">OpenCV</span><span class="tag">Computer Vision</span>
+                    </div>
+                </div>
+                <div class="card">
+                    <h3><a href="https://github.com/BlueDarkUP/FTC-27570-INTO-THE-DEEP" target="_blank">FTC 27570 Team Archive</a></h3>
+                    <p>27570队的赛季公开代码库，记录了荣获设计奖和控制奖的历程。<b>亮点:融合自动驾驶和第一版视觉，是赢得控制奖的关键。</b> </p>
+                    <div class="card-footer">
+                        <span class="tag">Java</span><span class="tag">FTC</span><span class="tag">Open Source</span><span class="tag">Archive</span>
+                    </div>
+                </div>
+                <div class="card">
+                    <h3><a href="https://github.com/BlueDarkUP/Zero-to-YOLO-Yard" target="_blank">Zero-to-YOLO-Yard</a></h3>
+                    <p>一个本地化的图像标注平台，集成了 SAM 模型。<b>亮点:</b> 将数据标注时间从平均每张图2分钟缩短到15秒，效率提升8倍。</p>
+                    <div class="card-footer">
+                        <span class="tag">Python</span><span class="tag">Flask</span><span class="tag">SAM</span><span class="tag">YOLO</span>
+                    </div>
+                </div>
+                <div class="card">
+                    <h3><a href="https://github.com/BlueDarkUP/FTC-Easy-TFLITE" target="_blank">FTC-Easy-TFLITE</a></h3>
+                    <p>一个本地 MLOps 流水线，实现了 TFLite 物体检测模型的自动化训练、量化和部署。<b>亮点:</b> 降低了在FTC等嵌入式环境中使用AI模型的门槛。</p>
+                    <div class="card-footer">
+                        <span class="tag">Python</span><span class="tag">TensorFlow</span><span class="tag">MLOps</span><span class="tag">Automation</span>
+                    </div>
+                </div>
+                 <div class="card">
+                    <h3><a href="https://github.com/BlueDarkUP/Easy-YOLO-Augmenter" target="_blank">Easy-YOLO-Augmenter</a></h3>
+                    <p>一个直观的桌面应用，无需编码即可增强YOLO格式的图像数据集。<b>亮点:</b> 基于多进程并行处理，由Albumentations驱动，显著提升数据增强效率。</p>
+                    <div class="card-footer">
+                        <span class="tag">Python</span><span class="tag">PyQt5</span><span class="tag">Computer Vision</span><span class="tag">Data Augmentation</span>
+                    </div>
+                </div>
+                <div class="card">
+                    <h3><a href="https://github.com/BlueDarkUP/Yolo2TFRecord" target="_blank">Yolo2TFRecord</a></h3>
+                    <p>一个将YOLO格式标注数据集转换为TFRecord格式的Python脚本。<b>亮点:</b> 自动解析`data.yaml`，并创建符合TF Object Detection API标准的目录结构。</p>
+                    <div class="card-footer">
+                        <span class="tag">Python</span><span class="tag">TensorFlow</span><span class="tag">YOLO</span><span class="tag">Data Conversion</span>
+                    </div>
+                </div>
+                <div class="card">
+                    <h3><a href="https://github.com/BlueDarkUP/FLL-AquaHunter" target="_blank">FLL-AquaHunter</a></h3>
+                    <p>用于 FLL 竞赛的水下机器人 (ROV)，能够自主识别、追踪并抓取狮子鱼。<b>亮点:</b> 将AI视觉应用于解决入侵物种问题的真实场景。</p>
+                    <div class="card-footer">
+                        <span class="tag">Python</span><span class="tag">YOLOv8</span><span class="tag">SORT</span><span class="tag">Embedded AI</span>
+                    </div>
+                </div>
+                <div class="card">
+                    <h3><a href="https://github.com/BlueDarkUP/AIRS-RM-2025" target="_blank">RM-Hunter (RMYC)</a></h3>
+                    <p>为 RoboMaster 青年赛设计的自主守卫机器人。<b>亮点:</b> 成功将在FTC和FLL项目中积累的视觉自瞄与PID控制算法迁移应用。</p>
+                    <div class="card-footer">
+                        <span class="tag">Python</span><span class="tag">OpenCV</span><span class="tag">PID Control</span><span class="tag">RoboMaster</span>
+                    </div>
+                </div>
+                <div class="card">
+                    <h3><a href="https://github.com/BlueDarkUP/Scanventory" target="_blank">Scanventory</a></h3>
+                    <p>一款专为国企设计的开源固定资产盘点安卓应用。<b>亮点:</b> 通过手机扫码盘点，支持Excel导入导出，所有数据本地处理，保障隐私安全。</p>
+                    <div class="card-footer">
+                        <span class="tag">Android</span><span class="tag">Kotlin</span><span class="tag">Jetpack Compose</span><span class="tag">SQLite</span>
+                    </div>
+                </div>
+                <div class="card">
+                    <h3><a href="https://github.com/BlueDarkUP/FTC-Servo-Angle-Control" target="_blank">FTC-Servo-Angle-Control (CSP)</a></h3>
+                    <p>一个用于FTC Java编程的即插即用工具，让您能用直观的角度而非小数来控制舵机。<b>亮点:</b> 简化配置，自动处理映射、缩放和反向，让舵机控制更直观。</p>
+                    <div class="card-footer">
+                        <span class="tag">Java</span><span class="tag">FTC</span><span class="tag">Robotics</span><span class="tag">Library</span>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-            <section id="about" class="fade-in">
-                <h2 class="section-title">关于我</h2>
-                <div class="about-content">
-                    <div>
-                        <p>我是一名来自北京市八一学校 Grade 11 的学生，也是机器人竞赛团队 <strong>FTC Team 27570</strong> 的核心成员。我对人工智能/机器学习、机器人学和全栈开发充满热情。</p>
-                        <p>我的工程理念是超越单纯的“写代码”，专注于“构建工具”和系统。我坚信系统性思维的力量，致力于打造可复用、可扩展、易于维护的解决方案，将复杂的想法转化为现实世界中稳定可靠的系统。</p>
-                    </div>
-                    <div class="milestones">
-                        <h4>荣誉与里程碑</h4>
-                        <ul>
-                            <li>FTC 设计奖第一名 (Design Award), 2024-2025 赛季</li>
-                            <li>FTC 思维奖第三名 (Think Award), 2024-2025 赛季</li>
-                            <li>FTC 控制奖 (Control Award), 2024-2025 赛季</li>
-                            <li>FTC 中国区总决赛晋级者</li>
-                            <li>北京市金鹏科技论坛项目二等奖</li>
-                            <li>FTC 休斯顿世锦赛特邀技术贡献者</li>
-                            <li>CSDN 机器人与计算机视觉领域博主</li>
-                        </ul>
-                    </div>
+        <section id="tech-stack" class="fade-in">
+            <h2 class="section-title">技术栈</h2>
+            <div class="tech-category">
+                <h4>精通 (Proficient)</h4>
+                <div class="tech-grid">
+                    <span class="tech-item"><i class="devicon-python-plain"></i> Python</span>
+                    <span class="tech-item"><i class="devicon-java-plain"></i> Java</span>
+                    <span class="tech-item"><i class="devicon-tensorflow-original"></i> TensorFlow</span>
+                    <span class="tech-item"><i class="devicon-opencv-plain"></i> OpenCV</span>
+                    <span class="tech-item"><i class="devicon-fastapi-plain"></i> YOLO</span>
+                    <span class="tech-item"><i class="devicon-git-plain"></i> Git</span>
                 </div>
-            </section>
-            
-            <section id="philosophy" class="fade-in">
-                <h2 class="section-title">我的理念与愿景</h2>
-                <div class="card-grid">
-                    <div class="card">
-                        <h4><span style="color: var(--secondary-color); margin-right: 10px;">Q1:</span> 您为什么对机器人和 AI 充满热情？</h4>
-                        <p>
-                            对我而言，AI 与机器人的最大魅力在于它们是<strong>连接虚拟世界与物理世界的桥梁</strong>。我的热情始于一个简单的生活观察：初中校门口一个即使无车也漫长等待的红绿灯。为此，我编写了第一个视觉程序——“基于OpenCV的行人检测系统”，旨在动态调整信号灯时长，这个项目也荣幸地获得了北京市金鹏科技论坛二等奖。
-                        </p>
-                        <p>
-                            从那一刻起我便着迷于此：一行代码不再仅是屏幕上的逻辑，它能驱动机械臂精准抓取，能引导小车在赛场上自主导航。当看到自己的想法变为现实，那种成就感是我不断探索的根本动力。
-                        </p>
-                    </div>
-                    <div class="card">
-                        <h4><span style="color: var(--secondary-color); margin-right: 10px;">Q2:</span> 您认为好的软件工程是怎样的？</h4>
-                        <p>
-                            我追求的不仅是“能用”的代码，更是<strong>优雅、可读、可维护的工程艺术</strong>。这意味着深思熟虑的命名、高度模块化的结构和清晰的文档。
-                        </p>
-                        <p>
-                            在 FTC 团队项目中，我主导了代码架构的重构，将视觉、控制、导航等核心模块完全解耦。这确保了任何成员都能快速上手、修改特定功能，而不会引发系统性崩溃。一个好的系统，应当像一本清晰的书，任何人翻开都能轻松理解脉络，并充满信心地添写新的篇章。
-                        </p>
-                    </div>
-                    <div class="card">
-                        <h4><span style="color: var(--secondary-color); margin-right: 10px;">Q3:</span> 您希望未来用技术解决什么样的问题？</h4>
-                        <p>
-                            我的长期愿景是成为一名“**工具的创造者**”。我发现，许多创想难以落地，并非因为缺乏智慧，而是被繁琐的底层技术流程所束缚。
-                        </p>
-                        <p>
-                            因此，我希望能继续构建更多像 <code>Zero-to-YOLO-Yard</code> 和 <code>FTC-Easy-TFLITE</code> 这样的工具。我的目标是降低技术门槛，让更多的工程师、设计师乃至学生能将宝贵的精力聚焦于“创造”本身，而非重复性的技术配置。技术应赋能于人，我希望成为那个打造高效工具的人，去帮助更多人解决更多有价值的问题。
-                        </p>
-                    </div>
+            </div>
+            <div class="tech-category">
+                <h4>熟练 (Experienced)</h4>
+                <div class="tech-grid">
+                    <span class="tech-item"><i class="devicon-cplusplus-plain"></i> C++</span>
+                    <span class="tech-item"><i class="devicon-bash-plain"></i> Bash</span>
+                    <span class="tech-item"><i class="devicon-pytorch-plain"></i> PyTorch</span>
+                    <span class="tech-item"><i class="devicon-flask-original"></i> Flask</span>
+                    <span class="tech-item"><i class="devicon-docker-plain"></i> Docker</span>
+                    <span class="tech-item"><i class="devicon-androidstudio-plain"></i> Android Studio</span>
+                    <span class="tech-item">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="1.5em" height="1.5em" viewBox="0 0 128 128">
+                            <path fill="currentColor" d="M33.875 22.45c0 6.898-5.418 12.488-12.102 12.488-6.683 0-12.101-5.59-12.101-12.489 0-6.894 5.418-12.484 12.101-12.484 6.684 0 12.102 5.59 12.102 12.484Zm0 42.55c0 6.895-5.418 12.484-12.102 12.484-6.683 0-12.101-5.59-12.101-12.484 0-6.895 5.418-12.484 12.101-12.484 6.684 0 12.102 5.59 12.102 12.484Zm0 42.55c0 6.895-5.418 12.485-12.102 12.485-6.683 0-12.101-5.59-12.101-12.484 0-6.895 5.418-12.489 12.101-12.489 6.684 0 12.102 5.594 12.102 12.489ZM76.102 65c0 6.895-5.418 12.484-12.102 12.484S51.898 71.894 51.898 65c0-6.895 5.418-12.484 12.102-12.484S76.102 58.106 76.102 65Zm0-42.55c0 6.898-5.418 12.488-12.102 12.488s-12.102-5.59-12.102-12.489c0-6.894 5.418-12.484 12.102-12.484s12.102 5.59 12.102 12.484ZM118.328 65c0 6.895-5.418 12.484-12.101 12.484-6.684 0-12.102-5.59-12.102-12.484 0-6.895 5.422-12.484 12.102-12.484 6.683 0 12.101 5.59 12.101 12.484Zm0-42.55c0 6.898-5.418 12.488-12.101 12.488-6.684 0-12.102-5.59-12.102-12.489 0-6.894 5.422-12.484 12.102-12.484 6.683 0 12.101 5.59 12.101 12.484Zm0 85.1c0 6.895-5.418 12.485-12.101 12.485-6.684 0-12.102-5.59-12.102-12.484 0-6.895 5.422-12.489 12.102-12.489 6.683 0 12.101 5.594 12.101 12.489Zm-42.226 0c0 6.895-5.418 12.485-12.102 12.485s-12.102-5.59-12.102-12.484c0-6.895 5.418-12.489 12.102-12.489s12.102 5.594 12.102 12.489Zm0 0"></path>
+                        </svg>
+                        ROS
+                    </span>
                 </div>
-            </section>
-            
-            <section id="articles" class="fade-in">
-                <h2 class="section-title">精选技术文章与教程</h2>
-                <div class="card-grid">
-                    <div class="card">
-                        <h3><a href="https://grizzly-treatment-ac4.notion.site/FTC-27570-TeleOp-250969a5284d8075b144dca6f421e9b8?pvs=73" target="_blank">课程 1: 你的第一个竞赛级 TeleOp</a></h3>
-                        <p>学习 LinearOpMode 的基本结构，如何映射硬件，并为Mecanum底盘实现稳健的驱动控制。</p>
-                        <div class="card-footer">
-                            <span class="tag">硬件映射</span><span class="tag">场地中心驱动</span><span class="tag">状态机</span>
-                        </div>
-                    </div>
-                    <div class="card">
-                        <h3><a href="https://grizzly-treatment-ac4.notion.site/FTC-27570-250969a5284d8098bb35c9c637ac0fa3?pvs=73" target="_blank">课程 2: 集成 Road Runner 的高级 TeleOp</a></h3>
-                        <p>学习如何将 Road Runner 集成到 TeleOp 中，实现强大的半自动功能，如“一键返回”。</p>
-                        <div class="card-footer">
-                            <span class="tag">Road Runner</span><span class="tag">Pose2d</span><span class="tag">运动序列</span>
-                        </div>
-                    </div>
-                     <div class="card">
-                        <h3><a href="https://grizzly-treatment-ac4.notion.site/FTC-27570-API-250969a5284d8039bb4ee5f524f3279f?pvs=73" target="_blank">课程 3: 构建视觉 API (入门)</a></h3>
-                        <p>介绍如何设计一个独立的视觉系统。本课程涵盖了可被任何 OpMode 使用的视觉管线的初始架构。</p>
-                        <div class="card-footer">
-                            <span class="tag">API 设计</span><span class="tag">OpenCvPipeline</span><span class="tag">颜色分割</span>
-                        </div>
-                    </div>
-                    <div class="card">
-                        <h3><a href="https://grizzly-treatment-ac4.notion.site/FTC-27570-API-250969a5284d808380a8ea220da47436?pvs=73" target="_blank">课程 4: 生产级视觉系统架构</a></h3>
-                        <p>一堂关于软件架构的大师课，将初始API重构为一个高度模块化、可维护的强大系统。</p>
-                        <div class="card-footer">
-                            <span class="tag">SoC</span><span class="tag">配置管理</span><span class="tag">运动学建模</span>
-                        </div>
-                    </div>
-                    <div class="card">
-                        <h3><a href="https://grizzly-treatment-ac4.notion.site/FTC-27570-250969a5284d802eabe6de3f2173870d?pvs=73" target="_blank">课程 5: FLL AquaHunter (自主ROV)</a></h3>
-                        <p>学习如何从零开始构建一个完整的单脚本AI系统，涵盖实时对象跟踪和水下机器人的视觉伺服。</p>
-                        <div class="card-footer">
-                            <span class="tag">YOLOv8</span><span class="tag">SORT算法</span><span class="tag">串口通信</span>
-                        </div>
-                    </div>
-                    <div class="card">
-                        <h3><a href="https://grizzly-treatment-ac4.notion.site/FTC-27570-AI-250969a5284d80aa8ccfe5e2bc11e73e?pvs=73" target="_blank">课程 6: 构建你自己的数据引擎</a></h3>
-                        <p>学习如何架构和构建一个用于管理整个机器学习数据生命周期的全栈Web应用。</p>
-                        <div class="card-footer">
-                            <span class="tag">Flask</span><span class="tag">SQLite</span><span class="tag">REST API</span><span class="tag">SAM 2.1</span>
-                        </div>
-                    </div>
-                    <div class="card">
-                        <h3><a href="https://grizzly-treatment-ac4.notion.site/FTC-27570-AI-250969a5284d8001ab71c9365a4827e8?pvs=73" target="_blank">课程 7: 打造你自己的AI工厂</a></h3>
-                        <p>创建一个标准化、自动化和可复现的MLOps流水线，用于训练和部署FTC兼容的模型。</p>
-                        <div class="card-footer">
-                            <span class="tag">MLOps</span><span class="tag">自动化</span><span class="tag">模型量化</span><span class="tag">TFLite</span>
-                        </div>
-                    </div>
+            </div>
+            <div class="tech-category">
+                <h4>了解 (Familiar with)</h4>
+                <div class="tech-grid">
+                    <span class="tech-item"><i class="devicon-javascript-plain"></i> JavaScript</span>
+                    <span class="tech-item"><i class="devicon-sqlite-plain"></i> SQLite</span>
+                    <span class="tech-item"><svg xmlns="http://www.w3.org/2000/svg" width="1.5em" height="1.5em" viewBox="0 0 20 20"><path fill="currentColor" d="M16 13c-1.3 0-2.4.8-2.8 2H9c0-.7-.2-1.3-.5-1.8l7.1-7.3c.3 0 .6.1.9.1C17.9 6 19 4.9 19 3.5S17.9 1 16.5 1 14 2.1 14 3.5c0 .3.1.7.2 1l-7 7.2c-.6-.5-1.4-.7-2.2-.7V6.8C6.2 6.4 7 5.3 7 4c0-1.7-1.3-3-3-3S1 2.3 1 4c0 1.3.8 2.4 2 2.8v4.7c-1.2.7-2 2-2 3.4 0 2.2 1.8 4 4 4 1.5 0 2.8-.8 3.4-2h4.7c.4 1.1 1.5 2 2.8 2 1.6 0 3-1.3 3-3C19 14.3 17.6 13 16 13z"></path></svg> REST API</span>
+                    <span class="tech-item"><i class="devicon-anaconda-original"></i> Conda</span>
                 </div>
-            </section>
-            
-            <section id="community" class="fade-in">
-                <h2 class="section-title">社区贡献与影响力</h2>
-                <div class="card-grid">
-                    <div class="card">
-                        <h3>开源工具的普惠价值</h3>
-                        <p>我开发的 `FTC-Easy-TFLITE` 和 `Zero-to-YOLO-Yard` 等工具，通过 CSDN 等平台帮助了许多非竞赛背景的开发者，简化了 AI 模型的训练与数据标注流程，致力于降低技术门槛。</p>
-                    </div>
-                    <div class="card">
-                        <h3>知识分享与技术布道</h3>
-                        <p>我坚信分享是技术进步的催化剂。通过撰写深度技术文章、开源全部核心代码，以及为新队伍（如 28119 队）提供技术讲解，我希望将实战中积累的知识回馈给社区。</p>
-                    </div>
-                    <div class="card">
-                        <h3>跨团队与跨赛事协作</h3>
-                        <p>为 FTC 19705 (红心机器人) 开发的视觉系统助力其在休斯顿世锦赛取得佳绩。同时，将技术经验成功应用于 FLL 水下机器人及 RoboMaster 青年赛项目中，探索技术融合创新。</p>
-                    </div>
-                </div>
-            </section>
+            </div>
+        </section>
 
-            <section id="projects" class="fade-in">
-                <h2 class="section-title">开源项目</h2>
-                <div class="card-grid">
-                    <div class="card">
-                        <h3><a href="https://github.com/BlueDarkUP/FTC-27570-INTOTHEDEEP-WRC" target="_blank">FTC 27570 Team Code (WRC)</a></h3>
-                        <p>27570队赛季核心代码库。<b>亮点:</b> 集成了先进的自主导航、L3级辅助驾驶和智能视觉抓取系统，作为赛季总结和技术沉淀，为社区提供参考和学习。</p>
-                        <div class="card-footer">
-                            <span class="tag">Java</span><span class="tag">FTC SDK</span><span class="tag">RoadRunner</span><span class="tag">Robotics</span>
-                        </div>
-                    </div>
-                    <div class="card">
-                        <h3><a href="https://github.com/BlueDarkUP/FTC-INTO-THE-DEEP-VISION-for-19705" target="_blank">Vision System for FTC Team 19705</a></h3>
-                        <p>为红心机器人19705队开发的竞赛级视觉系统。<b>亮点:</b> 在休斯顿世锦赛实战验证，实现平均2秒/次的抓取速度与高稳定性。</p>
-                        <div class="card-footer">
-                            <span class="tag">Java</span><span class="tag">FTC</span><span class="tag">OpenCV</span><span class="tag">Computer Vision</span>
-                        </div>
-                    </div>
-                    <div class="card">
-                        <h3><a href="https://github.com/BlueDarkUP/FTC-27570-INTO-THE-DEEP" target="_blank">FTC 27570 Team Archive</a></h3>
-                        <p>27570队的赛季公开代码库，记录了荣获设计奖和控制奖的历程。<b>亮点:融合自动驾驶和第一版视觉，是赢得控制奖的关键。</b> </p>
-                        <div class="card-footer">
-                            <span class="tag">Java</span><span class="tag">FTC</span><span class="tag">Open Source</span><span class="tag">Archive</span>
-                        </div>
-                    </div>
-                    <div class="card">
-                        <h3><a href="https://github.com/BlueDarkUP/Zero-to-YOLO-Yard" target="_blank">Zero-to-YOLO-Yard</a></h3>
-                        <p>一个本地化的图像标注平台，集成了 SAM 模型。<b>亮点:</b> 将数据标注时间从平均每张图2分钟缩短到15秒，效率提升8倍。</p>
-                        <div class="card-footer">
-                            <span class="tag">Python</span><span class="tag">Flask</span><span class="tag">SAM</span><span class="tag">YOLO</span>
-                        </div>
-                    </div>
-                    <div class="card">
-                        <h3><a href="https://github.com/BlueDarkUP/FTC-Easy-TFLITE" target="_blank">FTC-Easy-TFLITE</a></h3>
-                        <p>一个本地 MLOps 流水线，实现了 TFLite 物体检测模型的自动化训练、量化和部署。<b>亮点:</b> 降低了在FTC等嵌入式环境中使用AI模型的门槛。</p>
-                        <div class="card-footer">
-                            <span class="tag">Python</span><span class="tag">TensorFlow</span><span class="tag">MLOps</span><span class="tag">Automation</span>
-                        </div>
-                    </div>
-                     <div class="card">
-                        <h3><a href="https://github.com/BlueDarkUP/Easy-YOLO-Augmenter" target="_blank">Easy-YOLO-Augmenter</a></h3>
-                        <p>一个直观的桌面应用，无需编码即可增强YOLO格式的图像数据集。<b>亮点:</b> 基于多进程并行处理，由Albumentations驱动，显著提升数据增强效率。</p>
-                        <div class="card-footer">
-                            <span class="tag">Python</span><span class="tag">PyQt5</span><span class="tag">Computer Vision</span><span class="tag">Data Augmentation</span>
-                        </div>
-                    </div>
-                    <div class="card">
-                        <h3><a href="https://github.com/BlueDarkUP/Yolo2TFRecord" target="_blank">Yolo2TFRecord</a></h3>
-                        <p>一个将YOLO格式标注数据集转换为TFRecord格式的Python脚本。<b>亮点:</b> 自动解析`data.yaml`，并创建符合TF Object Detection API标准的目录结构。</p>
-                        <div class="card-footer">
-                            <span class="tag">Python</span><span class="tag">TensorFlow</span><span class="tag">YOLO</span><span class="tag">Data Conversion</span>
-                        </div>
-                    </div>
-                    <div class="card">
-                        <h3><a href="https://github.com/BlueDarkUP/FLL-AquaHunter" target="_blank">FLL-AquaHunter</a></h3>
-                        <p>用于 FLL 竞赛的水下机器人 (ROV)，能够自主识别、追踪并抓取狮子鱼。<b>亮点:</b> 将AI视觉应用于解决入侵物种问题的真实场景。</p>
-                        <div class="card-footer">
-                            <span class="tag">Python</span><span class="tag">YOLOv8</span><span class="tag">SORT</span><span class="tag">Embedded AI</span>
-                        </div>
-                    </div>
-                    <div class="card">
-                        <h3><a href="https://github.com/BlueDarkUP/AIRS-RM-2025" target="_blank">RM-Hunter (RMYC)</a></h3>
-                        <p>为 RoboMaster 青年赛设计的自主守卫机器人。<b>亮点:</b> 成功将在FTC和FLL项目中积累的视觉自瞄与PID控制算法迁移应用。</p>
-                        <div class="card-footer">
-                            <span class="tag">Python</span><span class="tag">OpenCV</span><span class="tag">PID Control</span><span class="tag">RoboMaster</span>
-                        </div>
-                    </div>
-                    <div class="card">
-                        <h3><a href="https://github.com/BlueDarkUP/Scanventory" target="_blank">Scanventory</a></h3>
-                        <p>一款专为国企设计的开源固定资产盘点安卓应用。<b>亮点:</b> 通过手机扫码盘点，支持Excel导入导出，所有数据本地处理，保障隐私安全。</p>
-                        <div class="card-footer">
-                            <span class="tag">Android</span><span class="tag">Kotlin</span><span class="tag">Jetpack Compose</span><span class="tag">SQLite</span>
-                        </div>
-                    </div>
-                    <div class="card">
-                        <h3><a href="https://github.com/BlueDarkUP/FTC-Servo-Angle-Control" target="_blank">FTC-Servo-Angle-Control (CSP)</a></h3>
-                        <p>一个用于FTC Java编程的即插即用工具，让您能用直观的角度而非小数来控制舵机。<b>亮点:</b> 简化配置，自动处理映射、缩放和反向，让舵机控制更直观。</p>
-                        <div class="card-footer">
-                            <span class="tag">Java</span><span class="tag">FTC</span><span class="tag">Robotics</span><span class="tag">Library</span>
-                        </div>
-                    </div>
-                </div>
-            </section>
+        <section id="contact" class="fade-in">
+            <h2 class="section-title" style="margin: 0 auto;">联系方式</h2>
+            <p>我对新的机遇和挑战总是充满热情。欢迎随时通过以下方式与我交流、探讨技术或寻求合作！</p>
+            <div class="contact-links">
+                <a href="https://github.com/BlueDarkUP" target="_blank" title="GitHub" aria-label="访问我的GitHub主页">
+                    <svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><title>GitHub</title><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.12-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.665 1.653.255 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
+                </a>
+                <a href="mailto:BlueDarkUP@Gmail.com" target="_blank" title="Email" aria-label="给我发送电子邮件">
+                    <svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><title>Email</title><path d="M22 6c0-1.1-.9-2-2-2H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6zm-2 0l-8 5-8-5h16zm0 12H4V8l8 5 8-5v10z"/></svg>
+                </a>
+                <a href="https://www.youtube.com/@BlueDarkUP" target="_blank" title="YouTube" aria-label="访问我的YouTube频道">
+                     <svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><title>YouTube</title><path d="M21.582 7.336c-.2-.736-.77-1.306-1.506-1.506C18.66 5.5 12 5.5 12 5.5s-6.66 0-8.076.33c-.736.2-1.306.77-1.506 1.506C2.088 8.752 2 12 2 12s.088 3.248.418 4.664c.2.736.77 1.306 1.506 1.506C5.34 18.5 12 18.5 12 18.5s6.66 0 8.076-.33c.736-.2 1.306.77 1.506-1.506C21.912 15.248 22 12 22 12s-.088-3.248-.418-4.664zM9.75 14.885V9.115l4.985 2.885-4.985 2.885z"/></svg>
+                </a>
+                <a href="https://www.instagram.com/bluedarkup/" target="_blank" title="Instagram" aria-label="访问我的Instagram">
+                     <svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><title>Instagram</title><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.85s-.012 3.584-.07 4.85c-.148 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07s-3.584-.012-4.85-.07c-3.252-.148-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.85s.012-3.584.07-4.85c.148-3.227 1.664-4.771 4.919-4.919C8.356 2.175 8.741 2.163 12 2.163m0-2.163C8.741 0 8.333.014 7.053.072 2.82.266.202 2.883 0 7.117.058 8.397.072 8.804.072 12s-.014 3.603-.072 4.883c-.194 4.233 2.812 6.852 7.046 7.046 1.28.058 1.687.072 4.947.072s3.667-.014 4.947-.072c4.233-.194 6.852-2.812 7.046-7.046.058-1.28.072-1.687.072-4.883s-.014-3.603-.072-4.883C23.798 2.883 21.18.266 16.947.072 15.667.014 15.259 0 12 0zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.162 6.162 6.162 6.162-2.759 6.162-6.162-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4s1.791-4 4-4 4 1.79 4 4-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.441 1.441 1.441 1.441-.645 1.441-1.441-.645-1.44-1.441-1.44z"/></svg>
+                </a>
+                <a href="https://space.bilibili.com/1778652739" target="_blank" title="Bilibili" aria-label="访问我的Bilibili空间">
+                    <svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><title>Bilibili</title><path d="M18.223 3.086a1.25 1.25 0 0 1 0 1.768L17.08 5.996h1.17A3.75 3.75 0 0 1 22 9.747v7.5a3.75 3.75 0 0 1-3.75 3.75H5.75A3.75 3.75 0 0 1 2 17.247v-7.5a3.75 3.75 0 0 1 3.75-3.75h1.166L5.775 4.855a1.25 1.25 0 1 1 1.767-1.768l2.652 2.652c.079.079.145.165.198.257h3.213c.053-.092.12-.18.199-.258l2.651-2.652a1.25 1.25 0 0 1 1.768 0zm.027 5.42H5.75a1.25 1.25 0 0 0-1.247 1.157l-.003.094v7.5c0 .659.51 1.199 1.157 1.246l.093.004h12.5a1.25 1.25 0 0 0 1.247-1.157l.003-.093v-7.5c0-.69-.56-1.25-1.25-1.25zm-10 2.5c.69 0 1.25.56 1.25 1.25v1.25a1.25 1.25 0 1 1-2.5 0v-1.25c0-.69.56-1.25 1.25-1.25zm7.5 0c.69 0 1.25.56 1.25 1.25v1.25a1.25 1.25 0 1 1-2.5 0v-1.25c0-.69.56-1.25 1.25-1.25z"/></svg>
+                </a>
+                <a href="https://blog.csdn.net/weixin_55053322?type=blog" target="_blank" title="CSDN" aria-label="访问我的CSDN博客">
+                    <svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><title>CSDN</title><path d="M6.217 13.408c.447.18 1.379.359 2.132.359.812 0 1.264-.247 1.3-.632.033-.35-.299-.398-1.216-.637-1.267-.342-2.075-.871-1.996-1.717.092-.982 1.286-1.724 3.118-1.724.893 0 1.759.069 2.208.231l-.154 1.238c-.291-.112-1.406-.266-2.16-.266-.765 0-1.16.265-1.188.555-.034.367.363.385 1.356.676 1.345.376 1.933.905 1.856 1.725C11.382 14.18 10.308 15 8.163 15 7.27 15 6.5 14.821 6.076 14.641L6.217 13.408 6.217 13.408zM18.821 9.366c4.884-1.017 5.305.811 5.154 2.428l-.284 2.992h-1.55l.259-2.729c.056-.601.405-1.776-1.281-1.732-.584.016-.873.104-.873.104s-.051.726-.112 1.263l-.294 3.095h-1.52l.302-3.05C18.622 11.736 18.821 9.366 18.821 9.366zM12.653 9.224c.349-.042.884-.084 1.621-.084 1.23 0 2.225.236 2.841.734.553.464.921 1.214.819 2.302-.094 1.012-.57 1.721-1.264 2.159-.635.413-1.434.59-2.637.59-.709 0-1.385-.042-1.9-.126L12.653 9.224 12.653 9.224zM13.669 13.69c.119.025.274.051.582.051 1.231 0 2.098-.668 2.185-1.607.127-1.358-.643-1.832-1.94-1.824-.168 0-.401 0-.525.025L13.669 13.69 13.669 13.69zM5.335 14.813C5.043 14.924 4.439 15 3.595 15c-2.427 0-3.737-1.254-3.583-2.913C.198 10.112 2.139 9 4.264 9c.823 0 1.308.073 1.762.195L5.88 10.526c-.302-.112-1.01-.215-1.583-.215-1.25 0-2.312.41-2.434 1.707-.109 1.16.637 1.714 2.044 1.714.49 0 1.212-.077 1.545-.189C5.452 13.544 5.335 14.813 5.335 14.813z"/></svg>
+                </a>
+                <a href="https://www.facebook.com/profile.php?id=61578829349690" target="_blank" title="Facebook" aria-label="访问我的Facebook">
+                    <svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><title>Facebook</title><path d="M22.675 0h-21.35C.59 0 0 .59 0 1.325v21.35C0 23.41.59 24 1.325 24H12.82v-9.29h-3.128V11.21h3.128V8.647c0-3.1 1.893-4.788 4.659-4.788 1.325 0 2.463.099 2.795.143v3.24l-1.918.001c-1.504 0-1.795.715-1.795 1.763v2.313h3.587l-.467 3.5h-3.12V24h5.713c.735 0 1.325-.59 1.325-1.325V1.325C24 .59 23.41 0 22.675 0z"/></svg>
+                </a>
+                <a href="https://www.reddit.com/user/OppositeCampaign2649/" target="_blank" title="Reddit" aria-label="访问我的Reddit">
+                    <svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><title>Reddit</title><path d="M10.24 13.6C10.0818 13.6 9.92711 13.5531 9.79555 13.4652C9.66399 13.3773 9.56145 13.2523 9.5009 13.1061C9.44035 12.96 9.42451 12.7991 9.45538 12.6439C9.48624 12.4887 9.56244 12.3462 9.67432 12.2343C9.7862 12.1224 9.92875 12.0462 10.0839 12.0154C10.2391 11.9845 10.4 12.0003 10.5461 12.0609C10.6923 12.1214 10.8173 12.224 10.9052 12.3555C10.9931 12.4871 11.04 12.6418 11.04 12.8C11.04 12.9051 11.0193 13.0091 10.9791 13.1061C10.9389 13.2032 10.88 13.2914 10.8057 13.3657C10.7314 13.44 10.6432 13.4989 10.5461 13.5391C10.4491 13.5793 10.3451 13.6 10.24 13.6ZM20 12C20 13.5823 19.5308 15.129 18.6518 16.4446C17.7727 17.7602 16.5233 18.7855 15.0615 19.391C13.5997 19.9965 11.9911 20.155 10.4393 19.8463C8.88743 19.5376 7.46197 18.7757 6.34315 17.6569C5.22433 16.538 4.4624 15.1126 4.15372 13.5607C3.84504 12.0089 4.00347 10.4003 4.60897 8.93853C5.21447 7.47672 6.23985 6.22729 7.55544 5.34824C8.87103 4.46919 10.4178 4 12 4C14.1217 4 16.1566 4.84285 17.6569 6.34315C19.1571 7.84344 20 9.87827 20 12ZM15.73 10.67C15.4543 10.6862 15.1943 10.8038 15 11C14.1775 10.4564 13.2158 10.1613 12.23 10.15L12.79 7.62L14.58 8.02C14.5787 8.12458 14.5981 8.22839 14.6372 8.32539C14.6764 8.4224 14.7343 8.51067 14.8078 8.58509C14.8813 8.65951 14.9689 8.7186 15.0654 8.75892C15.1619 8.79925 15.2654 8.82001 15.37 8.82C15.5831 8.81737 15.7866 8.73087 15.9363 8.57925C16.0861 8.42763 16.17 8.2231 16.17 8.01C16.176 7.82715 16.1183 7.6479 16.0069 7.50284C15.8954 7.35777 15.737 7.25589 15.5588 7.21458C15.3806 7.17327 15.1936 7.1951 15.0296 7.27633C14.8657 7.35756 14.7351 7.49317 14.66 7.66L12.66 7.22C12.6124 7.21087 12.5631 7.22027 12.5222 7.2463C12.4813 7.27233 12.4519 7.313 12.44 7.36L11.82 10.15C10.8346 10.1641 9.87368 10.4589 9.05 11C8.94175 10.8882 8.81043 10.8014 8.66518 10.7456C8.51993 10.6898 8.36426 10.6663 8.20902 10.6769C8.05378 10.6874 7.9027 10.7316 7.76631 10.8065C7.62993 10.8814 7.51152 10.9852 7.41934 11.1105C7.32717 11.2359 7.26344 11.3799 7.23261 11.5324C7.20178 11.6849 7.20458 11.8423 7.24082 11.9936C7.27706 12.1449 7.34586 12.2865 7.44244 12.4085C7.53902 12.5305 7.66104 12.63 7.8 12.7C7.78471 12.8663 7.78471 13.0337 7.8 13.2C7.8 14.89 9.71 16.27 12.06 16.27C14.41 16.27 16.32 14.89 16.32 13.2C16.3204 13.0282 16.3002 12.857 16.26 12.69C16.4621 12.5755 16.6215 12.3984 16.714 12.1854C16.8066 11.9724 16.8274 11.7351 16.7732 11.5092C16.719 11.2834 16.5927 11.0813 16.4136 10.9335C16.2344 10.7858 16.012 10.7003 15.78 10.69L15.73 10.67ZM13.51 14.42C13.0606 14.7023 12.5407 14.852 12.01 14.852C11.4793 14.852 10.9594 14.7023 10.51 14.42C10.4731 14.3863 10.425 14.3676 10.375 14.3676C10.325 14.3676 10.2769 14.3863 10.24 14.42C10.2206 14.4378 10.2051 14.4594 10.1945 14.4835C10.1839 14.5076 10.1785 14.5337 10.1785 14.56C10.1785 14.5863 10.1839 14.6124 10.1945 14.6365C10.2051 14.6606 10.2206 14.6822 10.24 14.7C10.7652 15.0564 11.3853 15.2469 12.02 15.2469C12.6547 15.2469 13.2748 15.0564 13.8 14.7C13.8194 14.6822 13.8349 14.6606 13.8455 14.6365C13.8561 14.6124 13.8616 14.5863 13.8616 14.56C13.8616 14.5337 13.8561 14.5076 13.8455 14.4835C13.8349 14.4594 13.8194 14.4378 13.8 14.42C13.7813 14.4003 13.7588 14.3847 13.7339 14.374C13.709 14.3633 13.6821 14.3577 13.655 14.3577C13.6279 14.3577 13.601 14.3633 13.5761 14.374C13.5512 14.3847 13.5287 14.4003 13.51 14.42ZM13.76 12C13.6018 12 13.4471 12.0469 13.3155 12.1348C13.184 12.2227 13.0814 12.3477 13.0209 12.4939C12.9604 12.64 12.9445 12.8009 12.9754 12.9561C13.0062 13.1113 13.0824 13.2538 13.1943 13.3657C13.3062 13.4776 13.4487 13.5538 13.6039 13.5846C13.7591 13.6155 13.92 13.5997 14.0662 13.5391C14.2123 13.4786 14.3373 13.376 14.4252 13.2445C14.5131 13.1129 14.56 12.9582 14.56 12.8C14.56 12.5878 14.4757 12.3843 14.3257 12.2343C14.1757 12.0843 13.9722 12 13.76 12Z"/></svg>
+                </a>
+            </div>
+        </section>
 
-            <section id="tech-stack" class="fade-in">
-                <h2 class="section-title">技术栈</h2>
-                <div class="tech-category">
-                    <h4>精通 (Proficient)</h4>
-                    <div class="tech-grid">
-                        <span class="tech-item"><i class="devicon-python-plain"></i> Python</span>
-                        <span class="tech-item"><i class="devicon-java-plain"></i> Java</span>
-                        <span class="tech-item"><i class="devicon-tensorflow-original"></i> TensorFlow</span>
-                        <span class="tech-item"><i class="devicon-opencv-plain"></i> OpenCV</span>
-                        <span class="tech-item"><i class="devicon-fastapi-plain"></i> YOLO</span>
-                        <span class="tech-item"><i class="devicon-git-plain"></i> Git</span>
-                    </div>
-                </div>
-                <div class="tech-category">
-                    <h4>熟练 (Experienced)</h4>
-                    <div class="tech-grid">
-                        <span class="tech-item"><i class="devicon-cplusplus-plain"></i> C++</span>
-                        <span class="tech-item"><i class="devicon-bash-plain"></i> Bash</span>
-                        <span class="tech-item"><i class="devicon-pytorch-plain"></i> PyTorch</span>
-                        <span class="tech-item"><i class="devicon-flask-original"></i> Flask</span>
-                        <span class="tech-item"><i class="devicon-docker-plain"></i> Docker</span>
-                        <span class="tech-item"><i class="devicon-androidstudio-plain"></i> Android Studio</span>
-                        <span class="tech-item">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="1.5em" height="1.5em" viewBox="0 0 128 128">
-                                <path fill="currentColor" d="M33.875 22.45c0 6.898-5.418 12.488-12.102 12.488-6.683 0-12.101-5.59-12.101-12.489 0-6.894 5.418-12.484 12.101-12.484 6.684 0 12.102 5.59 12.102 12.484Zm0 42.55c0 6.895-5.418 12.484-12.102 12.484-6.683 0-12.101-5.59-12.101-12.484 0-6.895 5.418-12.484 12.101-12.484 6.684 0 12.102 5.59 12.102 12.484Zm0 42.55c0 6.895-5.418 12.485-12.102 12.485-6.683 0-12.101-5.59-12.101-12.484 0-6.895 5.418-12.489 12.101-12.489 6.684 0 12.102 5.594 12.102 12.489ZM76.102 65c0 6.895-5.418 12.484-12.102 12.484S51.898 71.894 51.898 65c0-6.895 5.418-12.484 12.102-12.484S76.102 58.106 76.102 65Zm0-42.55c0 6.898-5.418 12.488-12.102 12.488s-12.102-5.59-12.102-12.489c0-6.894 5.418-12.484 12.102-12.484s12.102 5.59 12.102 12.484ZM118.328 65c0 6.895-5.418 12.484-12.101 12.484-6.684 0-12.102-5.59-12.102-12.484 0-6.895 5.422-12.484 12.102-12.484 6.683 0 12.101 5.59 12.101 12.484Zm0-42.55c0 6.898-5.418 12.488-12.101 12.488-6.684 0-12.102-5.59-12.102-12.489 0-6.894 5.422-12.484 12.102-12.484 6.683 0 12.101 5.59 12.101 12.484Zm0 85.1c0 6.895-5.418 12.485-12.101 12.485-6.684 0-12.102-5.59-12.102-12.484 0-6.895 5.422-12.489 12.102-12.489 6.683 0 12.101 5.594 12.101 12.489Zm-42.226 0c0 6.895-5.418 12.485-12.102 12.485s-12.102-5.59-12.102-12.484c0-6.895 5.418-12.489 12.102-12.489s12.102 5.594 12.102 12.489Zm0 0"></path>
-                            </svg>
-                            ROS
-                        </span>
-                    </div>
-                </div>
-                <div class="tech-category">
-                    <h4>了解 (Familiar with)</h4>
-                    <div class="tech-grid">
-                        <span class="tech-item"><i class="devicon-javascript-plain"></i> JavaScript</span>
-                        <span class="tech-item"><i class="devicon-sqlite-plain"></i> SQLite</span>
-                        <span class="tech-item"><svg xmlns="http://www.w3.org/2000/svg" width="1.5em" height="1.5em" viewBox="0 0 20 20"><path fill="currentColor" d="M16 13c-1.3 0-2.4.8-2.8 2H9c0-.7-.2-1.3-.5-1.8l7.1-7.3c.3 0 .6.1.9.1C17.9 6 19 4.9 19 3.5S17.9 1 16.5 1 14 2.1 14 3.5c0 .3.1.7.2 1l-7 7.2c-.6-.5-1.4-.7-2.2-.7V6.8C6.2 6.4 7 5.3 7 4c0-1.7-1.3-3-3-3S1 2.3 1 4c0 1.3.8 2.4 2 2.8v4.7c-1.2.7-2 2-2 3.4 0 2.2 1.8 4 4 4 1.5 0 2.8-.8 3.4-2h4.7c.4 1.1 1.5 2 2.8 2 1.6 0 3-1.3 3-3C19 14.3 17.6 13 16 13z"></path></svg> REST API</span>
-                        <span class="tech-item"><i class="devicon-anaconda-original"></i> Conda</span>
-                    </div>
-                </div>
-            </section>
-
-            <section id="contact" class="fade-in">
-                <h2 class="section-title" style="margin: 0 auto;">联系方式</h2>
-                <p>我对新的机遇和挑战总是充满热情。欢迎随时通过以下方式与我交流、探讨技术或寻求合作！</p>
-                <div class="contact-links">
-                    <a href="https://github.com/BlueDarkUP" target="_blank" title="GitHub" aria-label="访问我的GitHub主页">
-                        <svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><title>GitHub</title><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.12-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.665 1.653.255 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
-                    </a>
-                    <a href="mailto:BlueDarkUP@Gmail.com" target="_blank" title="Email" aria-label="给我发送电子邮件">
-                        <svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><title>Email</title><path d="M22 6c0-1.1-.9-2-2-2H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6zm-2 0l-8 5-8-5h16zm0 12H4V8l8 5 8-5v10z"/></svg>
-                    </a>
-                    <a href="https://www.youtube.com/@BlueDarkUP" target="_blank" title="YouTube" aria-label="访问我的YouTube频道">
-                         <svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><title>YouTube</title><path d="M21.582 7.336c-.2-.736-.77-1.306-1.506-1.506C18.66 5.5 12 5.5 12 5.5s-6.66 0-8.076.33c-.736.2-1.306.77-1.506 1.506C2.088 8.752 2 12 2 12s.088 3.248.418 4.664c.2.736.77 1.306 1.506 1.506C5.34 18.5 12 18.5 12 18.5s6.66 0 8.076-.33c.736-.2 1.306.77 1.506-1.506C21.912 15.248 22 12 22 12s-.088-3.248-.418-4.664zM9.75 14.885V9.115l4.985 2.885-4.985 2.885z"/></svg>
-                    </a>
-                    <a href="https://www.instagram.com/bluedarkup/" target="_blank" title="Instagram" aria-label="访问我的Instagram">
-                         <svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><title>Instagram</title><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.85s-.012 3.584-.07 4.85c-.148 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07s-3.584-.012-4.85-.07c-3.252-.148-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.85s.012-3.584.07-4.85c.148-3.227 1.664-4.771 4.919-4.919C8.356 2.175 8.741 2.163 12 2.163m0-2.163C8.741 0 8.333.014 7.053.072 2.82.266.202 2.883 0 7.117.058 8.397.072 8.804.072 12s-.014 3.603-.072 4.883c-.194 4.233 2.812 6.852 7.046 7.046 1.28.058 1.687.072 4.947.072s3.667-.014 4.947-.072c4.233-.194 6.852-2.812 7.046-7.046.058-1.28.072-1.687.072-4.883s-.014-3.603-.072-4.883C23.798 2.883 21.18.266 16.947.072 15.667.014 15.259 0 12 0zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.162 6.162 6.162 6.162-2.759 6.162-6.162-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4s1.791-4 4-4 4 1.79 4 4-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.441 1.441 1.441 1.441-.645 1.441-1.441-.645-1.44-1.441-1.44z"/></svg>
-                    </a>
-                    <a href="https://space.bilibili.com/1778652739" target="_blank" title="Bilibili" aria-label="访问我的Bilibili空间">
-                        <svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><title>Bilibili</title><path d="M18.223 3.086a1.25 1.25 0 0 1 0 1.768L17.08 5.996h1.17A3.75 3.75 0 0 1 22 9.747v7.5a3.75 3.75 0 0 1-3.75 3.75H5.75A3.75 3.75 0 0 1 2 17.247v-7.5a3.75 3.75 0 0 1 3.75-3.75h1.166L5.775 4.855a1.25 1.25 0 1 1 1.767-1.768l2.652 2.652c.079.079.145.165.198.257h3.213c.053-.092.12-.18.199-.258l2.651-2.652a1.25 1.25 0 0 1 1.768 0zm.027 5.42H5.75a1.25 1.25 0 0 0-1.247 1.157l-.003.094v7.5c0 .659.51 1.199 1.157 1.246l.093.004h12.5a1.25 1.25 0 0 0 1.247-1.157l.003-.093v-7.5c0-.69-.56-1.25-1.25-1.25zm-10 2.5c.69 0 1.25.56 1.25 1.25v1.25a1.25 1.25 0 1 1-2.5 0v-1.25c0-.69.56-1.25 1.25-1.25zm7.5 0c.69 0 1.25.56 1.25 1.25v1.25a1.25 1.25 0 1 1-2.5 0v-1.25c0-.69.56-1.25 1.25-1.25z"/></svg>
-                    </a>
-                    <a href="https://blog.csdn.net/weixin_55053322?type=blog" target="_blank" title="CSDN" aria-label="访问我的CSDN博客">
-                        <svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><title>CSDN</title><path d="M6.217 13.408c.447.18 1.379.359 2.132.359.812 0 1.264-.247 1.3-.632.033-.35-.299-.398-1.216-.637-1.267-.342-2.075-.871-1.996-1.717.092-.982 1.286-1.724 3.118-1.724.893 0 1.759.069 2.208.231l-.154 1.238c-.291-.112-1.406-.266-2.16-.266-.765 0-1.16.265-1.188.555-.034.367.363.385 1.356.676 1.345.376 1.933.905 1.856 1.725C11.382 14.18 10.308 15 8.163 15 7.27 15 6.5 14.821 6.076 14.641L6.217 13.408 6.217 13.408zM18.821 9.366c4.884-1.017 5.305.811 5.154 2.428l-.284 2.992h-1.55l.259-2.729c.056-.601.405-1.776-1.281-1.732-.584.016-.873.104-.873.104s-.051.726-.112 1.263l-.294 3.095h-1.52l.302-3.05C18.622 11.736 18.821 9.366 18.821 9.366zM12.653 9.224c.349-.042.884-.084 1.621-.084 1.23 0 2.225.236 2.841.734.553.464.921 1.214.819 2.302-.094 1.012-.57 1.721-1.264 2.159-.635.413-1.434.59-2.637.59-.709 0-1.385-.042-1.9-.126L12.653 9.224 12.653 9.224zM13.669 13.69c.119.025.274.051.582.051 1.231 0 2.098-.668 2.185-1.607.127-1.358-.643-1.832-1.94-1.824-.168 0-.401 0-.525.025L13.669 13.69 13.669 13.69zM5.335 14.813C5.043 14.924 4.439 15 3.595 15c-2.427 0-3.737-1.254-3.583-2.913C.198 10.112 2.139 9 4.264 9c.823 0 1.308.073 1.762.195L5.88 10.526c-.302-.112-1.01-.215-1.583-.215-1.25 0-2.312.41-2.434 1.707-.109 1.16.637 1.714 2.044 1.714.49 0 1.212-.077 1.545-.189C5.452 13.544 5.335 14.813 5.335 14.813z"/></svg>
-                    </a>
-                    <a href="https://www.facebook.com/profile.php?id=61578829349690" target="_blank" title="Facebook" aria-label="访问我的Facebook">
-                        <svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><title>Facebook</title><path d="M22.675 0h-21.35C.59 0 0 .59 0 1.325v21.35C0 23.41.59 24 1.325 24H12.82v-9.29h-3.128V11.21h3.128V8.647c0-3.1 1.893-4.788 4.659-4.788 1.325 0 2.463.099 2.795.143v3.24l-1.918.001c-1.504 0-1.795.715-1.795 1.763v2.313h3.587l-.467 3.5h-3.12V24h5.713c.735 0 1.325-.59 1.325-1.325V1.325C24 .59 23.41 0 22.675 0z"/></svg>
-                    </a>
-                    <a href="https://www.reddit.com/user/OppositeCampaign2649/" target="_blank" title="Reddit" aria-label="访问我的Reddit">
-                        <svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><title>Reddit</title><path d="M10.24 13.6C10.0818 13.6 9.92711 13.5531 9.79555 13.4652C9.66399 13.3773 9.56145 13.2523 9.5009 13.1061C9.44035 12.96 9.42451 12.7991 9.45538 12.6439C9.48624 12.4887 9.56244 12.3462 9.67432 12.2343C9.7862 12.1224 9.92875 12.0462 10.0839 12.0154C10.2391 11.9845 10.4 12.0003 10.5461 12.0609C10.6923 12.1214 10.8173 12.224 10.9052 12.3555C10.9931 12.4871 11.04 12.6418 11.04 12.8C11.04 12.9051 11.0193 13.0091 10.9791 13.1061C10.9389 13.2032 10.88 13.2914 10.8057 13.3657C10.7314 13.44 10.6432 13.4989 10.5461 13.5391C10.4491 13.5793 10.3451 13.6 10.24 13.6ZM20 12C20 13.5823 19.5308 15.129 18.6518 16.4446C17.7727 17.7602 16.5233 18.7855 15.0615 19.391C13.5997 19.9965 11.9911 20.155 10.4393 19.8463C8.88743 19.5376 7.46197 18.7757 6.34315 17.6569C5.22433 16.538 4.4624 15.1126 4.15372 13.5607C3.84504 12.0089 4.00347 10.4003 4.60897 8.93853C5.21447 7.47672 6.23985 6.22729 7.55544 5.34824C8.87103 4.46919 10.4178 4 12 4C14.1217 4 16.1566 4.84285 17.6569 6.34315C19.1571 7.84344 20 9.87827 20 12ZM15.73 10.67C15.4543 10.6862 15.1943 10.8038 15 11C14.1775 10.4564 13.2158 10.1613 12.23 10.15L12.79 7.62L14.58 8.02C14.5787 8.12458 14.5981 8.22839 14.6372 8.32539C14.6764 8.4224 14.7343 8.51067 14.8078 8.58509C14.8813 8.65951 14.9689 8.7186 15.0654 8.75892C15.1619 8.79925 15.2654 8.82001 15.37 8.82C15.5831 8.81737 15.7866 8.73087 15.9363 8.57925C16.0861 8.42763 16.17 8.2231 16.17 8.01C16.176 7.82715 16.1183 7.6479 16.0069 7.50284C15.8954 7.35777 15.737 7.25589 15.5588 7.21458C15.3806 7.17327 15.1936 7.1951 15.0296 7.27633C14.8657 7.35756 14.7351 7.49317 14.66 7.66L12.66 7.22C12.6124 7.21087 12.5631 7.22027 12.5222 7.2463C12.4813 7.27233 12.4519 7.313 12.44 7.36L11.82 10.15C10.8346 10.1641 9.87368 10.4589 9.05 11C8.94175 10.8882 8.81043 10.8014 8.66518 10.7456C8.51993 10.6898 8.36426 10.6663 8.20902 10.6769C8.05378 10.6874 7.9027 10.7316 7.76631 10.8065C7.62993 10.8814 7.51152 10.9852 7.41934 11.1105C7.32717 11.2359 7.26344 11.3799 7.23261 11.5324C7.20178 11.6849 7.20458 11.8423 7.24082 11.9936C7.27706 12.1449 7.34586 12.2865 7.44244 12.4085C7.53902 12.5305 7.66104 12.63 7.8 12.7C7.78471 12.8663 7.78471 13.0337 7.8 13.2C7.8 14.89 9.71 16.27 12.06 16.27C14.41 16.27 16.32 14.89 16.32 13.2C16.3204 13.0282 16.3002 12.857 16.26 12.69C16.4621 12.5755 16.6215 12.3984 16.714 12.1854C16.8066 11.9724 16.8274 11.7351 16.7732 11.5092C16.719 11.2834 16.5927 11.0813 16.4136 10.9335C16.2344 10.7858 16.012 10.7003 15.78 10.69L15.73 10.67ZM13.51 14.42C13.0606 14.7023 12.5407 14.852 12.01 14.852C11.4793 14.852 10.9594 14.7023 10.51 14.42C10.4731 14.3863 10.425 14.3676 10.375 14.3676C10.325 14.3676 10.2769 14.3863 10.24 14.42C10.2206 14.4378 10.2051 14.4594 10.1945 14.4835C10.1839 14.5076 10.1785 14.5337 10.1785 14.56C10.1785 14.5863 10.1839 14.6124 10.1945 14.6365C10.2051 14.6606 10.2206 14.6822 10.24 14.7C10.7652 15.0564 11.3853 15.2469 12.02 15.2469C12.6547 15.2469 13.2748 15.0564 13.8 14.7C13.8194 14.6822 13.8349 14.6606 13.8455 14.6365C13.8561 14.6124 13.8616 14.5863 13.8616 14.56C13.8616 14.5337 13.8561 14.5076 13.8455 14.4835C13.8349 14.4594 13.8194 14.4378 13.8 14.42C13.7813 14.4003 13.7588 14.3847 13.7339 14.374C13.709 14.3633 13.6821 14.3577 13.655 14.3577C13.6279 14.3577 13.601 14.3633 13.5761 14.374C13.5512 14.3847 13.5287 14.4003 13.51 14.42ZM13.76 12C13.6018 12 13.4471 12.0469 13.3155 12.1348C13.184 12.2227 13.0814 12.3477 13.0209 12.4939C12.9604 12.64 12.9445 12.8009 12.9754 12.9561C13.0062 13.1113 13.0824 13.2538 13.1943 13.3657C13.3062 13.4776 13.4487 13.5538 13.6039 13.5846C13.7591 13.6155 13.92 13.5997 14.0662 13.5391C14.2123 13.4786 14.3373 13.376 14.4252 13.2445C14.5131 13.1129 14.56 12.9582 14.56 12.8C14.56 12.5878 14.4757 12.3843 14.3257 12.2343C14.1757 12.0843 13.9722 12 13.76 12Z"/></svg>
-                    </a>
-                </div>
-            </section>
-
-        </main>
-        
-        <a class="back-to-top" aria-label="返回页面顶部"></a>
-        
-        <footer>
-            <p>
-                Designed & Built by 
-                <a href="https://github.com/BlueDarkUP" target="_blank">Jiang (BlueDarkUP)</a>
-            </p>
-        </footer>
-    </div>
+    </main>
+    
+    <a class="back-to-top" aria-label="返回页面顶部"></a>
+    
+    <footer>
+        <p>
+            Designed & Built by 
+            <a href="https://github.com/BlueDarkUP" target="_blank">Jiang (BlueDarkUP)</a>
+        </p>
+    </footer>
 
     <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
     
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            const splashScreen = document.getElementById('splash-screen');
-            document.body.classList.add('loading-state');
-
-            setTimeout(() => {
-                splashScreen.classList.add('hidden');
-                document.body.classList.remove('loading-state');
-                
-                setTimeout(() => {
-                    splashScreen.style.display = 'none';
-                }, 1000);
-            }, 2800);
-
             const hamburger = document.querySelector('.hamburger');
             const navLinks = document.querySelector('.nav-links');
             const navLinksItems = document.querySelectorAll('.nav-links li a');
@@ -941,32 +939,18 @@
 
             const backToTopButton = document.querySelector('.back-to-top');
             const navbar = document.querySelector('.navbar');
-            let particlesAreDense = true;
 
             window.addEventListener('scroll', () => {
-                if (window.pageYOffset > 50) {
-                    navbar.classList.add('scrolled');
-                } else {
-                    navbar.classList.remove('scrolled');
-                }
-                
                 if (window.pageYOffset > 300) {
                     backToTopButton.classList.add('visible');
                 } else {
                     backToTopButton.classList.remove('visible');
                 }
-
-                const pJS = window.pJSDom && window.pJSDom[0] ? window.pJSDom[0].pJS : null;
-                if (!pJS) return;
-
-                if (window.scrollY > 300 && particlesAreDense) {
-                    pJS.particles.number.value = 100;
-                    pJS.fn.particlesRefresh();
-                    particlesAreDense = false;
-                } else if (window.scrollY <= 300 && !particlesAreDense) {
-                    pJS.particles.number.value = 200;
-                    pJS.fn.particlesRefresh();
-                    particlesAreDense = true;
+                
+                if (window.pageYOffset > 50) {
+                    navbar.classList.add('scrolled');
+                } else {
+                    navbar.classList.remove('scrolled');
                 }
             });
             
@@ -997,7 +981,7 @@
             }, {
                 threshold: 0.1
             });
-            
+
             const animatedElements = document.querySelectorAll('.fade-in, .card-grid');
             animatedElements.forEach(element => {
                 observer.observe(element);
@@ -1015,7 +999,7 @@
                 particlesJS('particles-js', {
                     "particles": {
                         "number": {
-                            "value": 500,
+                            "value": 40,
                             "density": {
                                 "enable": true,
                                 "value_area": 800
@@ -1025,7 +1009,7 @@
                             "value": "#A8B852"
                         },
                         "shape": {
-                            "type": "circle",
+                            "type": "circle"
                         },
                         "opacity": {
                             "value": 0.4,
@@ -1078,28 +1062,28 @@
                                     "opacity": 0.5
                                 }
                             },
-                            "bubble": {
-                                "distance": 400,
-                                "size": 40,
-                                "duration": 2,
-                                "opacity": 8,
-                                "speed": 3
-                            },
-                            "repulse": {
-                                "distance": 200,
-                                "duration": 0.4
-                            },
+                            "bubble": {},
+                            "repulse": {},
                             "push": {
                                 "particles_nb": 4
                             },
-                            "remove": {
-                                "particles_nb": 2
-                            }
+                            "remove": {}
                         }
                     },
                     "retina_detect": true
                 });
             }
+        });
+
+        // --- 新增：启动动画逻辑 ---
+        const preloader = document.getElementById('preloader');
+        window.addEventListener('load', function() {
+            // 确保动画至少播放2.8秒
+            setTimeout(() => {
+                if (preloader) {
+                    preloader.classList.add('loaded');
+                }
+            }, 2800); 
         });
     </script>
 </body>
