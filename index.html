@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Jiang (BlueDarkUP) - 全栈开发者 & AI 机器人工程师</title>
+    <!-- Favicon: 浏览器标签页图标 -->
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🧑‍💻</text></svg>">
     <style>
         :root {
             --primary-color: #2A4730;
@@ -43,7 +45,7 @@
             top: 0;
             background-color: rgba(42, 71, 48, 0.85);
             backdrop-filter: blur(10px);
-            z-index: 100;
+            z-index: 1000;
         }
 
         .logo {
@@ -51,12 +53,15 @@
             font-size: 1.8em;
             color: var(--secondary-color);
             text-decoration: none;
+            z-index: 1001; /* 确保Logo在移动菜单之上 */
         }
 
         .nav-links {
             list-style: none;
             display: flex;
             gap: 25px;
+            margin: 0;
+            padding: 0;
         }
 
         .nav-links a {
@@ -70,9 +75,37 @@
             color: var(--secondary-color);
         }
 
+        .hamburger {
+            display: none; /* 默认隐藏 */
+            cursor: pointer;
+            z-index: 1001;
+        }
+
+        .hamburger .bar {
+            display: block;
+            width: 25px;
+            height: 3px;
+            margin: 5px auto;
+            -webkit-transition: all 0.3s ease-in-out;
+            transition: all 0.3s ease-in-out;
+            background-color: var(--text-color-light);
+        }
+        
         section {
             padding: 120px 0;
             min-height: 80vh;
+        }
+        
+        /* 优化: 滚动动画的初始状态 */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+
+        .fade-in.is-visible {
+            opacity: 1;
+            transform: translateY(0);
         }
 
         .section-title {
@@ -260,12 +293,84 @@
             text-decoration: none;
         }
 
+        /* 优化: “返回顶部”按钮样式 */
+        .back-to-top {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: rgba(216, 226, 94, 0.2);
+            border: 1px solid var(--secondary-color);
+            color: var(--secondary-color);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s, visibility 0.3s, background-color 0.3s;
+            z-index: 999;
+        }
+
+        .back-to-top:hover {
+            background-color: rgba(216, 226, 94, 0.4);
+        }
+
+        .back-to-top.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .back-to-top::after {
+            content: '↑';
+            font-size: 1.5em;
+            font-weight: bold;
+        }
+
+        /* 优化: 响应式设计 - 移动端适配 */
         @media (max-width: 768px) {
             .about-content {
                 grid-template-columns: 1fr;
             }
+
             .nav-links {
-                display: none;
+                position: fixed;
+                left: -100%; /* 初始状态在屏幕外 */
+                top: 0;
+                flex-direction: column;
+                background-color: var(--primary-color);
+                width: 100%;
+                height: 100vh;
+                text-align: center;
+                transition: 0.3s;
+                justify-content: center;
+                gap: 50px;
+            }
+
+            .nav-links.active {
+                left: 0; /* 激活时移入屏幕 */
+            }
+
+            .nav-links a {
+                font-size: 1.5em;
+            }
+
+            .hamburger {
+                display: block; /* 在移动端显示汉堡菜单 */
+            }
+            
+            .hamburger.active .bar:nth-child(2) {
+                opacity: 0;
+            }
+
+            .hamburger.active .bar:nth-child(1) {
+                transform: translateY(8px) rotate(45deg);
+            }
+
+            .hamburger.active .bar:nth-child(3) {
+                transform: translateY(-8px) rotate(-45deg);
             }
         }
     </style>
@@ -282,11 +387,17 @@
             <li><a href="#tech-stack">技术栈</a></li>
             <li><a href="#contact">联系方式</a></li>
         </ul>
+        <!-- 优化: 汉堡菜单HTML结构 -->
+        <div class="hamburger">
+            <span class="bar"></span>
+            <span class="bar"></span>
+            <span class="bar"></span>
+        </div>
     </nav>
 
     <main class="container">
 
-        <section id="hero">
+        <section id="hero" class="fade-in">
             <p style="color: var(--secondary-color); font-size: 1.1em; margin-bottom: 10px;">Hi, my name is</p>
             <h1>Jiang (BlueDarkUP)</h1>
             <h1 class="highlight">全栈开发者 & AI 机器人工程师</h1>
@@ -294,7 +405,7 @@
             <a href="https://github.com/BlueDarkUP" target="_blank" class="cta-button">查看我的开源项目</a>
         </section>
 
-        <section id="about">
+        <section id="about" class="fade-in">
             <h2 class="section-title">关于我</h2>
             <div class="about-content">
                 <div>
@@ -316,52 +427,53 @@
             </div>
         </section>
 
-        <section id="articles">
+        <section id="articles" class="fade-in">
             <h2 class="section-title">精选技术文章与教程</h2>
             <div class="card-grid">
-                <div class="card">
+                <!-- 为每个卡片添加 fade-in 类以实现动画 -->
+                <div class="card fade-in">
                     <h3><a href="https://grizzly-treatment-ac4.notion.site/FTC-27570-TeleOp-250969a5284d8075b144dca6f421e9b8?pvs=73" target="_blank">课程 1: 你的第一个竞赛级 TeleOp</a></h3>
                     <p>学习 LinearOpMode 的基本结构，如何映射硬件，并为Mecanum底盘实现稳健的驱动控制。</p>
                     <div class="card-footer">
                         <span class="tag">硬件映射</span><span class="tag">场地中心驱动</span><span class="tag">状态机</span>
                     </div>
                 </div>
-                <div class="card">
+                <div class="card fade-in">
                     <h3><a href="https://grizzly-treatment-ac4.notion.site/FTC-27570-250969a5284d8098bb35c9c637ac0fa3?pvs=73" target="_blank">课程 2: 集成 Road Runner 的高级 TeleOp</a></h3>
                     <p>学习如何将 Road Runner 集成到 TeleOp 中，实现强大的半自动功能，如“一键返回”。</p>
                     <div class="card-footer">
                         <span class="tag">Road Runner</span><span class="tag">Pose2d</span><span class="tag">运动序列</span>
                     </div>
                 </div>
-                 <div class="card">
+                 <div class="card fade-in">
                     <h3><a href="https://grizzly-treatment-ac4.notion.site/FTC-27570-API-250969a5284d8039bb4ee5f524f3279f?pvs=73" target="_blank">课程 3: 构建视觉 API (入门)</a></h3>
                     <p>介绍如何设计一个独立的视觉系统。本课程涵盖了可被任何 OpMode 使用的视觉管线的初始架构。</p>
                     <div class="card-footer">
                         <span class="tag">API 设计</span><span class="tag">OpenCvPipeline</span><span class="tag">颜色分割</span>
                     </div>
                 </div>
-                <div class="card">
+                <div class="card fade-in">
                     <h3><a href="https://grizzly-treatment-ac4.notion.site/FTC-27570-API-250969a5284d808380a8ea220da47436?pvs=73" target="_blank">课程 4: 生产级视觉系统架构</a></h3>
                     <p>一堂关于软件架构的大师课，将初始API重构为一个高度模块化、可维护的强大系统。</p>
                     <div class="card-footer">
                         <span class="tag">SoC</span><span class="tag">配置管理</span><span class="tag">运动学建模</span>
                     </div>
                 </div>
-                <div class="card">
+                <div class="card fade-in">
                     <h3><a href="https://grizzly-treatment-ac4.notion.site/FTC-27570-250969a5284d802eabe6de3f2173870d?pvs=73" target="_blank">课程 5: FLL AquaHunter (自主ROV)</a></h3>
                     <p>学习如何从零开始构建一个完整的单脚本AI系统，涵盖实时对象跟踪和水下机器人的视觉伺服。</p>
                     <div class="card-footer">
                         <span class="tag">YOLOv8</span><span class="tag">SORT算法</span><span class="tag">串口通信</span>
                     </div>
                 </div>
-                <div class="card">
+                <div class="card fade-in">
                     <h3><a href="https://grizzly-treatment-ac4.notion.site/FTC-27570-AI-250969a5284d80aa8ccfe5e2bc11e73e?pvs=73" target="_blank">课程 6: 构建你自己的数据引擎</a></h3>
                     <p>学习如何架构和构建一个用于管理整个机器学习数据生命周期的全栈Web应用。</p>
                     <div class="card-footer">
                         <span class="tag">Flask</span><span class="tag">SQLite</span><span class="tag">REST API</span><span class="tag">SAM 2.1</span>
                     </div>
                 </div>
-                <div class="card">
+                <div class="card fade-in">
                     <h3><a href="https://grizzly-treatment-ac4.notion.site/FTC-27570-AI-250969a5284d8001ab71c9365a4827e8?pvs=73" target="_blank">课程 7: 打造你自己的AI工厂</a></h3>
                     <p>创建一个标准化、自动化和可复现的MLOps流水线，用于训练和部署FTC兼容的模型。</p>
                     <div class="card-footer">
@@ -371,98 +483,99 @@
             </div>
         </section>
 
-        <section id="community">
+        <section id="community" class="fade-in">
             <h2 class="section-title">社区贡献与影响力</h2>
             <div class="card-grid">
-                <div class="card">
+                <div class="card fade-in">
                     <h3>开源工具的普惠价值</h3>
                     <p>我开发的 `FTC-Easy-TFLITE` 和 `Zero-to-YOLO-Yard` 等工具，通过 CSDN 等平台帮助了许多非竞赛背景的开发者，简化了 AI 模型的训练与数据标注流程，致力于降低技术门槛。</p>
                 </div>
-                <div class="card">
+                <div class="card fade-in">
                     <h3>知识分享与技术布道</h3>
                     <p>我坚信分享是技术进步的催化剂。通过撰写深度技术文章、开源全部核心代码，以及为新队伍（如 28119 队）提供技术讲解，我希望将实战中积累的知识回馈给社区。</p>
                 </div>
-                <div class="card">
+                <div class="card fade-in">
                     <h3>跨团队与跨赛事协作</h3>
                     <p>为 FTC 19705 (红心机器人) 开发的视觉系统助力其在休斯顿世锦赛取得佳绩。同时，将技术经验成功应用于 FLL 水下机器人及 RoboMaster 青年赛项目中，探索技术融合创新。</p>
                 </div>
             </div>
         </section>
         
-        <section id="projects">
+        <section id="projects" class="fade-in">
             <h2 class="section-title">开源项目</h2>
             <div class="card-grid">
-                <div class="card">
+                <!-- 为每个卡片添加 fade-in 类以实现动画 -->
+                <div class="card fade-in">
                     <h3><a href="https://github.com/BlueDarkUP/FTC-27570-INTOTHEDEEP-WRC" target="_blank">FTC 27570 Team Code (WRC)</a></h3>
                     <p>27570队赛季核心代码库。<b>亮点:</b> 集成了先进的自主导航、L3级辅助驾驶和智能视觉抓取系统，是赢得控制奖的关键。</p>
                     <div class="card-footer">
                         <span class="tag">Java</span><span class="tag">FTC SDK</span><span class="tag">RoadRunner</span><span class="tag">Robotics</span>
                     </div>
                 </div>
-                <div class="card">
+                <div class="card fade-in">
                     <h3><a href="https://github.com/BlueDarkUP/FTC-INTO-THE-DEEP-VISION-for-19705" target="_blank">Vision System for FTC Team 19705</a></h3>
                     <p>为红心机器人19705队开发的竞赛级视觉系统。<b>亮点:</b> 在休斯顿世锦赛实战验证，实现平均2秒/次的抓取速度与高稳定性。</p>
                     <div class="card-footer">
                         <span class="tag">Java</span><span class="tag">FTC</span><span class="tag">OpenCV</span><span class="tag">Computer Vision</span>
                     </div>
                 </div>
-                <div class="card">
+                <div class="card fade-in">
                     <h3><a href="https://github.com/BlueDarkUP/FTC-27570-INTO-THE-DEEP" target="_blank">FTC 27570 Team Archive</a></h3>
                     <p>27570队的赛季公开代码库，记录了荣获设计奖和控制奖的历程。<b>亮点:</b> 作为赛季总结和技术沉淀，为社区提供参考和学习。</p>
                     <div class="card-footer">
                         <span class="tag">Java</span><span class="tag">FTC</span><span class="tag">Open Source</span><span class="tag">Archive</span>
                     </div>
                 </div>
-                <div class="card">
+                <div class="card fade-in">
                     <h3><a href="https://github.com/BlueDarkUP/Zero-to-YOLO-Yard" target="_blank">Zero-to-YOLO-Yard</a></h3>
                     <p>一个本地化的图像标注平台，集成了 SAM 模型。<b>亮点:</b> 将数据标注时间从平均每张图2分钟缩短到15秒，效率提升8倍。</p>
                     <div class="card-footer">
                         <span class="tag">Python</span><span class="tag">Flask</span><span class="tag">SAM</span><span class="tag">YOLO</span>
                     </div>
                 </div>
-                <div class="card">
+                <div class="card fade-in">
                     <h3><a href="https://github.com/BlueDarkUP/FTC-Easy-TFLITE" target="_blank">FTC-Easy-TFLITE</a></h3>
                     <p>一个本地 MLOps 流水线，实现了 TFLite 物体检测模型的自动化训练、量化和部署。<b>亮点:</b> 降低了在FTC等嵌入式环境中使用AI模型的门槛。</p>
                     <div class="card-footer">
                         <span class="tag">Python</span><span class="tag">TensorFlow</span><span class="tag">MLOps</span><span class="tag">Automation</span>
                     </div>
                 </div>
-                 <div class="card">
+                 <div class="card fade-in">
                     <h3><a href="https://github.com/BlueDarkUP/Easy-YOLO-Augmenter" target="_blank">Easy-YOLO-Augmenter</a></h3>
                     <p>一个直观的桌面应用，无需编码即可增强YOLO格式的图像数据集。<b>亮点:</b> 基于多进程并行处理，由Albumentations驱动，显著提升数据增强效率。</p>
                     <div class="card-footer">
                         <span class="tag">Python</span><span class="tag">PyQt5</span><span class="tag">Computer Vision</span><span class="tag">Data Augmentation</span>
                     </div>
                 </div>
-                <div class="card">
+                <div class="card fade-in">
                     <h3><a href="https://github.com/BlueDarkUP/Yolo2TFRecord" target="_blank">Yolo2TFRecord</a></h3>
                     <p>一个将YOLO格式标注数据集转换为TFRecord格式的Python脚本。<b>亮点:</b> 自动解析`data.yaml`，并创建符合TF Object Detection API标准的目录结构。</p>
                     <div class="card-footer">
                         <span class="tag">Python</span><span class="tag">TensorFlow</span><span class="tag">YOLO</span><span class="tag">Data Conversion</span>
                     </div>
                 </div>
-                <div class="card">
+                <div class="card fade-in">
                     <h3><a href="https://github.com/BlueDarkUP/FLL-AquaHunter" target="_blank">FLL-AquaHunter</a></h3>
                     <p>用于 FLL 竞赛的水下机器人 (ROV)，能够自主识别、追踪并抓取狮子鱼。<b>亮点:</b> 将AI视觉应用于解决入侵物种问题的真实场景。</p>
                     <div class="card-footer">
                         <span class="tag">Python</span><span class="tag">YOLOv8</span><span class="tag">SORT</span><span class="tag">Embedded AI</span>
                     </div>
                 </div>
-                <div class="card">
+                <div class="card fade-in">
                     <h3><a href="https://github.com/BlueDarkUP/AIRS-RM-2025" target="_blank">RM-Hunter (RMYC)</a></h3>
                     <p>为 RoboMaster 青年赛设计的自主守卫机器人。<b>亮点:</b> 成功将在FTC和FLL项目中积累的视觉自瞄与PID控制算法迁移应用。</p>
                     <div class="card-footer">
                         <span class="tag">Python</span><span class="tag">OpenCV</span><span class="tag">PID Control</span><span class="tag">RoboMaster</span>
                     </div>
                 </div>
-                <div class="card">
+                <div class="card fade-in">
                     <h3><a href="https://github.com/BlueDarkUP/Scanventory" target="_blank">Scanventory</a></h3>
                     <p>一款专为国企设计的开源固定资产盘点安卓应用。<b>亮点:</b> 通过手机扫码盘点，支持Excel导入导出，所有数据本地处理，保障隐私安全。</p>
                     <div class="card-footer">
                         <span class="tag">Android</span><span class="tag">Kotlin</span><span class="tag">Jetpack Compose</span><span class="tag">SQLite</span>
                     </div>
                 </div>
-                <div class="card">
+                <div class="card fade-in">
                     <h3><a href="https://github.com/BlueDarkUP/FTC-Servo-Angle-Control" target="_blank">FTC-Servo-Angle-Control (CSP)</a></h3>
                     <p>一个用于FTC Java编程的即插即用工具，让您能用直观的角度而非小数来控制舵机。<b>亮点:</b> 简化配置，自动处理映射、缩放和反向，让舵机控制更直观。</p>
                     <div class="card-footer">
@@ -472,7 +585,7 @@
             </div>
         </section>
 
-        <section id="tech-stack">
+        <section id="tech-stack" class="fade-in">
             <h2 class="section-title">技术栈</h2>
             <div class="tech-category">
                 <h4>精通 (Proficient)</h4>
@@ -508,38 +621,42 @@
             </div>
         </section>
 
-        <section id="contact">
+        <section id="contact" class="fade-in">
             <h2 class="section-title" style="margin: 0 auto;">联系方式</h2>
             <p>我对新的机遇和挑战总是充满热情。欢迎随时通过以下方式与我交流、探讨技术或寻求合作！</p>
             <div class="contact-links">
-                <a href="https://github.com/BlueDarkUP" target="_blank" title="GitHub">
+                <!-- 优化: 为链接添加aria-label以提升可访问性 -->
+                <a href="https://github.com/BlueDarkUP" target="_blank" title="GitHub" aria-label="访问我的GitHub主页">
                     <svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><title>GitHub</title><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.12-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.665 1.653.255 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
                 </a>
-                <a href="mailto:BlueDarkUP@Gmail.com" target="_blank" title="Email">
+                <a href="mailto:BlueDarkUP@Gmail.com" target="_blank" title="Email" aria-label="给我发送电子邮件">
                     <svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><title>Email</title><path d="M22 6c0-1.1-.9-2-2-2H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6zm-2 0l-8 5-8-5h16zm0 12H4V8l8 5 8-5v10z"/></svg>
                 </a>
-                <a href="https://www.youtube.com/@BlueDarkUP" target="_blank" title="YouTube">
+                <a href="https://www.youtube.com/@BlueDarkUP" target="_blank" title="YouTube" aria-label="访问我的YouTube频道">
                      <svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><title>YouTube</title><path d="M21.582 7.336c-.2-.736-.77-1.306-1.506-1.506C18.66 5.5 12 5.5 12 5.5s-6.66 0-8.076.33c-.736.2-1.306.77-1.506 1.506C2.088 8.752 2 12 2 12s.088 3.248.418 4.664c.2.736.77 1.306 1.506 1.506C5.34 18.5 12 18.5 12 18.5s6.66 0 8.076-.33c.736-.2 1.306-.77 1.506-1.506C21.912 15.248 22 12 22 12s-.088-3.248-.418-4.664zM9.75 14.885V9.115l4.985 2.885-4.985 2.885z"/></svg>
                 </a>
-                <a href="https://www.instagram.com/bluedarkup/" target="_blank" title="Instagram">
+                <a href="https://www.instagram.com/bluedarkup/" target="_blank" title="Instagram" aria-label="访问我的Instagram">
                      <svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><title>Instagram</title><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.85s-.012 3.584-.07 4.85c-.148 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07s-3.584-.012-4.85-.07c-3.252-.148-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.85s.012-3.584.07-4.85c.148-3.227 1.664-4.771 4.919-4.919C8.356 2.175 8.741 2.163 12 2.163m0-2.163C8.741 0 8.333.014 7.053.072 2.82.266.202 2.883 0 7.117.058 8.397.072 8.804.072 12s-.014 3.603-.072 4.883c-.194 4.233 2.812 6.852 7.046 7.046 1.28.058 1.687.072 4.947.072s3.667-.014 4.947-.072c4.233-.194 6.852-2.812 7.046-7.046.058-1.28.072-1.687.072-4.883s-.014-3.603-.072-4.883C23.798 2.883 21.18.266 16.947.072 15.667.014 15.259 0 12 0zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.162 6.162 6.162 6.162-2.759 6.162-6.162-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4s1.791-4 4-4 4 1.79 4 4-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.441 1.441 1.441 1.441-.645 1.441-1.441-.645-1.44-1.441-1.44z"/></svg>
                 </a>
-                <a href="https://space.bilibili.com/1778652739" target="_blank" title="Bilibili">
+                <a href="https://space.bilibili.com/1778652739" target="_blank" title="Bilibili" aria-label="访问我的Bilibili空间">
                     <svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><title>Bilibili</title><path d="M15.31 2.92H8.69A5.77 5.77 0 0 0 2.92 8.69v6.62a5.77 5.77 0 0 0 5.77 5.77h6.62a5.77 5.77 0 0 0 5.77-5.77V8.69A5.77 5.77 0 0 0 15.31 2.92ZM7.84 9.15a1.47 1.47 0 1 1-1.46 1.46A1.46 1.46 0 0 1 7.84 9.15Zm8.32 0a1.47 1.47 0 1 1-1.46 1.46A1.46 1.46 0 0 1 16.16 9.15ZM18 16.05a6 6 0 0 1-12 0V15.3a8.8 8.8 0 0 1 12 0Z"/></svg>
                 </a>
-                <a href="https://blog.csdn.net/weixin_55053322?type=blog" target="_blank" title="CSDN">
+                <a href="https://blog.csdn.net/weixin_55053322?type=blog" target="_blank" title="CSDN" aria-label="访问我的CSDN博客">
                     <svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><title>CSDN</title><path d="M11.906 4.094c-5.187 0-9.422 3.657-9.422 8.157s4.234 8.156 9.422 8.156 9.422-3.656 9.422-8.156S17.094 4.094 11.906 4.094zm3.93 5.43c.484.453.625.968.625 1.578v.25c0 .61-.14 1.125-.625 1.578-.484.453-1.164.672-2.039.672h-1.5v1.844h-1.656V8.094h3.187c.852 0 1.531.22 2.016.672zm-2.032 2.148c.328 0 .586-.14.773-.422.188-.281.281-.625.281-1.031v-.25c0-.406-.094-.75-.281-1.031-.188-.281-.445-.422-.773-.422h-1.532v3.156h1.532zM24 12.25C24 5.485 18.633 0 12 0 5.367 0 0 5.484 0 12.25c0 6.765 5.367 12.25 12 12.25c6.633 0 12-5.485 12-12.25"/></svg>
                 </a>
-                <a href="https://www.facebook.com/profile.php?id=61578829349690" target="_blank" title="Facebook">
+                <a href="https://www.facebook.com/profile.php?id=61578829349690" target="_blank" title="Facebook" aria-label="访问我的Facebook">
                     <svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><title>Facebook</title><path d="M22.675 0h-21.35C.59 0 0 .59 0 1.325v21.35C0 23.41.59 24 1.325 24H12.82v-9.29h-3.128V11.21h3.128V8.647c0-3.1 1.893-4.788 4.659-4.788 1.325 0 2.463.099 2.795.143v3.24l-1.918.001c-1.504 0-1.795.715-1.795 1.763v2.313h3.587l-.467 3.5h-3.12V24h5.713c.735 0 1.325-.59 1.325-1.325V1.325C24 .59 23.41 0 22.675 0z"/></svg>
                 </a>
-                <a href="https://www.reddit.com/user/OppositeCampaign2649/" target="_blank" title="Reddit">
+                <a href="https://www.reddit.com/user/OppositeCampaign2649/" target="_blank" title="Reddit" aria-label="访问我的Reddit">
                     <svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><title>Reddit</title><path d="M12 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0zm5.01 4.744c.688 0 1.25.561 1.25 1.249a1.25 1.25 0 0 1-2.498.056l-2.597-.547-.8 1.772c.996.107 1.953.546 2.761 1.229a3.024 3.024 0 0 1 1.762 2.964c0 1.66-1.353 3.012-3.012 3.012-1.659 0-3.012-1.352-3.012-3.012 0-.242.03-.48.087-.708-.727-.243-1.442-.644-2.072-1.134l-1.632 1.945c-.244.29-.636.328-1.014.088-.477-.29-.69-.844-.446-1.32l2.339-4.881c.243-.508.844-.73 1.32-.487.477.243.69.844.446 1.32l-1.879 3.917c.946.436 1.996.722 3.129.722 1.056 0 2.024-.282 2.847-.768l.244-4.254c-.608-.187-1.14-.54-1.554-1.074l.056-.057c.028-.028.056-.056.084-.084.561-.561.945-1.299 1.135-2.125l2.456.516c.028.005.056.009.084.009.688 0 1.25-.561 1.25-1.249a1.25 1.25 0 0 0-1.25-1.249zm-2.012 5.385c-.718 0-1.299-.581-1.299-1.299s.581-1.299 1.299-1.299c.718 0 1.299.581 1.299 1.299s-.581 1.299-1.299 1.299zm-4.839-3.606c-.718 0-1.299-.581-1.299-1.299s.581-1.299 1.299-1.299c.718 0 1.299.581 1.299 1.299s-.581 1.299-1.299 1.299z"/></svg>
                 </a>
             </div>
         </section>
 
     </main>
+    
+    <!-- 优化: “返回顶部”按钮HTML结构 -->
+    <a class="back-to-top" aria-label="返回页面顶部"></a>
     
     <footer>
         <p>
@@ -548,5 +665,66 @@
         </p>
     </footer>
 
+    <!-- 优化: 全站功能的JavaScript -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // 1. 汉堡菜单功能
+            const hamburger = document.querySelector('.hamburger');
+            const navLinks = document.querySelector('.nav-links');
+            const navLinksItems = document.querySelectorAll('.nav-links li a');
+
+            hamburger.addEventListener('click', () => {
+                hamburger.classList.toggle('active');
+                navLinks.classList.toggle('active');
+            });
+
+            // 点击移动菜单链接后，自动关闭菜单
+            navLinksItems.forEach(link => {
+                link.addEventListener('click', () => {
+                    if (navLinks.classList.contains('active')) {
+                        hamburger.classList.remove('active');
+                        navLinks.classList.remove('active');
+                    }
+                });
+            });
+
+            // 2. “返回顶部”按钮功能
+            const backToTopButton = document.querySelector('.back-to-top');
+
+            window.addEventListener('scroll', () => {
+                if (window.pageYOffset > 300) { // 滚动超过300px后显示
+                    backToTopButton.classList.add('visible');
+                } else {
+                    backToTopButton.classList.remove('visible');
+                }
+            });
+            
+            backToTopButton.addEventListener('click', (e) => {
+                e.preventDefault();
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+            });
+
+            // 3. 滚动加载动画功能
+            const animatedElements = document.querySelectorAll('.fade-in');
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('is-visible');
+                        observer.unobserve(entry.target); // 动画只播放一次
+                    }
+                });
+            }, {
+                threshold: 0.1 // 元素进入视口10%时触发
+            });
+
+            animatedElements.forEach(element => {
+                observer.observe(element);
+            });
+        });
+    </script>
 </body>
 </html>
