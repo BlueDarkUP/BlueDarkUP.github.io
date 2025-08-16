@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Jiang (BlueDarkUP) - 全栈开发者 & AI 机器人工程师</title>
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🔑</text></svg>">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🔑</text></svg>">
     <meta name="description" content="Jiang (BlueDarkUP) 的个人作品集，一位专注于全栈开发与 AI 机器人工程的学生开发者。展示了我的开源项目、技术文章以及在 FTC 机器人竞赛中的贡献。">
     <meta name="author" content="Jiang (BlueDarkUP)">
     <!-- 美化: 技术栈图标库 -->
@@ -209,6 +209,22 @@
             justify-content: center;
             min-height: 100vh;
             padding-top: 0;
+            position: relative; /* Added for particles.js positioning */
+            overflow: hidden; /* Hide particles overflow */
+        }
+        
+        /* Particles.js Background Styling */
+        #particles-js {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: 0; /* Behind the content */
+        }
+        
+        #hero .container {
+            z-index: 1; /* Ensure content is above particles */
         }
 
         #hero h1 {
@@ -281,7 +297,7 @@
             gap: 20px;
         }
 
-        /* 美化: 精致的卡片悬停效果 */
+        /* 美化: 精致的卡片悬停效果与加载动画 */
         .card {
             background-color: var(--background-light);
             padding: 25px;
@@ -289,8 +305,17 @@
             display: flex;
             flex-direction: column;
             border: 1px solid transparent;
-            transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+            transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease, opacity 0.5s ease-out, transform 0.5s ease-out;
+            /* Initial state for staggered animation */
+            opacity: 0;
+            transform: translateY(20px);
         }
+        
+        .card.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
         .card:hover {
             transform: translateY(-7px);
             box-shadow: 0 10px 30px -15px rgba(0,0,0,0.7);
@@ -481,8 +506,8 @@
                 transform: translateY(-8px) rotate(-45deg);
             }
             
-            #cursor-glow {
-                display: none; /* 在移动端禁用辉光效果以提高性能 */
+            #cursor-glow, #particles-js {
+                display: none; /* 在移动端禁用辉光和粒子效果以提高性能 */
             }
         }
     </style>
@@ -508,16 +533,21 @@
             <span class="bar"></span>
         </div>
     </nav>
+    
+    <section id="hero">
+        <div id="particles-js"></div>
+        <div class="container">
+            <div class="fade-in">
+                <p style="color: var(--secondary-color); font-size: 1.1em; margin-bottom: 10px;">Hi, my name is</p>
+                <h1>Jiang (BlueDarkUP)</h1>
+                <h1 class="highlight">全栈开发者 & AI 机器人工程师</h1>
+                <p class="subtitle">构建从想法到部署的端到端系统，致力于用技术解决现实世界难题。</p>
+                <a href="https://github.com/BlueDarkUP" target="_blank" class="cta-button">查看我的开源项目</a>
+            </div>
+        </div>
+    </section>
 
     <main class="container">
-
-        <section id="hero" class="fade-in">
-            <p style="color: var(--secondary-color); font-size: 1.1em; margin-bottom: 10px;">Hi, my name is</p>
-            <h1>Jiang (BlueDarkUP)</h1>
-            <h1 class="highlight">全栈开发者 & AI 机器人工程师</h1>
-            <p class="subtitle">构建从想法到部署的端到端系统，致力于用技术解决现实世界难题。</p>
-            <a href="https://github.com/BlueDarkUP" target="_blank" class="cta-button">查看我的开源项目</a>
-        </section>
 
         <section id="about" class="fade-in">
             <h2 class="section-title">关于我</h2>
@@ -544,7 +574,7 @@
         <section id="philosophy" class="fade-in">
             <h2 class="section-title">我的理念与愿景</h2>
             <div class="card-grid">
-                <div class="card fade-in">
+                <div class="card">
                     <h4><span style="color: var(--secondary-color); margin-right: 10px;">Q1:</span> 您为什么对机器人和 AI 充满热情？</h4>
                     <p>
                         对我而言，AI 与机器人的最大魅力在于它们是<strong>连接虚拟世界与物理世界的桥梁</strong>。我的热情始于一个简单的生活观察：初中校门口一个即使无车也漫长等待的红绿灯。为此，我编写了第一个视觉程序——“基于OpenCV的行人检测系统”，旨在动态调整信号灯时长，这个项目也荣幸地获得了北京市金鹏科技论坛二等奖。
@@ -553,7 +583,7 @@
                         从那一刻起我便着迷于此：一行代码不再仅是屏幕上的逻辑，它能驱动机械臂精准抓取，能引导小车在赛场上自主导航。当看到自己的想法变为现实，那种成就感是我不断探索的根本动力。
                     </p>
                 </div>
-                <div class="card fade-in">
+                <div class="card">
                     <h4><span style="color: var(--secondary-color); margin-right: 10px;">Q2:</span> 您认为好的软件工程是怎样的？</h4>
                     <p>
                         我追求的不仅是“能用”的代码，更是<strong>优雅、可读、可维护的工程艺术</strong>。这意味着深思熟虑的命名、高度模块化的结构和清晰的文档。
@@ -562,7 +592,7 @@
                         在 FTC 团队项目中，我主导了代码架构的重构，将视觉、控制、导航等核心模块完全解耦。这确保了任何成员都能快速上手、修改特定功能，而不会引发系统性崩溃。一个好的系统，应当像一本清晰的书，任何人翻开都能轻松理解脉络，并充满信心地添写新的篇章。
                     </p>
                 </div>
-                <div class="card fade-in">
+                <div class="card">
                     <h4><span style="color: var(--secondary-color); margin-right: 10px;">Q3:</span> 您希望未来用技术解决什么样的问题？</h4>
                     <p>
                         我的长期愿景是成为一名“**工具的创造者**”。我发现，许多创想难以落地，并非因为缺乏智慧，而是被繁琐的底层技术流程所束缚。
@@ -577,49 +607,49 @@
         <section id="articles" class="fade-in">
             <h2 class="section-title">精选技术文章与教程</h2>
             <div class="card-grid">
-                <div class="card fade-in">
+                <div class="card">
                     <h3><a href="https://grizzly-treatment-ac4.notion.site/FTC-27570-TeleOp-250969a5284d8075b144dca6f421e9b8?pvs=73" target="_blank">课程 1: 你的第一个竞赛级 TeleOp</a></h3>
                     <p>学习 LinearOpMode 的基本结构，如何映射硬件，并为Mecanum底盘实现稳健的驱动控制。</p>
                     <div class="card-footer">
                         <span class="tag">硬件映射</span><span class="tag">场地中心驱动</span><span class="tag">状态机</span>
                     </div>
                 </div>
-                <div class="card fade-in">
+                <div class="card">
                     <h3><a href="https://grizzly-treatment-ac4.notion.site/FTC-27570-250969a5284d8098bb35c9c637ac0fa3?pvs=73" target="_blank">课程 2: 集成 Road Runner 的高级 TeleOp</a></h3>
                     <p>学习如何将 Road Runner 集成到 TeleOp 中，实现强大的半自动功能，如“一键返回”。</p>
                     <div class="card-footer">
                         <span class="tag">Road Runner</span><span class="tag">Pose2d</span><span class="tag">运动序列</span>
                     </div>
                 </div>
-                 <div class="card fade-in">
+                 <div class="card">
                     <h3><a href="https://grizzly-treatment-ac4.notion.site/FTC-27570-API-250969a5284d8039bb4ee5f524f3279f?pvs=73" target="_blank">课程 3: 构建视觉 API (入门)</a></h3>
                     <p>介绍如何设计一个独立的视觉系统。本课程涵盖了可被任何 OpMode 使用的视觉管线的初始架构。</p>
                     <div class="card-footer">
                         <span class="tag">API 设计</span><span class="tag">OpenCvPipeline</span><span class="tag">颜色分割</span>
                     </div>
                 </div>
-                <div class="card fade-in">
+                <div class="card">
                     <h3><a href="https://grizzly-treatment-ac4.notion.site/FTC-27570-API-250969a5284d808380a8ea220da47436?pvs=73" target="_blank">课程 4: 生产级视觉系统架构</a></h3>
                     <p>一堂关于软件架构的大师课，将初始API重构为一个高度模块化、可维护的强大系统。</p>
                     <div class="card-footer">
                         <span class="tag">SoC</span><span class="tag">配置管理</span><span class="tag">运动学建模</span>
                     </div>
                 </div>
-                <div class="card fade-in">
+                <div class="card">
                     <h3><a href="https://grizzly-treatment-ac4.notion.site/FTC-27570-250969a5284d802eabe6de3f2173870d?pvs=73" target="_blank">课程 5: FLL AquaHunter (自主ROV)</a></h3>
                     <p>学习如何从零开始构建一个完整的单脚本AI系统，涵盖实时对象跟踪和水下机器人的视觉伺服。</p>
                     <div class="card-footer">
                         <span class="tag">YOLOv8</span><span class="tag">SORT算法</span><span class="tag">串口通信</span>
                     </div>
                 </div>
-                <div class="card fade-in">
+                <div class="card">
                     <h3><a href="https://grizzly-treatment-ac4.notion.site/FTC-27570-AI-250969a5284d80aa8ccfe5e2bc11e73e?pvs=73" target="_blank">课程 6: 构建你自己的数据引擎</a></h3>
                     <p>学习如何架构和构建一个用于管理整个机器学习数据生命周期的全栈Web应用。</p>
                     <div class="card-footer">
                         <span class="tag">Flask</span><span class="tag">SQLite</span><span class="tag">REST API</span><span class="tag">SAM 2.1</span>
                     </div>
                 </div>
-                <div class="card fade-in">
+                <div class="card">
                     <h3><a href="https://grizzly-treatment-ac4.notion.site/FTC-27570-AI-250969a5284d8001ab71c9365a4827e8?pvs=73" target="_blank">课程 7: 打造你自己的AI工厂</a></h3>
                     <p>创建一个标准化、自动化和可复现的MLOps流水线，用于训练和部署FTC兼容的模型。</p>
                     <div class="card-footer">
@@ -632,15 +662,15 @@
         <section id="community" class="fade-in">
             <h2 class="section-title">社区贡献与影响力</h2>
             <div class="card-grid">
-                <div class="card fade-in">
+                <div class="card">
                     <h3>开源工具的普惠价值</h3>
                     <p>我开发的 `FTC-Easy-TFLITE` 和 `Zero-to-YOLO-Yard` 等工具，通过 CSDN 等平台帮助了许多非竞赛背景的开发者，简化了 AI 模型的训练与数据标注流程，致力于降低技术门槛。</p>
                 </div>
-                <div class="card fade-in">
+                <div class="card">
                     <h3>知识分享与技术布道</h3>
                     <p>我坚信分享是技术进步的催化剂。通过撰写深度技术文章、开源全部核心代码，以及为新队伍（如 28119 队）提供技术讲解，我希望将实战中积累的知识回馈给社区。</p>
                 </div>
-                <div class="card fade-in">
+                <div class="card">
                     <h3>跨团队与跨赛事协作</h3>
                     <p>为 FTC 19705 (红心机器人) 开发的视觉系统助力其在休斯顿世锦赛取得佳绩。同时，将技术经验成功应用于 FLL 水下机器人及 RoboMaster 青年赛项目中，探索技术融合创新。</p>
                 </div>
@@ -650,77 +680,77 @@
         <section id="projects" class="fade-in">
             <h2 class="section-title">开源项目</h2>
             <div class="card-grid">
-                <div class="card fade-in">
+                <div class="card">
                     <h3><a href="https://github.com/BlueDarkUP/FTC-27570-INTOTHEDEEP-WRC" target="_blank">FTC 27570 Team Code (WRC)</a></h3>
                     <p>27570队赛季核心代码库。<b>亮点:</b> 集成了先进的自主导航、L3级辅助驾驶和智能视觉抓取系统，作为赛季总结和技术沉淀，为社区提供参考和学习。</p>
                     <div class="card-footer">
                         <span class="tag">Java</span><span class="tag">FTC SDK</span><span class="tag">RoadRunner</span><span class="tag">Robotics</span>
                     </div>
                 </div>
-                <div class="card fade-in">
+                <div class="card">
                     <h3><a href="https://github.com/BlueDarkUP/FTC-INTO-THE-DEEP-VISION-for-19705" target="_blank">Vision System for FTC Team 19705</a></h3>
                     <p>为红心机器人19705队开发的竞赛级视觉系统。<b>亮点:</b> 在休斯顿世锦赛实战验证，实现平均2秒/次的抓取速度与高稳定性。</p>
                     <div class="card-footer">
                         <span class="tag">Java</span><span class="tag">FTC</span><span class="tag">OpenCV</span><span class="tag">Computer Vision</span>
                     </div>
                 </div>
-                <div class="card fade-in">
+                <div class="card">
                     <h3><a href="https://github.com/BlueDarkUP/FTC-27570-INTO-THE-DEEP" target="_blank">FTC 27570 Team Archive</a></h3>
                     <p>27570队的赛季公开代码库，记录了荣获设计奖和控制奖的历程。<b>亮点:融合自动驾驶和第一版视觉，是赢得控制奖的关键。</b> </p>
                     <div class="card-footer">
                         <span class="tag">Java</span><span class="tag">FTC</span><span class="tag">Open Source</span><span class="tag">Archive</span>
                     </div>
                 </div>
-                <div class="card fade-in">
+                <div class="card">
                     <h3><a href="https://github.com/BlueDarkUP/Zero-to-YOLO-Yard" target="_blank">Zero-to-YOLO-Yard</a></h3>
                     <p>一个本地化的图像标注平台，集成了 SAM 模型。<b>亮点:</b> 将数据标注时间从平均每张图2分钟缩短到15秒，效率提升8倍。</p>
                     <div class="card-footer">
                         <span class="tag">Python</span><span class="tag">Flask</span><span class="tag">SAM</span><span class="tag">YOLO</span>
                     </div>
                 </div>
-                <div class="card fade-in">
+                <div class="card">
                     <h3><a href="https://github.com/BlueDarkUP/FTC-Easy-TFLITE" target="_blank">FTC-Easy-TFLITE</a></h3>
                     <p>一个本地 MLOps 流水线，实现了 TFLite 物体检测模型的自动化训练、量化和部署。<b>亮点:</b> 降低了在FTC等嵌入式环境中使用AI模型的门槛。</p>
                     <div class="card-footer">
                         <span class="tag">Python</span><span class="tag">TensorFlow</span><span class="tag">MLOps</span><span class="tag">Automation</span>
                     </div>
                 </div>
-                 <div class="card fade-in">
+                 <div class="card">
                     <h3><a href="https://github.com/BlueDarkUP/Easy-YOLO-Augmenter" target="_blank">Easy-YOLO-Augmenter</a></h3>
                     <p>一个直观的桌面应用，无需编码即可增强YOLO格式的图像数据集。<b>亮点:</b> 基于多进程并行处理，由Albumentations驱动，显著提升数据增强效率。</p>
                     <div class="card-footer">
                         <span class="tag">Python</span><span class="tag">PyQt5</span><span class="tag">Computer Vision</span><span class="tag">Data Augmentation</span>
                     </div>
                 </div>
-                <div class="card fade-in">
+                <div class="card">
                     <h3><a href="https://github.com/BlueDarkUP/Yolo2TFRecord" target="_blank">Yolo2TFRecord</a></h3>
                     <p>一个将YOLO格式标注数据集转换为TFRecord格式的Python脚本。<b>亮点:</b> 自动解析`data.yaml`，并创建符合TF Object Detection API标准的目录结构。</p>
                     <div class="card-footer">
                         <span class="tag">Python</span><span class="tag">TensorFlow</span><span class="tag">YOLO</span><span class="tag">Data Conversion</span>
                     </div>
                 </div>
-                <div class="card fade-in">
+                <div class="card">
                     <h3><a href="https://github.com/BlueDarkUP/FLL-AquaHunter" target="_blank">FLL-AquaHunter</a></h3>
                     <p>用于 FLL 竞赛的水下机器人 (ROV)，能够自主识别、追踪并抓取狮子鱼。<b>亮点:</b> 将AI视觉应用于解决入侵物种问题的真实场景。</p>
                     <div class="card-footer">
                         <span class="tag">Python</span><span class="tag">YOLOv8</span><span class="tag">SORT</span><span class="tag">Embedded AI</span>
                     </div>
                 </div>
-                <div class="card fade-in">
+                <div class="card">
                     <h3><a href="https://github.com/BlueDarkUP/AIRS-RM-2025" target="_blank">RM-Hunter (RMYC)</a></h3>
                     <p>为 RoboMaster 青年赛设计的自主守卫机器人。<b>亮点:</b> 成功将在FTC和FLL项目中积累的视觉自瞄与PID控制算法迁移应用。</p>
                     <div class="card-footer">
                         <span class="tag">Python</span><span class="tag">OpenCV</span><span class="tag">PID Control</span><span class="tag">RoboMaster</span>
                     </div>
                 </div>
-                <div class="card fade-in">
+                <div class="card">
                     <h3><a href="https://github.com/BlueDarkUP/Scanventory" target="_blank">Scanventory</a></h3>
                     <p>一款专为国企设计的开源固定资产盘点安卓应用。<b>亮点:</b> 通过手机扫码盘点，支持Excel导入导出，所有数据本地处理，保障隐私安全。</p>
                     <div class="card-footer">
                         <span class="tag">Android</span><span class="tag">Kotlin</span><span class="tag">Jetpack Compose</span><span class="tag">SQLite</span>
                     </div>
                 </div>
-                <div class="card fade-in">
+                <div class="card">
                     <h3><a href="https://github.com/BlueDarkUP/FTC-Servo-Angle-Control" target="_blank">FTC-Servo-Angle-Control (CSP)</a></h3>
                     <p>一个用于FTC Java编程的即插即用工具，让您能用直观的角度而非小数来控制舵机。<b>亮点:</b> 简化配置，自动处理映射、缩放和反向，让舵机控制更直观。</p>
                     <div class="card-footer">
@@ -813,6 +843,9 @@
         </p>
     </footer>
 
+    <!-- Particles.js library -->
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             const hamburger = document.querySelector('.hamburger');
@@ -858,17 +891,31 @@
                 });
             });
 
-            const animatedElements = document.querySelectorAll('.fade-in');
+            // --- UPDATED ANIMATION LOGIC ---
             const observer = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
-                        entry.target.classList.add('is-visible');
+                        // Handle staggered card animations
+                        if (entry.target.classList.contains('card-grid')) {
+                            const cards = entry.target.querySelectorAll('.card');
+                            cards.forEach((card, index) => {
+                                setTimeout(() => {
+                                    card.classList.add('is-visible');
+                                }, index * 150); // 150ms delay between cards
+                            });
+                        } else {
+                            // Handle other fade-in elements
+                            entry.target.classList.add('is-visible');
+                        }
                         observer.unobserve(entry.target);
                     }
                 });
             }, {
                 threshold: 0.1
             });
+
+            // Observe all fade-in sections AND all card grids for staggered animation
+            const animatedElements = document.querySelectorAll('.fade-in, .card-grid');
             animatedElements.forEach(element => {
                 observer.observe(element);
             });
@@ -878,6 +925,104 @@
                 window.addEventListener('mousemove', (e) => {
                     glow.style.left = e.clientX + 'px';
                     glow.style.top = e.clientY + 'px';
+                });
+            }
+
+            // --- PARTICLES.JS INITIALIZATION ---
+            if (document.getElementById('particles-js')) {
+                particlesJS('particles-js', {
+                    "particles": {
+                        "number": {
+                            "value": 40, // Reduced particle count for subtlety
+                            "density": {
+                                "enable": true,
+                                "value_area": 800
+                            }
+                        },
+                        "color": {
+                            "value": "#A8B852" // Using text-color-dark
+                        },
+                        "shape": {
+                            "type": "circle",
+                            "stroke": {
+                                "width": 0,
+                                "color": "#000000"
+                            },
+                        },
+                        "opacity": {
+                            "value": 0.4,
+                            "random": true,
+                            "anim": {
+                                "enable": true,
+                                "speed": 0.5,
+                                "opacity_min": 0.1,
+                                "sync": false
+                            }
+                        },
+                        "size": {
+                            "value": 3,
+                            "random": true,
+                            "anim": {
+                                "enable": false,
+                            }
+                        },
+                        "line_linked": {
+                            "enable": true,
+                            "distance": 150,
+                            "color": "#A8B852", // Using text-color-dark
+                            "opacity": 0.2,
+                            "width": 1
+                        },
+                        "move": {
+                            "enable": true,
+                            "speed": 1.5, // Slow movement
+                            "direction": "none",
+                            "random": false,
+                            "straight": false,
+                            "out_mode": "out",
+                            "bounce": false,
+                        }
+                    },
+                    "interactivity": {
+                        "detect_on": "canvas",
+                        "events": {
+                            "onhover": {
+                                "enable": true,
+                                "mode": "grab" // Subtle interaction on hover
+                            },
+                            "onclick": {
+                                "enable": true,
+                                "mode": "push"
+                            },
+                            "resize": true
+                        },
+                        "modes": {
+                            "grab": {
+                                "distance": 140,
+                                "line_linked": {
+                                    "opacity": 0.5
+                                }
+                            },
+                            "bubble": {
+                                "distance": 400,
+                                "size": 40,
+                                "duration": 2,
+                                "opacity": 8,
+                                "speed": 3
+                            },
+                            "repulse": {
+                                "distance": 200,
+                                "duration": 0.4
+                            },
+                            "push": {
+                                "particles_nb": 4
+                            },
+                            "remove": {
+                                "particles_nb": 2
+                            }
+                        }
+                    },
+                    "retina_detect": true
                 });
             }
         });
