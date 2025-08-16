@@ -6,6 +6,8 @@
     <title>Jiang (BlueDarkUP) - 全栈开发者 & AI 机器人工程师</title>
     <!-- Favicon: 浏览器标签页图标 -->
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🧑‍💻</text></svg>">
+    <!-- Devicon CDN for tech stack icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@v2.15.1/devicon.min.css">
     <style>
         :root {
             --primary-color: #2A4730;
@@ -22,11 +24,28 @@
 
         body {
             font-family: var(--font-sans);
-            background-color: var(--primary-color);
+            /* background-color: var(--primary-color); */
+            background: linear-gradient(180deg, #315139 0%, var(--primary-color) 100%);
+            background-attachment: fixed;
             color: var(--text-color-light);
             margin: 0;
             padding: 0;
             line-height: 1.6;
+        }
+
+        /* Cursor Follow Glow Effect */
+        #cursor-glow {
+            pointer-events: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 600px;
+            height: 600px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(216, 226, 94, 0.05), transparent 60%);
+            transform: translate(-50%, -50%);
+            transition: transform 0.1s ease-out;
+            z-index: 0;
         }
 
         .container {
@@ -205,11 +224,13 @@
             border-radius: 5px;
             display: flex;
             flex-direction: column;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 1px solid transparent; /* Refined hover effect */
+            transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
         }
         .card:hover {
             transform: translateY(-7px);
             box-shadow: 0 10px 30px -15px rgba(0,0,0,0.7);
+            border-color: var(--secondary-color); /* Refined hover effect */
         }
 
         .card h3 {
@@ -222,6 +243,20 @@
         .card h3 a:hover {
             color: var(--secondary-color);
         }
+        
+        /* Refined hover effect for card title */
+        .card h3 a::after {
+            content: ' →';
+            display: inline-block;
+            opacity: 0;
+            transform: translateX(-10px);
+            transition: all 0.3s ease;
+        }
+        .card:hover h3 a::after {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
         .card p {
             font-size: 0.95em;
             color: var(--text-color-dark);
@@ -255,6 +290,9 @@
             background-color: var(--background-light);
             padding: 8px 18px;
             border-radius: 5px;
+            display: inline-flex; /* For icon alignment */
+            align-items: center; /* For icon alignment */
+            gap: 8px; /* Space between icon and text */
         }
 
         #contact {
@@ -376,6 +414,8 @@
     </style>
 </head>
 <body>
+
+    <div id="cursor-glow"></div>
 
     <nav class="navbar">
         <a href="#hero" class="logo">-BlueDarkUP-</a>
@@ -590,33 +630,33 @@
             <div class="tech-category">
                 <h4>精通 (Proficient)</h4>
                 <div class="tech-grid">
-                    <span class="tech-item">Python</span>
-                    <span class="tech-item">Java</span>
-                    <span class="tech-item">TensorFlow</span>
-                    <span class="tech-item">OpenCV</span>
+                    <span class="tech-item"><i class="devicon-python-plain"></i> Python</span>
+                    <span class="tech-item"><i class="devicon-java-plain"></i> Java</span>
+                    <span class="tech-item"><i class="devicon-tensorflow-original"></i> TensorFlow</span>
+                    <span class="tech-item"><i class="devicon-opencv-plain"></i> OpenCV</span>
                     <span class="tech-item">YOLO</span>
-                    <span class="tech-item">Git</span>
+                    <span class="tech-item"><i class="devicon-git-plain"></i> Git</span>
                 </div>
             </div>
             <div class="tech-category">
                 <h4>熟练 (Experienced)</h4>
                 <div class="tech-grid">
-                    <span class="tech-item">C++</span>
-                    <span class="tech-item">Bash</span>
-                    <span class="tech-item">PyTorch</span>
-                    <span class="tech-item">Flask</span>
-                    <span class="tech-item">Docker</span>
-                    <span class="tech-item">Android Studio</span>
+                    <span class="tech-item"><i class="devicon-cplusplus-plain"></i> C++</span>
+                    <span class="tech-item"><i class="devicon-bash-plain"></i> Bash</span>
+                    <span class="tech-item"><i class="devicon-pytorch-original"></i> PyTorch</span>
+                    <span class="tech-item"><i class="devicon-flask-original"></i> Flask</span>
+                    <span class="tech-item"><i class="devicon-docker-plain"></i> Docker</span>
+                    <span class="tech-item"><i class="devicon-androidstudio-plain"></i> Android Studio</span>
                     <span class="tech-item">ROS</span>
                 </div>
             </div>
             <div class="tech-category">
                 <h4>了解 (Familiar with)</h4>
                 <div class="tech-grid">
-                    <span class="tech-item">JavaScript</span>
-                    <span class="tech-item">SQLite</span>
+                    <span class="tech-item"><i class="devicon-javascript-plain"></i> JavaScript</span>
+                    <span class="tech-item"><i class="devicon-sqlite-plain"></i> SQLite</span>
                     <span class="tech-item">REST API</span>
-                    <span class="tech-item">Conda</span>
+                    <span class="tech-item"><i class="devicon-anaconda-original"></i> Conda</span>
                 </div>
             </div>
         </section>
@@ -633,7 +673,7 @@
                     <svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><title>Email</title><path d="M22 6c0-1.1-.9-2-2-2H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6zm-2 0l-8 5-8-5h16zm0 12H4V8l8 5 8-5v10z"/></svg>
                 </a>
                 <a href="https://www.youtube.com/@BlueDarkUP" target="_blank" title="YouTube" aria-label="访问我的YouTube频道">
-                     <svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><title>YouTube</title><path d="M21.582 7.336c-.2-.736-.77-1.306-1.506-1.506C18.66 5.5 12 5.5 12 5.5s-6.66 0-8.076.33c-.736.2-1.306.77-1.506 1.506C2.088 8.752 2 12 2 12s.088 3.248.418 4.664c.2.736.77 1.306 1.506 1.506C5.34 18.5 12 18.5 12 18.5s6.66 0 8.076-.33c.736-.2 1.306-.77 1.506-1.506C21.912 15.248 22 12 22 12s-.088-3.248-.418-4.664zM9.75 14.885V9.115l4.985 2.885-4.985 2.885z"/></svg>
+                     <svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><title>YouTube</title><path d="M21.582 7.336c-.2-.736-.77-1.306-1.506-1.506C18.66 5.5 12 5.5 12 5.5s-6.66 0-8.076.33c-.736.2-1.306.77-1.506 1.506C2.088 8.752 2 12 2 12s.088 3.248.418 4.664c.2.736.77 1.306 1.506 1.506C5.34 18.5 12 18.5 12 18.5s6.66 0 8.076-.33c.736-.2 1.306.77 1.506-1.506C21.912 15.248 22 12 22 12s-.088-3.248-.418-4.664zM9.75 14.885V9.115l4.985 2.885-4.985 2.885z"/></svg>
                 </a>
                 <a href="https://www.instagram.com/bluedarkup/" target="_blank" title="Instagram" aria-label="访问我的Instagram">
                      <svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><title>Instagram</title><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.85s-.012 3.584-.07 4.85c-.148 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07s-3.584-.012-4.85-.07c-3.252-.148-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.85s.012-3.584.07-4.85c.148-3.227 1.664-4.771 4.919-4.919C8.356 2.175 8.741 2.163 12 2.163m0-2.163C8.741 0 8.333.014 7.053.072 2.82.266.202 2.883 0 7.117.058 8.397.072 8.804.072 12s-.014 3.603-.072 4.883c-.194 4.233 2.812 6.852 7.046 7.046 1.28.058 1.687.072 4.947.072s3.667-.014 4.947-.072c4.233-.194 6.852-2.812 7.046-7.046.058-1.28.072-1.687.072-4.883s-.014-3.603-.072-4.883C23.798 2.883 21.18.266 16.947.072 15.667.014 15.259 0 12 0zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.162 6.162 6.162 6.162-2.759 6.162-6.162-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4s1.791-4 4-4 4 1.79 4 4-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.441 1.441 1.441 1.441-.645 1.441-1.441-.645-1.44-1.441-1.44z"/></svg>
@@ -724,6 +764,15 @@
             animatedElements.forEach(element => {
                 observer.observe(element);
             });
+            
+            // 4. 鼠标光标跟随辉光效果
+            const glow = document.getElementById('cursor-glow');
+            if (glow) {
+                window.addEventListener('mousemove', (e) => {
+                    // We offset by half the width/height of the glow element to center it
+                    glow.style.transform = `translate(${e.clientX - 300}px, ${e.clientY - 300}px)`;
+                });
+            }
         });
     </script>
 </body>
