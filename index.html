@@ -33,7 +33,6 @@
             padding: 0 40px;
         }
 
-        /* Navbar */
         .navbar {
             display: flex;
             justify-content: space-between;
@@ -71,7 +70,6 @@
             color: var(--secondary-color);
         }
 
-        /* General Section Styling */
         section {
             padding: 120px 0;
             min-height: 80vh;
@@ -94,7 +92,6 @@
             margin-top: 10px;
         }
 
-        /* Hero Section */
         #hero {
             display: flex;
             flex-direction: column;
@@ -104,7 +101,7 @@
         }
 
         #hero h1 {
-            font-size: clamp(40px, 8vw, 80px); /* Responsive font size */
+            font-size: clamp(40px, 8vw, 80px);
             margin: 0;
             color: #e6f1ff;
         }
@@ -136,7 +133,6 @@
             background-color: rgba(100, 255, 218, 0.1);
         }
 
-        /* About Section */
         .about-content {
             display: grid;
             grid-template-columns: 2fr 1fr;
@@ -164,7 +160,6 @@
             color: var(--secondary-color);
         }
 
-        /* Cards Styling (Projects, Articles, etc.) */
         .card-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
@@ -212,15 +207,7 @@
             display: inline-block;
             margin-bottom: 5px;
         }
-        .card-button {
-            display: inline-block;
-            margin-top: 15px;
-            color: var(--secondary-color);
-            text-decoration: none;
-            font-weight: bold;
-        }
-
-        /* Tech Stack */
+        
         .tech-category h4 {
             color: var(--secondary-color);
             margin-top: 30px;
@@ -237,7 +224,6 @@
             border-radius: 5px;
         }
 
-        /* Contact Section */
         #contact {
             text-align: center;
         }
@@ -263,7 +249,6 @@
             fill: var(--secondary-color);
         }
         
-        /* Footer */
         footer {
             text-align: center;
             padding: 25px;
@@ -280,7 +265,7 @@
                 grid-template-columns: 1fr;
             }
             .nav-links {
-                display: none; /* Simplification for mobile, can be replaced with a hamburger menu */
+                display: none;
             }
         }
     </style>
@@ -301,7 +286,6 @@
 
     <main class="container">
 
-        <!-- Hero Section -->
         <section id="hero">
             <p style="color: var(--secondary-color); font-size: 1.1em; margin-bottom: 10px;">Hi, my name is</p>
             <h1>Jiang (BlueDarkUP)</h1>
@@ -310,7 +294,6 @@
             <a href="https://github.com/BlueDarkUP" target="_blank" class="cta-button">查看我的开源项目</a>
         </section>
 
-        <!-- About Section -->
         <section id="about">
             <h2 class="section-title">关于我</h2>
             <div class="about-content">
@@ -321,6 +304,8 @@
                 <div class="milestones">
                     <h4>荣誉与里程碑</h4>
                     <ul>
+                        <li>FTC 设计奖第一名 (Design Award), 2024-2025 赛季</li>
+                        <li>FTC 思维奖第三名 (Think Award), 2024-2025 赛季</li>
                         <li>FTC 控制奖 (Control Award), 2024-2025 赛季</li>
                         <li>FTC 中国区总决赛晋级者</li>
                         <li>北京市金鹏科技论坛项目二等奖</li>
@@ -331,25 +316,47 @@
             </div>
         </section>
 
-        <!-- Featured Articles Section -->
         <section id="articles">
-            <h2 class="section-title">精选技术文章</h2>
-            <div class="card-grid" style="grid-template-columns: 1fr;">
+            <h2 class="section-title">精选技术文章与教程</h2>
+            <div class="card-grid">
                 <div class="card">
-                    <h3><a href="你的CSDN文章链接" target="_blank">FTC 27570 “INTO THE DEEP“ 赛季高精度视觉抓取系统深度解析</a></h3>
-                    <p>本文全面剖析了一套经过实战检验的高性能视觉抓取系统，涵盖了分层软件架构、核心 OpenCV 算法、复合校正模型以及逆向运动学解算。该系统成功帮助队伍赢得“控制奖”并晋级国赛。</p>
+                    <h3><a href="https://grizzly-treatment-ac4.notion.site/FTC-27570-TeleOp-250969a5284d8075b144dca6f421e9b8?pvs=73" target="_blank">课程 1: 你的第一个竞赛级 TeleOp</a></h3>
+                    <p>学习 LinearOpMode 的基本结构，如何映射硬件，并为Mecanum底盘实现稳健的驱动控制。</p>
                     <div class="card-footer">
-                        <span class="tag">计算机视觉</span>
-                        <span class="tag">FTC</span>
-                        <span class="tag">机器人</span>
-                        <span class="tag">OpenCV</span>
-                        <span class="tag">运动学</span>
+                        <span class="tag">硬件映射</span><span class="tag">场地中心驱动</span><span class="tag">状态机</span>
+                    </div>
+                </div>
+                <div class="card">
+                    <h3><a href="https://grizzly-treatment-ac4.notion.site/FTC-27570-250969a5284d8098bb35c9c637ac0fa3?pvs=73" target="_blank">课程 4: 生产级视觉系统架构</a></h3>
+                    <p>一堂关于软件架构的大师课，将初始API重构为一个高度模块化、可维护的强大系统。</p>
+                    <div class="card-footer">
+                        <span class="tag">SoC</span><span class="tag">配置管理</span><span class="tag">运动学建模</span>
+                    </div>
+                </div>
+                <div class="card">
+                    <h3><a href="https://grizzly-treatment-ac4.notion.site/FTC-27570-250969a5284d802eabe6de3f2173870d?pvs=73" target="_blank">课程 5: FLL AquaHunter (自主ROV)</a></h3>
+                    <p>学习如何从零开始构建一个完整的单脚本AI系统，涵盖实时对象跟踪和水下机器人的视觉伺服。</p>
+                    <div class="card-footer">
+                        <span class="tag">YOLOv8</span><span class="tag">SORT算法</span><span class="tag">串口通信</span>
+                    </div>
+                </div>
+                <div class="card">
+                    <h3><a href="https://grizzly-treatment-ac4.notion.site/FTC-27570-AI-250969a5284d80aa8ccfe5e2bc11e73e?pvs=73" target="_blank">课程 6: 构建你自己的数据引擎</a></h3>
+                    <p>学习如何架构和构建一个用于管理整个机器学习数据生命周期的全栈Web应用。</p>
+                    <div class="card-footer">
+                        <span class="tag">Flask</span><span class="tag">SQLite</span><span class="tag">REST API</span><span class="tag">SAM 2.1</span>
+                    </div>
+                </div>
+                <div class="card">
+                    <h3><a href="https://grizzly-treatment-ac4.notion.site/FTC-27570-AI-250969a5284d8001ab71c9365a4827e8?pvs=73" target="_blank">课程 7: 打造你自己的AI工厂</a></h3>
+                    <p>创建一个标准化、自动化和可复现的MLOps流水线，用于训练和部署FTC兼容的模型。</p>
+                    <div class="card-footer">
+                        <span class="tag">MLOps</span><span class="tag">自动化</span><span class="tag">模型量化</span><span class="tag">TFLite</span>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- Community & Impact Section -->
         <section id="community">
             <h2 class="section-title">社区贡献与影响力</h2>
             <div class="card-grid">
@@ -368,7 +375,6 @@
             </div>
         </section>
         
-        <!-- Open Source Projects Section -->
         <section id="projects">
             <h2 class="section-title">开源项目</h2>
             <div class="card-grid">
@@ -417,7 +423,6 @@
             </div>
         </section>
 
-        <!-- Tech Stack Section -->
         <section id="tech-stack">
             <h2 class="section-title">技术栈</h2>
             <div class="tech-category">
@@ -451,7 +456,6 @@
             </div>
         </section>
 
-        <!-- Contact Section -->
         <section id="contact">
             <h2 class="section-title" style="margin: 0 auto;">联系方式</h2>
             <p>我对新的机遇和挑战总是充满热情。欢迎随时通过以下方式与我交流、探讨技术或寻求合作！</p>
