@@ -8,194 +8,9 @@
     <meta name="description" content="Jiang (BlueDarkUP) 的个人作品集，一位专注于FTC机器人工程与开源社区贡献的学生开发者。展示了我的开源工具、技术传承以及对FIRST社区的影响力。">
     <meta name="author" content="Jiang (BlueDarkUP)">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@v2.15.1/devicon.min.css">
-    <!-- Marked.js for rendering README files -->
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
     <style>
-        /* [ 您原有的全部CSS样式保持不变，这里省略以保持简洁 ] */
-        /* [ Original CSS remains unchanged, omitted for brevity ] */
-        body.theme-green{--primary-color:#336A29;--primary-color-transparent:rgba(51,106,41,.85);--primary-color-darker:#26501f;--secondary-color:#80B155;--secondary-color-transparent-1:rgba(128,177,85,.1);--secondary-color-transparent-2:rgba(128,177,85,.2);--secondary-color-transparent-4:rgba(128,177,85,.4);--secondary-color-transparent-5:rgba(128,177,85,.5);--secondary-color-transparent-gradient:rgba(128,177,85,.07);--text-color-light:#EAEF9D;--text-color-dark:#C1D95C;--cta-hover-text-color:#336A29}body.theme-blue{--primary-color:#2C6975;--primary-color-transparent:rgba(44,105,117,.85);--primary-color-darker:#1f4a53;--secondary-color:#68B2A0;--secondary-color-transparent-1:rgba(104,178,160,.15);--secondary-color-transparent-2:rgba(104,178,160,.2);--secondary-color-transparent-4:rgba(104,178,160,.4);--secondary-color-transparent-5:rgba(104,178,160,.5);--secondary-color-transparent-gradient:rgba(104,178,160,.07);--text-color-light:#E0ECDE;--text-color-dark:#CDE0C9;--cta-hover-text-color:#2C6975}body.theme-orange{--primary-color:#A94A3A;--primary-color-transparent:rgba(169,74,58,.85);--primary-color-darker:#82392c;--secondary-color:#F37121;--secondary-color-transparent-1:rgba(243,113,33,.15);--secondary-color-transparent-2:rgba(243,113,33,.2);--secondary-color-transparent-4:rgba(243,113,33,.4);--secondary-color-transparent-5:rgba(243,113,33,.5);--secondary-color-transparent-gradient:rgba(243,113,33,.07);--text-color-light:#F7D154;--text-color-dark:#FFCBA4;--cta-hover-text-color:#A94A3A}body.theme-gray{--primary-color:#2c2c2c;--primary-color-transparent:rgba(44,44,44,.85);--primary-color-darker:#1e1e1e;--secondary-color:#9B9B9B;--secondary-color-transparent-1:rgba(155,155,155,.15);--secondary-color-transparent-2:rgba(155,155,155,.2);--secondary-color-transparent-4:rgba(155,155,155,.4);--secondary-color-transparent-5:rgba(155,155,155,.5);--secondary-color-transparent-gradient:rgba(155,155,155,.07);--text-color-light:#fff;--text-color-dark:#E7E7E7;--cta-hover-text-color:#2c2c2c}body.theme-dopamine{--primary-color:#5D3776;--primary-color-transparent:rgba(93,55,118,.85);--primary-color-darker:#432856;--secondary-color:#F57B92;--secondary-color-transparent-1:rgba(245,123,146,.15);--secondary-color-transparent-2:rgba(245,123,146,.2);--secondary-color-transparent-4:rgba(245,123,146,.4);--secondary-color-transparent-5:rgba(245,123,146,.5);--secondary-color-transparent-gradient:rgba(245,123,146,.07);--text-color-light:#FEF0A5;--text-color-dark:#A8D8F0;--cta-hover-text-color:#5D3776}body.theme-aurora{--primary-color:#055B5C;--primary-color-transparent:rgba(5,91,92,.85);--primary-color-darker:#033c3d;--secondary-color:#6EC6CA;--secondary-color-transparent-1:rgba(110,198,202,.15);--secondary-color-transparent-2:rgba(110,198,202,.2);--secondary-color-transparent-4:rgba(110,198,202,.4);--secondary-color-transparent-5:rgba(110,198,202,.5);--secondary-color-transparent-gradient:rgba(110,198,202,.07);--text-color-light:#CCABD8;--text-color-dark:#8474A1;--cta-hover-text-color:#055B5C}body.theme-oasis{--primary-color:#DBCBBE;--primary-color-transparent:rgba(219,203,190,.85);--primary-color-darker:#C9B9AD;--secondary-color:#4D8581;--secondary-color-transparent-1:rgba(77,133,129,.1);--secondary-color-transparent-2:rgba(77,133,129,.2);--secondary-color-transparent-4:rgba(77,133,129,.4);--secondary-color-transparent-5:rgba(77,133,129,.5);--secondary-color-transparent-gradient:rgba(77,133,129,.07);--text-color-light:#4E443F;--text-color-dark:#6F6159;--cta-hover-text-color:#EEE7DF}body.theme-soda{--primary-color:#FBFAF5;--primary-color-transparent:rgba(251,250,245,.85);--primary-color-darker:#F5F2EA;--secondary-color:#81D8CF;--secondary-color-transparent-1:rgba(129,216,207,.15);--secondary-color-transparent-2:rgba(129,216,207,.2);--secondary-color-transparent-4:rgba(129,216,207,.4);--secondary-color-transparent-5:rgba(129,216,207,.5);--secondary-color-transparent-gradient:rgba(129,216,207,.07);--text-color-light:#33645F;--text-color-dark:#5E8480;--cta-hover-text-color:#FBFAF5}body.theme-bordeaux{--primary-color:#4C0013;--primary-color-transparent:rgba(76,0,19,.85);--primary-color-darker:#33000d;--secondary-color:#FF7B89;--secondary-color-transparent-1:rgba(255,123,137,.15);--secondary-color-transparent-2:rgba(255,123,137,.2);--secondary-color-transparent-4:rgba(255,123,137,.4);--secondary-color-transparent-5:rgba(255,123,137,.5);--secondary-color-transparent-gradient:rgba(255,123,137,.07);--text-color-light:#f5dde1;--text-color-dark:#8A5082;--cta-hover-text-color:#4C0013}:root{--font-sans:'Segoe UI','Roboto','Helvetica Neue',system-ui,sans-serif;--background-light:var(--secondary-color-transparent-1)}html{scroll-behavior:smooth}body{font-family:var(--font-sans);background:linear-gradient(180deg,var(--primary-color) 0%,var(--primary-color-darker) 100%);background-attachment:fixed;color:var(--text-color-light);margin:0;padding:0;line-height:1.6;transition:background-color .3s ease,color .3s ease}#preloader{position:fixed;top:0;left:0;width:100%;height:100%;background-color:var(--primary-color);z-index:9999;display:flex;justify-content:center;align-items:center;transition:opacity .8s ease-in-out,visibility .8s ease-in-out;visibility:visible;opacity:1;will-change:opacity,visibility}#preloader.loaded{opacity:0;visibility:hidden;pointer-events:none}.rocket-container{text-align:center;animation:takeOff 2.6s ease-in-out forwards;will-change:transform,opacity}.rocket-container svg{width:150px;height:150px;margin-bottom:20px}.loading-text{color:var(--text-color-dark);font-size:1.2em;letter-spacing:2px;opacity:0;animation:fadeInText 1s ease-in .5s forwards}@keyframes takeOff{0%{transform:translateY(60px);opacity:0}25%{transform:translateY(0);opacity:1}80%{transform:translateY(0);opacity:1}100%{transform:translateY(-120px);opacity:0}}@keyframes fadeInText{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}body::before{content:'';position:fixed;top:0;left:0;width:100vw;height:100vh;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 250 250' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");opacity:.03;pointer-events:none;z-index:0}#cursor-glow{pointer-events:none;position:fixed;top:0;left:0;width:600px;height:600px;border-radius:50%;background:radial-gradient(circle,var(--secondary-color-transparent-gradient),transparent 60%);transform:translate(-50%,-50%);transition:top .1s ease-out,left .1s ease-out;z-index:0}::-webkit-scrollbar{width:8px}::-webkit-scrollbar-track{background:var(--primary-color)}::-webkit-scrollbar-thumb{background-color:var(--secondary-color);border-radius:10px;opacity:.7}::-webkit-scrollbar-thumb:hover{background-color:var(--text-color-light)}.container{max-width:1100px;margin:0 auto;padding:0 40px;position:relative;z-index:1}.navbar{display:flex;justify-content:space-between;align-items:center;padding:15px 40px;position:fixed;width:calc(100% - 80px);top:0;background-color:var(--primary-color-transparent);backdrop-filter:blur(10px);z-index:1000;transition:padding .3s ease-in-out,box-shadow .3s ease-in-out}.navbar.scrolled{padding-top:10px;padding-bottom:10px;box-shadow:0 5px 20px rgba(0,0,0,.2)}.logo{font-weight:700;font-size:1.8em;color:var(--text-color-light);text-decoration:none;z-index:1001}.nav-links{list-style:none;display:flex;gap:25px;margin:0;padding:0}.nav-links a{color:var(--text-color-light);text-decoration:none;transition:color .3s ease;font-size:.95em;position:relative;padding:5px 0}.nav-links a::after{content:'';position:absolute;width:100%;height:2px;background-color:var(--secondary-color);bottom:0;left:0;transform:scaleX(0);transform-origin:left;transition:transform .3s ease-in-out}.nav-links a:hover{color:var(--secondary-color)}.nav-links a:hover::after{transform:scaleX(1)}.hamburger{display:none;cursor:pointer;z-index:1001}.hamburger .bar{display:block;width:25px;height:3px;margin:5px auto;-webkit-transition:all .3s ease-in-out;transition:all .3s ease-in-out;background-color:var(--text-color-light)}section{padding:120px 0;min-height:80vh}.fade-in{opacity:0;transform:translateY(20px);transition:opacity .6s ease-out,transform .6s ease-out;will-change:transform,opacity}.fade-in.is-visible{opacity:1;transform:translateY(0)}.section-title{font-size:2.5em;margin-bottom:50px;position:relative;display:inline-block;color:var(--text-color-light)}.section-title::after{content:'';display:block;width:50%;height:3px;background-color:var(--secondary-color);margin-top:10px}#hero{display:flex;flex-direction:column;justify-content:center;min-height:100vh;padding-top:0;position:relative;overflow:hidden}#particles-js{position:absolute;width:100%;height:100%;top:0;left:0;z-index:0}#hero .container{z-index:1}#hero h1{font-size:clamp(40px,8vw,80px);margin:0;color:var(--text-color-light)}#hero .highlight{color:var(--secondary-color)}#hero p.subtitle{font-size:1.2em;color:var(--text-color-dark);max-width:600px;margin-top:20px}#hero p.philosophy{font-size:1.3em;font-style:italic;color:var(--text-color-light);max-width:700px;margin-top:25px;border-left:3px solid var(--secondary-color);padding-left:20px}.cta-button{display:inline-block;padding:14px 28px;border:1px solid var(--secondary-color);color:var(--secondary-color);text-decoration:none;border-radius:4px;margin-top:30px;transition:background-color .3s ease,color .3s ease;font-size:1em}.cta-button:hover{background-color:var(--secondary-color);color:var(--cta-hover-text-color)}.about-content{display:grid;grid-template-columns:2fr 1fr;gap:50px;align-items:flex-start}.about-content p{max-width:650px;font-size:1.1em;color:var(--text-color-dark)}.milestones ul{list-style:none;padding:0}.milestones li{padding-left:20px;position:relative;margin-bottom:10px}.milestones li::before{content:'▹';position:absolute;left:0;color:var(--secondary-color)}.card-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:20px}.card{background-color:var(--background-light);padding:25px;border-radius:5px;display:flex;flex-direction:column;border:1px solid transparent;transition:transform .3s ease,box-shadow .3s ease,border-color .3s ease,opacity .5s ease-out,transform .5s ease-out;opacity:0;transform:translateY(20px);will-change:transform,opacity}.card.is-visible{opacity:1;transform:translateY(0)}.card:hover{transform:translateY(-7px);box-shadow:0 10px 30px -15px rgba(0,0,0,.7);border-color:var(--secondary-color-transparent-5)}.card h3 a::after{content:' →';opacity:0;transform:translateX(-10px);transition:all .3s ease;display:inline-block}.card:hover h3 a::after{opacity:1;transform:translateX(0)}.card h3{margin-top:0}.card h3 a{color:var(--text-color-light);text-decoration:none;transition:color .3s ease}.card h3 a:hover{color:var(--secondary-color)}.card p{font-size:.95em;color:var(--text-color-dark);flex-grow:1}.card h4{color:var(--text-color-light);margin-top:0}.card-footer{margin-top:20px}.tag{background-color:var(--secondary-color-transparent-1);color:var(--text-color-light);padding:4px 10px;border-radius:12px;font-size:.8em;margin-right:5px;display:inline-block;margin-bottom:5px}.tech-category h4{color:var(--secondary-color);margin-top:30px;margin-bottom:15px}.tech-grid{display:flex;flex-wrap:wrap;gap:15px}.tech-item{background-color:var(--background-light);padding:8px 18px;border-radius:5px;display:inline-flex;align-items:center;gap:10px;font-size:1.1em}.tech-item i,.tech-item svg{font-size:1.5em;color:var(--text-color-dark)}#contact{text-align:center}#contact p{max-width:500px;margin:20px auto 40px;color:var(--text-color-dark)}.contact-links a{margin:0 15px;display:inline-block;transition:transform .3s ease}.contact-links a:hover{transform:translateY(-3px)}.contact-links svg{width:32px;height:32px;fill:var(--text-color-light);transition:fill .3s ease}.contact-links a:hover svg{fill:var(--secondary-color)}footer{text-align:center;padding:25px;font-size:.9em;color:var(--text-color-dark)}footer a{color:var(--text-color-light);text-decoration:none;transition:color .3s ease}footer a:hover{color:var(--secondary-color)}.theme-switcher{margin-bottom:20px;display:flex;justify-content:center;align-items:center;gap:10px}.theme-switcher label{font-size:.95em;color:var(--text-color-dark)}.theme-switcher select{background-color:var(--primary-color);color:var(--text-color-dark);border:1px solid var(--secondary-color);padding:5px 10px;border-radius:4px;font-family:var(--font-sans);font-size:.9em;cursor:pointer}.theme-switcher select:focus{outline:2px solid var(--secondary-color);outline-offset:2px}.back-to-top{position:fixed;bottom:20px;right:20px;background-color:var(--secondary-color-transparent-2);border:1px solid var(--secondary-color);color:var(--secondary-color);width:40px;height:40px;border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;opacity:0;visibility:hidden;transition:opacity .3s,visibility .3s,background-color .3s;z-index:999}.back-to-top:hover{background-color:var(--secondary-color-transparent-4)}.back-to-top.visible{opacity:1;visibility:visible}.back-to-top::after{content:'↑';font-size:1.5em;font-weight:700}@media (max-width:768px){.about-content{grid-template-columns:1fr}.nav-links{position:fixed;left:-100%;top:0;flex-direction:column;background-color:var(--primary-color);width:100%;height:100vh;text-align:center;transition:.3s;justify-content:center;gap:50px}.nav-links.active{left:0}.nav-links a{font-size:1.5em}.hamburger{display:block}.hamburger.active .bar:nth-child(2){opacity:0}.hamburger.active .bar:nth-child(1){transform:translateY(8px) rotate(45deg)}.hamburger.active .bar:nth-child(3){transform:translateY(-8px) rotate(-45deg)}#cursor-glow,#particles-js{display:none}}
-        
-        /* --- NEW STYLES FOR NARRATIVE AND MODAL --- */
-        .core-contribution-card {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 40px;
-            align-items: center;
-            background-color: var(--background-light);
-            padding: 30px;
-            border-radius: 5px;
-            margin-bottom: 40px;
-        }
-
-        .core-contribution-card:nth-child(odd) .contribution-image {
-            order: 2;
-        }
-
-        .contribution-image img {
-            width: 100%;
-            border-radius: 5px;
-            border: 1px solid var(--secondary-color-transparent-2);
-        }
-
-        .contribution-details h3 {
-            color: var(--secondary-color);
-            margin-top: 0;
-        }
-
-        .contribution-details .problem, .contribution-details .solution {
-            font-size: 1em;
-            color: var(--text-color-dark);
-            margin-bottom: 15px;
-        }
-
-        .contribution-details .problem strong, .contribution-details .solution strong {
-            color: var(--text-color-light);
-            display: block;
-            margin-bottom: 5px;
-        }
-        
-        .community-card {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            text-align: center;
-        }
-        .community-card img {
-            width: 100%;
-            max-width: 400px;
-            border-radius: 5px;
-            margin-bottom: 20px;
-        }
-        .community-card blockquote {
-            border-left: 3px solid var(--secondary-color);
-            padding-left: 15px;
-            font-style: italic;
-            color: var(--text-color-dark);
-            max-width: 500px;
-            margin: 0 auto;
-        }
-        .community-card cite {
-            display: block;
-            margin-top: 10px;
-            color: var(--text-color-light);
-            font-style: normal;
-        }
-
-        #project-modal {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 2000;
-            display: none;
-            align-items: center;
-            justify-content: center;
-        }
-        #project-modal.visible {
-            display: flex;
-        }
-        #modal-overlay {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0,0,0,0.8);
-            backdrop-filter: blur(5px);
-            cursor: pointer;
-        }
-        #modal-content {
-            position: relative;
-            width: 90%;
-            max-width: 1400px;
-            height: 85vh;
-            background: linear-gradient(180deg, var(--primary-color-darker) 0%, var(--primary-color) 100%);
-            border: 1px solid var(--secondary-color-transparent-5);
-            border-radius: 8px;
-            display: flex;
-            overflow: hidden;
-            box-shadow: 0 10px 50px rgba(0,0,0,0.5);
-            opacity: 0;
-            transform: scale(0.95);
-            transition: opacity 0.3s ease, transform 0.3s ease;
-        }
-        #project-modal.visible #modal-content {
-            opacity: 1;
-            transform: scale(1);
-        }
-        #modal-close {
-            position: absolute;
-            top: 15px;
-            right: 20px;
-            font-size: 2.5em;
-            color: var(--text-color-light);
-            cursor: pointer;
-            z-index: 2001;
-            transition: color 0.3s ease, transform 0.3s ease;
-        }
-        #modal-close:hover {
-            color: var(--secondary-color);
-            transform: rotate(90deg);
-        }
-        #readme-content {
-            flex: 1;
-            padding: 30px 40px;
-            overflow-y: auto;
-            color: var(--text-color-dark);
-        }
-        #readme-content h1, #readme-content h2, #readme-content h3 { color: var(--text-color-light); border-bottom: 1px solid var(--secondary-color-transparent-2); padding-bottom: 5px; }
-        #readme-content a { color: var(--secondary-color); text-decoration: none; }
-        #readme-content a:hover { text-decoration: underline; }
-        #readme-content pre { background-color: var(--secondary-color-transparent-1); padding: 15px; border-radius: 5px; overflow-x: auto; }
-        #readme-content code { font-family: 'Courier New', Courier, monospace; }
-        #readme-content img { max-width: 100%; border-radius: 4px; }
-        #readme-content .loader { font-size: 1.5em; text-align: center; padding-top: 50px; }
-
-        #image-gallery {
-            flex: 1;
-            background-color: rgba(0,0,0,0.2);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 20px;
-            position: relative;
-        }
-        #image-gallery img {
-            max-width: 100%;
-            max-height: 100%;
-            object-fit: contain;
-            border-radius: 5px;
-            transition: opacity 0.4s ease;
-        }
-        #image-counter {
-            position: absolute;
-            bottom: 20px;
-            right: 20px;
-            background-color: var(--primary-color-transparent);
-            color: var(--text-color-dark);
-            padding: 5px 12px;
-            border-radius: 15px;
-            font-size: 0.9em;
-            backdrop-filter: blur(5px);
-        }
-        
-        @media (max-width: 1024px) {
-            #modal-content {
-                flex-direction: column;
-                height: 90vh;
-            }
-            #readme-content, #image-gallery {
-                flex: none;
-                width: 100%;
-                height: 50%;
-                box-sizing: border-box;
-            }
-        }
-        @media (max-width: 768px) {
-            .core-contribution-card { grid-template-columns: 1fr; }
-            .core-contribution-card:nth-child(odd) .contribution-image { order: 0; }
-        }
+        body.theme-green{--primary-color:#336A29;--primary-color-transparent:rgba(51,106,41,.85);--primary-color-darker:#26501f;--secondary-color:#80B155;--secondary-color-transparent-1:rgba(128,177,85,.1);--secondary-color-transparent-2:rgba(128,177,85,.2);--secondary-color-transparent-4:rgba(128,177,85,.4);--secondary-color-transparent-5:rgba(128,177,85,.5);--secondary-color-transparent-gradient:rgba(128,177,85,.07);--text-color-light:#EAEF9D;--text-color-dark:#C1D95C;--cta-hover-text-color:#336A29}body.theme-blue{--primary-color:#2C6975;--primary-color-transparent:rgba(44,105,117,.85);--primary-color-darker:#1f4a53;--secondary-color:#68B2A0;--secondary-color-transparent-1:rgba(104,178,160,.15);--secondary-color-transparent-2:rgba(104,178,160,.2);--secondary-color-transparent-4:rgba(104,178,160,.4);--secondary-color-transparent-5:rgba(104,178,160,.5);--secondary-color-transparent-gradient:rgba(104,178,160,.07);--text-color-light:#E0ECDE;--text-color-dark:#CDE0C9;--cta-hover-text-color:#2C6975}body.theme-orange{--primary-color:#A94A3A;--primary-color-transparent:rgba(169,74,58,.85);--primary-color-darker:#82392c;--secondary-color:#F37121;--secondary-color-transparent-1:rgba(243,113,33,.15);--secondary-color-transparent-2:rgba(243,113,33,.2);--secondary-color-transparent-4:rgba(243,113,33,.4);--secondary-color-transparent-5:rgba(243,113,33,.5);--secondary-color-transparent-gradient:rgba(243,113,33,.07);--text-color-light:#F7D154;--text-color-dark:#FFCBA4;--cta-hover-text-color:#A94A3A}body.theme-gray{--primary-color:#2c2c2c;--primary-color-transparent:rgba(44,44,44,.85);--primary-color-darker:#1e1e1e;--secondary-color:#9B9B9B;--secondary-color-transparent-1:rgba(155,155,155,.15);--secondary-color-transparent-2:rgba(155,155,155,.2);--secondary-color-transparent-4:rgba(155,155,155,.4);--secondary-color-transparent-5:rgba(155,155,155,.5);--secondary-color-transparent-gradient:rgba(155,155,155,.07);--text-color-light:#fff;--text-color-dark:#E7E7E7;--cta-hover-text-color:#2c2c2c}body.theme-dopamine{--primary-color:#5D3776;--primary-color-transparent:rgba(93,55,118,.85);--primary-color-darker:#432856;--secondary-color:#F57B92;--secondary-color-transparent-1:rgba(245,123,146,.15);--secondary-color-transparent-2:rgba(245,123,146,.2);--secondary-color-transparent-4:rgba(245,123,146,.4);--secondary-color-transparent-5:rgba(245,123,146,.5);--secondary-color-transparent-gradient:rgba(245,123,146,.07);--text-color-light:#FEF0A5;--text-color-dark:#A8D8F0;--cta-hover-text-color:#5D3776}body.theme-aurora{--primary-color:#055B5C;--primary-color-transparent:rgba(5,91,92,.85);--primary-color-darker:#033c3d;--secondary-color:#6EC6CA;--secondary-color-transparent-1:rgba(110,198,202,.15);--secondary-color-transparent-2:rgba(110,198,202,.2);--secondary-color-transparent-4:rgba(110,198,202,.4);--secondary-color-transparent-5:rgba(110,198,202,.5);--secondary-color-transparent-gradient:rgba(110,198,202,.07);--text-color-light:#CCABD8;--text-color-dark:#8474A1;--cta-hover-text-color:#055B5C}body.theme-oasis{--primary-color:#DBCBBE;--primary-color-transparent:rgba(219,203,190,.85);--primary-color-darker:#C9B9AD;--secondary-color:#4D8581;--secondary-color-transparent-1:rgba(77,133,129,.1);--secondary-color-transparent-2:rgba(77,133,129,.2);--secondary-color-transparent-4:rgba(77,133,129,.4);--secondary-color-transparent-5:rgba(77,133,129,.5);--secondary-color-transparent-gradient:rgba(77,133,129,.07);--text-color-light:#4E443F;--text-color-dark:#6F6159;--cta-hover-text-color:#EEE7DF}body.theme-soda{--primary-color:#FBFAF5;--primary-color-transparent:rgba(251,250,245,.85);--primary-color-darker:#F5F2EA;--secondary-color:#81D8CF;--secondary-color-transparent-1:rgba(129,216,207,.15);--secondary-color-transparent-2:rgba(129,216,207,.2);--secondary-color-transparent-4:rgba(129,216,207,.4);--secondary-color-transparent-5:rgba(129,216,207,.5);--secondary-color-transparent-gradient:rgba(129,216,207,.07);--text-color-light:#33645F;--text-color-dark:#5E8480;--cta-hover-text-color:#FBFAF5}body.theme-bordeaux{--primary-color:#4C0013;--primary-color-transparent:rgba(76,0,19,.85);--primary-color-darker:#33000d;--secondary-color:#FF7B89;--secondary-color-transparent-1:rgba(255,123,137,.15);--secondary-color-transparent-2:rgba(255,123,137,.2);--secondary-color-transparent-4:rgba(255,123,137,.4);--secondary-color-transparent-5:rgba(255,123,137,.5);--secondary-color-transparent-gradient:rgba(255,123,137,.07);--text-color-light:#f5dde1;--text-color-dark:#8A5082;--cta-hover-text-color:#4C0013}:root{--font-sans:'Segoe UI','Roboto','Helvetica Neue',system-ui,sans-serif;--background-light:var(--secondary-color-transparent-1)}html{scroll-behavior:smooth}body{font-family:var(--font-sans);background:linear-gradient(180deg,var(--primary-color) 0%,var(--primary-color-darker) 100%);background-attachment:fixed;color:var(--text-color-light);margin:0;padding:0;line-height:1.6;transition:background-color .3s ease,color .3s ease}#preloader{position:fixed;top:0;left:0;width:100%;height:100%;background-color:var(--primary-color);z-index:9999;display:flex;justify-content:center;align-items:center;transition:opacity .8s ease-in-out,visibility .8s ease-in-out;visibility:visible;opacity:1;will-change:opacity,visibility}#preloader.loaded{opacity:0;visibility:hidden;pointer-events:none}.rocket-container{text-align:center;animation:takeOff 2.6s ease-in-out forwards;will-change:transform,opacity}.rocket-container svg{width:150px;height:150px;margin-bottom:20px}.loading-text{color:var(--text-color-dark);font-size:1.2em;letter-spacing:2px;opacity:0;animation:fadeInText 1s ease-in .5s forwards}@keyframes takeOff{0%{transform:translateY(60px);opacity:0}25%{transform:translateY(0);opacity:1}80%{transform:translateY(0);opacity:1}100%{transform:translateY(-120px);opacity:0}}@keyframes fadeInText{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}body::before{content:'';position:fixed;top:0;left:0;width:100vw;height:100vh;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 250 250' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");opacity:.03;pointer-events:none;z-index:0}#cursor-glow{pointer-events:none;position:fixed;top:0;left:0;width:600px;height:600px;border-radius:50%;background:radial-gradient(circle,var(--secondary-color-transparent-gradient),transparent 60%);transform:translate(-50%,-50%);transition:top .1s ease-out,left .1s ease-out;z-index:0}::-webkit-scrollbar{width:8px}::-webkit-scrollbar-track{background:var(--primary-color)}::-webkit-scrollbar-thumb{background-color:var(--secondary-color);border-radius:10px;opacity:.7}::-webkit-scrollbar-thumb:hover{background-color:var(--text-color-light)}.container{max-width:1100px;margin:0 auto;padding:0 40px;position:relative;z-index:1}.navbar{display:flex;justify-content:space-between;align-items:center;padding:15px 40px;position:fixed;width:calc(100% - 80px);top:0;background-color:var(--primary-color-transparent);backdrop-filter:blur(10px);z-index:1000;transition:padding .3s ease-in-out,box-shadow .3s ease-in-out}.navbar.scrolled{padding-top:10px;padding-bottom:10px;box-shadow:0 5px 20px rgba(0,0,0,.2)}.logo{font-weight:700;font-size:1.8em;color:var(--text-color-light);text-decoration:none;z-index:1001}.nav-links{list-style:none;display:flex;gap:25px;margin:0;padding:0}.nav-links a{color:var(--text-color-light);text-decoration:none;transition:color .3s ease;font-size:.95em;position:relative;padding:5px 0}.nav-links a::after{content:'';position:absolute;width:100%;height:2px;background-color:var(--secondary-color);bottom:0;left:0;transform:scaleX(0);transform-origin:left;transition:transform .3s ease-in-out}.nav-links a:hover{color:var(--secondary-color)}.nav-links a:hover::after{transform:scaleX(1)}.hamburger{display:none;cursor:pointer;z-index:1001}.hamburger .bar{display:block;width:25px;height:3px;margin:5px auto;-webkit-transition:all .3s ease-in-out;transition:all .3s ease-in-out;background-color:var(--text-color-light)}section{padding:120px 0;min-height:80vh}.fade-in{opacity:0;transform:translateY(20px);transition:opacity .6s ease-out,transform .6s ease-out;will-change:transform,opacity}.fade-in.is-visible{opacity:1;transform:translateY(0)}.section-title{font-size:2.5em;margin-bottom:50px;position:relative;display:inline-block;color:var(--text-color-light)}.section-title::after{content:'';display:block;width:50%;height:3px;background-color:var(--secondary-color);margin-top:10px}#hero{display:flex;flex-direction:column;justify-content:center;min-height:100vh;padding-top:0;position:relative;overflow:hidden}#particles-js{position:absolute;width:100%;height:100%;top:0;left:0;z-index:0}#hero .container{z-index:1}#hero h1{font-size:clamp(40px,8vw,80px);margin:0;color:var(--text-color-light)}#hero .highlight{color:var(--secondary-color)}#hero p.subtitle{font-size:1.2em;color:var(--text-color-dark);max-width:600px;margin-top:20px}#hero p.philosophy{font-size:1.3em;font-style:italic;color:var(--text-color-light);max-width:700px;margin-top:25px;border-left:3px solid var(--secondary-color);padding-left:20px}.cta-button{display:inline-block;padding:14px 28px;border:1px solid var(--secondary-color);color:var(--secondary-color);text-decoration:none;border-radius:4px;margin-top:30px;transition:background-color .3s ease,color .3s ease;font-size:1em}.cta-button:hover{background-color:var(--secondary-color);color:var(--cta-hover-text-color)}.about-content{display:grid;grid-template-columns:2fr 1fr;gap:50px;align-items:flex-start}.about-content p{max-width:650px;font-size:1.1em;color:var(--text-color-dark)}.milestones ul{list-style:none;padding:0}.milestones li{padding-left:20px;position:relative;margin-bottom:10px}.milestones li::before{content:'▹';position:absolute;left:0;color:var(--secondary-color)}.card-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:20px}.card{background-color:var(--background-light);padding:25px;border-radius:5px;display:flex;flex-direction:column;border:1px solid transparent;transition:transform .3s ease,box-shadow .3s ease,border-color .3s ease,opacity .5s ease-out,transform .5s ease-out;opacity:0;transform:translateY(20px);will-change:transform,opacity}.card.is-visible{opacity:1;transform:translateY(0)}.card:hover{transform:translateY(-7px);box-shadow:0 10px 30px -15px rgba(0,0,0,.7);border-color:var(--secondary-color-transparent-5)}.card h3 a::after{content:' →';opacity:0;transform:translateX(-10px);transition:all .3s ease;display:inline-block}.card:hover h3 a::after{opacity:1;transform:translateX(0)}.card h3{margin-top:0}.card h3 a{color:var(--text-color-light);text-decoration:none;transition:color .3s ease}.card h3 a:hover{color:var(--secondary-color)}.card p{font-size:.95em;color:var(--text-color-dark);flex-grow:1}.card h4{color:var(--text-color-light);margin-top:0}.card-footer{margin-top:20px}.tag{background-color:var(--secondary-color-transparent-1);color:var(--text-color-light);padding:4px 10px;border-radius:12px;font-size:.8em;margin-right:5px;display:inline-block;margin-bottom:5px}.tech-category h4{color:var(--secondary-color);margin-top:30px;margin-bottom:15px}.tech-grid{display:flex;flex-wrap:wrap;gap:15px}.tech-item{background-color:var(--background-light);padding:8px 18px;border-radius:5px;display:inline-flex;align-items:center;gap:10px;font-size:1.1em}.tech-item i,.tech-item svg{font-size:1.5em;color:var(--text-color-dark)}#contact{text-align:center}#contact p{max-width:500px;margin:20px auto 40px;color:var(--text-color-dark)}.contact-links a{margin:0 15px;display:inline-block;transition:transform .3s ease}.contact-links a:hover{transform:translateY(-3px)}.contact-links svg{width:32px;height:32px;fill:var(--text-color-light);transition:fill .3s ease}.contact-links a:hover svg{fill:var(--secondary-color)}footer{text-align:center;padding:25px;font-size:.9em;color:var(--text-color-dark)}footer a{color:var(--text-color-light);text-decoration:none;transition:color .3s ease}footer a:hover{color:var(--secondary-color)}.theme-switcher{margin-bottom:20px;display:flex;justify-content:center;align-items:center;gap:10px}.theme-switcher label{font-size:.95em;color:var(--text-color-dark)}.theme-switcher select{background-color:var(--primary-color);color:var(--text-color-dark);border:1px solid var(--secondary-color);padding:5px 10px;border-radius:4px;font-family:var(--font-sans);font-size:.9em;cursor:pointer}.theme-switcher select:focus{outline:2px solid var(--secondary-color);outline-offset:2px}.back-to-top{position:fixed;bottom:20px;right:20px;background-color:var(--secondary-color-transparent-2);border:1px solid var(--secondary-color);color:var(--secondary-color);width:40px;height:40px;border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;opacity:0;visibility:hidden;transition:opacity .3s,visibility .3s,background-color .3s;z-index:999}.back-to-top:hover{background-color:var(--secondary-color-transparent-4)}.back-to-top.visible{opacity:1;visibility:visible}.back-to-top::after{content:'↑';font-size:1.5em;font-weight:700}@media (max-width:768px){.about-content{grid-template-columns:1fr}.nav-links{position:fixed;left:-100%;top:0;flex-direction:column;background-color:var(--primary-color);width:100%;height:100vh;text-align:center;transition:.3s;justify-content:center;gap:50px}.nav-links.active{left:0}.nav-links a{font-size:1.5em}.hamburger{display:block}.hamburger.active .bar:nth-child(2){opacity:0}.hamburger.active .bar:nth-child(1){transform:translateY(8px) rotate(45deg)}.hamburger.active .bar:nth-child(3){transform:translateY(-8px) rotate(-45deg)}#cursor-glow,#particles-js{display:none}}.core-contribution-card{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:center;background-color:var(--background-light);padding:30px;border-radius:5px;margin-bottom:40px}.core-contribution-card:nth-child(odd) .contribution-media{order:2}.contribution-media video,.contribution-media img{width:100%;border-radius:5px;border:1px solid var(--secondary-color-transparent-2)}.contribution-details h3{color:var(--secondary-color);margin-top:0}.contribution-details .problem,.contribution-details .solution{font-size:1em;color:var(--text-color-dark);margin-bottom:15px}.contribution-details .problem strong,.contribution-details .solution strong{color:var(--text-color-light);display:block;margin-bottom:5px}.community-card{display:flex;flex-direction:column;align-items:center;text-align:center}.community-card img{width:100%;max-width:400px;border-radius:5px;margin-bottom:20px}.community-card blockquote{border-left:3px solid var(--secondary-color);padding-left:15px;font-style:italic;color:var(--text-color-dark);max-width:500px;margin:0 auto}.community-card cite{display:block;margin-top:10px;color:var(--text-color-light);font-style:normal}#project-modal{position:fixed;top:0;left:0;width:100%;height:100%;z-index:2000;display:none;align-items:center;justify-content:center}#project-modal.visible{display:flex}#modal-overlay{position:absolute;top:0;left:0;width:100%;height:100%;background-color:rgba(0,0,0,.8);backdrop-filter:blur(5px);cursor:pointer}#modal-content{position:relative;width:90%;max-width:1400px;height:85vh;background:linear-gradient(180deg,var(--primary-color-darker) 0%,var(--primary-color) 100%);border:1px solid var(--secondary-color-transparent-5);border-radius:8px;display:flex;overflow:hidden;box-shadow:0 10px 50px rgba(0,0,0,.5);opacity:0;transform:scale(.95);transition:opacity .3s ease,transform .3s ease}#project-modal.visible #modal-content{opacity:1;transform:scale(1)}#modal-close{position:absolute;top:15px;right:20px;font-size:2.5em;color:var(--text-color-light);cursor:pointer;z-index:2001;transition:color .3s ease,transform .3s ease}#modal-close:hover{color:var(--secondary-color);transform:rotate(90deg)}#readme-content{flex:1;padding:30px 40px;overflow-y:auto;color:var(--text-color-dark)}#readme-content h1,#readme-content h2,#readme-content h3{color:var(--text-color-light);border-bottom:1px solid var(--secondary-color-transparent-2);padding-bottom:5px}#readme-content a{color:var(--secondary-color);text-decoration:none}#readme-content a:hover{text-decoration:underline}#readme-content pre{background-color:var(--secondary-color-transparent-1);padding:15px;border-radius:5px;overflow-x:auto}#readme-content code{font-family:'Courier New',Courier,monospace}#readme-content img{max-width:100%;border-radius:4px}#readme-content .loader{font-size:1.5em;text-align:center;padding-top:50px}#media-gallery{flex:1;background-color:rgba(0,0,0,.2);display:flex;align-items:center;justify-content:center;padding:20px;position:relative}#media-gallery img,#media-gallery video{max-width:100%;max-height:100%;object-fit:contain;border-radius:5px;transition:opacity .4s ease}#media-counter{position:absolute;bottom:20px;right:20px;background-color:var(--primary-color-transparent);color:var(--text-color-dark);padding:5px 12px;border-radius:15px;font-size:.9em;backdrop-filter:blur(5px)}@media (max-width:1024px){#modal-content{flex-direction:column;height:90vh}#readme-content,#media-gallery{flex:none;width:100%;height:50%;box-sizing:border-box}}@media (max-width:768px){.core-contribution-card{grid-template-columns:1fr}.core-contribution-card:nth-child(odd) .contribution-media{order:0}}
     </style>
     
     <script>
@@ -257,13 +72,13 @@
                 <div class="milestones">
                     <h4>荣誉与里程碑</h4>
                     <ul>
-                        <li>FTC 设计奖第一名 (Design Award), 2024-2025 赛季</li>
-                        <li>FTC 思维奖第三名 (Think Award), 2024-2025 赛季</li>
-                        <li>FTC 控制奖 (Control Award), 2024-2025 赛季</li>
+                        <li>FLL 亚锦赛 亚军 (2025)</li>
+                        <li>FTC 设计奖第一名 (Design Award)</li>
+                        <li>FTC 思维奖第三名 (Think Award)</li>
+                        <li>FTC 控制奖 (Control Award)</li>
                         <li>FTC 中国区总决赛晋级者</li>
                         <li>北京市金鹏科技论坛项目二等奖</li>
                         <li>FTC 休斯顿世锦赛特邀技术贡献者</li>
-                        <li>CSDN 机器人与计算机视觉领域博主</li>
                     </ul>
                 </div>
             </div>
@@ -275,22 +90,22 @@
                 <div class="contribution-details">
                     <h3>Zero-to-YOLO-Yard</h3>
                     <p class="problem"><strong>痛点:</strong> FTC 社区普遍面临数据标注耗时过长的问题，平均每张图耗时2分钟，效率低下。</p>
-                    <p class="solution"><strong>我的解决方案:</strong> 为此，我开发了这款集成了 SAM 模型的本地化标注平台，将效率提升了8倍，缩短至15秒/张，让所有队伍都能免费享受到专业级标注体验。</p>
-                    <a href="javascript:void(0);" class="cta-button project-link" data-repo="BlueDarkUP/Zero-to-YOLO-Yard" data-images="https://user-images.githubusercontent.com/67853412/285526012-706f3621-e886-4e4b-91c6-30232a931481.png,https://user-images.githubusercontent.com/67853412/285526015-802c6107-1647-4958-9a3b-2ed67a26f03d.png">查看项目详情</a>
+                    <p class="solution"><strong>我的解决方案:</strong> 为此，我开发了这款集成了 SAM 模型的本地化标注平台，将效率提升了8倍（40秒标注200张），让所有队伍都能免费享受到专业级标注体验。</p>
+                    <a href="javascript:void(0);" class="cta-button project-link" data-repo="BlueDarkUP/Zero-to-YOLO-Yard" data-media="Zero2YOLOYard.mp4">查看项目详情</a>
                 </div>
-                <div class="contribution-image">
-                    <img src="https://user-images.githubusercontent.com/67853412/285526012-706f3621-e886-4e4b-91c6-30232a931481.png" alt="Zero-to-YOLO-Yard 界面截图">
+                <div class="contribution-media">
+                    <video src="Zero2YOLOYard.mp4" autoplay muted loop playsinline></video>
                 </div>
             </div>
             <div class="core-contribution-card">
-                 <div class="contribution-image">
-                    <img src="https://user-images.githubusercontent.com/67853412/285526027-c10f8211-13c5-4122-8178-5776d5483a90.png" alt="FTC-Easy-TFLITE 流程图">
+                 <div class="contribution-media">
+                    <video src="FTC-Easy-TFLite.mp4" autoplay muted loop playsinline></video>
                 </div>
                 <div class="contribution-details">
                     <h3>FTC-Easy-TFLITE</h3>
                     <p class="problem"><strong>痛点:</strong> 在 FTC 机器人上部署自定义 AI 模型流程复杂、门槛高，劝退了许多队伍。</p>
                     <p class="solution"><strong>我的解决方案:</strong> 我打造了这条本地 MLOps 流水线，将模型训练、量化、部署全过程自动化，真正实现了一键生成 FTC 兼容模型，赋能更多队伍在比赛中使用先进的AI技术。</p>
-                     <a href="javascript:void(0);" class="cta-button project-link" data-repo="BlueDarkUP/FTC-Easy-TFLITE" data-images="https://user-images.githubusercontent.com/67853412/285526027-c10f8211-13c5-4122-8178-5776d5483a90.png,https://user-images.githubusercontent.com/67853412/285526028-1b058a2d-b0a7-47b2-a444-2ed6824900a0.png">查看项目详情</a>
+                     <a href="javascript:void(0);" class="cta-button project-link" data-repo="BlueDarkUP/FTC-Easy-TFLITE" data-media="FTC-Easy-TFLite.mp4">查看项目详情</a>
                 </div>
             </div>
         </section>
@@ -301,8 +116,11 @@
             <div class="card-grid">
                 <div class="card"><div class="card-content"><h3><a href="https://grizzly-treatment-ac4.notion.site/FTC-27570-TeleOp-250969a5284d8075b144dca6f421e9b8?pvs=73" target="_blank">课程 1: 你的第一个竞赛级 TeleOp</a></h3><p>学习 LinearOpMode 的基本结构，如何映射硬件，并为Mecanum底盘实现稳健的驱动控制。</p></div><div class="card-footer"><span class="tag">硬件映射</span><span class="tag">场地中心驱动</span><span class="tag">状态机</span></div></div>
                 <div class="card"><div class="card-content"><h3><a href="https://grizzly-treatment-ac4.notion.site/FTC-27570-250969a5284d8098bb35c9c637ac0fa3?pvs=73" target="_blank">课程 2: 集成 Road Runner 的高级 TeleOp</a></h3><p>学习如何将 Road Runner 集成到 TeleOp 中，实现强大的半自动功能，如“一键返回”。</p></div><div class="card-footer"><span class="tag">Road Runner</span><span class="tag">Pose2d</span><span class="tag">运动序列</span></div></div>
+                 <div class="card"><div class="card-content"><h3><a href="https://grizzly-treatment-ac4.notion.site/FTC-27570-API-250969a5284d8039bb4ee5f524f3279f?pvs=73" target="_blank">课程 3: 构建视觉 API (入门)</a></h3><p>介绍如何设计一个独立的视觉系统。本课程涵盖了可被任何 OpMode 使用的视觉管线的初始架构。</p></div><div class="card-footer"><span class="tag">API 设计</span><span class="tag">OpenCvPipeline</span><span class="tag">颜色分割</span></div></div>
                 <div class="card"><div class="card-content"><h3><a href="https://grizzly-treatment-ac4.notion.site/FTC-27570-API-250969a5284d808380a8ea220da47436?pvs=73" target="_blank">课程 4: 生产级视觉系统架构</a></h3><p>一堂关于软件架构的大师课，将初始API重构为一个高度模块化、可维护的强大系统。</p></div><div class="card-footer"><span class="tag">SoC</span><span class="tag">配置管理</span><span class="tag">运动学建模</span></div></div>
+                <div class="card"><div class="card-content"><h3><a href="https://grizzly-treatment-ac4.notion.site/FTC-27570-250969a5284d802eabe6de3f2173870d?pvs=73" target="_blank">课程 5: FLL AquaHunter (自主ROV)</a></h3><p>学习如何从零开始构建一个完整的单脚本AI系统，涵盖实时对象跟踪和水下机器人的视觉伺服。</p></div><div class="card-footer"><span class="tag">YOLOv8</span><span class="tag">SORT算法</span><span class="tag">串口通信</span></div></div>
                 <div class="card"><div class="card-content"><h3><a href="https://grizzly-treatment-ac4.notion.site/FTC-27570-AI-250969a5284d80aa8ccfe5e2bc11e73e?pvs=73" target="_blank">课程 6: 构建你自己的数据引擎</a></h3><p>学习如何架构和构建一个用于管理整个机器学习数据生命周期的全栈Web应用。</p></div><div class="card-footer"><span class="tag">Flask</span><span class="tag">SQLite</span><span class="tag">REST API</span><span class="tag">SAM 2.1</span></div></div>
+                <div class="card"><div class="card-content"><h3><a href="https://grizzly-treatment-ac4.notion.site/FTC-27570-AI-250969a5284d8001ab71c9365a4827e8?pvs=73" target="_blank">课程 7: 打造你自己的AI工厂</a></h3><p>创建一个标准化、自动化和可复现的MLOps流水线，用于训练和部署FTC兼容的模型。</p></div><div class="card-footer"><span class="tag">MLOps</span><span class="tag">自动化</span><span class="tag">模型量化</span><span class="tag">TFLite</span></div></div>
             </div>
         </section>
         
@@ -310,14 +128,12 @@
             <h2 class="section-title">社区贡献与影响力</h2>
             <div class="card-grid">
                 <div class="card community-card">
-                    <!-- 建议替换为真实照片 -->
-                    <img src="https://via.placeholder.com/400x300.png/336A29/EAEF9D?text=Mentoring+FLL+Team" alt="指导FLL队伍">
+                    <img src="28119-T.jpg" alt="在28119交流会上讲解视觉">
                     <h3>知识分享与技术布道</h3>
                     <p>我坚信分享是技术进步的催化剂。通过撰写深度技术文章、开源全部核心代码，以及为新队伍（如 28119 队）提供技术讲解，我希望将实战中积累的知识回馈给社区。</p>
                 </div>
                 <div class="card community-card">
-                    <!-- 建议替换为真实照片 -->
-                    <img src="https://via.placeholder.com/400x300.png/2C6975/E0ECDE?text=Collaboration+with+19705" alt="与19705队协作">
+                    <img src="HUSTON-T.jpg" alt="在休斯顿世锦赛现场为19705队调试">
                     <h3>跨团队与跨赛事协作</h3>
                     <p>为 FTC 19705 (红心机器人) 开发的视觉系统助力其在休斯顿世锦赛取得佳绩。同时，将技术经验成功应用于 FLL 水下机器人及 RoboMaster 青年赛项目中，探索技术融合创新。</p>
                      <blockquote>
@@ -331,19 +147,22 @@
         <section id="more-projects" class="fade-in">
             <h2 class="section-title">更多开源项目</h2>
             <div class="card-grid">
-                <!-- IMPORTANT: Replace the "data-images" with your actual comma-separated image URLs -->
-                <div class="card"><div class="card-content"><h3><a href="javascript:void(0);" class="project-link" data-repo="BlueDarkUP/FTC-27570-INTOTHEDEEP-WRC" data-images="...">FTC 27570 Team Code (WRC)</a></h3><p>27570队赛季核心代码库。<b>亮点:</b> 集成了先进的自主导航、L3级辅助驾驶和智能视觉抓取系统。</p></div><div class="card-footer"><span class="tag">Java</span><span class="tag">FTC SDK</span><span class="tag">RoadRunner</span></div></div>
-                <div class="card"><div class="card-content"><h3><a href="javascript:void(0);" class="project-link" data-repo="BlueDarkUP/FTC-INTO-THE-DEEP-VISION-for-19705" data-images="...">Vision System for FTC Team 19705</a></h3><p>为红心机器人19705队开发的竞赛级视觉系统。<b>亮点:</b> 在休斯顿世锦赛实战验证，实现平均2秒/次的抓取速度。</p></div><div class="card-footer"><span class="tag">Java</span><span class="tag">OpenCV</span><span class="tag">Computer Vision</span></div></div>
-                <div class="card"><div class="card-content"><h3><a href="javascript:void(0);" class="project-link" data-repo="BlueDarkUP/Easy-YOLO-Augmenter" data-images="...">Easy-YOLO-Augmenter</a></h3><p>一个直观的桌面应用，无需编码即可增强YOLO格式的图像数据集。<b>亮点:</b> 基于多进程并行处理，效率高。</p></div><div class="card-footer"><span class="tag">Python</span><span class="tag">PyQt5</span><span class="tag">Data Augmentation</span></div></div>
-                <div class="card"><div class="card-content"><h3><a href="javascript:void(0);" class="project-link" data-repo="BlueDarkUP/FLL-AquaHunter" data-images="...">FLL-AquaHunter</a></h3><p>用于 FLL 竞赛的水下机器人 (ROV)，能够自主识别、追踪并抓取狮子鱼。<b>亮点:</b> 将AI视觉应用于解决入侵物种问题的真实场景。</p></div><div class="card-footer"><span class="tag">Python</span><span class="tag">YOLOv8</span><span class="tag">SORT</span></div></div>
-                <div class="card"><div class="card-content"><h3><a href="javascript:void(0);" class="project-link" data-repo="BlueDarkUP/AIRS-RM-2025" data-images="...">RM-Hunter (RMYC)</a></h3><p>为 RoboMaster 青年赛设计的自主守卫机器人。<b>亮点:</b> 成功将在FTC和FLL项目中积累的视觉自瞄与PID控制算法迁移应用。</p></div><div class="card-footer"><span class="tag">Python</span><span class="tag">OpenCV</span><span class="tag">PID Control</span></div></div>
-                <div class="card"><div class="card-content"><h3><a href="javascript:void(0);" class="project-link" data-repo="BlueDarkUP/Scanventory" data-images="...">Scanventory</a></h3><p>一款专为国企设计的开源固定资产盘点安卓应用。<b>亮点:</b> 通过手机扫码盘点，所有数据本地处理，保障隐私安全。</p></div><div class="card-footer"><span class="tag">Android</span><span class="tag">Kotlin</span><span class="tag">Jetpack Compose</span></div></div>
+                <div class="card"><div class="card-content"><h3><a href="javascript:void(0);" class="project-link" data-repo="BlueDarkUP/FTC-27570-INTOTHEDEEP-WRC" data-media="570100.mp4,5703D.jpg">FTC 27570 Team Code (WRC)</a></h3><p>27570队赛季核心代码库。<b>亮点:</b> 集成了比为19705开发的版本更快更强的视觉系统，实现了100%的抓取成功率。</p></div><div class="card-footer"><span class="tag">Java</span><span class="tag">FTC SDK</span><span class="tag">RoadRunner</span></div></div>
+                <div class="card"><div class="card-content"><h3><a href="javascript:void(0);" class="project-link" data-repo="BlueDarkUP/FTC-INTO-THE-DEEP-VISION-for-19705" data-media="705100.mp4,HOUSTON84.mp4,HOUSTON-TIE.jpg">Vision System for FTC Team 19705</a></h3><p>为红心机器人19705队开发的竞赛级视觉系统。<b>亮点:</b> 在休斯顿世锦赛实战验证，关键时刻弥补失误，助力队伍取得高分。</p></div><div class="card-footer"><span class="tag">Java</span><span class="tag">OpenCV</span><span class="tag">Computer Vision</span></div></div>
+                <div class="card"><div class="card-content"><h3><a href="javascript:void(0);" class="project-link" data-repo="BlueDarkUP/FLL-AquaHunter" data-media="FLL-W.jpg,FLL-T.jpg,FLL-S.jpg,FLL-A.jpg">FLL-AquaHunter</a></h3><p>用于 FLL 竞赛的水下机器人 (ROV)，能够自主识别、追踪并抓取狮子鱼。<b>亮点:</b> 将AI视觉应用于解决入侵物种问题的真实场景，荣获亚锦赛亚军。</p></div><div class="card-footer"><span class="tag">Python</span><span class="tag">YOLOv8</span><span class="tag">SORT</span></div></div>
+                <div class="card"><div class="card-content"><h3><a href="javascript:void(0);" class="project-link" data-repo="BlueDarkUP/AIRS-RM-2025" data-media="RMYC-AA.mp4,RMYC-RR.mp4">RM-Hunter (RMYC)</a></h3><p>为 RoboMaster 青年赛设计的自主守卫机器人。<b>亮点:</b> 成功将在FTC和FLL项目中积累的视觉自瞄与PID控制算法迁移应用，效果显著。</p></div><div class="card-footer"><span class="tag">Python</span><span class="tag">OpenCV</span><span class="tag">PID Control</span></div></div>
+                <div class="card"><div class="card-content"><h3><a href="javascript:void(0);" class="project-link" data-repo="BlueDarkUP/Easy-YOLO-Augmenter" data-media="">Easy-YOLO-Augmenter</a></h3><p>一个直观的桌面应用，无需编码即可增强YOLO格式的图像数据集。<b>亮点:</b> 基于多进程并行处理，由Albumentations驱动，显著提升数据增强效率。</p></div><div class="card-footer"><span class="tag">Python</span><span class="tag">PyQt5</span><span class="tag">Data Augmentation</span></div></div>
+                <div class="card"><div class="card-content"><h3><a href="javascript:void(0);" class="project-link" data-repo="BlueDarkUP/Scanventory" data-media="">Scanventory</a></h3><p>一款专为国企设计的开源固定资产盘点安卓应用。<b>亮点:</b> 通过手机扫码盘点，所有数据本地处理，保障隐私安全。</p></div><div class="card-footer"><span class="tag">Android</span><span class="tag">Kotlin</span><span class="tag">Jetpack Compose</span></div></div>
             </div>
         </section>
 
-        <!-- [ 原有的技术栈、联系方式、页脚部分保持不变 ] -->
-        <!-- [ Original Tech Stack, Contact, Footer sections remain unchanged ] -->
-        <section id="tech-stack" class="fade-in"> <h2 class="section-title">技术栈</h2> <div class="tech-category"> <h4>精通 (Proficient)</h4> <div class="tech-grid"> <span class="tech-item"><i class="devicon-python-plain"></i> Python</span> <span class="tech-item"><i class="devicon-java-plain"></i> Java</span> <span class="tech-item"><i class="devicon-tensorflow-original"></i> TensorFlow</span> <span class="tech-item"><i class="devicon-opencv-plain"></i> OpenCV</span> <span class="tech-item"><i class="devicon-fastapi-plain"></i> YOLO</span> <span class="tech-item"><i class="devicon-git-plain"></i> Git</span> </div> </div> <div class="tech-category"> <h4>熟练 (Experienced)</h4> <div class="tech-grid"> <span class="tech-item"><i class="devicon-cplusplus-plain"></i> C++</span> <span class="tech-item"><i class="devicon-bash-plain"></i> Bash</span> <span class="tech-item"><i class="devicon-pytorch-plain"></i> PyTorch</span> <span class="tech-item"><i class="devicon-flask-original"></i> Flask</span> <span class="tech-item"><i class="devicon-docker-plain"></i> Docker</span> <span class="tech-item"><i class="devicon-androidstudio-plain"></i> Android Studio</span> <span class="tech-item"> <svg xmlns="http://www.w3.org/2000/svg" width="1.5em" height="1.5em" viewBox="0 0 128 128"> <path fill="currentColor" d="M33.875 22.45c0 6.898-5.418 12.488-12.102 12.488-6.683 0-12.101-5.59-12.101-12.489 0-6.894 5.418-12.484 12.101-12.484 6.684 0 12.102 5.59 12.102 12.484Zm0 42.55c0 6.895-5.418 12.484-12.102 12.484-6.683 0-12.101-5.59-12.101-12.484 0-6.895 5.418-12.484 12.101-12.484 6.684 0 12.102 5.59 12.102 12.484Zm0 42.55c0 6.895-5.418 12.485-12.102 12.485-6.683 0-12.101-5.59-12.101-12.484 0-6.895 5.418-12.489 12.101-12.489 6.684 0 12.102 5.594 12.102 12.489ZM76.102 65c0 6.895-5.418 12.484-12.102 12.484S51.898 71.894 51.898 65c0-6.895 5.418-12.484 12.102-12.484S76.102 58.106 76.102 65Zm0-42.55c0 6.898-5.418 12.488-12.102 12.488s-12.102-5.59-12.102-12.489c0-6.894 5.418-12.484 12.102-12.484s12.102 5.59 12.102 12.484ZM118.328 65c0 6.895-5.418 12.484-12.101 12.484-6.684 0-12.102-5.59-12.102-12.484 0-6.895 5.422-12.484 12.102-12.484 6.683 0 12.101 5.59 12.101 12.484Zm0-42.55c0 6.898-5.418 12.488-12.101 12.488-6.684 0-12.102-5.59-12.102-12.489 0-6.894 5.422-12.484 12.102-12.484 6.683 0 12.101 5.59 12.101 12.484Zm0 85.1c0 6.895-5.418 12.485-12.101 12.485-6.684 0-12.102-5.59-12.102-12.484 0-6.895 5.422-12.489 12.102-12.489 6.683 0 12.101 5.594 12.101 12.489Zm-42.226 0c0 6.895-5.418 12.485-12.102 12.485s-12.102-5.59-12.102-12.484c0-6.895 5.418-12.489 12.102-12.489s12.102 5.594 12.102 12.489Zm0 0"></path> </svg> ROS </span> </div> </div> <div class="tech-category"> <h4>了解 (Familiar with)</h4> <div class="tech-grid"> <span class="tech-item"><i class="devicon-javascript-plain"></i> JavaScript</span> <span class="tech-item"><i class="devicon-sqlite-plain"></i> SQLite</span> <span class="tech-item"><svg xmlns="http://www.w3.org/2000/svg" width="1.5em" height="1.5em" viewBox="0 0 20 20"><path fill="currentColor" d="M16 13c-1.3 0-2.4.8-2.8 2H9c0-.7-.2-1.3-.5-1.8l7.1-7.3c.3 0 .6.1.9.1C17.9 6 19 4.9 19 3.5S17.9 1 16.5 1 14 2.1 14 3.5c0 .3.1.7.2 1l-7 7.2c-.6-.5-1.4-.7-2.2-.7V6.8C6.2 6.4 7 5.3 7 4c0-1.7-1.3-3-3-3S1 2.3 1 4c0 1.3.8 2.4 2 2.8v4.7c-1.2.7-2 2-2 3.4 0 2.2 1.8 4 4 4 1.5 0 2.8-.8 3.4-2h4.7c.4 1.1 1.5 2 2.8 2 1.6 0 3-1.3 3-3C19 14.3 17.6 13 16 13z"></path></svg> REST API</span> <span class="tech-item"><i class="devicon-anaconda-original"></i> Conda</span> </div> </div> </section>
+        <section id="tech-stack" class="fade-in">
+            <h2 class="section-title">技术栈</h2>
+            <div class="tech-category"><h4>精通 (Proficient)</h4><div class="tech-grid"><span class="tech-item"><i class="devicon-python-plain"></i> Python</span><span class="tech-item"><i class="devicon-java-plain"></i> Java</span><span class="tech-item"><i class="devicon-tensorflow-original"></i> TensorFlow</span><span class="tech-item"><i class="devicon-opencv-plain"></i> OpenCV</span><span class="tech-item"><i class="devicon-fastapi-plain"></i> YOLO</span><span class="tech-item"><i class="devicon-git-plain"></i> Git</span></div></div>
+            <div class="tech-category"><h4>熟练 (Experienced)</h4><div class="tech-grid"><span class="tech-item"><i class="devicon-cplusplus-plain"></i> C++</span><span class="tech-item"><i class="devicon-bash-plain"></i> Bash</span><span class="tech-item"><i class="devicon-pytorch-plain"></i> PyTorch</span><span class="tech-item"><i class="devicon-flask-original"></i> Flask</span><span class="tech-item"><i class="devicon-docker-plain"></i> Docker</span><span class="tech-item"><i class="devicon-androidstudio-plain"></i> Android Studio</span><span class="tech-item"><svg xmlns="http://www.w3.org/2000/svg" width="1.5em" height="1.5em" viewBox="0 0 128 128"><path fill="currentColor" d="M33.875 22.45c0 6.898-5.418 12.488-12.102 12.488-6.683 0-12.101-5.59-12.101-12.489 0-6.894 5.418-12.484 12.101-12.484 6.684 0 12.102 5.59 12.102 12.484Zm0 42.55c0 6.895-5.418 12.484-12.102 12.484-6.683 0-12.101-5.59-12.101-12.484 0-6.895 5.418-12.484 12.101-12.484 6.684 0 12.102 5.59 12.102 12.484Zm0 42.55c0 6.895-5.418 12.485-12.102 12.485-6.683 0-12.101-5.59-12.101-12.484 0-6.895 5.418-12.489 12.101-12.489 6.684 0 12.102 5.594 12.102 12.489ZM76.102 65c0 6.895-5.418 12.484-12.102 12.484S51.898 71.894 51.898 65c0-6.895 5.418-12.484 12.102-12.484S76.102 58.106 76.102 65Zm0-42.55c0 6.898-5.418 12.488-12.102 12.488s-12.102-5.59-12.102-12.489c0-6.894 5.418-12.484 12.102-12.484s12.102 5.59 12.102 12.484ZM118.328 65c0 6.895-5.418 12.484-12.101 12.484-6.684 0-12.102-5.59-12.102-12.484 0-6.895 5.422-12.484 12.102-12.484 6.683 0 12.101 5.59 12.101 12.484Zm0-42.55c0 6.898-5.418 12.488-12.101 12.488-6.684 0-12.102-5.59-12.102-12.489 0-6.894 5.422-12.484 12.102-12.484 6.683 0 12.101 5.59 12.101 12.484Zm0 85.1c0 6.895-5.418 12.485-12.101 12.485-6.684 0-12.102-5.59-12.102-12.484 0-6.895 5.422-12.489 12.102-12.489 6.683 0 12.101 5.594 12.101 12.489Zm-42.226 0c0 6.895-5.418 12.485-12.102 12.485s-12.102-5.59-12.102-12.484c0-6.895 5.418-12.489 12.102-12.489s12.102 5.594 12.102 12.489Zm0 0"></path></svg> ROS</span></div></div>
+            <div class="tech-category"><h4>了解 (Familiar with)</h4><div class="tech-grid"><span class="tech-item"><i class="devicon-javascript-plain"></i> JavaScript</span><span class="tech-item"><i class="devicon-sqlite-plain"></i> SQLite</span><span class="tech-item"><svg xmlns="http://www.w3.org/2000/svg" width="1.5em" height="1.5em" viewBox="0 0 20 20"><path fill="currentColor" d="M16 13c-1.3 0-2.4.8-2.8 2H9c0-.7-.2-1.3-.5-1.8l7.1-7.3c.3 0 .6.1.9.1C17.9 6 19 4.9 19 3.5S17.9 1 16.5 1 14 2.1 14 3.5c0 .3.1.7.2 1l-7 7.2c-.6-.5-1.4-.7-2.2-.7V6.8C6.2 6.4 7 5.3 7 4c0-1.7-1.3-3-3-3S1 2.3 1 4c0 1.3.8 2.4 2 2.8v4.7c-1.2.7-2 2-2 3.4 0 2.2 1.8 4 4 4 1.5 0 2.8-.8 3.4-2h4.7c.4 1.1 1.5 2 2.8 2 1.6 0 3-1.3 3-3C19 14.3 17.6 13 16 13z"></path></svg> REST API</span><span class="tech-item"><i class="devicon-anaconda-original"></i> Conda</span></div></div>
+        </section>
+
         <section id="contact" class="fade-in"> <h2 class="section-title" style="margin: 0 auto;">联系方式</h2> <p>我对新的机遇和挑战总是充满热情。欢迎随时通过以下方式与我交流、探讨技术或寻求合作！</p> <div class="contact-links"> <a href="https://github.com/BlueDarkUP" target="_blank" title="GitHub" aria-label="访问我的GitHub主页"> <svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><title>GitHub</title><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.12-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.665 1.653.255 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg> </a> <a href="mailto:BlueDarkUP@Gmail.com" target="_blank" title="Email" aria-label="给我发送电子邮件"> <svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><title>Email</title><path d="M22 6c0-1.1-.9-2-2-2H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6zm-2 0l-8 5-8-5h16zm0 12H4V8l8 5 8-5v10z"/></svg> </a> <a href="https://www.youtube.com/@BlueDarkUP" target="_blank" title="YouTube" aria-label="访问我的YouTube频道"> <svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><title>YouTube</title><path d="M21.582 7.336c-.2-.736-.77-1.306-1.506-1.506C18.66 5.5 12 5.5 12 5.5s-6.66 0-8.076.33c-.736.2-1.306.77-1.506 1.506C2.088 8.752 2 12 2 12s.088 3.248.418 4.664c.2.736.77 1.306 1.506 1.506C5.34 18.5 12 18.5 12 18.5s6.66 0 8.076-.33c.736-.2 1.306.77 1.506-1.506C21.912 15.248 22 12 22 12s-.088-3.248-.418-4.664zM9.75 14.885V9.115l4.985 2.885-4.985 2.885z"/></svg> </a> <a href="https://www.instagram.com/bluedarkup/" target="_blank" title="Instagram" aria-label="访问我的Instagram"> <svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><title>Instagram</title><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.85s-.012 3.584-.07 4.85c-.148 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07s-3.584-.012-4.85-.07c-3.252-.148-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.85s.012-3.584.07-4.85c.148-3.227 1.664-4.771 4.919-4.919C8.356 2.175 8.741 2.163 12 2.163m0-2.163C8.741 0 8.333.014 7.053.072 2.82.266.202 2.883 0 7.117.058 8.397.072 8.804.072 12s-.014 3.603-.072 4.883c-.194 4.233 2.812 6.852 7.046 7.046 1.28.058 1.687.072 4.947.072s3.667-.014 4.947-.072c4.233-.194 6.852-2.812 7.046-7.046.058-1.28.072-1.687.072-4.883s-.014-3.603-.072-4.883C23.798 2.883 21.18.266 16.947.072 15.667.014 15.259 0 12 0zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.162 6.162 6.162 6.162-2.759 6.162-6.162-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4s1.791-4 4-4 4 1.79 4 4-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.441 1.441 1.441 1.441-.645 1.441-1.441-.645-1.44-1.441-1.44z"/></svg> </a> <a href="https://space.bilibili.com/1778652739" target="_blank" title="Bilibili" aria-label="访问我的Bilibili空间"> <svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><title>Bilibili</title><path d="M18.223 3.086a1.25 1.25 0 0 1 0 1.768L17.08 5.996h1.17A3.75 3.75 0 0 1 22 9.747v7.5a3.75 3.75 0 0 1-3.75 3.75H5.75A3.75 3.75 0 0 1 2 17.247v-7.5a3.75 3.75 0 0 1 3.75-3.75h1.166L5.775 4.855a1.25 1.25 0 1 1 1.767-1.768l2.652 2.652c.079.079.145.165.198.257h3.213c.053-.092.12-.18.199-.258l2.651-2.652a1.25 1.25 0 0 1 1.768 0zm.027 5.42H5.75a1.25 1.25 0 0 0-1.247 1.157l-.003.094v7.5c0 .659.51 1.199 1.157 1.246l.093.004h12.5a1.25 1.25 0 0 0 1.247-1.157l.003-.093v-7.5c0-.69-.56-1.25-1.25-1.25zm-10 2.5c.69 0 1.25.56 1.25 1.25v1.25a1.25 1.25 0 1 1-2.5 0v-1.25c0-.69.56-1.25 1.25-1.25zm7.5 0c.69 0 1.25.56 1.25 1.25v1.25a1.25 1.25 0 1 1-2.5 0v-1.25c0-.69.56-1.25 1.25-1.25z"/></svg> </a> <a href="https://blog.csdn.net/weixin_55053322?type=blog" target="_blank" title="CSDN" aria-label="访问我的CSDN博客"> <svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><title>CSDN</title><path d="M6.217 13.408c.447.18 1.379.359 2.132.359.812 0 1.264-.247 1.3-.632.033-.35-.299-.398-1.216-.637-1.267-.342-2.075-.871-1.996-1.717.092-.982 1.286-1.724 3.118-1.724.893 0 1.759.069 2.208.231l-.154 1.238c-.291-.112-1.406-.266-2.16-.266-.765 0-1.16.265-1.188.555-.034.367.363.385 1.356.676 1.345.376 1.933.905 1.856 1.725C11.382 14.18 10.308 15 8.163 15 7.27 15 6.5 14.821 6.076 14.641L6.217 13.408 6.217 13.408zM18.821 9.366c4.884-1.017 5.305.811 5.154 2.428l-.284 2.992h-1.55l.259-2.729c.056-.601.405-1.776-1.281-1.732-.584.016-.873.104-.873.104s-.051.726-.112 1.263l-.294 3.095h-1.52l.302-3.05C18.622 11.736 18.821 9.366 18.821 9.366zM12.653 9.224c.349-.042.884-.084 1.621-.084 1.23 0 2.225.236 2.841.734.553.464.921 1.214.819 2.302-.094 1.012-.57 1.721-1.264 2.159-.635.413-1.434.59-2.637.59-.709 0-1.385-.042-1.9-.126L12.653 9.224 12.653 9.224zM13.669 13.69c.119.025.274.051.582.051 1.231 0 2.098-.668 2.185-1.607.127-1.358-.643-1.832-1.94-1.824-.168 0-.401 0-.525.025L13.669 13.69 13.669 13.69zM5.335 14.813C5.043 14.924 4.439 15 3.595 15c-2.427 0-3.737-1.254-3.583-2.913C.198 10.112 2.139 9 4.264 9c.823 0 1.308.073 1.762.195L5.88 10.526c-.302-.112-1.01-.215-1.583-.215-1.25 0-2.312.41-2.434 1.707-.109 1.16.637 1.714 2.044 1.714.49 0 1.212-.077 1.545-.189C5.452 13.544 5.335 14.813 5.335 14.813z"/></svg> </a> <a href="https://www.facebook.com/profile.php?id=61578829349690" target="_blank" title="Facebook" aria-label="访问我的Facebook"> <svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><title>Facebook</title><path d="M22.675 0h-21.35C.59 0 0 .59 0 1.325v21.35C0 23.41.59 24 1.325 24H12.82v-9.29h-3.128V11.21h3.128V8.647c0-3.1 1.893-4.788 4.659-4.788 1.325 0 2.463.099 2.795.143v3.24l-1.918.001c-1.504 0-1.795.715-1.795 1.763v2.313h3.587l-.467 3.5h-3.12V24h5.713c.735 0 1.325-.59 1.325-1.325V1.325C24 .59 23.41 0 22.675 0z"/></svg> </a> <a href="https://www.reddit.com/user/OppositeCampaign2649/" target="_blank" title="Reddit" aria-label="访问我的Reddit"> <svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><title>Reddit</title><path d="M10.24 13.6C10.0818 13.6 9.92711 13.5531 9.79555 13.4652C9.66399 13.3773 9.56145 13.2523 9.5009 13.1061C9.44035 12.96 9.42451 12.7991 9.45538 12.6439C9.48624 12.4887 9.56244 12.3462 9.67432 12.2343C9.7862 12.1224 9.92875 12.0462 10.0839 12.0154C10.2391 11.9845 10.4 12.0003 10.5461 12.0609C10.6923 12.1214 10.8173 12.224 10.9052 12.3555C10.9931 12.4871 11.04 12.6418 11.04 12.8C11.04 12.9051 11.0193 13.0091 10.9791 13.1061C10.9389 13.2032 10.88 13.2914 10.8057 13.3657C10.7314 13.44 10.6432 13.4989 10.5461 13.5391C10.4491 13.5793 10.3451 13.6 10.24 13.6ZM20 12C20 13.5823 19.5308 15.129 18.6518 16.4446C17.7727 17.7602 16.5233 18.7855 15.0615 19.391C13.5997 19.9965 11.9911 20.155 10.4393 19.8463C8.88743 19.5376 7.46197 18.7757 6.34315 17.6569C5.22433 16.538 4.4624 15.1126 4.15372 13.5607C3.84504 12.0089 4.00347 10.4003 4.60897 8.93853C5.21447 7.47672 6.23985 6.22729 7.55544 5.34824C8.87103 4.46919 10.4178 4 12 4C14.1217 4 16.1566 4.84285 17.6569 6.34315C19.1571 7.84344 20 9.87827 20 12ZM15.73 10.67C15.4543 10.6862 15.1943 10.8038 15 11C14.1775 10.4564 13.2158 10.1613 12.23 10.15L12.79 7.62L14.58 8.02C14.5787 8.12458 14.5981 8.22839 14.6372 8.32539C14.6764 8.4224 14.7343 8.51067 14.8078 8.58509C14.8813 8.65951 14.9689 8.7186 15.0654 8.75892C15.1619 8.79925 15.2654 8.82001 15.37 8.82C15.5831 8.81737 15.7866 8.73087 15.9363 8.57925C16.0861 8.42763 16.17 8.2231 16.17 8.01C16.176 7.82715 16.1183 7.6479 16.0069 7.50284C15.8954 7.35777 15.737 7.25589 15.5588 7.21458C15.3806 7.17327 15.1936 7.1951 15.0296 7.27633C14.8657 7.35756 14.7351 7.49317 14.66 7.66L12.66 7.22C12.6124 7.21087 12.5631 7.22027 12.5222 7.2463C12.4813 7.27233 12.4519 7.313 12.44 7.36L11.82 10.15C10.8346 10.1641 9.87368 10.4589 9.05 11C8.94175 10.8882 8.81043 10.8014 8.66518 10.7456C8.51993 10.6898 8.36426 10.6663 8.20902 10.6769C8.05378 10.6874 7.9027 10.7316 7.76631 10.8065C7.62993 10.8814 7.51152 10.9852 7.41934 11.1105C7.32717 11.2359 7.26344 11.3799 7.23261 11.5324C7.20178 11.6849 7.20458 11.8423 7.24082 11.9936C7.27706 12.1449 7.34586 12.2865 7.44244 12.4085C7.53902 12.5305 7.66104 12.63 7.8 12.7C7.78471 12.8663 7.78471 13.0337 7.8 13.2C7.8 14.89 9.71 16.27 12.06 16.27C14.41 16.27 16.32 14.89 16.32 13.2C16.3204 13.0282 16.3002 12.857 16.26 12.69C16.4621 12.5755 16.6215 12.3984 16.714 12.1854C16.8066 11.9724 16.8274 11.7351 16.7732 11.5092C16.719 11.2834 16.5927 11.0813 16.4136 10.9335C16.2344 10.7858 16.012 10.7003 15.78 10.69L15.73 10.67ZM13.51 14.42C13.0606 14.7023 12.5407 14.852 12.01 14.852C11.4793 14.852 10.9594 14.7023 10.51 14.42C10.4731 14.3863 10.425 14.3676 10.375 14.3676C10.325 14.3676 10.2769 14.3863 10.24 14.42C10.2206 14.4378 10.2051 14.4594 10.1945 14.4835C10.1839 14.5076 10.1785 14.5337 10.1785 14.56C10.1785 14.5863 10.1839 14.6124 10.1945 14.6365C10.2051 14.6606 10.2206 14.6822 10.24 14.7C10.7652 15.0564 11.3853 15.2469 12.02 15.2469C12.6547 15.2469 13.2748 15.0564 13.8 14.7C13.8194 14.6822 13.8349 14.6606 13.8455 14.6365C13.8561 14.6124 13.8616 14.5863 13.8616 14.56C13.8616 14.5337 13.8561 14.5076 13.8455 14.4835C13.8349 14.4594 13.8194 14.4378 13.8 14.42C13.7813 14.4003 13.7588 14.3847 13.7339 14.374C13.709 14.3633 13.6821 14.3577 13.655 14.3577C13.6279 14.3577 13.601 14.3633 13.5761 14.374C13.5512 14.3847 13.5287 14.4003 13.51 14.42ZM13.76 12C13.6018 12 13.4471 12.0469 13.3155 12.1348C13.184 12.2227 13.0814 12.3477 13.0209 12.4939C12.9604 12.64 12.9445 12.8009 12.9754 12.9561C13.0062 13.1113 13.0824 13.2538 13.1943 13.3657C13.3062 13.4776 13.4487 13.5538 13.6039 13.5846C13.7591 13.6155 13.92 13.5997 14.0662 13.5391C14.2123 13.4786 14.3373 13.376 14.4252 13.2445C14.5131 13.1129 14.56 12.9582 14.56 12.8C14.56 12.5878 14.4757 12.3843 14.3257 12.2343C14.1757 12.0843 13.9722 12 13.76 12Z"/></svg> </a> </div> </section>
     </main>
     
@@ -367,18 +186,12 @@
         <p> Designed & Built by <a href="https://github.com/BlueDarkUP" target="_blank">Jiang (BlueDarkUP)</a> </p>
     </footer>
 
-    <!-- MODAL HTML -->
     <div id="project-modal">
         <div id="modal-overlay"></div>
         <div id="modal-content">
             <span id="modal-close">&times;</span>
-            <div id="readme-content">
-                <div class="loader">Loading README...</div>
-            </div>
-            <div id="image-gallery">
-                <img src="" alt="Project screenshot">
-                <div id="image-counter"></div>
-            </div>
+            <div id="readme-content"><div class="loader">Loading README...</div></div>
+            <div id="media-gallery"></div>
         </div>
     </div>
 
@@ -386,121 +199,118 @@
     
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            // [ 原有的基础功能JS保持不变，这里省略以保持简洁 ]
-            // [ Original JS functionality remains unchanged, omitted for brevity ]
             const themeSelect=document.getElementById("theme-select"),currentTheme=localStorage.getItem("selectedTheme")||"theme-green";themeSelect&&(themeSelect.value=currentTheme),themeSelect.addEventListener("change",function(e){const t=e.target.value;localStorage.setItem("selectedTheme",t),document.body.style.opacity="0",document.body.style.transition="opacity 0.3s ease",setTimeout(()=>location.reload(),300)});const hamburger=document.querySelector(".hamburger"),navLinks=document.querySelector(".nav-links"),navLinksItems=document.querySelectorAll(".nav-links li a");hamburger.addEventListener("click",()=>{hamburger.classList.toggle("active"),navLinks.classList.toggle("active")}),navLinksItems.forEach(e=>{e.addEventListener("click",()=>{navLinks.classList.contains("active")&&(hamburger.classList.remove("active"),navLinks.classList.remove("active"))})});const backToTopButton=document.querySelector(".back-to-top"),navbar=document.querySelector(".navbar");window.addEventListener("scroll",()=>{window.pageYOffset>300?backToTopButton.classList.add("visible"):backToTopButton.classList.remove("visible"),window.pageYOffset>50?navbar.classList.add("scrolled"):navbar.classList.remove("scrolled")}),backToTopButton.addEventListener("click",e=>{e.preventDefault(),window.scrollTo({top:0,behavior:"smooth"})});const observer=new IntersectionObserver(e=>{e.forEach(e=>{if(e.isIntersecting){if(e.target.classList.contains("card-grid")){const t=e.target.querySelectorAll(".card");t.forEach((e,t)=>{setTimeout(()=>{e.classList.add("is-visible")},150*t)})}else e.target.classList.add("is-visible");observer.unobserve(e.target)}})},{threshold:.1});const animatedElements=document.querySelectorAll(".fade-in, .card-grid");animatedElements.forEach(e=>{observer.observe(e)});const glow=document.getElementById("cursor-glow");glow&&window.addEventListener("mousemove",e=>{glow.style.left=e.clientX+"px",glow.style.top=e.clientY+"px"});const getCssValue=e=>getComputedStyle(document.documentElement).getPropertyValue(e).trim();if(document.getElementById("particles-js")){const e=getCssValue("--secondary-color");particlesJS("particles-js",{particles:{number:{value:80,density:{enable:!0,value_area:800}},color:{value:e},shape:{type:"circle"},opacity:{value:.6,random:!0,anim:{enable:!0,speed:.5,opacity_min:.1,sync:!1}},size:{value:4,random:!0},line_linked:{enable:!0,distance:120,color:e,opacity:.3,width:1},move:{enable:!0,speed:1.5,direction:"none",random:!1,straight:!1,out_mode:"out",bounce:!1}},interactivity:{detect_on:"canvas",events:{onhover:{enable:!0,mode:"grab"},onclick:{enable:!0,mode:"push"},resize:!0},modes:{grab:{distance:140,line_linked:{opacity:.5}},bubble:{},repulse:{},push:{particles_nb:4},remove:{}}},retina_detect:!0})}
         
-            /* --- NEW JAVASCRIPT FOR MODAL --- */
             const modal = document.getElementById('project-modal');
             const modalClose = document.getElementById('modal-close');
             const modalOverlay = document.getElementById('modal-overlay');
             const readmeContent = document.getElementById('readme-content');
-            const galleryImage = document.querySelector('#image-gallery img');
-            const imageCounter = document.getElementById('image-counter');
+            const mediaGallery = document.getElementById('media-gallery');
 
-            let currentImages = [];
-            let currentImageIndex = 0;
+            let currentMedia = [];
+            let currentMediaIndex = 0;
 
-            const projectLinks = document.querySelectorAll('.project-link');
-
-            projectLinks.forEach(link => {
+            document.querySelectorAll('.project-link').forEach(link => {
                 link.addEventListener('click', (e) => {
                     e.preventDefault();
                     const repo = link.dataset.repo;
-                    const images = link.dataset.images.split(',').filter(img => img.trim() !== '');
-                    openModal(repo, images);
+                    const media = link.dataset.media.split(',').filter(m => m.trim() !== '');
+                    openModal(repo, media);
                 });
             });
             
             async function fetchReadme(repo) {
-                const branch = 'main'; // Or 'master', adjust if needed
-                const url = `https://raw.githubusercontent.com/${repo}/${branch}/README.md`;
-                try {
-                    const response = await fetch(url);
-                    if (!response.ok) {
-                        // Try 'master' branch as a fallback
-                         const fallbackUrl = `https://raw.githubusercontent.com/${repo}/master/README.md`;
-                         const fallbackResponse = await fetch(fallbackUrl);
-                         if (!fallbackResponse.ok) throw new Error('README not found in main or master branch');
-                         return await fallbackResponse.text();
-                    }
-                    return await response.text();
-                } catch (error) {
-                    console.error('Error fetching README:', error);
-                    return `## 抱歉，加载 README 失败\n\n无法从 GitHub 仓库 \`${repo}\` 获取 README.md 文件。请稍后重试或直接访问 [GitHub 仓库](https://github.com/${repo})。`;
+                const branches = ['main', 'master'];
+                for (const branch of branches) {
+                    try {
+                        const url = `https://raw.githubusercontent.com/${repo}/${branch}/README.md`;
+                        const response = await fetch(url);
+                        if (response.ok) return await response.text();
+                    } catch (error) {}
                 }
+                throw new Error('README not found');
             }
             
-            async function openModal(repo, images) {
+            async function openModal(repo, media) {
                 readmeContent.innerHTML = '<div class="loader">正在从 GitHub 加载 README...</div>';
                 modal.classList.add('visible');
                 document.body.style.overflow = 'hidden';
 
-                const markdown = await fetchReadme(repo);
-                readmeContent.innerHTML = marked.parse(markdown);
-
-                currentImages = images;
-                currentImageIndex = 0;
+                try {
+                    const markdown = await fetchReadme(repo);
+                    readmeContent.innerHTML = marked.parse(markdown);
+                } catch(error) {
+                    console.error('Error fetching README:', error);
+                    readmeContent.innerHTML = `<h2>抱歉，加载 README 失败</h2><p>无法从 GitHub 仓库 \`${repo}\` 获取 README.md 文件。请直接访问 <a href="https://github.com/${repo}" target="_blank">GitHub 仓库</a>。</p>`;
+                }
+                
+                currentMedia = media;
+                currentMediaIndex = 0;
                 updateGallery();
             }
 
             function closeModal() {
                 modal.classList.remove('visible');
                 document.body.style.overflow = '';
+                 mediaGallery.innerHTML = ''; // Stop video playback
             }
             
             function updateGallery() {
-                if (currentImages.length > 0) {
-                    galleryImage.style.opacity = '0';
-                    setTimeout(() => {
-                        galleryImage.src = currentImages[currentImageIndex];
-                        galleryImage.style.opacity = '1';
-                    }, 200);
-                    imageCounter.textContent = `${currentImageIndex + 1} / ${currentImages.length}`;
-                    imageCounter.style.display = currentImages.length > 1 ? 'block' : 'none';
+                mediaGallery.innerHTML = '';
+                if (currentMedia.length > 0) {
+                    const mediaUrl = currentMedia[currentMediaIndex];
+                    let mediaElement;
+                    if (mediaUrl.toLowerCase().endsWith('.mp4')) {
+                        mediaElement = document.createElement('video');
+                        mediaElement.src = mediaUrl;
+                        mediaElement.controls = true;
+                        mediaElement.autoplay = true;
+                        mediaElement.muted = true;
+                        mediaElement.loop = true;
+                        mediaElement.playsInline = true;
+                    } else {
+                        mediaElement = document.createElement('img');
+                        mediaElement.src = mediaUrl;
+                    }
+                    mediaElement.style.opacity = '0';
+                    setTimeout(() => { mediaElement.style.opacity = '1'; }, 50);
+                    mediaGallery.appendChild(mediaElement);
+
+                    if (currentMedia.length > 1) {
+                        const counter = document.createElement('div');
+                        counter.id = 'media-counter';
+                        counter.textContent = `${currentMediaIndex + 1} / ${currentMedia.length}`;
+                        mediaGallery.appendChild(counter);
+                    }
                 } else {
-                     galleryImage.src = 'https://via.placeholder.com/800x600.png/2c2c2c/9B9B9B?text=No+Preview+Available';
-                     imageCounter.style.display = 'none';
+                    mediaGallery.innerHTML = '<img src="https://via.placeholder.com/800x600.png/2c2c2c/9B9B9B?text=No+Preview+Available" alt="No media">';
                 }
             }
 
-            function cycleImage(direction) {
-                if (currentImages.length <= 1) return;
-                
-                if (direction === 'next') {
-                    currentImageIndex = (currentImageIndex + 1) % currentImages.length;
-                } else {
-                    currentImageIndex = (currentImageIndex - 1 + currentImages.length) % currentImages.length;
-                }
+            function cycleMedia(direction) {
+                if (currentMedia.length <= 1) return;
+                currentMediaIndex = (direction === 'next') 
+                    ? (currentMediaIndex + 1) % currentMedia.length
+                    : (currentMediaIndex - 1 + currentMedia.length) % currentMedia.length;
                 updateGallery();
             }
 
             modalClose.addEventListener('click', closeModal);
             modalOverlay.addEventListener('click', closeModal);
-            
             document.addEventListener('keydown', (e) => {
-                if (e.key === 'Escape' && modal.classList.contains('visible')) {
-                    closeModal();
-                }
+                if (e.key === 'Escape' && modal.classList.contains('visible')) closeModal();
             });
-
-            document.getElementById('image-gallery').addEventListener('wheel', (e) => {
+            mediaGallery.addEventListener('wheel', (e) => {
                 e.preventDefault();
-                if (e.deltaY > 0) {
-                    cycleImage('next');
-                } else {
-                    cycleImage('prev');
-                }
+                cycleMedia(e.deltaY > 0 ? 'next' : 'prev');
             }, { passive: false });
         });
 
-        const preloader = document.getElementById('preloader');
         window.addEventListener('load', function() {
-            setTimeout(() => {
-                if (preloader) {
-                    preloader.classList.add('loaded');
-                }
-            }, 2600); 
+            const preloader = document.getElementById('preloader');
+            if (preloader) {
+                setTimeout(() => preloader.classList.add('loaded'), 2600); 
+            }
         });
     </script>
 </body>
