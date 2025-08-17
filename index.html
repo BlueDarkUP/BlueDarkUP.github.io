@@ -9,7 +9,6 @@
     <meta name="author" content="Jiang (BlueDarkUP)">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@v2.15.1/devicon.min.css">
     <style>
-        /* --- THEME DEFINITIONS START --- */
         body.theme-green {
             --primary-color: #336A29;
             --primary-color-transparent: rgba(51, 106, 41, 0.85);
@@ -100,36 +99,34 @@
             --cta-hover-text-color: #055B5C;
         }
         
-        /* REVISED: Light Theme */
         body.theme-oasis {
-            --primary-color: #DBCBBE; /* Sand */
+            --primary-color: #DBCBBE;
             --primary-color-transparent: rgba(219, 203, 190, 0.85);
             --primary-color-darker: #C9B9AD;
-            --secondary-color: #4D8581; /* Oasis Teal */
+            --secondary-color: #4D8581;
             --secondary-color-transparent-1: rgba(77, 133, 129, 0.1);
             --secondary-color-transparent-2: rgba(77, 133, 129, 0.2);
             --secondary-color-transparent-4: rgba(77, 133, 129, 0.4);
             --secondary-color-transparent-5: rgba(77, 133, 129, 0.5);
             --secondary-color-transparent-gradient: rgba(77, 133, 129, 0.07);
-            --text-color-light: #4E443F; /* Dark Brown */
-            --text-color-dark: #6F6159; /* Lighter Brown */
-            --cta-hover-text-color: #EEE7DF; /* Lightest Sand */
+            --text-color-light: #4E443F;
+            --text-color-dark: #6F6159;
+            --cta-hover-text-color: #EEE7DF;
         }
         
-        /* REVISED: Light Theme */
         body.theme-soda {
-            --primary-color: #FBFAF5; /* Light Cream */
+            --primary-color: #FBFAF5;
             --primary-color-transparent: rgba(251, 250, 245, 0.85);
             --primary-color-darker: #F5F2EA;
-            --secondary-color: #81D8CF; /* Turquoise */
+            --secondary-color: #81D8CF;
             --secondary-color-transparent-1: rgba(129, 216, 207, 0.15);
             --secondary-color-transparent-2: rgba(129, 216, 207, 0.2);
             --secondary-color-transparent-4: rgba(129, 216, 207, 0.4);
             --secondary-color-transparent-5: rgba(129, 216, 207, 0.5);
             --secondary-color-transparent-gradient: rgba(129, 216, 207, 0.07);
-            --text-color-light: #33645F; /* Dark Teal */
-            --text-color-dark: #5E8480; /* Softer Teal */
-            --cta-hover-text-color: #FBFAF5; /* Light Cream */
+            --text-color-light: #33645F;
+            --text-color-dark: #5E8480;
+            --cta-hover-text-color: #FBFAF5;
         }
         
         body.theme-bordeaux {
@@ -146,7 +143,6 @@
             --text-color-dark: #8A5082;
             --cta-hover-text-color: #4C0013;
         }
-        /* --- THEME DEFINITIONS END --- */
         
         :root {
             --font-sans: 'Segoe UI', 'Roboto', 'Helvetica Neue', system-ui, sans-serif;
@@ -168,7 +164,6 @@
             transition: background-color 0.3s ease, color 0.3s ease;
         }
 
-        /* --- 启动动画样式 --- */
         #preloader {
             position: fixed;
             top: 0;
@@ -235,8 +230,6 @@
             from { opacity: 0; transform: translateY(10px); }
             to { opacity: 1; transform: translateY(0); }
         }
-        /* --- 启动动画样式结束 --- */
-
 
         body::before {
             content: '';
@@ -739,17 +732,14 @@
     </style>
     
     <script>
-        // --- THEME LOADER SCRIPT ---
-        // This script runs early to prevent a flash of the wrong theme.
         (function() {
-            const savedTheme = localStorage.getItem('selectedTheme') || 'theme-green'; // Default to green
+            const savedTheme = localStorage.getItem('selectedTheme') || 'theme-green';
             document.documentElement.className = savedTheme;
         })();
     </script>
 </head>
 <body class=""> 
     
-    <!-- This script is for setting the class on the body as well, needed for some specific CSS selectors -->
     <script>document.body.className = document.documentElement.className;</script>
 
     <div id="preloader">
@@ -768,7 +758,7 @@
     <div id="cursor-glow"></div>
 
     <nav class="navbar">
-        <a href="#hero" class="logo">BlueDarkUP  -  JiangJinCH</a>
+        <a href="#hero" class="logo">BlueDarkUP - JiangJinCH</a>
         <ul class="nav-links">
             <li><a href="#about">关于我</a></li>
             <li><a href="#philosophy">我的理念</a></li>
@@ -1112,32 +1102,23 @@
     
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-
-            // --- THEME SWITCHER LOGIC ---
             const themeSelect = document.getElementById('theme-select');
             const currentTheme = localStorage.getItem('selectedTheme') || 'theme-green';
             
-            // Set the dropdown to show the current theme
             if (themeSelect) {
                 themeSelect.value = currentTheme;
             }
 
-            // Listen for changes in the dropdown
             themeSelect.addEventListener('change', function(e) {
                 const newTheme = e.target.value;
                 localStorage.setItem('selectedTheme', newTheme);
                 
-                // Hide the body to prevent flash before reload
                 document.body.style.opacity = '0';
                 document.body.style.transition = 'opacity 0.3s ease';
 
-
-                // Reload the page to apply the new theme and show preloader
                 setTimeout(() => location.reload(), 300);
             });
 
-
-            // --- EXISTING PAGE LOGIC ---
             const hamburger = document.querySelector('.hamburger');
             const navLinks = document.querySelector('.nav-links');
             const navLinksItems = document.querySelectorAll('.nav-links li a');
@@ -1214,7 +1195,6 @@
                 });
             }
 
-            // Helper to get CSS variable values
             const getCssValue = (variable) => {
                 return getComputedStyle(document.documentElement).getPropertyValue(variable).trim();
             };
@@ -1225,22 +1205,22 @@
                 particlesJS('particles-js', {
                     "particles": {
                         "number": {
-                            "value": 80, // Increased from 40 to 80
+                            "value": 80,
                             "density": { "enable": true, "value_area": 800 }
                         },
                         "color": { "value": particleColor },
                         "shape": { "type": "circle" },
                         "opacity": {
-                            "value": 0.6, // Increased from 0.4 to 0.6
+                            "value": 0.6,
                             "random": true,
                             "anim": { "enable": true, "speed": 0.5, "opacity_min": 0.1, "sync": false }
                         },
-                        "size": { "value": 4, "random": true }, // Increased from 3 to 4
+                        "size": { "value": 4, "random": true },
                         "line_linked": {
                             "enable": true,
-                            "distance": 120, // Decreased from 150 to 120
+                            "distance": 120,
                             "color": particleColor,
-                            "opacity": 0.3, // Increased from 0.2 to 0.3
+                            "opacity": 0.3,
                             "width": 1
                         },
                         "move": {
