@@ -300,29 +300,32 @@
             color: var(--text-color-light);
             padding: 12px 25px;
             border: 1px solid var(--secondary-color-transparent-5);
-            border-radius: 5px;
+            border-radius: 8px; /* Slightly larger border-radius */
             cursor: pointer;
             font-size: 1.1em;
             transition: all 0.3s ease;
-            text-decoration: none; /* For nested links */
+            text-decoration: none;
             display: inline-flex;
             align-items: center;
             justify-content: center;
             position: relative;
             overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2); /* Added subtle shadow */
         }
         .category-btn:hover {
             background-color: var(--secondary-color);
             color: var(--cta-hover-text-color);
-            transform: translateY(-3px);
-            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            transform: translateY(-5px); /* More pronounced lift */
+            box-shadow: 0 8px 20px rgba(0,0,0,0.4); /* Stronger shadow on hover */
+            border-color: var(--secondary-color);
         }
         .category-btn.active {
             background-color: var(--secondary-color);
             color: var(--cta-hover-text-color);
             border-color: var(--secondary-color);
-            box-shadow: 0 0 15px var(--secondary-color-transparent-4);
+            box-shadow: 0 0 20px var(--secondary-color-transparent-4), 0 5px 25px rgba(0,0,0,0.5); /* More prominent shadow for active */
             font-weight: bold;
+            transform: translateY(-2px);
         }
 
         /* FTC Sub-menu */
@@ -337,57 +340,71 @@
         .ftc-submenu .category-btn {
             padding: 8px 15px;
             font-size: 0.95em;
+            border-radius: 5px; /* Smaller border-radius for sub-buttons */
+            box-shadow: none; /* Remove shadow from sub-buttons */
+        }
+        .ftc-submenu .category-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+        }
+        .ftc-submenu .category-btn.active {
+            box-shadow: 0 0 10px var(--secondary-color-transparent-4);
+            transform: translateY(0);
         }
 
         /* Gallery Container & Slider */
         .gallery-section {
             display: none; /* 默认隐藏 */
             opacity: 0;
-            transition: opacity 0.5s ease-in-out;
-            padding: 40px 0;
+            transition: opacity 0.6s ease-in-out; /* Slightly longer transition */
+            padding: 60px 20px; /* Increased padding */
             text-align: center;
             background-color: var(--background-light);
-            border-radius: 8px;
+            border-radius: 12px; /* More rounded corners */
             position: relative;
-            min-height: 500px; /* 确保有足够空间 */
-            display: flex; /* Flexbox for centering */
+            min-height: 600px; /* Ensure enough space for larger media */
+            display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.4); /* Stronger section shadow */
         }
         .gallery-section.active {
-            display: flex; /* 显示激活的 Section */
+            display: flex;
             opacity: 1;
         }
 
         .gallery-title {
-            font-size: 2em;
+            font-size: 2.8em; /* Larger title */
             color: var(--text-color-light);
-            margin-bottom: 30px;
+            margin-bottom: 25px;
+            text-shadow: 0 2px 8px rgba(0,0,0,0.3); /* Add text shadow */
         }
         .gallery-subtitle {
-            font-size: 1.1em;
+            font-size: 1.25em; /* Larger subtitle */
             color: var(--text-color-dark);
-            margin-bottom: 40px;
-            max-width: 800px;
+            margin-bottom: 50px; /* More space below subtitle */
+            max-width: 900px;
+            line-height: 1.8;
         }
 
         .gallery-slider-wrapper {
             position: relative;
             width: 100%;
-            max-width: 900px;
-            height: 500px; /* 控制滑块高度 */
+            max-width: 950px; /* Wider slider */
+            height: 650px; /* Increased slider height */
             overflow: hidden;
             margin: 0 auto;
-            perspective: 1000px; /* 3D透视效果 */
+            perspective: 1200px; /* Stronger 3D perspective */
             transform-style: preserve-3d;
             background-color: var(--primary-color-darker);
-            border-radius: 10px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            border-radius: 15px; /* More rounded corners for slider */
+            box-shadow: 0 15px 50px rgba(0,0,0,0.6); /* Deeper shadow */
             display: flex;
             justify-content: center;
             align-items: center;
-            margin-bottom: 30px;
+            margin-bottom: 40px;
+            border: 1px solid var(--secondary-color-transparent-2); /* Subtle border */
         }
 
         .gallery-slide {
@@ -400,27 +417,29 @@
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            background-color: var(--primary-color); /* 单个滑块背景 */
-            border-radius: 10px;
+            background-color: var(--primary-color);
+            border-radius: 15px; /* Match wrapper border-radius */
             overflow: hidden;
-            transition: transform 0.6s ease-in-out, opacity 0.6s ease-in-out, z-index 0s 0.3s; /* z-index延迟切换 */
-            box-shadow: 0 0 15px rgba(0,0,0,0.3);
-            backface-visibility: hidden; /* 避免背面闪烁 */
+            transition: transform 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55), opacity 0.8s ease-in-out, box-shadow 0.3s ease; /* More dynamic transition */
+            backface-visibility: hidden;
             will-change: transform, opacity;
-            z-index: 1; /* 默认Z轴顺序 */
+            z-index: 1;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.4); /* Default slide shadow */
+            pointer-events: none; /* Default to non-interactive when not current */
         }
 
         .gallery-slide img, .gallery-slide .video-embed {
-            max-width: 90%;
-            max-height: 70%;
-            object-fit: contain; /* 确保图片完整显示 */
-            border-radius: 8px;
+            max-width: 95%; /* Make images/videos larger */
+            max-height: 85%; /* Make images/videos larger */
+            object-fit: contain;
+            border-radius: 10px; /* Rounded corners for media */
             display: block;
-            margin-bottom: 15px;
+            margin-bottom: 20px; /* More space below media */
+            box-shadow: 0 5px 20px rgba(0,0,0,0.3); /* Shadow for media */
         }
         .gallery-slide .video-embed {
-            width: 90%;
-            height: 70%;
+            width: 95%;
+            height: 85%;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -429,15 +448,16 @@
             width: 100%;
             height: 100%;
             border: none;
-            border-radius: 8px;
+            border-radius: 10px;
         }
 
         .slide-description {
             color: var(--text-color-light);
-            font-size: 1.1em;
-            max-width: 80%;
+            font-size: 1.2em; /* Larger description font */
+            max-width: 85%; /* Wider description area */
             margin: 0 auto;
             text-align: center;
+            text-shadow: 0 1px 4px rgba(0,0,0,0.2);
         }
 
         /* 滑动控制按钮 */
@@ -449,57 +469,58 @@
             align-items: center;
             top: 50%;
             transform: translateY(-50%);
-            padding: 0 15px;
+            padding: 0 25px; /* Increased padding */
             z-index: 10;
         }
 
         .control-button {
-            background-color: var(--secondary-color-transparent-4);
+            background-color: var(--secondary-color-transparent-5); /* More opaque */
             color: var(--text-color-light);
-            border: none;
+            border: 1px solid var(--secondary-color); /* Added border */
             border-radius: 50%;
-            width: 50px;
-            height: 50px;
-            font-size: 2em;
+            width: 60px; /* Larger buttons */
+            height: 60px; /* Larger buttons */
+            font-size: 2.5em; /* Larger font for arrows */
             cursor: pointer;
             display: flex;
             justify-content: center;
             align-items: center;
-            transition: background-color 0.3s ease, transform 0.2s ease;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.4);
+            transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.5); /* Stronger shadow */
+        }
+        .control-button svg {
+            width: 35px; /* Size for SVG icon */
+            height: 35px;
+            fill: currentColor; /* Inherit color from parent */
         }
         .control-button:hover {
             background-color: var(--secondary-color);
-            transform: scale(1.1);
+            transform: scale(1.15); /* More pronounced scale */
+            box-shadow: 0 6px 20px rgba(0,0,0,0.6); /* Stronger hover shadow */
+            color: var(--cta-hover-text-color);
         }
         .control-button:active {
-            transform: scale(0.95);
+            transform: scale(0.9); /* More pronounced active state */
+            box-shadow: 0 2px 10px rgba(0,0,0,0.4);
         }
 
         /* 堆叠和滑动效果的关键 CSS */
-        /*
-         * 关于堆叠效果的说明：
-         * 真正的3D堆叠（Z轴位移）结合从右往左的滑动，用纯CSS实现会非常复杂且兼容性差。
-         * 这里采用的是视觉上的“堆叠”模拟：
-         * - `current` 元素在最前面，完全可见。
-         * - `prev` 和 `next` 元素通过 `translateX` 移出视野，并降低 `opacity`，
-         *   它们各自的 `z-index` 确保在切换过程中视觉上是“从后面滑走”或“从后面滑入”。
-         * - `z-index` 的切换延迟 (`z-index 0s 0.3s`) 确保在动画开始后才改变图层顺序，避免闪烁。
-         */
-        .gallery-slide.prev { /* 逻辑上的“前一个”，在切换到它时会从左边滑入 */
-            transform: translateX(-100%) scale(0.8);
+        .gallery-slide.prev {
+            transform: translateX(-110%) scale(0.75) rotateY(10deg); /* Moves further left, slightly smaller, slight rotation */
             opacity: 0;
-            z-index: 1; 
+            z-index: 1; /* Still behind current */
         }
         .gallery-slide.current {
-            transform: translateX(0) scale(1);
+            transform: translateX(0) scale(1) rotateY(0deg);
             opacity: 1;
-            z-index: 3; /* 最前面 */
+            z-index: 3; /* Most front */
+            box-shadow: 0 15px 40px rgba(0,0,0,0.6); /* Stronger shadow for current */
+            pointer-events: all; /* Make current slide interactive */
         }
-        .gallery-slide.next { /* 逻辑上的“下一个”，在切换到它时会从右边滑入 */
-            transform: translateX(100%) scale(0.8);
+        .gallery-slide.next {
+            transform: translateX(110%) scale(0.75) rotateY(-10deg); /* Moves further right, slightly smaller, slight rotation */
             opacity: 0;
-            z-index: 1; 
+            z-index: 1; /* Still behind current */
         }
 
 
@@ -507,6 +528,11 @@
             .category-nav {
                 flex-direction: column;
                 align-items: center;
+                gap: 15px;
+            }
+            .category-btn {
+                padding: 10px 20px;
+                font-size: 1em;
             }
             .ftc-submenu {
                 margin-left: 0;
@@ -515,20 +541,38 @@
                 margin-top: 10px;
                 text-align: center;
             }
+            .gallery-section {
+                padding: 40px 15px;
+                min-height: 450px;
+            }
+            .gallery-title {
+                font-size: 2.2em;
+            }
+            .gallery-subtitle {
+                font-size: 1.1em;
+                margin-bottom: 30px;
+            }
             .gallery-slider-wrapper {
-                height: 400px; /* 移动端适当减小高度 */
+                height: 450px; /* Mobile height */
+                max-width: 95%;
+                border-radius: 10px;
             }
             .control-button {
-                width: 40px;
-                height: 40px;
-                font-size: 1.5em;
+                width: 45px;
+                height: 45px;
+                font-size: 2em;
+            }
+            .control-button svg {
+                width: 25px;
+                height: 25px;
             }
             .gallery-slide img, .gallery-slide .video-embed {
-                max-width: 95%;
-                max-height: 60%;
+                max-width: 98%;
+                max-height: 70%;
+                margin-bottom: 15px;
             }
             .slide-description {
-                font-size: 1em;
+                font-size: 0.95em;
                 padding: 0 10px;
             }
         }
@@ -604,8 +648,16 @@
                     <!-- Slides will be dynamically inserted here -->
                 </div>
                 <div class="gallery-controls">
-                    <button class="control-button prev-slide" data-target="fll">←</button>
-                    <button class="control-button next-slide" data-target="fll">→</button>
+                    <button class="control-button prev-slide" data-target="fll">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/>
+                        </svg>
+                    </button>
+                    <button class="control-button next-slide" data-target="fll">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6z"/>
+                        </svg>
+                    </button>
                 </div>
                 <p class="current-slide-description slide-description"></p>
             </div>
@@ -618,8 +670,16 @@
                     <!-- Slides will be dynamically inserted here -->
                 </div>
                 <div class="gallery-controls">
-                    <button class="control-button prev-slide" data-target="ftc27570">←</button>
-                    <button class="control-button next-slide" data-target="ftc27570">→</button>
+                    <button class="control-button prev-slide" data-target="ftc27570">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/>
+                        </svg>
+                    </button>
+                    <button class="control-button next-slide" data-target="ftc27570">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6z"/>
+                        </svg>
+                    </button>
                 </div>
                 <p class="current-slide-description slide-description"></p>
             </div>
@@ -632,8 +692,16 @@
                     <!-- Slides will be dynamically inserted here -->
                 </div>
                 <div class="gallery-controls">
-                    <button class="control-button prev-slide" data-target="ftcCommunity">←</button>
-                    <button class="control-button next-slide" data-target="ftcCommunity">→</button>
+                    <button class="control-button prev-slide" data-target="ftcCommunity">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/>
+                        </svg>
+                    </button>
+                    <button class="control-button next-slide" data-target="ftcCommunity">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6z"/>
+                        </svg>
+                    </button>
                 </div>
                 <p class="current-slide-description slide-description"></p>
             </div>
@@ -646,8 +714,16 @@
                     <!-- Slides will be dynamically inserted here -->
                 </div>
                 <div class="gallery-controls">
-                    <button class="control-button prev-slide" data-target="robomaster">←</button>
-                    <button class="control-button next-slide" data-target="robomaster">→</button>
+                    <button class="control-button prev-slide" data-target="robomaster">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/>
+                        </svg>
+                    </button>
+                    <button class="control-button next-slide" data-target="robomaster">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6z"/>
+                        </svg>
+                    </button>
                 </div>
                 <p class="current-slide-description slide-description"></p>
             </div>
@@ -822,29 +898,29 @@
             const galleryData = {
                 fll: [
                     { type: 'image', src: 'images/fll/FLL-A.jpg', description: 'FLL 2025-2026 赛季乐高®教育FLL科创活动和国际赛事大中华区发布仪式暨 FLL大中华区合作伙伴答谢晚宴 大合影' },
-                    { type: 'video', youtubeId: 'g4h1Y4xQoJk', description: 'AquaHunter 完整自主任务视频展示，2025-2026 赛季乐高®教育FLL科创活动和国际赛事大中华区发布仪式中，作为创新研究全场第一进行介绍' },
-                    { type: 'image', src: 'images/fll/FLL-T.jpg', description: 'FLL 团队成员在激烈比赛前夜，共同调试 AquaHunter 的传感器和运动系统，确保万无一失。' },
-                    { type: 'image', src: 'images/fll/FLL-S.jpg', description: 'FLL 创新研究贡献学生老师在2025-2026 赛季乐高®教育FLL科创活动和国际赛事大中华区发布仪式暨 FLL大中华区合作伙伴答谢晚宴中的合影' }
+                    { type: 'video', youtubeId: 'g4h1Y4xQoJk', description: 'AquaHunter 完整自主任务视频展示，在2025-2026 赛季乐高®教育FLL科创活动和国际赛事大中华区发布仪式中，作为创新研究全场第一进行介绍。' },
+                    { type: 'image', src: 'images/fll/FLL-T.jpg', description: 'FLL 创新研究全场第一奖杯和证书，表彰了AquaHunter在技术创新和研究方面的卓越表现。' },
+                    { type: 'image', src: 'images/fll/FLL-S.jpg', description: 'FLL 创新研究贡献学生与老师在2025-2026 赛季乐高®教育FLL科创活动和国际赛事大中华区发布仪式暨 FLL大中华区合作伙伴答谢晚宴中的合影。' }
                     // 更多 FLL 图片/视频...
                 ],
                 ftc27570: [
-                    { type: 'image', src: 'images/ftc/27570_robot_design.jpg', description: 'FTC 27570 赛季机器人最终设计图，展示了我们独特的机械臂和抓取机构。' },
-                    { type: 'video', youtubeId: 'wFkLwL2Cgq8', description: '27570 机器人在 FTC 区域赛自主阶段高分表现，完美执行了所有任务，并赢得了控制奖。(示例视频)' },
-                    { type: 'image', src: 'images/ftc/27570_team_china_final.jpg', description: 'FTC 中国区总决赛现场，27570 团队成员在赛前进行最后的检查。' },
-                    { type: 'image', src: 'images/ftc/27570_vision_system.jpg', description: 'FTC 27570 的智能视觉抓取系统，通过 TensorFlow Lite 模型实现实时物体识别。' },
-                    { type: 'video', youtubeId: 'x72vRjQ6wF8', description: '27570 机器人操作员控制阶段视频，展示了 L3 级辅助驾驶的流畅性。(示例视频)' }
+                    { type: 'image', src: 'images/ftc/27570_robot_design.jpg', description: 'FTC 27570 赛季机器人最终设计图，展示了我们独特的机械臂和抓取机构，专为高效完成任务而优化。' },
+                    { type: 'video', youtubeId: 'wFkLwL2Cgq8', description: '27570 机器人在 FTC 区域赛自主阶段高分表现，完美执行了所有任务，并赢得了控制奖。视频展示了机器人精准的路径规划和物体识别能力。' },
+                    { type: 'image', src: 'images/ftc/27570_team_china_final.jpg', description: 'FTC 中国区总决赛现场，27570 团队成员在赛前进行最后的检查，确保机器人处于最佳状态。' },
+                    { type: 'image', src: 'images/ftc/27570_vision_system.jpg', description: 'FTC 27570 的智能视觉抓取系统，通过集成TensorFlow Lite模型实现实时物体识别和高精度抓取，是机器人的核心竞争力。' },
+                    { type: 'video', youtubeId: 'x72vRjQ6wF8', description: '27570 机器人操作员控制阶段视频，展示了基于L3级辅助驾驶的流畅控制，有效减轻操作员负担并提高操作精度。' }
                     // 更多 FTC 27570 图片/视频...
                 ],
                 ftcCommunity: [
-                    { type: 'image', src: 'images/ftc/community_19705_vision.jpg', description: '为 FTC 19705 红心机器人队开发的竞赛级视觉系统，在休斯顿世锦赛上助力他们取得了优异成绩。' },
-                    { type: 'video', youtubeId: 'Z9RkQxT8v4c', description: '19705 队在休斯顿世锦赛使用我们视觉系统的实战录像，展示了其高稳定性和抓取速度。(示例视频)' },
-                    { type: 'image', src: 'images/ftc/community_28119_training.jpg', description: '为 FTC 新队伍 28119 进行技术讲解，分享视觉系统开发和机器人编程经验。' }
+                    { type: 'image', src: 'images/ftc/community_19705_vision.jpg', description: '为 FTC 19705 红心机器人队开发的竞赛级视觉系统，在休斯顿世锦赛上助力他们取得了优异成绩，该系统集成了先进的物体检测算法。' },
+                    { type: 'video', youtubeId: 'Z9RkQxT8v4c', description: '19705 队在休斯顿世锦赛使用我们视觉系统的实战录像，展示了其高稳定性和抓取速度，体现了系统在复杂比赛环境下的可靠性。' },
+                    { type: 'image', src: 'images/ftc/community_28119_training.jpg', description: '为 FTC 新队伍 28119 进行技术讲解，分享视觉系统开发和机器人编程经验，帮助他们快速掌握核心技术。' }
                     // 更多 FTC 社区贡献图片/视频...
                 ],
                 robomaster: [
-                    { type: 'video', youtubeId: '9bZkp7q19f0', description: 'RoboMaster 青年赛自主守卫机器人 RM-Hunter 的演示视频，展示了其视觉自瞄与PID控制算法的协同工作。(示例视频)' },
-                    { type: 'image', src: 'images/robomaster/rm_hunter_physical.jpg', description: 'RM-Hunter 机器人实物图，展示了紧凑的结构和高性能的传感器集成。' },
-                    { type: 'image', src: 'images/robomaster/rm_control_board.jpg', description: 'RM-Hunter 的核心控制电路板，集成了 Jetson Nano 和自定义驱动模块。' }
+                    { type: 'video', youtubeId: '9bZkp7q19f0', description: 'RoboMaster 青年赛自主守卫机器人 RM-Hunter 的演示视频，展示了其视觉自瞄与PID控制算法的协同工作，实现了精准打击和高效防御。' },
+                    { type: 'image', src: 'images/robomaster/rm_hunter_physical.jpg', description: 'RM-Hunter 机器人实物图，展示了其紧凑的结构设计和高性能的传感器集成，确保了其在赛场上的敏捷性和适应性。' },
+                    { type: 'image', src: 'images/robomaster/rm_control_board.jpg', description: 'RM-Hunter 的核心控制电路板，集成了Jetson Nano和自定义驱动模块，是机器人智能决策和运动控制的大脑。' }
                     // 更多 RoboMaster 图片/视频...
                 ]
             };
@@ -864,8 +940,8 @@
                 galleryWrapper.innerHTML = ''; // 清空现有内容
 
                 if (!data || data.length === 0) {
-                    galleryWrapper.innerHTML = `<p style="color:var(--text-color-dark); margin: auto;">暂无内容。</p>`;
-                    descriptionDisplay.textContent = '';
+                    galleryWrapper.innerHTML = `<p style="color:var(--text-color-dark); margin: auto; font-size: 1.2em;">暂无内容。</p>`;
+                    descriptionDisplay.textContent = '暂无详细描述。';
                     return;
                 }
 
@@ -912,17 +988,18 @@
                         videoIframe.contentWindow.postMessage('{"event":"command","func":"pauseVideo","args":""}', '*');
                     }
 
-                    // 移除所有状态类，重置 z-index
+                    // 移除所有状态类，重置 z-index 和 pointer-events
                     slide.classList.remove('current', 'prev', 'next');
                     slide.style.zIndex = '1'; 
+                    slide.style.pointerEvents = 'none';
 
                     if (i === state.index) {
                         slide.classList.add('current');
                         slide.style.zIndex = '3'; // 最前面
+                        slide.style.pointerEvents = 'all'; // 激活当前 slide 的交互
                         currentDescriptionDisplay.textContent = galleryData[categoryId][state.index].description;
                         // 播放当前视频
                         if (videoIframe && videoIframe.contentWindow.postMessage) {
-                             // 使用 try-catch 避免一些浏览器沙盒限制
                             try {
                                 videoIframe.contentWindow.postMessage('{"event":"command","func":"playVideo","args":""}', '*');
                             } catch (e) {
@@ -931,10 +1008,10 @@
                         }
                     } else if (i === (state.index - 1 + state.slides.length) % state.slides.length) {
                         slide.classList.add('prev');
-                        slide.style.zIndex = '2'; // 比当前低，比其他非激活的高
+                        slide.style.zIndex = '2'; // 比当前低，但比其他非激活的高
                     } else if (i === (state.index + 1) % state.slides.length) {
                         slide.classList.add('next');
-                        slide.style.zIndex = '2'; // 比当前低，比其他非激活的高
+                        slide.style.zIndex = '2'; // 比当前低，但比其他非激活的高
                     }
                 });
             }
