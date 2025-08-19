@@ -328,14 +328,22 @@
             transform: translateY(-2px);
         }
 
-        /* FTC Sub-menu */
+        /* FTC Sub-menu - 动画改进 */
         .ftc-submenu {
-            display: flex;
+            max-height: 0; /* 默认隐藏 */
+            opacity: 0; /* 默认隐藏 */
+            overflow: hidden; /* 隐藏溢出内容 */
+            transition: max-height 0.4s ease-out, opacity 0.4s ease-out; /* 过渡动画 */
+            display: flex; /* 确保子元素是flex布局 */
             flex-direction: column;
             gap: 10px;
             margin-left: 20px;
             padding-left: 10px;
             border-left: 2px solid var(--secondary-color-transparent-2);
+        }
+        .ftc-submenu.show {
+            max-height: 300px; /* 足够的高度以显示所有子按钮 */
+            opacity: 1;
         }
         .ftc-submenu .category-btn {
             padding: 8px 15px;
@@ -352,11 +360,13 @@
             transform: translateY(0);
         }
 
-        /* Gallery Container & Slider */
+        /* Gallery Container & Slider - 过渡改进 */
         .gallery-section {
-            display: none; /* 默认隐藏 */
-            opacity: 0;
-            transition: opacity 0.6s ease-in-out; /* Slightly longer transition */
+            opacity: 0; /* 默认隐藏 */
+            visibility: hidden; /* 默认隐藏 */
+            height: 0; /* 默认高度为0，方便过渡 */
+            overflow: hidden; /* 隐藏溢出内容 */
+            transition: opacity 0.6s ease-in-out, visibility 0.6s ease-in-out, height 0.6s ease-in-out; /* 增加 height 过渡 */
             padding: 60px 20px; /* Increased padding */
             text-align: center;
             background-color: var(--background-light);
@@ -370,8 +380,10 @@
             box-shadow: 0 15px 40px rgba(0,0,0,0.4); /* Stronger section shadow */
         }
         .gallery-section.active {
-            display: flex;
             opacity: 1;
+            visibility: visible;
+            height: auto; /* 激活时恢复高度 */
+            overflow: visible; /* 激活时显示溢出内容 */
         }
 
         .gallery-title {
@@ -451,13 +463,20 @@
             border-radius: 10px;
         }
 
-        .slide-description {
+        .slide-info {
             color: var(--text-color-light);
             font-size: 1.2em; /* Larger description font */
             max-width: 85%; /* Wider description area */
             margin: 0 auto;
             text-align: center;
             text-shadow: 0 1px 4px rgba(0,0,0,0.2);
+            padding-bottom: 10px; /* Add some padding below for progress */
+        }
+        .slide-progress {
+            font-size: 0.9em;
+            color: var(--text-color-dark);
+            margin-top: 5px;
+            display: block; /* Ensure it's on a new line */
         }
 
         /* 滑动控制按钮 */
@@ -504,23 +523,26 @@
             box-shadow: 0 2px 10px rgba(0,0,0,0.4);
         }
 
-        /* 堆叠和滑动效果的关键 CSS */
+        /* 堆叠和滑动效果的关键 CSS - 视觉反馈改进 */
         .gallery-slide.prev {
-            transform: translateX(-110%) scale(0.75) rotateY(10deg); /* Moves further left, slightly smaller, slight rotation */
-            opacity: 0;
-            z-index: 1; /* Still behind current */
+            transform: translateX(-80%) scale(0.85) rotateY(5deg); /* 调整位置、大小和旋转 */
+            opacity: 0.4; /* 部分可见 */
+            z-index: 1; /* 仍然在当前后面 */
+            filter: blur(0.5px); /* 略微模糊 */
         }
         .gallery-slide.current {
             transform: translateX(0) scale(1) rotateY(0deg);
             opacity: 1;
-            z-index: 3; /* Most front */
+            z-index: 3; /* 最前面 */
             box-shadow: 0 15px 40px rgba(0,0,0,0.6); /* Stronger shadow for current */
             pointer-events: all; /* Make current slide interactive */
+            filter: none; /* 清除模糊 */
         }
         .gallery-slide.next {
-            transform: translateX(110%) scale(0.75) rotateY(-10deg); /* Moves further right, slightly smaller, slight rotation */
-            opacity: 0;
-            z-index: 1; /* Still behind current */
+            transform: translateX(80%) scale(0.85) rotateY(-5deg); /* 调整位置、大小和旋转 */
+            opacity: 0.4; /* 部分可见 */
+            z-index: 1; /* 仍然在当前后面 */
+            filter: blur(0.5px); /* 略微模糊 */
         }
 
 
@@ -571,7 +593,7 @@
                 max-height: 70%;
                 margin-bottom: 15px;
             }
-            .slide-description {
+            .slide-info { /* Changed from slide-description */
                 font-size: 0.95em;
                 padding: 0 10px;
             }
@@ -659,7 +681,10 @@
                         </svg>
                     </button>
                 </div>
-                <p class="current-slide-description slide-description"></p>
+                <p class="slide-info">
+                    <span class="current-slide-description"></span>
+                    <span class="slide-progress"></span>
+                </p>
             </div>
 
             <!-- FTC 27570 Gallery Section -->
@@ -681,7 +706,10 @@
                         </svg>
                     </button>
                 </div>
-                <p class="current-slide-description slide-description"></p>
+                <p class="slide-info">
+                    <span class="current-slide-description"></span>
+                    <span class="slide-progress"></span>
+                </p>
             </div>
 
             <!-- FTC Community Gallery Section -->
@@ -703,7 +731,10 @@
                         </svg>
                     </button>
                 </div>
-                <p class="current-slide-description slide-description"></p>
+                <p class="slide-info">
+                    <span class="current-slide-description"></span>
+                    <span class="slide-progress"></span>
+                </p>
             </div>
 
             <!-- RoboMaster Gallery Section -->
@@ -725,7 +756,10 @@
                         </svg>
                     </button>
                 </div>
-                <p class="current-slide-description slide-description"></p>
+                <p class="slide-info">
+                    <span class="current-slide-description"></span>
+                    <span class="slide-progress"></span>
+                </p>
             </div>
         </section>
     </main>
@@ -887,14 +921,9 @@
                 });
             }
 
-            // ==================== 机器人集锦功能的核心代码 ====================
+            // ==================== 机器人集锦功能的核心代码 (已修改) ====================
 
             // 机器人集锦数据
-            // 在这里添加您的图片和视频路径以及描述
-            // type: 'image' 或 'video'
-            // src: 图片路径 (例如: 'images/fll/fll_robot_1.jpg')
-            // youtubeId: YouTube 视频 ID (例如: 'dQw4w9WgXcQ')
-            // description: 图片或视频的详细介绍
             const galleryData = {
                 fll: [
                     { type: 'image', src: 'images/fll/FLL-A.jpg', description: 'FLL 2025-2026 赛季乐高®教育FLL科创活动和国际赛事大中华区发布仪式暨 FLL大中华区合作伙伴答谢晚宴 大合影' },
@@ -902,12 +931,10 @@
                     { type: 'image', src: 'images/fll/FLL-W.jpg', description: 'FLL 亚锦赛获得亚军 颁奖现场' },
                     { type: 'image', src: 'images/fll/FLL-T.jpg', description: 'AquaHunter 完整自主任务视频展示，在2025-2026 赛季乐高®教育FLL科创活动和国际赛事大中华区发布仪式中，作为创新研究全场第一进行介绍。' },
                     { type: 'image', src: 'images/fll/FLL-S.jpg', description: 'FLL 创新研究贡献学生与老师在2025-2026 赛季乐高®教育FLL科创活动和国际赛事大中华区发布仪式暨 FLL大中华区合作伙伴答谢晚宴中的合影。' }
-                    // 更多 FLL 图片/视频...
                 ],
                 ftc27570: [
                     { type: 'video', youtubeId: '5zU5Di1xkyc', description: '27570 机器人最终版本的超高精度视觉，甚至能识别潜水区铁杆（bushi' },
                     { type: 'video', youtubeId: '2otmbbGTOR8', description: '27570 机器人在上海三开发的自动驾驶，凭借此程序夺得控制奖晋级国赛。' }
-                    // 更多 FTC 27570 图片/视频...
                 ],
                 ftcCommunity: [
                     { type: 'image', src: 'images/ftc/community_19705_vision.jpg', description: '为 FTC 19705 红心机器人开发的竞赛级视觉系统，在休斯顿世锦赛练习场地上进行测试。' },
@@ -915,13 +942,11 @@
                     { type: 'video', youtubeId: 'Xr-lSPC3_i0', description: '19705 队在休斯顿世锦赛之前，测试的超高精度自动阶段放框视觉程序' },
                     { type: 'video', youtubeId: '2ydu9OxluLw', description: '19705 队在休斯顿世锦赛使用我们视觉系统的实战录像，展示了其高稳定性和抓取速度，体现了系统在复杂比赛环境下的可靠性。' },
                     { type: 'image', src: 'images/ftc/28119-T.jpg', description: '为 FTC 新队伍 28119 进行技术讲解，分享视觉系统开发和机器人编程经验，帮助他们快速掌握核心技术。' }
-                    // 更多 FTC 社区贡献图片/视频...
                 ],
                 robomaster: [
                     { type: 'video', youtubeId: 'Ogi15fAEs1s', description: 'RoboMaster RMYC步兵机器人的自动程序，在自动结束之后对方基地血量减少三分之一' },
                     { type: 'image', src: 'images/robomaster/rm_hunter_physical.jpg', description: 'RM-Hunter 机器人实物图，展示了其紧凑的结构设计和高性能的传感器集成，确保了其在赛场上的敏捷性和适应性。' },
                     { type: 'image', src: 'images/robomaster/rm_control_board.jpg', description: 'RM-Hunter 的核心控制电路板，集成了Jetson Nano和自定义驱动模块，是机器人智能决策和运动控制的大脑。' }
-                    // 更多 RoboMaster 图片/视频...
                 ]
             };
 
@@ -929,19 +954,33 @@
             const categoryButtons = document.querySelectorAll('.category-btn');
             const ftcParentButton = document.querySelector('[data-category="ftc-parent"]');
             const ftcSubmenu = document.getElementById('ftc-submenu');
+            const ftcSubCategoryButtons = ftcSubmenu.querySelectorAll('.category-btn');
             
             let currentGalleryState = {}; // 用于存储每个画廊的当前索引
+
+            // 停止所有画廊中视频的函数
+            function stopAllVideos() {
+                document.querySelectorAll('.gallery-slide iframe').forEach(iframe => {
+                    if (iframe.contentWindow.postMessage) {
+                        iframe.contentWindow.postMessage('{"event":"command","func":"pauseVideo","args":""}', '*');
+                        // 尝试将视频回到开头，可选
+                        // iframe.contentWindow.postMessage('{"event":"command","func":"seekTo","args":[0, true]}', '*');
+                    }
+                });
+            }
 
             // 渲染画廊内容
             function renderGallery(categoryId) {
                 const data = galleryData[categoryId];
                 const galleryWrapper = document.querySelector(`#${categoryId}-gallery .gallery-slider-wrapper`);
-                const descriptionDisplay = document.querySelector(`#${categoryId}-gallery .current-slide-description`);
                 galleryWrapper.innerHTML = ''; // 清空现有内容
 
                 if (!data || data.length === 0) {
                     galleryWrapper.innerHTML = `<p style="color:var(--text-color-dark); margin: auto; font-size: 1.2em;">暂无内容。</p>`;
+                    const descriptionDisplay = document.querySelector(`#${categoryId}-gallery .current-slide-description`);
+                    const progressDisplay = document.querySelector(`#${categoryId}-gallery .slide-progress`);
                     descriptionDisplay.textContent = '暂无详细描述。';
+                    progressDisplay.textContent = '';
                     return;
                 }
 
@@ -958,8 +997,6 @@
                     } else if (item.type === 'video') {
                         const videoEmbed = document.createElement('div');
                         videoEmbed.classList.add('video-embed');
-                        // 使用 enablejsapi=1 允许通过 JavaScript 控制播放，rel=0 防止播放相关视频
-                        // 注意：YouTube 自动播放策略可能会限制无用户交互的自动播放
                         videoEmbed.innerHTML = `<iframe src="https://www.youtube.com/embed/${item.youtubeId}?enablejsapi=1&rel=0" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`;
                         slide.appendChild(videoEmbed);
                     }
@@ -967,7 +1004,7 @@
                 });
 
                 // 初始化当前索引
-                if (currentGalleryState[categoryId] === undefined) {
+                if (currentGalleryState[categoryId] === undefined || currentGalleryState[categoryId].slides === undefined || currentGalleryState[categoryId].slides.length !== data.length) {
                      currentGalleryState[categoryId] = { index: 0 };
                 }
                 currentGalleryState[categoryId].slides = galleryWrapper.querySelectorAll('.gallery-slide');
@@ -980,24 +1017,26 @@
                 if (!state || state.slides.length === 0) return;
 
                 const currentDescriptionDisplay = document.querySelector(`#${categoryId}-gallery .current-slide-description`);
+                const progressDisplay = document.querySelector(`#${categoryId}-gallery .slide-progress`);
                 
+                // 暂停所有视频，防止背景播放
+                stopAllVideos();
+
                 state.slides.forEach((slide, i) => {
                     const videoIframe = slide.querySelector('iframe');
-                    // 暂停所有视频，防止背景播放
-                    if (videoIframe && videoIframe.contentWindow.postMessage) {
-                        videoIframe.contentWindow.postMessage('{"event":"command","func":"pauseVideo","args":""}', '*');
-                    }
-
+                    
                     // 移除所有状态类，重置 z-index 和 pointer-events
                     slide.classList.remove('current', 'prev', 'next');
                     slide.style.zIndex = '1'; 
                     slide.style.pointerEvents = 'none';
+                    slide.style.filter = 'none'; // 移除可能存在的模糊
 
                     if (i === state.index) {
                         slide.classList.add('current');
                         slide.style.zIndex = '3'; // 最前面
                         slide.style.pointerEvents = 'all'; // 激活当前 slide 的交互
                         currentDescriptionDisplay.textContent = galleryData[categoryId][state.index].description;
+                        progressDisplay.textContent = `(${state.index + 1}/${state.slides.length})`;
                         // 播放当前视频
                         if (videoIframe && videoIframe.contentWindow.postMessage) {
                             try {
@@ -1030,44 +1069,53 @@
                 button.addEventListener('click', function() {
                     const category = this.dataset.category;
 
-                    // 处理 FTC 子菜单显示/隐藏
+                    // 移除所有按钮的 active 状态
+                    categoryButtons.forEach(btn => btn.classList.remove('active'));
+                    this.classList.add('active'); // 激活当前点击的按钮
+
+                    stopAllVideos(); // 切换类别时停止所有视频
+
                     if (category === 'ftc-parent') {
                         // 切换子菜单显示状态
-                        const isSubmenuVisible = ftcSubmenu.style.display === 'flex';
-                        ftcSubmenu.style.display = isSubmenuVisible ? 'none' : 'flex';
-
-                        // 移除所有按钮的 active 状态，只激活父按钮
-                        categoryButtons.forEach(btn => btn.classList.remove('active'));
-                        this.classList.add('active');
-                        
-                        // 如果子菜单打开，不显示任何画廊，直到选择子类别
-                        // 如果子菜单关闭，也不显示任何画廊
-                        gallerySections.forEach(section => section.classList.remove('active'));
+                        const isSubmenuVisible = ftcSubmenu.classList.contains('show');
+                        if (!isSubmenuVisible) {
+                            ftcSubmenu.classList.add('show');
+                            // 默认激活并显示 FTC 27570 团队的画廊
+                            const defaultFtcSubCategoryBtn = document.querySelector('.category-btn[data-category="ftc27570"]');
+                            if (defaultFtcSubCategoryBtn) {
+                                defaultFtcSubCategoryBtn.classList.add('active'); // 激活子菜单中的第一个按钮
+                                showGallerySection('ftc27570');
+                            }
+                        } else {
+                            ftcSubmenu.classList.remove('show');
+                            // 关闭子菜单时，隐藏所有画廊
+                            gallerySections.forEach(section => section.classList.remove('active'));
+                        }
                         return; 
                     } else {
                         // 如果点击的是非 FTC 父按钮，则隐藏 FTC 子菜单
-                        ftcSubmenu.style.display = 'none';
-                    }
-
-                    // 移除所有按钮的 active 状态，并激活当前点击的按钮
-                    categoryButtons.forEach(btn => btn.classList.remove('active'));
-                    this.classList.add('active');
-                    // 如果是 FTC 子类别按钮，也激活 FTC 父按钮
-                    if (category === 'ftc27570' || category === 'ftcCommunity') {
-                        ftcParentButton.classList.add('active');
+                        ftcSubmenu.classList.remove('show');
+                        // 确保如果点击的是 FTC 子类按钮，FTC 父按钮也保持激活
+                        if (['ftc27570', 'ftcCommunity'].includes(category)) {
+                             ftcParentButton.classList.add('active');
+                        }
                     }
 
                     // 显示对应的画廊 Section
-                    gallerySections.forEach(section => {
-                        if (section.id === `${category}-gallery`) {
-                            section.classList.add('active');
-                            renderGallery(category); // 渲染并初始化画廊
-                        } else {
-                            section.classList.remove('active');
-                        }
-                    });
+                    showGallerySection(category);
                 });
             });
+
+            function showGallerySection(categoryId) {
+                gallerySections.forEach(section => {
+                    if (section.id === `${categoryId}-gallery`) {
+                        section.classList.add('active');
+                        renderGallery(categoryId); // 渲染并初始化画廊
+                    } else {
+                        section.classList.remove('active');
+                    }
+                });
+            }
 
             // 轮播控制按钮事件
             document.querySelectorAll('.control-button').forEach(button => {
@@ -1078,18 +1126,18 @@
                 });
             });
 
-            // 鼠标滚轮事件 (仅对当前激活的画廊有效)
+            // 鼠标滚轮事件 (仅对当前激活的画廊有效，不劫持页面滚动)
             document.querySelectorAll('.gallery-slider-wrapper').forEach(wrapper => {
                 wrapper.addEventListener('wheel', function(event) {
                     const activeSection = this.closest('.gallery-section.active');
-                    if (!activeSection) return; // 只有当wrapper在激活的section内才响应
+                    if (!activeSection) return; 
 
-                    event.preventDefault(); // 阻止页面滚动
+                    // 移除了 event.preventDefault(); 允许页面正常滚动
 
                     const categoryId = activeSection.id.replace('-gallery', '');
                     const direction = event.deltaY > 0 ? 1 : -1; // deltaY > 0 滚轮向下 (下一张), < 0 滚轮向上 (上一张)
                     navigateGallery(categoryId, direction);
-                }, { passive: false }); // 使用 passive: false 确保 preventDefault 有效
+                }); // Removed { passive: false } as preventDefault is removed
             });
 
             // 初始加载：默认显示 FLL 画廊
