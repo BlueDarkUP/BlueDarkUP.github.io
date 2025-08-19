@@ -407,6 +407,7 @@
             box-shadow: 0 0 15px rgba(0,0,0,0.3);
             backface-visibility: hidden; /* 避免背面闪烁 */
             will-change: transform, opacity;
+            z-index: 1; /* 默认Z轴顺序 */
         }
 
         .gallery-slide img, .gallery-slide .video-embed {
@@ -476,35 +477,31 @@
         }
 
         /* 堆叠和滑动效果的关键 CSS */
-        .gallery-slide.prev {
+        /*
+         * 关于堆叠效果的说明：
+         * 真正的3D堆叠（Z轴位移）结合从右往左的滑动，用纯CSS实现会非常复杂且兼容性差。
+         * 这里采用的是视觉上的“堆叠”模拟：
+         * - `current` 元素在最前面，完全可见。
+         * - `prev` 和 `next` 元素通过 `translateX` 移出视野，并降低 `opacity`，
+         *   它们各自的 `z-index` 确保在切换过程中视觉上是“从后面滑走”或“从后面滑入”。
+         * - `z-index` 的切换延迟 (`z-index 0s 0.3s`) 确保在动画开始后才改变图层顺序，避免闪烁。
+         */
+        .gallery-slide.prev { /* 逻辑上的“前一个”，在切换到它时会从左边滑入 */
             transform: translateX(-100%) scale(0.8);
             opacity: 0;
-            z-index: 1; /* 比当前低，比下一个高 */
+            z-index: 1; 
         }
         .gallery-slide.current {
             transform: translateX(0) scale(1);
             opacity: 1;
             z-index: 3; /* 最前面 */
         }
-        .gallery-slide.next {
+        .gallery-slide.next { /* 逻辑上的“下一个”，在切换到它时会从右边滑入 */
             transform: translateX(100%) scale(0.8);
             opacity: 0;
-            z-index: 1; /* 比当前低，比上一个高 */
+            z-index: 1; 
         }
-        /* 当有多个元素在堆叠时，可以调整 z-index */
-        .gallery-slide.prev-1 { /* 假设是当前元素的前一个 */
-            transform: translateX(-50%) scale(0.9);
-            opacity: 0.5;
-            z-index: 2;
-        }
-        .gallery-slide.next-1 { /* 假设是当前元素的后一个 */
-            transform: translateX(50%) scale(0.9);
-            opacity: 0.5;
-            z-index: 2;
-        }
-        /* 如果要实现堆叠，需要更复杂的逻辑，这里简化为只显示当前 */
-        /* 为了简化实现，我将“堆叠”效果解释为只有当前元素完全可见，其他元素通过透明度和平移来模拟堆叠在后台 */
-        /* 如果需要真实的3D堆叠，CSS和JS会复杂很多 */
+
 
         @media (max-width: 768px) {
             .category-nav {
@@ -538,14 +535,16 @@
     </style>
     
     <script>
+        // 在 DOMContentLoaded 之前执行，确保 body 立即获得主题类
         (function() {
             const savedTheme = localStorage.getItem('selectedTheme') || 'theme-green';
-            document.documentElement.className = savedTheme;
+            document.documentElement.className = savedTheme; // Apply to html element
+            document.body.className = savedTheme; // Also apply to body for direct styling if needed
         })();
     </script>
 </head>
 <body class=""> 
-    
+    <!-- 确保 body class 在此被设置，以便 CSS 变量正确应用 -->
     <script>document.body.className = document.documentElement.className;</script>
 
     <div id="preloader">
@@ -589,7 +588,7 @@
                 <button class="category-btn" data-category="fll">FLL</button>
                 <div>
                     <button class="category-btn" data-category="ftc-parent">FTC</button>
-                    <div id="ftc-submenu" class="ftc-submenu" style="display: none;">
+                    <div id="ftc-submenu" class="ftc-submenu"> <!-- 默认不显示，靠 JS 控制 -->
                         <button class="category-btn" data-category="ftc27570">27570 团队</button>
                         <button class="category-btn" data-category="ftcCommunity">其他社区贡献</button>
                     </div>
@@ -605,8 +604,8 @@
                     <!-- Slides will be dynamically inserted here -->
                 </div>
                 <div class="gallery-controls">
-                    <button class="control-button prev-slide" data-target="fll-gallery">←</button>
-                    <button class="control-button next-slide" data-target="fll-gallery">→</button>
+                    <button class="control-button prev-slide" data-target="fll">←</button>
+                    <button class="control-button next-slide" data-target="fll">→</button>
                 </div>
                 <p class="current-slide-description slide-description"></p>
             </div>
@@ -619,8 +618,8 @@
                     <!-- Slides will be dynamically inserted here -->
                 </div>
                 <div class="gallery-controls">
-                    <button class="control-button prev-slide" data-target="ftc27570-gallery">←</button>
-                    <button class="control-button next-slide" data-target="ftc27570-gallery">→</button>
+                    <button class="control-button prev-slide" data-target="ftc27570">←</button>
+                    <button class="control-button next-slide" data-target="ftc27570">→</button>
                 </div>
                 <p class="current-slide-description slide-description"></p>
             </div>
@@ -633,8 +632,8 @@
                     <!-- Slides will be dynamically inserted here -->
                 </div>
                 <div class="gallery-controls">
-                    <button class="control-button prev-slide" data-target="ftcCommunity-gallery">←</button>
-                    <button class="control-button next-slide" data-target="ftcCommunity-gallery">→</button>
+                    <button class="control-button prev-slide" data-target="ftcCommunity">←</button>
+                    <button class="control-button next-slide" data-target="ftcCommunity">→</button>
                 </div>
                 <p class="current-slide-description slide-description"></p>
             </div>
@@ -647,8 +646,8 @@
                     <!-- Slides will be dynamically inserted here -->
                 </div>
                 <div class="gallery-controls">
-                    <button class="control-button prev-slide" data-target="robomaster-gallery">←</button>
-                    <button class="control-button next-slide" data-target="robomaster-gallery">→</button>
+                    <button class="control-button prev-slide" data-target="robomaster">←</button>
+                    <button class="control-button next-slide" data-target="robomaster">→</button>
                 </div>
                 <p class="current-slide-description slide-description"></p>
             </div>
@@ -684,19 +683,17 @@
         document.addEventListener('DOMContentLoaded', function() {
             // ==================== 主题切换功能 (从 index.html 复制) ====================
             const themeSelect = document.getElementById('theme-select');
-            const currentTheme = localStorage.getItem('selectedTheme') || 'theme-green';
-            
+            // 注意：这里已经通过外部脚本在 DOMContentLoaded 之前设置了 body class，但为了兼容性保留
+            const currentTheme = localStorage.getItem('selectedTheme') || 'theme-green'; 
             if (themeSelect) {
                 themeSelect.value = currentTheme;
             }
-
             themeSelect.addEventListener('change', function(e) {
                 const newTheme = e.target.value;
                 localStorage.setItem('selectedTheme', newTheme);
-                
+                // 重新加载页面以应用新主题，并添加过渡效果
                 document.body.style.opacity = '0';
                 document.body.style.transition = 'opacity 0.3s ease';
-
                 setTimeout(() => location.reload(), 300);
             });
 
@@ -759,6 +756,8 @@
                 return getComputedStyle(document.documentElement).getPropertyValue(variable).trim();
             };
 
+            // 注意：particles-js 容器在 robotics-gallery.html 中不存在，此代码块在此页面不会执行
+            // 如果您希望机器人集锦页面也有粒子效果，请在 body 内部添加 <div id="particles-js"></div>
             if (document.getElementById('particles-js')) {
                 const particleColor = getCssValue('--secondary-color');
                 
@@ -823,27 +822,27 @@
             const galleryData = {
                 fll: [
                     { type: 'image', src: 'images/fll/fll_robot_1.jpg', description: 'FLL 水下机器人 AquaHunter 第一次成功识别目标并准备抓取狮子鱼。这张照片拍摄于我们的测试水池中。' },
-                    { type: 'video', youtubeId: 'VIDEO_ID_FLL_AQUA', description: 'AquaHunter 完整自主任务视频展示，包括路径规划和目标跟踪，这是我们赛季的里程碑。' },
+                    { type: 'video', youtubeId: 'g4h1Y4xQoJk', description: 'AquaHunter 完整自主任务视频展示，包括路径规划和目标跟踪，这是我们赛季的里程碑。(示例视频)' },
                     { type: 'image', src: 'images/fll/fll_team_debug.jpg', description: 'FLL 团队成员在激烈比赛前夜，共同调试 AquaHunter 的传感器和运动系统，确保万无一失。' },
                     { type: 'image', src: 'images/fll/fll_code_view.jpg', description: 'FLL 视觉系统代码概览，我们在这里实现了基于OpenCV的颜色分割与目标检测算法。' }
                     // 更多 FLL 图片/视频...
                 ],
                 ftc27570: [
                     { type: 'image', src: 'images/ftc/27570_robot_design.jpg', description: 'FTC 27570 赛季机器人最终设计图，展示了我们独特的机械臂和抓取机构。' },
-                    { type: 'video', youtubeId: 'VIDEO_ID_FTC27570_AUTO', description: '27570 机器人在 FTC 区域赛自主阶段高分表现，完美执行了所有任务，并赢得了控制奖。' },
+                    { type: 'video', youtubeId: 'wFkLwL2Cgq8', description: '27570 机器人在 FTC 区域赛自主阶段高分表现，完美执行了所有任务，并赢得了控制奖。(示例视频)' },
                     { type: 'image', src: 'images/ftc/27570_team_china_final.jpg', description: 'FTC 中国区总决赛现场，27570 团队成员在赛前进行最后的检查。' },
                     { type: 'image', src: 'images/ftc/27570_vision_system.jpg', description: 'FTC 27570 的智能视觉抓取系统，通过 TensorFlow Lite 模型实现实时物体识别。' },
-                    { type: 'video', youtubeId: 'VIDEO_ID_FTC27570_TELEOP', description: '27570 机器人操作员控制阶段视频，展示了 L3 级辅助驾驶的流畅性。' }
+                    { type: 'video', youtubeId: 'x72vRjQ6wF8', description: '27570 机器人操作员控制阶段视频，展示了 L3 级辅助驾驶的流畅性。(示例视频)' }
                     // 更多 FTC 27570 图片/视频...
                 ],
                 ftcCommunity: [
                     { type: 'image', src: 'images/ftc/community_19705_vision.jpg', description: '为 FTC 19705 红心机器人队开发的竞赛级视觉系统，在休斯顿世锦赛上助力他们取得了优异成绩。' },
-                    { type: 'video', youtubeId: 'VIDEO_ID_FTCCOMM_HOUSTON', description: '19705 队在休斯顿世锦赛使用我们视觉系统的实战录像，展示了其高稳定性和抓取速度。' },
+                    { type: 'video', youtubeId: 'Z9RkQxT8v4c', description: '19705 队在休斯顿世锦赛使用我们视觉系统的实战录像，展示了其高稳定性和抓取速度。(示例视频)' },
                     { type: 'image', src: 'images/ftc/community_28119_training.jpg', description: '为 FTC 新队伍 28119 进行技术讲解，分享视觉系统开发和机器人编程经验。' }
                     // 更多 FTC 社区贡献图片/视频...
                 ],
                 robomaster: [
-                    { type: 'video', youtubeId: 'VIDEO_ID_RM_HUNTER', description: 'RoboMaster 青年赛自主守卫机器人 RM-Hunter 的演示视频，展示了其视觉自瞄与PID控制算法的协同工作。' },
+                    { type: 'video', youtubeId: '9bZkp7q19f0', description: 'RoboMaster 青年赛自主守卫机器人 RM-Hunter 的演示视频，展示了其视觉自瞄与PID控制算法的协同工作。(示例视频)' },
                     { type: 'image', src: 'images/robomaster/rm_hunter_physical.jpg', description: 'RM-Hunter 机器人实物图，展示了紧凑的结构和高性能的传感器集成。' },
                     { type: 'image', src: 'images/robomaster/rm_control_board.jpg', description: 'RM-Hunter 的核心控制电路板，集成了 Jetson Nano 和自定义驱动模块。' }
                     // 更多 RoboMaster 图片/视频...
@@ -865,7 +864,7 @@
                 galleryWrapper.innerHTML = ''; // 清空现有内容
 
                 if (!data || data.length === 0) {
-                    galleryWrapper.innerHTML = `<p style="color:var(--text-color-dark);">暂无内容。</p>`;
+                    galleryWrapper.innerHTML = `<p style="color:var(--text-color-dark); margin: auto;">暂无内容。</p>`;
                     descriptionDisplay.textContent = '';
                     return;
                 }
@@ -883,19 +882,19 @@
                     } else if (item.type === 'video') {
                         const videoEmbed = document.createElement('div');
                         videoEmbed.classList.add('video-embed');
-                        // 使用 rel=0 防止播放相关视频，autoplay=1 自动播放， mute=1 静音 (用户点击可解除)
-                        // 注意：YouTube 自动播放策略会限制无用户交互的自动播放
-                        videoEmbed.innerHTML = `<iframe src="https://www.youtube.com/embed/${item.youtubeId}?enablejsapi=1&autoplay=0&rel=0" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`;
+                        // 使用 enablejsapi=1 允许通过 JavaScript 控制播放，rel=0 防止播放相关视频
+                        // 注意：YouTube 自动播放策略可能会限制无用户交互的自动播放
+                        videoEmbed.innerHTML = `<iframe src="https://www.youtube.com/embed/${item.youtubeId}?enablejsapi=1&rel=0" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`;
                         slide.appendChild(videoEmbed);
                     }
                     galleryWrapper.appendChild(slide);
                 });
 
                 // 初始化当前索引
-                currentGalleryState[categoryId] = {
-                    index: 0,
-                    slides: galleryWrapper.querySelectorAll('.gallery-slide')
-                };
+                if (currentGalleryState[categoryId] === undefined) {
+                     currentGalleryState[categoryId] = { index: 0 };
+                }
+                currentGalleryState[categoryId].slides = galleryWrapper.querySelectorAll('.gallery-slide');
                 updateGalleryDisplay(categoryId);
             }
 
@@ -908,29 +907,34 @@
                 
                 state.slides.forEach((slide, i) => {
                     const videoIframe = slide.querySelector('iframe');
-                    if (videoIframe) {
-                        // 暂停所有视频
+                    // 暂停所有视频，防止背景播放
+                    if (videoIframe && videoIframe.contentWindow.postMessage) {
                         videoIframe.contentWindow.postMessage('{"event":"command","func":"pauseVideo","args":""}', '*');
                     }
 
-                    // 移除所有状态类
-                    slide.classList.remove('current', 'prev', 'next', 'prev-1', 'next-1');
-                    slide.style.zIndex = '1'; // 重置 z-index
+                    // 移除所有状态类，重置 z-index
+                    slide.classList.remove('current', 'prev', 'next');
+                    slide.style.zIndex = '1'; 
 
                     if (i === state.index) {
                         slide.classList.add('current');
-                        slide.style.zIndex = '3';
+                        slide.style.zIndex = '3'; // 最前面
                         currentDescriptionDisplay.textContent = galleryData[categoryId][state.index].description;
-                        if (videoIframe) {
-                            // 播放当前视频
-                            videoIframe.contentWindow.postMessage('{"event":"command","func":"playVideo","args":""}', '*');
+                        // 播放当前视频
+                        if (videoIframe && videoIframe.contentWindow.postMessage) {
+                             // 使用 try-catch 避免一些浏览器沙盒限制
+                            try {
+                                videoIframe.contentWindow.postMessage('{"event":"command","func":"playVideo","args":""}', '*');
+                            } catch (e) {
+                                console.warn("Failed to play video:", e);
+                            }
                         }
                     } else if (i === (state.index - 1 + state.slides.length) % state.slides.length) {
                         slide.classList.add('prev');
-                        slide.style.zIndex = '2'; // 确保在当前元素后面，但在其他非激活元素前面
+                        slide.style.zIndex = '2'; // 比当前低，比其他非激活的高
                     } else if (i === (state.index + 1) % state.slides.length) {
                         slide.classList.add('next');
-                        slide.style.zIndex = '2'; // 确保在当前元素后面，但在其他非激活元素前面
+                        slide.style.zIndex = '2'; // 比当前低，比其他非激活的高
                     }
                 });
             }
@@ -951,24 +955,30 @@
 
                     // 处理 FTC 子菜单显示/隐藏
                     if (category === 'ftc-parent') {
-                        ftcSubmenu.style.display = ftcSubmenu.style.display === 'flex' ? 'none' : 'flex';
-                        // 激活父按钮，并取消子按钮的激活状态
+                        // 切换子菜单显示状态
+                        const isSubmenuVisible = ftcSubmenu.style.display === 'flex';
+                        ftcSubmenu.style.display = isSubmenuVisible ? 'none' : 'flex';
+
+                        // 移除所有按钮的 active 状态，只激活父按钮
                         categoryButtons.forEach(btn => btn.classList.remove('active'));
                         this.classList.add('active');
+                        
                         // 如果子菜单打开，不显示任何画廊，直到选择子类别
+                        // 如果子菜单关闭，也不显示任何画廊
                         gallerySections.forEach(section => section.classList.remove('active'));
-                        return; // 不继续处理画廊显示
+                        return; 
                     } else {
-                        ftcSubmenu.style.display = 'none'; // 隐藏子菜单
+                        // 如果点击的是非 FTC 父按钮，则隐藏 FTC 子菜单
+                        ftcSubmenu.style.display = 'none';
                     }
 
                     // 移除所有按钮的 active 状态，并激活当前点击的按钮
                     categoryButtons.forEach(btn => btn.classList.remove('active'));
                     this.classList.add('active');
-                    if (category !== 'ftc-parent') { // 如果点击的是子类别按钮，则激活父按钮
+                    // 如果是 FTC 子类别按钮，也激活 FTC 父按钮
+                    if (category === 'ftc27570' || category === 'ftcCommunity') {
                         ftcParentButton.classList.add('active');
                     }
-
 
                     // 显示对应的画廊 Section
                     gallerySections.forEach(section => {
@@ -991,24 +1001,30 @@
                 });
             });
 
-            // 鼠标滚轮事件
+            // 鼠标滚轮事件 (仅对当前激活的画廊有效)
             document.querySelectorAll('.gallery-slider-wrapper').forEach(wrapper => {
                 wrapper.addEventListener('wheel', function(event) {
-                    event.preventDefault(); // 阻止页面滚动
-
                     const activeSection = this.closest('.gallery-section.active');
-                    if (!activeSection) return;
+                    if (!activeSection) return; // 只有当wrapper在激活的section内才响应
+
+                    event.preventDefault(); // 阻止页面滚动
 
                     const categoryId = activeSection.id.replace('-gallery', '');
                     const direction = event.deltaY > 0 ? 1 : -1; // deltaY > 0 滚轮向下 (下一张), < 0 滚轮向上 (上一张)
                     navigateGallery(categoryId, direction);
-                });
+                }, { passive: false }); // 使用 passive: false 确保 preventDefault 有效
             });
 
             // 初始加载：默认显示 FLL 画廊
             // 确保页面加载后，有一个默认的激活状态
-            // 可以选择默认显示FLL，或不显示任何，等待用户点击
+            // 模拟点击 FLL 按钮，触发初始渲染和显示
             document.querySelector('.category-btn[data-category="fll"]').click(); 
+
+            // 确保页面加载时 fade-in 效果应用于主内容区域
+            const mainGallerySection = document.getElementById('main-robotics-gallery-section');
+            if (mainGallerySection) {
+                mainGallerySection.classList.add('is-visible');
+            }
         });
 
         // ==================== 预加载动画 (从 index.html 复制) ====================
