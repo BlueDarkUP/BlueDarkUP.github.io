@@ -9,150 +9,171 @@
     <meta name="author" content="Jiang (BlueDarkUP)">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@v2.15.1/devicon.min.css">
     <style>
+        /* 
+        ==========================================================================
+        Theme Palettes - Designed by Gemini
+        ========================================================================== 
+        */
+    
+        /* 1. 森呼吸 (Forest Breath) - 宁静、自然、充满生机 */
         body.theme-green {
-            --primary-color: #336A29;
-            --primary-color-transparent: rgba(51, 106, 41, 0.85);
-            --primary-color-darker: #26501f;
-            --secondary-color: #80B155;
-            --secondary-color-transparent-1: rgba(128, 177, 85, 0.1);
-            --secondary-color-transparent-2: rgba(128, 177, 85, 0.2);
-            --secondary-color-transparent-4: rgba(128, 177, 85, 0.4);
-            --secondary-color-transparent-5: rgba(128, 177, 85, 0.5);
-            --secondary-color-transparent-gradient: rgba(128, 177, 85, 0.07);
-            --text-color-light: #EAEF9D;
-            --text-color-dark: #C1D95C;
-            --cta-hover-text-color: #336A29;
+            --primary-color: #1A2E28; /* 深邃的森林绿 */
+            --primary-color-transparent: rgba(26, 46, 40, 0.85);
+            --primary-color-darker: #11201C; /* 更深的墨绿 */
+            --secondary-color: #58C27D; /* 充满活力的亮绿 */
+            --secondary-color-transparent-1: rgba(88, 194, 125, 0.1);
+            --secondary-color-transparent-2: rgba(88, 194, 125, 0.2);
+            --secondary-color-transparent-4: rgba(88, 194, 125, 0.4);
+            --secondary-color-transparent-5: rgba(88, 194, 125, 0.5);
+            --secondary-color-transparent-gradient: rgba(88, 194, 125, 0.07);
+            --text-color-light: #E3EBE7; /* 柔和米白 */
+            --text-color-dark: #A8B8B2; /* 灰绿 */
+            --cta-hover-text-color: #1A2E28;
         }
-
+    
+        /* 2. 深海极客 (Deep Sea Geek) - 神秘、科技、冷静 */
         body.theme-blue {
-            --primary-color: #2C6975;
-            --primary-color-transparent: rgba(44, 105, 117, 0.85);
-            --primary-color-darker: #1f4a53;
-            --secondary-color: #68B2A0;
-            --secondary-color-transparent-1: rgba(104, 178, 160, 0.15);
-            --secondary-color-transparent-2: rgba(104, 178, 160, 0.2);
-            --secondary-color-transparent-4: rgba(104, 178, 160, 0.4);
-            --secondary-color-transparent-5: rgba(104, 178, 160, 0.5);
-            --secondary-color-transparent-gradient: rgba(104, 178, 160, 0.07);
-            --text-color-light: #E0ECDE;
-            --text-color-dark: #CDE0C9;
-            --cta-hover-text-color: #2C6975;
+            --primary-color: #0B192F; /* 午夜蓝 */
+            --primary-color-transparent: rgba(11, 25, 47, 0.85);
+            --primary-color-darker: #071222; /* 更深的蓝黑 */
+            --secondary-color: #64FFDA; /* 赛博青色 */
+            --secondary-color-transparent-1: rgba(100, 255, 218, 0.1);
+            --secondary-color-transparent-2: rgba(100, 255, 218, 0.2);
+            --secondary-color-transparent-4: rgba(100, 255, 218, 0.4);
+            --secondary-color-transparent-5: rgba(100, 255, 218, 0.5);
+            --secondary-color-transparent-gradient: rgba(100, 255, 218, 0.07);
+            --text-color-light: #CCD6F6; /* 淡蓝色文本 */
+            --text-color-dark: #8892B0; /* 石板灰蓝 */
+            --cta-hover-text-color: #0B192F;
         }
-
+    
+        /* 3. 落日熔金 (Molten Gold Sunset) - 温暖、辉煌、创造力 */
         body.theme-orange {
-            --primary-color: #A94A3A;
-            --primary-color-transparent: rgba(169, 74, 58, 0.85);
-            --primary-color-darker: #82392c;
-            --secondary-color: #F37121;
-            --secondary-color-transparent-1: rgba(243, 113, 33, 0.15);
-            --secondary-color-transparent-2: rgba(243, 113, 33, 0.2);
-            --secondary-color-transparent-4: rgba(243, 113, 33, 0.4);
-            --secondary-color-transparent-5: rgba(243, 113, 33, 0.5);
-            --secondary-color-transparent-gradient: rgba(243, 113, 33, 0.07);
-            --text-color-light: #F7D154;
-            --text-color-dark: #FFCBA4;
-            --cta-hover-text-color: #A94A3A;
+            --primary-color: #4A1D21; /* 深橙红 */
+            --primary-color-transparent: rgba(74, 29, 33, 0.85);
+            --primary-color-darker: #331417; /* 更深的棕红 */
+            --secondary-color: #F7B801; /* 亮金色 */
+            --secondary-color-transparent-1: rgba(247, 184, 1, 0.1);
+            --secondary-color-transparent-2: rgba(247, 184, 1, 0.2);
+            --secondary-color-transparent-4: rgba(247, 184, 1, 0.4);
+            --secondary-color-transparent-5: rgba(247, 184, 1, 0.5);
+            --secondary-color-transparent-gradient: rgba(247, 184, 1, 0.07);
+            --text-color-light: #FDE8D6; /* 暮色暖白 */
+            --text-color-dark: #E6A573; /* 柔和橘色 */
+            --cta-hover-text-color: #4A1D21;
         }
         
-        body.theme-gray {
-            --primary-color: #2c2c2c;
-            --primary-color-transparent: rgba(44, 44, 44, 0.85);
-            --primary-color-darker: #1e1e1e;
-            --secondary-color: #9B9B9B;
-            --secondary-color-transparent-1: rgba(155, 155, 155, 0.15);
-            --secondary-color-transparent-2: rgba(155, 155, 155, 0.2);
-            --secondary-color-transparent-4: rgba(155, 155, 155, 0.4);
-            --secondary-color-transparent-5: rgba(155, 155, 155, 0.5);
-            --secondary-color-transparent-gradient: rgba(155, 155, 155, 0.07);
-            --text-color-light: #FFFFFF;
-            --text-color-dark: #E7E7E7;
-            --cta-hover-text-color: #2c2c2c;
-        }
-
-        body.theme-dopamine {
-            --primary-color: #5D3776;
-            --primary-color-transparent: rgba(93, 55, 118, 0.85);
-            --primary-color-darker: #432856;
-            --secondary-color: #F57B92;
-            --secondary-color-transparent-1: rgba(245, 123, 146, 0.15);
-            --secondary-color-transparent-2: rgba(245, 123, 146, 0.2);
-            --secondary-color-transparent-4: rgba(245, 123, 146, 0.4);
-            --secondary-color-transparent-5: rgba(245, 123, 146, 0.5);
-            --secondary-color-transparent-gradient: rgba(245, 123, 146, 0.07);
-            --text-color-light: #FEF0A5;
-            --text-color-dark: #A8D8F0;
-            --cta-hover-text-color: #5D3776;
-        }
-
-        body.theme-aurora {
-            --primary-color: #055B5C;
-            --primary-color-transparent: rgba(5, 91, 92, 0.85);
-            --primary-color-darker: #033c3d;
-            --secondary-color: #6EC6CA;
-            --secondary-color-transparent-1: rgba(110, 198, 202, 0.15);
-            --secondary-color-transparent-2: rgba(110, 198, 202, 0.2);
-            --secondary-color-transparent-4: rgba(110, 198, 202, 0.4);
-            --secondary-color-transparent-5: rgba(110, 198, 202, 0.5);
-            --secondary-color-transparent-gradient: rgba(110, 198, 202, 0.07);
-            --text-color-light: #CCABD8;
-            --text-color-dark: #8474A1;
-            --cta-hover-text-color: #055B5C;
-        }
-        
-        body.theme-oasis {
-            --primary-color: #DBCBBE;
-            --primary-color-transparent: rgba(219, 203, 190, 0.85);
-            --primary-color-darker: #C9B9AD;
-            --secondary-color: #4D8581;
-            --secondary-color-transparent-1: rgba(77, 133, 129, 0.1);
-            --secondary-color-transparent-2: rgba(77, 133, 129, 0.2);
-            --secondary-color-transparent-4: rgba(77, 133, 129, 0.4);
-            --secondary-color-transparent-5: rgba(77, 133, 129, 0.5);
-            --secondary-color-transparent-gradient: rgba(77, 133, 129, 0.07);
-            --text-color-light: #4E443F;
-            --text-color-dark: #6F6159;
-            --cta-hover-text-color: #EEE7DF;
-        }
-        
-        body.theme-soda {
-            --primary-color: #FBFAF5;
-            --primary-color-transparent: rgba(251, 250, 245, 0.85);
-            --primary-color-darker: #F5F2EA;
-            --secondary-color: #81D8CF;
-            --secondary-color-transparent-1: rgba(129, 216, 207, 0.15);
-            --secondary-color-transparent-2: rgba(129, 216, 207, 0.2);
-            --secondary-color-transparent-4: rgba(129, 216, 207, 0.4);
-            --secondary-color-transparent-5: rgba(129, 216, 207, 0.5);
-            --secondary-color-transparent-gradient: rgba(129, 216, 207, 0.07);
-            --text-color-light: #33645F;
-            --text-color-dark: #5E8480;
-            --cta-hover-text-color: #FBFAF5;
-        }
-        
+        /* 4. 波尔多红 (Bordeaux Red) - 优雅、成熟、精致 */
         body.theme-bordeaux {
-            --primary-color: #4C0013;
-            --primary-color-transparent: rgba(76, 0, 19, 0.85);
-            --primary-color-darker: #33000d;
-            --secondary-color: #FF7B89;
-            --secondary-color-transparent-1: rgba(255, 123, 137, 0.15);
-            --secondary-color-transparent-2: rgba(255, 123, 137, 0.2);
-            --secondary-color-transparent-4: rgba(255, 123, 137, 0.4);
-            --secondary-color-transparent-5: rgba(255, 123, 137, 0.5);
-            --secondary-color-transparent-gradient: rgba(255, 123, 137, 0.07);
-            --text-color-light: #f5dde1;
-            --text-color-dark: #8A5082;
-            --cta-hover-text-color: #4C0013;
+            --primary-color: #2E0B19; /* 醇厚酒红 */
+            --primary-color-transparent: rgba(46, 11, 25, 0.85);
+            --primary-color-darker: #1E0710;
+            --secondary-color: #D8A0A7; /* 玫瑰金粉 */
+            --secondary-color-transparent-1: rgba(216, 160, 167, 0.1);
+            --secondary-color-transparent-2: rgba(216, 160, 167, 0.2);
+            --secondary-color-transparent-4: rgba(216, 160, 167, 0.4);
+            --secondary-color-transparent-5: rgba(216, 160, 167, 0.5);
+            --secondary-color-transparent-gradient: rgba(216, 160, 167, 0.07);
+            --text-color-light: #F5E8ED; /* 淡粉白 */
+            --text-color-dark: #B08C94; /* 灰粉 */
+            --cta-hover-text-color: #2E0B19;
+        }
+    
+        /* 5. 极光之梦 (Aurora Dream) - 梦幻、未来、科技 */
+        body.theme-aurora {
+            --primary-color: #0C0F1A; /* 极夜蓝黑 */
+            --primary-color-transparent: rgba(12, 15, 26, 0.85);
+            --primary-color-darker: #06080D;
+            --secondary-color: #33BBC5; /* 极光青 */
+            --secondary-color-transparent-1: rgba(51, 187, 197, 0.1);
+            --secondary-color-transparent-2: rgba(51, 187, 197, 0.2);
+            --secondary-color-transparent-4: rgba(51, 187, 197, 0.4);
+            --secondary-color-transparent-5: rgba(51, 187, 197, 0.5);
+            --secondary-color-transparent-gradient: rgba(51, 187, 197, 0.07);
+            --text-color-light: #D4C9E8; /* 极光紫白 */
+            --text-color-dark: #8F82A8; /* 灰紫 */
+            --cta-hover-text-color: #0C0F1A;
         }
         
+        /* 6. 沙漠绿洲 (Desert Oasis) - 宁静、希望、生命力 */
+        body.theme-oasis {
+            --primary-color: #FDF6E3; /* 温暖沙色 */
+            --primary-color-transparent: rgba(253, 246, 227, 0.85);
+            --primary-color-darker: #F5EFE0;
+            --secondary-color: #2AA198; /* 绿洲松石绿 */
+            --secondary-color-transparent-1: rgba(42, 161, 152, 0.1);
+            --secondary-color-transparent-2: rgba(42, 161, 152, 0.2);
+            --secondary-color-transparent-4: rgba(42, 161, 152, 0.4);
+            --secondary-color-transparent-5: rgba(42, 161, 152, 0.5);
+            --secondary-color-transparent-gradient: rgba(42, 161, 152, 0.07);
+            --text-color-light: #586E75; /* 深灰蓝 (近景文字) */
+            --text-color-dark: #839496; /* 浅灰蓝 (远景文字) */
+            --cta-hover-text-color: #FDF6E3;
+        }
+        
+        /* 7. 夏日汽水 (Summer Soda) - 清爽、活力、愉悦 */
+        body.theme-soda {
+            --primary-color: #F8F9FA; /* 清爽米白 */
+            --primary-color-transparent: rgba(248, 249, 250, 0.85);
+            --primary-color-darker: #E9ECEF;
+            --secondary-color: #1ABC9C; /* 薄荷绿 */
+            --secondary-color-transparent-1: rgba(26, 188, 156, 0.1);
+            --secondary-color-transparent-2: rgba(26, 188, 156, 0.2);
+            --secondary-color-transparent-4: rgba(26, 188, 156, 0.4);
+            --secondary-color-transparent-5: rgba(26, 188, 156, 0.5);
+            --secondary-color-transparent-gradient: rgba(26, 188, 156, 0.07);
+            --text-color-light: #2C3E50; /* 深蓝灰 */
+            --text-color-dark: #7F8C8D; /* 灰云色 */
+            --cta-hover-text-color: #F8F9FA;
+        }
+        
+        /* 8. 多巴胺派对 (Dopamine Party) - 大胆、活力、激情 */
+        body.theme-dopamine {
+            --primary-color: #4A00E0; /* 亮紫色 */
+            --primary-color-transparent: rgba(74, 0, 224, 0.85);
+            --primary-color-darker: #3c00b3;
+            --secondary-color: #FF0080; /* 荧光粉 */
+            --secondary-color-transparent-1: rgba(255, 0, 128, 0.1);
+            --secondary-color-transparent-2: rgba(255, 0, 128, 0.2);
+            --secondary-color-transparent-4: rgba(255, 0, 128, 0.4);
+            --secondary-color-transparent-5: rgba(255, 0, 128, 0.5);
+            --secondary-color-transparent-gradient: rgba(255, 0, 128, 0.07);
+            --text-color-light: #F2F2F2; /* 高对比度亮灰 */
+            --text-color-dark: #E0B0FF; /* 淡紫色 */
+            --cta-hover-text-color: #FFFFFF;
+        }
+        
+        /* 9. 赛博黑石 (Cyber Obsidian) - 未来、冷峻、专业 */
+        body.theme-gray {
+            --primary-color: #0A0A0A; /* 纯黑 */
+            --primary-color-transparent: rgba(10, 10, 10, 0.85);
+            --primary-color-darker: #000000;
+            --secondary-color: #00BFFF; /* 霓虹深蓝 */
+            --secondary-color-transparent-1: rgba(0, 191, 255, 0.1);
+            --secondary-color-transparent-2: rgba(0, 191, 255, 0.2);
+            --secondary-color-transparent-4: rgba(0, 191, 255, 0.4);
+            --secondary-color-transparent-5: rgba(0, 191, 255, 0.5);
+            --secondary-color-transparent-gradient: rgba(0, 191, 255, 0.07);
+            --text-color-light: #EAEAEA; /* 银灰色 */
+            --text-color-dark: #A1A1A1; /* 中灰色 */
+            --cta-hover-text-color: #0A0A0A;
+        }
+        
+        /* 
+        ==========================================================================
+        Base and Structural Styles (Unchanged)
+        ========================================================================== 
+        */
+    
         :root {
             --font-sans: 'Segoe UI', 'Roboto', 'Helvetica Neue', system-ui, sans-serif;
             --background-light: var(--secondary-color-transparent-1);
         }
-
+    
         html {
             scroll-behavior: smooth;
         }
-
+    
         body {
             font-family: var(--font-sans);
             background: linear-gradient(180deg, var(--primary-color) 0%, var(--primary-color-darker) 100%);
@@ -163,7 +184,7 @@
             line-height: 1.6;
             transition: background-color 0.3s ease, color 0.3s ease;
         }
-
+    
         #preloader {
             position: fixed;
             top: 0;
@@ -180,25 +201,25 @@
             opacity: 1;
             will-change: opacity, visibility;
         }
-
+    
         #preloader.loaded {
             opacity: 0;
             visibility: hidden;
             pointer-events: none;
         }
-
+    
         .rocket-container {
             text-align: center;
             animation: takeOff 2.6s ease-in-out forwards;
             will-change: transform, opacity;
         }
-
+    
         .rocket-container svg {
             width: 150px;
             height: 150px;
             margin-bottom: 20px;
         }
-
+    
         .loading-text {
             color: var(--text-color-dark);
             font-size: 1.2em;
@@ -206,7 +227,7 @@
             opacity: 0;
             animation: fadeInText 1s ease-in 0.5s forwards;
         }
-
+    
         @keyframes takeOff {
             0% {
                 transform: translateY(60px);
@@ -230,7 +251,7 @@
             from { opacity: 0; transform: translateY(10px); }
             to { opacity: 1; transform: translateY(0); }
         }
-
+    
         body::before {
             content: '';
             position: fixed;
@@ -243,7 +264,7 @@
             pointer-events: none;
             z-index: 0;
         }
-
+    
         #cursor-glow {
             pointer-events: none;
             position: fixed;
@@ -257,7 +278,7 @@
             transition: top 0.1s ease-out, left 0.1s ease-out;
             z-index: 0;
         }
-
+    
         ::-webkit-scrollbar {
             width: 8px;
         }
@@ -272,7 +293,7 @@
         ::-webkit-scrollbar-thumb:hover {
             background-color: var(--text-color-light);
         }
-
+    
         .container {
             max-width: 1100px;
             margin: 0 auto;
@@ -280,7 +301,7 @@
             position: relative;
             z-index: 1;
         }
-
+    
         .navbar {
             display: flex;
             justify-content: space-between;
@@ -300,7 +321,7 @@
             padding-bottom: 10px;
             box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
         }
-
+    
         .logo {
             font-weight: bold;
             font-size: 1.8em;
@@ -308,7 +329,7 @@
             text-decoration: none;
             z-index: 1001;
         }
-
+    
         .nav-links {
             list-style: none;
             display: flex;
@@ -343,13 +364,13 @@
         .nav-links a:hover::after {
             transform: scaleX(1);
         }
-
+    
         .hamburger {
             display: none;
             cursor: pointer;
             z-index: 1001;
         }
-
+    
         .hamburger .bar {
             display: block;
             width: 25px;
@@ -371,12 +392,12 @@
             transition: opacity 0.6s ease-out, transform 0.6s ease-out;
             will-change: transform, opacity;
         }
-
+    
         .fade-in.is-visible {
             opacity: 1;
             transform: translateY(0);
         }
-
+    
         .section-title {
             font-size: 2.5em;
             margin-bottom: 50px;
@@ -384,7 +405,7 @@
             display: inline-block;
             color: var(--text-color-light);
         }
-
+    
         .section-title::after {
             content: '';
             display: block;
@@ -393,7 +414,7 @@
             background-color: var(--secondary-color);
             margin-top: 10px;
         }
-
+    
         #hero {
             display: flex;
             flex-direction: column;
@@ -416,7 +437,7 @@
         #hero .container {
             z-index: 1;
         }
-
+    
         #hero h1 {
             font-size: clamp(40px, 8vw, 80px);
             margin: 0;
@@ -426,14 +447,14 @@
         #hero .highlight {
             color: var(--secondary-color);
         }
-
+    
         #hero p.subtitle {
             font-size: 1.2em;
             color: var(--text-color-dark);
             max-width: 600px;
             margin-top: 20px;
         }
-
+    
         .cta-button {
             display: inline-block;
             padding: 14px 28px;
@@ -445,12 +466,12 @@
             transition: background-color 0.3s ease, color 0.3s ease;
             font-size: 1em;
         }
-
+    
         .cta-button:hover {
             background-color: var(--secondary-color);
             color: var(--cta-hover-text-color);
         }
-
+    
         .about-content {
             display: grid;
             grid-template-columns: 2fr 1fr;
@@ -477,13 +498,13 @@
             left: 0;
             color: var(--secondary-color);
         }
-
+    
         .card-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
             gap: 20px;
         }
-
+    
         .card {
             background-color: var(--background-light);
             padding: 25px;
@@ -518,7 +539,7 @@
             opacity: 1;
             transform: translateX(0);
         }
-
+    
         .card h3 {
             margin-top: 0;
         }
@@ -539,12 +560,12 @@
             color: var(--text-color-light);
             margin-top: 0;
         }
-
+    
         .card-footer {
             margin-top: 20px;
         }
         .tag {
-            background-color: var(--secondary-color-transparent-1);
+            background-color: var(--secondary-color-transparent-2); /* Adjusted for better visibility */
             color: var(--text-color-light);
             padding: 4px 10px;
             border-radius: 12px;
@@ -564,7 +585,7 @@
             flex-wrap: wrap;
             gap: 15px;
         }
-
+    
         .tech-item {
             background-color: var(--background-light);
             padding: 8px 18px;
@@ -578,7 +599,7 @@
             font-size: 1.5em;
             color: var(--text-color-dark);
         }
-
+    
         #contact {
             text-align: center;
         }
@@ -619,7 +640,7 @@
         footer a:hover {
             color: var(--secondary-color);
         }
-
+    
         .theme-switcher {
             margin-bottom: 20px;
             display: flex;
@@ -645,8 +666,8 @@
             outline: 2px solid var(--secondary-color);
             outline-offset: 2px;
         }
-
-
+    
+    
         .back-to-top {
             position: fixed;
             bottom: 20px;
@@ -666,27 +687,27 @@
             transition: opacity 0.3s, visibility 0.3s, background-color 0.3s;
             z-index: 999;
         }
-
+    
         .back-to-top:hover {
             background-color: var(--secondary-color-transparent-4);
         }
-
+    
         .back-to-top.visible {
             opacity: 1;
             visibility: visible;
         }
-
+    
         .back-to-top::after {
             content: '↑';
             font-size: 1.5em;
             font-weight: bold;
         }
-
+    
         @media (max-width: 768px) {
             .about-content {
                 grid-template-columns: 1fr;
             }
-
+    
             .nav-links {
                 position: fixed;
                 left: -100%;
@@ -700,15 +721,15 @@
                 justify-content: center;
                 gap: 50px;
             }
-
+    
             .nav-links.active {
                 left: 0;
             }
-
+    
             .nav-links a {
                 font-size: 1.5em;
             }
-
+    
             .hamburger {
                 display: block;
             }
@@ -716,11 +737,11 @@
             .hamburger.active .bar:nth-child(2) {
                 opacity: 0;
             }
-
+    
             .hamburger.active .bar:nth-child(1) {
                 transform: translateY(8px) rotate(45deg);
             }
-
+    
             .hamburger.active .bar:nth-child(3) {
                 transform: translateY(-8px) rotate(-45deg);
             }
