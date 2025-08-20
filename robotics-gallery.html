@@ -9,7 +9,6 @@
     <meta name="author" content="Jiang (BlueDarkUP)">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@v2.15.1/devicon.min.css">
     <style>
-        /* 从 index.html 复制的主题颜色变量 */
         body.theme-green {
             --primary-color: #336A29;
             --primary-color-transparent: rgba(51, 106, 41, 0.85);
@@ -145,7 +144,6 @@
             --cta-hover-text-color: #4C0013;
         }
 
-        /* 通用样式 */
         :root {
             --font-sans: 'Segoe UI', 'Roboto', 'Helvetica Neue', system-ui, sans-serif;
             --background-light: var(--secondary-color-transparent-1);
@@ -189,13 +187,11 @@
         .back-to-top.visible { opacity: 1; visibility: visible; }
         .back-to-top::after { content: '↑'; font-size: 1.5em; font-weight: bold; }
         
-        /* === REFACTORED GALLERY STYLES === */
-        
         main.container {
             padding-top: 100px;
             display: flex;
             flex-direction: column;
-            height: calc(100vh - 100px); /* Fill available vertical space */
+            height: calc(100vh - 100px);
         }
 
         #main-robotics-gallery-section {
@@ -203,12 +199,18 @@
             flex-direction: column;
             flex-grow: 1;
             padding: 20px 0;
-            min-height: 0; /* Override previous min-height */
+            min-height: 0;
+            opacity: 0;
+            transition: opacity 0.8s ease-in-out 0.2s;
+        }
+
+        #main-robotics-gallery-section.is-visible {
+            opacity: 1;
         }
         
         .section-title {
             font-size: 2.5em;
-            margin-bottom: 20px; /* Reduced margin */
+            margin-bottom: 20px;
             text-align: center;
         }
 
@@ -257,11 +259,10 @@
         .ftc-submenu.show {
             max-height: 200px;
             opacity: 1;
-            margin-top: 15px; /* Add space when open */
+            margin-top: 15px;
         }
         .ftc-submenu .category-btn { font-size: 0.9em; padding: 8px 15px; }
 
-        /* Two-column Layout Container */
         .gallery-layout {
             display: flex;
             gap: 40px;
@@ -270,53 +271,45 @@
             width: 100%;
         }
         
-        /* === 左侧信息面板可读性增强 (NEW STYLES) === */
         .gallery-info-panel {
-            flex: 1 1 35%; /* Flex-grow, flex-shrink, flex-basis */
+            flex: 1 1 35%;
             max-width: 450px;
-            padding: 30px; /* Increased padding */
-            
-            /* The Frosted Glass Effect */
-            background-color: var(--secondary-color-transparent-2); /* Increased opacity */
-            -webkit-backdrop-filter: blur(12px); /* Safari prefix */
-            backdrop-filter: blur(12px); /* Standard */
-
-            border-radius: 15px; /* Softer radius */
-            border: 1px solid var(--secondary-color-transparent-4); /* Subtle border for definition */
-            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37); /* Soft shadow for depth */
-
+            padding: 30px;
+            background-color: var(--secondary-color-transparent-2);
+            -webkit-backdrop-filter: blur(12px);
+            backdrop-filter: blur(12px);
+            border-radius: 15px;
+            border: 1px solid var(--secondary-color-transparent-4);
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
             display: flex;
             flex-direction: column;
-            align-self: stretch; /* Stretch to fill height of parent */
+            align-self: stretch;
             justify-content: center;
         }
 
         #gallery-title, #gallery-subtitle, #current-slide-info {
             transition: opacity 0.5s ease-out;
-            /* Subtle text shadow for max readability */
             text-shadow: 0px 1px 3px rgba(0, 0, 0, 0.4);
         }
         #gallery-title { font-size: 2.5em; color: var(--text-color-light); margin-bottom: 15px; }
         #gallery-subtitle { font-size: 1.1em; color: var(--text-color-dark); margin-bottom: 30px; line-height: 1.7; }
         
         #current-slide-info {
-            margin-top: auto; /* Push to the bottom */
+            margin-top: auto;
             padding-top: 20px;
-            border-top: 1px solid var(--secondary-color-transparent-4); /* Stronger separator */
+            border-top: 1px solid var(--secondary-color-transparent-4);
         }
         #slide-description { font-size: 1.1em; }
         #slide-progress { font-size: 0.9em; color: var(--text-color-dark); margin-top: 10px; }
 
-        /* Right Panel: Display Area */
         .gallery-display-panel {
             flex: 1 1 65%;
             position: relative;
-            height: 80vh; /* Fixed height for stability */
-            max-height: 800px; /* Max height limit */
+            height: 80vh;
+            max-height: 800px;
             align-self: stretch;
         }
 
-        /* Gallery Content (replaces gallery-section) */
         .gallery-content {
             position: absolute;
             top: 0; left: 0;
@@ -403,7 +396,7 @@
 
         @media (max-width: 1024px) {
             .gallery-layout { flex-direction: column; }
-            .gallery-info-panel { max-width: 100%; align-self: auto; max-height: 300px; /* Add max height on mobile */ }
+            .gallery-info-panel { max-width: 100%; align-self: auto; max-height: 300px; }
             .gallery-display-panel { width: 100%; height: 60vh; }
         }
 
@@ -465,7 +458,6 @@
             </div>
 
             <div class="gallery-layout">
-                <!-- Left Info Panel -->
                 <div class="gallery-info-panel">
                     <h3 id="gallery-title"></h3>
                     <p id="gallery-subtitle"></p>
@@ -475,9 +467,7 @@
                     </div>
                 </div>
 
-                <!-- Right Display Panel -->
                 <div class="gallery-display-panel">
-                    <!-- FLL Gallery -->
                     <div id="fll-gallery" class="gallery-content">
                         <div class="gallery-slider-wrapper"></div>
                         <div class="gallery-controls">
@@ -485,7 +475,6 @@
                             <button class="control-button next-slide" data-target="fll"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6z"/></svg></button>
                         </div>
                     </div>
-                    <!-- FTC 27570 Gallery -->
                     <div id="ftc27570-gallery" class="gallery-content">
                         <div class="gallery-slider-wrapper"></div>
                         <div class="gallery-controls">
@@ -493,7 +482,6 @@
                             <button class="control-button next-slide" data-target="ftc27570"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6z"/></svg></button>
                         </div>
                     </div>
-                    <!-- FTC Community Gallery -->
                     <div id="ftcCommunity-gallery" class="gallery-content">
                         <div class="gallery-slider-wrapper"></div>
                         <div class="gallery-controls">
@@ -501,7 +489,6 @@
                             <button class="control-button next-slide" data-target="ftcCommunity"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6z"/></svg></button>
                         </div>
                     </div>
-                    <!-- RoboMaster Gallery -->
                     <div id="robomaster-gallery" class="gallery-content">
                         <div class="gallery-slider-wrapper"></div>
                         <div class="gallery-controls">
@@ -519,7 +506,6 @@
     
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            // === UTILITY FUNCTIONS (THEME, NAV, ETC.) ===
             const themeSelect = document.getElementById('theme-select');
             const currentTheme = localStorage.getItem('selectedTheme') || 'theme-green'; 
             if (themeSelect) themeSelect.value = currentTheme;
@@ -549,9 +535,6 @@
             const glow = document.getElementById('cursor-glow');
             if (glow) window.addEventListener('mousemove', (e) => { glow.style.left = e.clientX + 'px'; glow.style.top = e.clientY + 'px'; });
 
-            // === REFACTORED GALLERY LOGIC ===
-
-            // --- Data Structures ---
             const galleryInfoData = {
                 fll: { title: 'FLL (FIRST LEGO League) AquaHunter', subtitle: 'FLL 竞赛中自主水下机器人 AquaHunter 的开发与实践。' },
                 ftc27570: { title: 'FTC Team 27570', subtitle: '作为核心成员，我在 FTC 27570 团队的机器人设计、软件开发与竞赛实况。' },
@@ -593,7 +576,6 @@
                 ]
             };
             
-            // --- DOM Elements ---
             const categoryButtons = document.querySelectorAll('.category-btn');
             const ftcParentButton = document.querySelector('[data-category="ftc-parent"]');
             const ftcSubmenu = document.getElementById('ftc-submenu');
@@ -604,11 +586,9 @@
             const slideDescriptionEl = document.getElementById('slide-description');
             const slideProgressEl = document.getElementById('slide-progress');
 
-            // --- State ---
             let currentGalleryState = {};
             let activeCategoryId = '';
 
-            // --- Functions ---
             function stopAllVideos() {
                 document.querySelectorAll('.gallery-slide iframe').forEach(iframe => {
                     if (iframe.contentWindow && typeof iframe.contentWindow.postMessage === 'function') {
@@ -621,7 +601,6 @@
                 const info = galleryInfoData[categoryId];
                 if (!info) return;
 
-                // Fade out, change text, fade in
                 galleryTitleEl.style.opacity = 0;
                 gallerySubtitleEl.style.opacity = 0;
                 setTimeout(() => {
@@ -659,7 +638,7 @@
                      currentGalleryState[categoryId] = { index: 0 };
                 }
                 currentGalleryState[categoryId].slides = galleryWrapper.querySelectorAll('.gallery-slide');
-                updateGalleryDisplay(categoryId, true); // Pass true for initial render
+                updateGalleryDisplay(categoryId, true);
             }
 
             function updateGalleryDisplay(categoryId, isInitial = false) {
@@ -675,7 +654,6 @@
                     else if (i === (state.index + 1) % state.slides.length) slide.classList.add('next');
                 });
                 
-                // Update text in the left panel
                 slideDescriptionEl.textContent = galleryData[categoryId][state.index].description;
                 slideProgressEl.textContent = `(${state.index + 1} / ${state.slides.length})`;
             }
@@ -700,7 +678,6 @@
                 renderGallery(categoryId);
             }
 
-            // --- Event Listeners ---
             categoryButtons.forEach(button => {
                 button.addEventListener('click', function() {
                     const category = this.dataset.category;
@@ -711,7 +688,6 @@
                     if (category === 'ftc-parent') {
                         ftcSubmenu.classList.toggle('show');
                         if (ftcSubmenu.classList.contains('show')) {
-                            // If opening, default to the first sub-item
                             const firstSubItem = ftcSubmenu.querySelector('.category-btn');
                             firstSubItem.classList.add('active');
                             showGallery(firstSubItem.dataset.category);
@@ -734,13 +710,11 @@
                 });
             });
 
-            // --- Initial Load ---
             document.querySelector('.category-btn[data-category="fll"]').click();
             document.getElementById('main-robotics-gallery-section').classList.add('is-visible');
 
-            // Preloader
             window.addEventListener('load', () => {
-                setTimeout(() => document.getElementById('preloader')?.classList.add('loaded'), 500); // Faster fadeout
+                setTimeout(() => document.getElementById('preloader')?.classList.add('loaded'), 500);
             });
         });
     </script>
