@@ -8,6 +8,9 @@
     <meta name="description" content="Jiang (BlueDarkUP) 在 FLL, FTC, RoboMaster 机器人竞赛中的视觉贡献集锦，包含图片和视频。">
     <meta name="author" content="Jiang (BlueDarkUP)">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@v2.15.1/devicon.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@700&family=Inter:wght@400;700&display=swap" rel="stylesheet">
     <style>
         body.theme-green {
             --primary-color: #336A29;
@@ -145,7 +148,8 @@
         }
 
         :root {
-            --font-sans: 'Segoe UI', 'Roboto', 'Helvetica Neue', system-ui, sans-serif;
+            --font-sans: 'Inter', 'Segoe UI', 'Roboto', 'Helvetica Neue', system-ui, sans-serif;
+            --font-header: 'Exo 2', sans-serif;
             --background-light: var(--secondary-color-transparent-1);
         }
         html, body {
@@ -171,13 +175,9 @@
         @keyframes fadeInText { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
         body::before { content: ''; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 250 250' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E"); opacity: 0.03; pointer-events: none; z-index: -1; }
         #cursor-glow { pointer-events: none; position: fixed; top: 0; left: 0; width: 600px; height: 600px; border-radius: 50%; background: radial-gradient(circle, var(--secondary-color-transparent-gradient), transparent 60%); transform: translate(-50%, -50%); transition: top 0.1s ease-out, left 0.1s ease-out; z-index: -1; }
-        ::-webkit-scrollbar { width: 8px; }
-        ::-webkit-scrollbar-track { background: var(--primary-color); }
-        ::-webkit-scrollbar-thumb { background-color: var(--secondary-color); border-radius: 10px; }
         .container { max-width: 90%; margin: 0 auto; padding: 0 20px; position: relative; z-index: 1; flex-grow: 1; width: 100%; }
         .navbar { display: flex; justify-content: space-between; align-items: center; padding: 15px 40px; position: fixed; width: calc(100% - 80px); top: 0; background-color: var(--primary-color-transparent); backdrop-filter: blur(10px); z-index: 1000; transition: padding 0.3s ease, box-shadow 0.3s ease; }
-        .navbar.scrolled { padding: 10px 40px; box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2); }
-        .logo { font-weight: bold; font-size: 1.8em; color: var(--text-color-light); text-decoration: none; }
+        .logo { font-family: var(--font-header); font-weight: 700; font-size: 1.8em; color: var(--text-color-light); text-decoration: none; }
         .nav-links { list-style: none; display: flex; gap: 25px; margin: 0; padding: 0; }
         .nav-links a { color: var(--text-color-light); text-decoration: none; transition: color 0.3s ease; font-size: 0.95em; position: relative; padding: 5px 0; }
         .nav-links a::after { content: ''; position: absolute; width: 100%; height: 2px; background-color: var(--secondary-color); bottom: 0; left: 0; transform: scaleX(0); transition: transform 0.3s ease; }
@@ -209,6 +209,8 @@
         }
         
         .section-title {
+            font-family: var(--font-header);
+            font-weight: 700;
             font-size: 2.5em;
             margin-bottom: 20px;
             text-align: center;
@@ -275,12 +277,12 @@
             flex: 1 1 35%;
             max-width: 450px;
             padding: 30px;
-            background-color: var(--secondary-color-transparent-4); /* MODIFIED: Increased opacity */
-            -webkit-backdrop-filter: blur(12px);
-            backdrop-filter: blur(12px);
+            background-color: var(--secondary-color-transparent-2);
+            -webkit-backdrop-filter: blur(15px);
+            backdrop-filter: blur(15px);
             border-radius: 15px;
-            border: 1px solid var(--secondary-color-transparent-4);
-            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+            border: 1px solid var(--secondary-color-transparent-5);
+            box-shadow: 0 8px 32px rgba(0,0,0,0.3), inset 0 0 1px 1px rgba(255,255,255,0.05), 0 0 20px var(--secondary-color-transparent-2);
             display: flex;
             flex-direction: column;
             align-self: stretch;
@@ -288,10 +290,20 @@
         }
 
         #gallery-title, #gallery-subtitle, #current-slide-info {
-            transition: opacity 0.5s ease-out;
-            text-shadow: 0px 2px 6px rgba(0, 0, 0, 0.5); /* MODIFIED: Enhanced shadow */
+            transition: opacity 0.3s ease-out;
+            text-shadow: 0px 2px 6px rgba(0, 0, 0, 0.5);
         }
-        #gallery-title { font-size: 2.5em; color: var(--text-color-light); margin-bottom: 15px; }
+        #gallery-title.fading-out,
+        #gallery-subtitle.fading-out {
+            opacity: 0;
+        }
+        #gallery-title { 
+            font-family: var(--font-header);
+            font-weight: 700;
+            font-size: 2.5em; 
+            color: var(--text-color-light); 
+            margin-bottom: 15px; 
+        }
         #gallery-subtitle { font-size: 1.1em; color: var(--text-color-dark); margin-bottom: 30px; line-height: 1.7; }
         
         #current-slide-info {
@@ -378,8 +390,11 @@
 
         .control-button {
             background-color: var(--secondary-color-transparent-4);
+            -webkit-backdrop-filter: blur(10px);
+            backdrop-filter: blur(10px);
             color: var(--text-color-light);
-            border: none;
+            border: 1px solid var(--secondary-color-transparent-5);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
             border-radius: 50%;
             width: 50px; height: 50px;
             font-size: 2.2em;
@@ -390,9 +405,21 @@
         .control-button:hover { background-color: var(--secondary-color); color: var(--cta-hover-text-color); transform: scale(1.1); }
         .control-button svg { width: 30px; height: 30px; fill: currentColor; }
 
-        .gallery-slide.prev { transform: translateX(-60%) scale(0.8); opacity: 0.3; z-index: 1; }
-        .gallery-slide.current { transform: translateX(0) scale(1); opacity: 1; z-index: 3; }
-        .gallery-slide.next { transform: translateX(60%) scale(0.8); opacity: 0.3; z-index: 1; }
+        .gallery-slide.prev {
+            transform: translateX(-50%) translateZ(-200px) rotateY(45deg);
+            opacity: 0.4;
+            z-index: 1;
+        }
+        .gallery-slide.current {
+            transform: translateZ(0) rotateY(0);
+            opacity: 1;
+            z-index: 3;
+        }
+        .gallery-slide.next {
+            transform: translateX(50%) translateZ(-200px) rotateY(-45deg);
+            opacity: 0.4;
+            z-index: 1;
+        }
 
         @media (max-width: 1024px) {
             .gallery-layout { flex-direction: column; }
@@ -439,21 +466,38 @@
 
     <div id="cursor-glow"></div>
 
-    <nav class="navbar"><a href="index.html" class="logo">BlueDarkUP - JiangJinCH</a><ul class="nav-links"><li><a href="index.html#about">关于我</a></li><li><a href="index.html#philosophy">我的理念</a></li><li><a href="index.html#articles">精选文章</a></li><li><a href="index.html#community">社区贡献</a></li><li><a href="index.html#projects">开源项目</a></li><li><a href="index.html#robotics-contributions" class="active">机器人集锦</a></li><li><a href="index.html#tech-stack">技术栈</a></li><li><a href="index.html#contact">联系方式</a></li></ul><div class="hamburger"><span class="bar"></span><span class="bar"></span><span class="bar"></span></div></nav>
+    <nav class="navbar">
+        <a href="index.html" class="logo" aria-label="Back to homepage">BlueDarkUP - JiangJinCH</a>
+        <ul class="nav-links">
+            <li><a href="index.html#about" aria-label="Navigate to About Me section">关于我</a></li>
+            <li><a href="index.html#philosophy" aria-label="Navigate to My Philosophy section">我的理念</a></li>
+            <li><a href="index.html#articles" aria-label="Navigate to Selected Articles section">精选文章</a></li>
+            <li><a href="index.html#community" aria-label="Navigate to Community Contributions section">社区贡献</a></li>
+            <li><a href="index.html#projects" aria-label="Navigate to Open Source Projects section">开源项目</a></li>
+            <li><a href="index.html#robotics-contributions" class="active" aria-label="Navigate to Robotics Showcase section">机器人集锦</a></li>
+            <li><a href="index.html#tech-stack" aria-label="Navigate to Tech Stack section">技术栈</a></li>
+            <li><a href="index.html#contact" aria-label="Navigate to Contact Information section">联系方式</a></li>
+        </ul>
+        <div class="hamburger" aria-label="Toggle navigation menu" role="button" tabindex="0">
+            <span class="bar"></span>
+            <span class="bar"></span>
+            <span class="bar"></span>
+        </div>
+    </nav>
     
     <main class="container">
         <section id="main-robotics-gallery-section">
             <h2 class="section-title">我的机器人贡献集锦</h2>
             <div class="category-nav">
-                <button class="category-btn" data-category="fll">FLL</button>
+                <button class="category-btn" data-category="fll" aria-label="View FLL gallery">FLL</button>
                 <div>
-                    <button class="category-btn" data-category="ftc-parent">FTC</button>
+                    <button class="category-btn" data-category="ftc-parent" aria-label="View FTC galleries">FTC</button>
                     <div id="ftc-submenu" class="ftc-submenu">
-                        <button class="category-btn" data-category="ftc27570">27570 团队</button>
-                        <button class="category-btn" data-category="ftcCommunity">其他社区贡献</button>
+                        <button class="category-btn" data-category="ftc27570" aria-label="View FTC Team 27570 gallery">27570 团队</button>
+                        <button class="category-btn" data-category="ftcCommunity" aria-label="View other FTC community contributions gallery">其他社区贡献</button>
                     </div>
                 </div>
-                <button class="category-btn" data-category="robomaster">ROBOMASTER</button>
+                <button class="category-btn" data-category="robomaster" aria-label="View RoboMaster gallery">ROBOMASTER</button>
             </div>
 
             <div class="gallery-layout">
@@ -470,29 +514,29 @@
                     <div id="fll-gallery" class="gallery-content">
                         <div class="gallery-slider-wrapper"></div>
                         <div class="gallery-controls">
-                            <button class="control-button prev-slide" data-target="fll"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/></svg></button>
-                            <button class="control-button next-slide" data-target="fll"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6z"/></svg></button>
+                            <button class="control-button prev-slide" data-target="fll" aria-label="Previous slide"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/></svg></button>
+                            <button class="control-button next-slide" data-target="fll" aria-label="Next slide"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6z"/></svg></button>
                         </div>
                     </div>
                     <div id="ftc27570-gallery" class="gallery-content">
                         <div class="gallery-slider-wrapper"></div>
                         <div class="gallery-controls">
-                            <button class="control-button prev-slide" data-target="ftc27570"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/></svg></button>
-                            <button class="control-button next-slide" data-target="ftc27570"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6z"/></svg></button>
+                            <button class="control-button prev-slide" data-target="ftc27570" aria-label="Previous slide"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/></svg></button>
+                            <button class="control-button next-slide" data-target="ftc27570" aria-label="Next slide"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6z"/></svg></button>
                         </div>
                     </div>
                     <div id="ftcCommunity-gallery" class="gallery-content">
                         <div class="gallery-slider-wrapper"></div>
                         <div class="gallery-controls">
-                             <button class="control-button prev-slide" data-target="ftcCommunity"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/></svg></button>
-                            <button class="control-button next-slide" data-target="ftcCommunity"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6z"/></svg></button>
+                             <button class="control-button prev-slide" data-target="ftcCommunity" aria-label="Previous slide"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/></svg></button>
+                            <button class="control-button next-slide" data-target="ftcCommunity" aria-label="Next slide"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6z"/></svg></button>
                         </div>
                     </div>
                     <div id="robomaster-gallery" class="gallery-content">
                         <div class="gallery-slider-wrapper"></div>
                         <div class="gallery-controls">
-                            <button class="control-button prev-slide" data-target="robomaster"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/></svg></button>
-                            <button class="control-button next-slide" data-target="robomaster"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6z"/></svg></button>
+                            <button class="control-button prev-slide" data-target="robomaster" aria-label="Previous slide"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/></svg></button>
+                            <button class="control-button next-slide" data-target="robomaster" aria-label="Next slide"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6z"/></svg></button>
                         </div>
                     </div>
                 </div>
@@ -500,7 +544,6 @@
         </section>
     </main>
     
-    <a class="back-to-top" aria-label="返回页面顶部"></a>
     <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
     
     <script>
@@ -523,12 +566,6 @@
                 hamburger.classList.toggle('active');
                 navLinks.classList.toggle('active');
             });
-
-            const backToTopButton = document.querySelector('.back-to-top');
-            // Since scrolling is disabled, we don't need the scroll listener for this button.
-            // But we keep the element in case you re-enable scrolling later.
-            // window.addEventListener('scroll', () => { ... });
-            // backToTopButton.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
 
             const glow = document.getElementById('cursor-glow');
             if (glow) window.addEventListener('mousemove', (e) => { glow.style.left = e.clientX + 'px'; glow.style.top = e.clientY + 'px'; });
@@ -599,13 +636,14 @@
                 const info = galleryInfoData[categoryId];
                 if (!info) return;
 
-                galleryTitleEl.style.opacity = 0;
-                gallerySubtitleEl.style.opacity = 0;
+                galleryTitleEl.classList.add('fading-out');
+                gallerySubtitleEl.classList.add('fading-out');
+
                 setTimeout(() => {
                     galleryTitleEl.textContent = info.title;
                     gallerySubtitleEl.textContent = info.subtitle;
-                    galleryTitleEl.style.opacity = 1;
-                    gallerySubtitleEl.style.opacity = 1;
+                    galleryTitleEl.classList.remove('fading-out');
+                    gallerySubtitleEl.classList.remove('fading-out');
                 }, 300);
             }
 
@@ -706,6 +744,16 @@
                     const direction = this.classList.contains('next-slide') ? 1 : -1;
                     navigateGallery(targetCategory, direction);
                 });
+            });
+
+            document.addEventListener('keydown', function(e) {
+                if (activeCategoryId && galleryData[activeCategoryId] && galleryData[activeCategoryId].length > 1) {
+                    if (e.key === 'ArrowLeft') {
+                        navigateGallery(activeCategoryId, -1);
+                    } else if (e.key === 'ArrowRight') {
+                        navigateGallery(activeCategoryId, 1);
+                    }
+                }
             });
 
             document.querySelector('.category-btn[data-category="fll"]').click();
