@@ -185,11 +185,8 @@
         .nav-links a:hover::after { transform: scaleX(1); }
         .hamburger { display: none; cursor: pointer; }
         .hamburger .bar { display: block; width: 25px; height: 3px; margin: 5px auto; transition: all 0.3s ease-in-out; background-color: var(--text-color-light); }
-        .back-to-top { position: fixed; bottom: 20px; right: 20px; background-color: var(--secondary-color-transparent-2); border: 1px solid var(--secondary-color); color: var(--secondary-color); width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; opacity: 0; visibility: hidden; transition: opacity 0.3s, visibility 0.3s, background-color 0.3s; z-index: 999; }
-        .back-to-top:hover { background-color: var(--secondary-color-transparent-4); }
-        .back-to-top.visible { opacity: 1; visibility: visible; }
-        .back-to-top::after { content: '↑'; font-size: 1.5em; font-weight: bold; }
-        
+        .back-to-top { display: none !important; }
+
         main.container {
             padding-top: 100px;
             display: flex;
@@ -278,7 +275,7 @@
             flex: 1 1 35%;
             max-width: 450px;
             padding: 30px;
-            background-color: var(--secondary-color-transparent-2);
+            background-color: var(--secondary-color-transparent-4); /* MODIFIED: Increased opacity */
             -webkit-backdrop-filter: blur(12px);
             backdrop-filter: blur(12px);
             border-radius: 15px;
@@ -292,7 +289,7 @@
 
         #gallery-title, #gallery-subtitle, #current-slide-info {
             transition: opacity 0.5s ease-out;
-            text-shadow: 0px 1px 3px rgba(0, 0, 0, 0.4);
+            text-shadow: 0px 2px 6px rgba(0, 0, 0, 0.5); /* MODIFIED: Enhanced shadow */
         }
         #gallery-title { font-size: 2.5em; color: var(--text-color-light); margin-bottom: 15px; }
         #gallery-subtitle { font-size: 1.1em; color: var(--text-color-dark); margin-bottom: 30px; line-height: 1.7; }
@@ -528,13 +525,10 @@
             });
 
             const backToTopButton = document.querySelector('.back-to-top');
-            const navbar = document.querySelector('.navbar');
-            window.addEventListener('scroll', () => {
-                const scrollY = window.pageYOffset;
-                backToTopButton.classList.toggle('visible', scrollY > 300);
-                navbar.classList.toggle('scrolled', scrollY > 50);
-            });
-            backToTopButton.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+            // Since scrolling is disabled, we don't need the scroll listener for this button.
+            // But we keep the element in case you re-enable scrolling later.
+            // window.addEventListener('scroll', () => { ... });
+            // backToTopButton.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
 
             const glow = document.getElementById('cursor-glow');
             if (glow) window.addEventListener('mousemove', (e) => { glow.style.left = e.clientX + 'px'; glow.style.top = e.clientY + 'px'; });
