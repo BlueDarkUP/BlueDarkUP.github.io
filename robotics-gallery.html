@@ -3,280 +3,196 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>机器人贡献集锦 - Jiang (BlueDarkUP)</title>
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🔑</text></svg>">
-    <meta name="description" content="Jiang (BlueDarkUP) 在 FLL, FTC, RoboMaster 机器人竞赛中的视觉贡献集锦，包含图片和视频。">
-    <meta name="author" content="Jiang (BlueDarkUP)">
+    <title>Robotics Gallery - Jiang (BlueDarkUP)</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🏴‍☠️</text></svg>">
+    <meta name="description" content="Jiang (BlueDarkUP) - FTC World Record Holder. Visual journey through FLL, FTC, and RoboMaster competitions.">
+    
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@v2.15.1/devicon.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@600;700&family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@300;600;800&family=Inter:wght@200;400;600&display=swap" rel="stylesheet">
+
     <style>
         /* 
-         * Shared Theme logic - simplified here for brevity but assumes same variables as index.html
-         * Added specific gallery modern styles
-         */
-         body.theme-green {
-            --primary-color: #0f1c18;
-            --primary-color-transparent: rgba(15, 28, 24, 0.85);
-            --primary-color-darker: #080f0d;
-            --secondary-color: #58C27D;
-            --secondary-color-transparent-1: rgba(88, 194, 125, 0.08);
-            --secondary-color-transparent-2: rgba(88, 194, 125, 0.15);
-            --secondary-color-transparent-4: rgba(88, 194, 125, 0.4);
-            --secondary-color-transparent-5: rgba(88, 194, 125, 0.5);
-            --secondary-color-transparent-gradient: rgba(88, 194, 125, 0.05);
-            --text-color-light: #E3EBE7;
-            --text-color-dark: #8fa099;
-            --cta-hover-text-color: #0f1c18;
-        }
-
-        /* 
-           ... Repeat other themes here (Blue, Orange, etc.) ...
-           Assuming they are present as per the original file.
+        ==========================================================================
+        MONOCHROME GALLERY THEME
+        ========================================================================== 
         */
-        
-        /* Modern Defaults */
         :root {
-            --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
-            --font-header: 'Exo 2', sans-serif;
-            --background-light: var(--secondary-color-transparent-1);
-            --border-radius-lg: 16px;
+            --bg-deep: #000000;
+            --bg-card: #0a0a0a;
+            --text-main: #ffffff;
+            --text-dim: #888888;
+            --border-color: rgba(255, 255, 255, 0.15);
+            --accent-glow: rgba(255, 255, 255, 0.08);
+            --glass-bg: rgba(20, 20, 20, 0.6);
+            --transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
-        html { scroll-behavior: smooth; }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
         body {
-            font-family: var(--font-sans);
-            background: linear-gradient(180deg, var(--primary-color) 0%, var(--primary-color-darker) 100%);
-            background-attachment: fixed;
-            color: var(--text-color-light);
-            margin: 0; padding: 0; line-height: 1.7;
-            transition: background-color 0.3s ease, color 0.3s ease;
-            min-height: 100vh;
+            background-color: var(--bg-deep);
+            color: var(--text-main);
+            font-family: 'Inter', -apple-system, sans-serif;
+            line-height: 1.7;
+            overflow-x: hidden;
             display: flex; flex-direction: column;
+            min-height: 100vh;
         }
-        
-        #preloader { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: var(--primary-color); z-index: 9999; display: flex; justify-content: center; align-items: center; transition: opacity 0.8s ease-in-out, visibility 0.8s ease-in-out; visibility: visible; opacity: 1; }
-        #preloader.loaded { opacity: 0; visibility: hidden; pointer-events: none; }
-        .rocket-container { text-align: center; animation: takeOff 2.6s ease-in-out forwards; }
-        .rocket-container svg { width: 150px; height: 150px; margin-bottom: 20px; }
-        .loading-text { color: var(--text-color-dark); font-size: 1.2em; letter-spacing: 2px; opacity: 0; animation: fadeInText 1s ease-in 0.5s forwards; }
-        @keyframes takeOff { 0% { transform: translateY(60px); opacity: 0; } 25% { transform: translateY(0); opacity: 1; } 80% { transform: translateY(0); opacity: 1; } 100% { transform: translateY(-120px); opacity: 0; } }
-        @keyframes fadeInText { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
-        
-        body::before { content: ''; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 250 250' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E"); opacity: 0.04; pointer-events: none; z-index: -1; }
-        #cursor-glow { pointer-events: none; position: fixed; top: 0; left: 0; width: 600px; height: 600px; border-radius: 50%; background: radial-gradient(circle, var(--secondary-color-transparent-gradient), transparent 60%); transform: translate(-50%, -50%); transition: top 0.1s ease-out, left 0.1s ease-out; z-index: -1; }
-        
-        .container { max-width: 90%; margin: 0 auto; padding: 0 20px; position: relative; z-index: 1; flex-grow: 1; width: 100%; }
-        
-        /* Modern Floating Navbar (Consistent with Index) */
-        .navbar {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 12px 30px;
-            position: fixed;
-            width: calc(100% - 80px);
-            max-width: 1200px;
-            left: 50%;
-            transform: translateX(-50%);
-            top: 20px;
-            background-color: var(--primary-color-transparent);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            z-index: 1000;
-            transition: all 0.3s ease-in-out;
-            border-radius: 50px;
-            border: 1px solid var(--secondary-color-transparent-2);
-        }
-        .navbar.scrolled { padding: 10px 30px; top: 10px; background-color: rgba(var(--primary-color), 0.95); }
 
-        .logo { font-family: var(--font-header); font-weight: 700; font-size: 1.5em; color: var(--text-color-light); text-decoration: none; letter-spacing: -0.5px; }
-        .nav-links { list-style: none; display: flex; gap: 30px; margin: 0; padding: 0; }
-        .nav-links a { color: var(--text-color-light); text-decoration: none; transition: color 0.3s ease; font-size: 0.9em; font-weight: 600; position: relative; padding: 5px 0; opacity: 0.8; }
-        .nav-links a:hover { color: var(--secondary-color); opacity: 1; }
-        .nav-links a::after { content: ''; position: absolute; width: 100%; height: 2px; background-color: var(--secondary-color); bottom: -2px; left: 0; transform: scaleX(0); transition: transform 0.3s ease; }
-        .nav-links a:hover::after { transform: scaleX(1); }
-        .nav-links a.active { color: var(--secondary-color); opacity: 1; }
-        .nav-links a.active::after { transform: scaleX(1); }
+        /* 极简噪声叠加 */
+        body::before {
+            content: ''; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+            opacity: 0.04; pointer-events: none; z-index: -1;
+        }
+
+        #cursor-glow {
+            position: fixed; width: 500px; height: 500px;
+            background: radial-gradient(circle, var(--accent-glow) 0%, transparent 70%);
+            border-radius: 50%; pointer-events: none; z-index: -1;
+            transform: translate(-50%, -50%); transition: opacity 0.3s;
+        }
+
+        /* 导航栏 (与主页一致) */
+        .navbar {
+            position: fixed; top: 20px; left: 50%; transform: translateX(-50%);
+            width: 90%; max-width: 1200px; padding: 15px 40px;
+            background: rgba(10, 10, 10, 0.7); backdrop-filter: blur(20px);
+            border: 1px solid var(--border-color); border-radius: 100px;
+            display: flex; justify-content: space-between; align-items: center;
+            z-index: 1000; transition: var(--transition);
+        }
+        .logo { font-family: 'Exo 2'; font-weight: 800; font-size: 1.2rem; letter-spacing: 1px; text-decoration: none; color: #fff; }
+        .nav-links { display: flex; gap: 30px; list-style: none; }
+        .nav-links a { text-decoration: none; color: var(--text-dim); font-size: 0.75rem; font-weight: 600; text-transform: uppercase; letter-spacing: 1.5px; transition: var(--transition); }
+        .nav-links a:hover, .nav-links a.active { color: var(--text-main); }
 
         .hamburger { display: none; cursor: pointer; }
-        .hamburger .bar { display: block; width: 25px; height: 2px; margin: 6px auto; transition: all 0.3s ease-in-out; background-color: var(--text-color-light); border-radius: 2px; }
-        .back-to-top { display: none !important; }
+        .hamburger .bar { display: block; width: 25px; height: 2px; margin: 6px auto; background-color: #fff; }
 
-        main.container { padding-top: 120px; display: flex; flex-direction: column; height: calc(100vh - 100px); }
-
-        #main-robotics-gallery-section { display: flex; flex-direction: column; flex-grow: 1; padding: 20px 0; min-height: 0; opacity: 0; transition: opacity 0.8s ease-in-out 0.2s; }
-        #main-robotics-gallery-section.is-visible { opacity: 1; }
-        
-        .section-title {
-            font-family: var(--font-header); font-weight: 700; font-size: 2.5em; margin-bottom: 30px; text-align: center; letter-spacing: -1px;
+        /* 主容器 */
+        main.container {
+            flex-grow: 1; padding: 140px 5% 40px; 
+            max-width: 1400px; margin: 0 auto; width: 100%;
+            display: flex; flex-direction: column;
         }
 
-        /* Modernized Category Navigation */
-        .category-nav { display: flex; justify-content: center; flex-wrap: wrap; gap: 15px; margin-bottom: 40px; }
+        .section-header { text-align: center; margin-bottom: 50px; }
+        .section-title { font-family: 'Exo 2'; font-size: 3rem; font-weight: 800; letter-spacing: -1px; margin-bottom: 10px; }
+        .section-subtitle { color: var(--text-dim); font-size: 0.9rem; text-transform: uppercase; letter-spacing: 3px; }
+
+        /* 分类导航 */
+        .category-nav { display: flex; justify-content: center; gap: 15px; margin-bottom: 50px; flex-wrap: wrap; position: relative; }
         .category-btn {
-            background-color: transparent;
-            color: var(--text-color-light);
-            padding: 10px 24px;
-            border: 1px solid var(--secondary-color-transparent-5);
-            border-radius: 30px;
-            cursor: pointer;
-            font-size: 1em;
-            font-weight: 500;
-            font-family: var(--font-sans);
-            transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            background: transparent; color: var(--text-dim);
+            padding: 10px 25px; border: 1px solid var(--border-color);
+            cursor: pointer; font-size: 0.8rem; font-weight: 600;
+            text-transform: uppercase; letter-spacing: 1.5px;
+            transition: var(--transition);
         }
-        .category-btn:hover {
-            background-color: var(--secondary-color-transparent-2);
-            color: var(--secondary-color);
-            transform: translateY(-2px);
-            border-color: var(--secondary-color);
-        }
-        .category-btn.active {
-            background-color: var(--secondary-color);
-            color: var(--cta-hover-text-color);
-            border-color: var(--secondary-color);
-            box-shadow: 0 5px 15px var(--secondary-color-transparent-4);
-            font-weight: 700;
+        .category-btn:hover, .category-btn.active {
+            background: #fff; color: #000; border-color: #fff;
         }
 
+        /* 下拉菜单 */
+        .ftc-wrapper { position: relative; }
         .ftc-submenu {
-            max-height: 0; opacity: 0; overflow: hidden;
-            transition: max-height 0.4s ease-out, opacity 0.4s ease-out, margin-top 0.4s ease-out;
-            display: flex; flex-direction: column; gap: 8px; margin-top: 0;
-            position: absolute; /* Positioning tweak */
-            background: var(--primary-color-darker);
-            padding: 10px; border-radius: 12px;
-            z-index: 10; border: 1px solid var(--secondary-color-transparent-2);
+            position: absolute; top: 100%; left: 50%; transform: translateX(-50%) translateY(10px);
+            background: var(--bg-card); border: 1px solid var(--border-color);
+            padding: 5px; opacity: 0; visibility: hidden; pointer-events: none;
+            transition: var(--transition); display: flex; flex-direction: column; gap: 5px; min-width: 160px; z-index: 100;
         }
-        .ftc-submenu.show { max-height: 200px; opacity: 1; margin-top: 10px; position: relative; background: transparent; border: none; padding: 0; }
-        .ftc-submenu .category-btn { font-size: 0.9em; padding: 8px 20px; }
+        .ftc-wrapper:hover .ftc-submenu, .ftc-submenu.show { opacity: 1; visibility: visible; transform: translateX(-50%) translateY(5px); pointer-events: auto; }
+        .ftc-submenu .category-btn { width: 100%; text-align: center; border: none; }
+        .ftc-submenu .category-btn:hover { background: rgba(255,255,255,0.1); color: #fff; }
 
-        .gallery-layout { display: flex; gap: 40px; flex-grow: 1; align-items: center; width: 100%; height: 100%; }
-        
-        /* Modernized Info Panel */
+        /* 画廊布局 */
+        .gallery-layout {
+            display: grid; grid-template-columns: 350px 1fr; gap: 40px;
+            height: 600px; width: 100%;
+        }
+
+        /* 左侧信息面板 (博物馆说明牌风格) */
         .gallery-info-panel {
-            flex: 1 1 30%;
-            max-width: 450px;
-            padding: 40px;
-            background-color: rgba(255,255,255,0.02);
-            -webkit-backdrop-filter: blur(20px);
-            backdrop-filter: blur(20px);
-            border-radius: var(--border-radius-lg);
-            border: 1px solid rgba(255,255,255,0.05);
-            box-shadow: 0 20px 50px rgba(0,0,0,0.2);
-            display: flex; flex-direction: column; align-self: stretch; justify-content: center;
+            border-top: 1px solid #fff;
+            padding-top: 30px;
+            display: flex; flex-direction: column;
+            justify-content: space-between;
         }
-
-        #gallery-title, #gallery-subtitle, #current-slide-info { transition: opacity 0.3s ease-out; }
-        #gallery-title.fading-out, #gallery-subtitle.fading-out { opacity: 0; }
-        #gallery-title { font-family: var(--font-header); font-weight: 700; font-size: 2.2em; color: var(--text-color-light); margin-bottom: 20px; line-height: 1.2; }
-        #gallery-subtitle { font-size: 1.1em; color: var(--text-color-dark); margin-bottom: 30px; line-height: 1.6; font-weight: 300; }
+        #gallery-title { font-family: 'Exo 2'; font-size: 2rem; font-weight: 800; line-height: 1.1; margin-bottom: 15px; }
+        #gallery-subtitle { color: var(--text-dim); font-size: 0.95rem; font-weight: 300; margin-bottom: 40px; }
         
-        #current-slide-info { margin-top: auto; padding-top: 25px; border-top: 1px solid var(--secondary-color-transparent-2); }
-        #slide-description { font-size: 1.05em; margin-bottom: 10px; }
-        #slide-progress { font-size: 0.9em; color: var(--secondary-color); font-weight: 700; font-family: var(--font-header); letter-spacing: 1px; }
+        .slide-meta { border-top: 1px solid var(--border-color); padding-top: 20px; }
+        #slide-progress { font-family: 'Exo 2'; font-size: 0.8rem; letter-spacing: 2px; color: var(--text-dim); margin-bottom: 10px; display: block; }
+        #slide-description { font-size: 1rem; line-height: 1.6; }
 
-        .gallery-display-panel { flex: 1 1 70%; position: relative; height: 100%; max-height: 75vh; align-self: stretch; border-radius: var(--border-radius-lg); overflow: hidden; background: rgba(0,0,0,0.2); border: 1px solid rgba(255,255,255,0.05); }
-
-        .gallery-content { position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 0; visibility: hidden; transition: opacity 0.6s ease-in-out, visibility 0.6s ease-in-out; display: flex; flex-direction: column; justify-content: center; align-items: center; }
-        .gallery-content.active { opacity: 1; visibility: visible; }
-
-        .gallery-slider-wrapper { position: relative; width: 100%; height: 100%; display: flex; overflow: hidden; }
-        .gallery-slide {
-            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-            display: flex; justify-content: center; align-items: center;
-            transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-            background-color: transparent;
-            flex-shrink: 0; 
-        }
-
-        .gallery-slide img, .gallery-slide .video-embed {
+        /* 右侧展示区 */
+        .gallery-display-panel {
+            position: relative; overflow: hidden;
+            background: var(--bg-card); border: 1px solid var(--border-color);
             width: 100%; height: 100%;
-            object-fit: contain; /* Changed to contain to see full image */
-            background: black;
         }
-        .gallery-slide .video-embed iframe { width: 100%; height: 100%; border: none; }
+        .gallery-content { position: absolute; inset: 0; opacity: 0; visibility: hidden; transition: opacity 0.5s ease; }
+        .gallery-content.active { opacity: 1; visibility: visible; }
+        
+        .gallery-slider-wrapper { position: relative; width: 100%; height: 100%; }
+        .gallery-slide {
+            position: absolute; width: 100%; height: 100%;
+            display: flex; align-items: center; justify-content: center;
+            transition: transform 0.6s cubic-bezier(0.2, 0, 0.2, 1);
+            background: #000;
+        }
+        .gallery-slide img, .gallery-slide iframe {
+            width: 100%; height: 100%; object-fit: contain;
+        }
+        .gallery-slide iframe { border: none; }
 
-        .gallery-controls { position: absolute; width: 100%; display: flex; justify-content: space-between; align-items: center; top: 50%; transform: translateY(-50%); padding: 0 20px; z-index: 10; pointer-events: none; }
-
+        /* 控制按钮 */
+        .gallery-controls {
+            position: absolute; bottom: 20px; right: 20px; display: flex; gap: 10px; z-index: 10;
+        }
         .control-button {
-            pointer-events: auto;
-            background-color: rgba(0,0,0,0.3);
-            -webkit-backdrop-filter: blur(5px);
-            backdrop-filter: blur(5px);
-            color: var(--text-color-light);
-            border: 1px solid rgba(255,255,255,0.1);
-            border-radius: 50%;
-            width: 50px; height: 50px;
-            font-size: 2em;
-            cursor: pointer;
-            display: flex; justify-content: center; align-items: center;
-            transition: all 0.3s ease;
+            width: 45px; height: 45px;
+            border: 1px solid rgba(255,255,255,0.2); background: rgba(0,0,0,0.5); backdrop-filter: blur(5px);
+            color: #fff; cursor: pointer; display: flex; align-items: center; justify-content: center;
+            transition: var(--transition);
         }
-        .control-button:hover { background-color: var(--secondary-color); color: var(--cta-hover-text-color); transform: scale(1.1); border-color: transparent; }
-        .control-button svg { width: 24px; height: 24px; fill: currentColor; }
+        .control-button:hover { background: #fff; color: #000; border-color: #fff; }
+        .control-button svg { width: 20px; height: 20px; fill: currentColor; }
+
+        /* 动画状态 */
+        .fading-out { opacity: 0; transform: translateY(10px); }
 
         @media (max-width: 1024px) {
-            .gallery-layout { flex-direction: column; height: auto; }
-            .gallery-info-panel { max-width: 100%; align-self: auto; max-height: none; padding: 25px; margin-bottom: 20px; }
-            .gallery-display-panel { width: 100%; height: 50vh; min-height: 400px; }
-            .navbar { width: calc(100% - 40px); top: 10px; padding: 12px 20px; border-radius: 12px; }
+            .gallery-layout { grid-template-columns: 1fr; height: auto; }
+            .gallery-display-panel { height: 50vh; order: 1; }
+            .gallery-info-panel { order: 2; border-top: none; border-left: 1px solid #fff; padding-left: 20px; padding-top: 0; }
         }
 
         @media (max-width: 768px) {
-            .container { max-width: 100%; padding: 0 15px; }
-            .nav-links { position: fixed; left: -100%; top: 0; flex-direction: column; background-color: var(--primary-color); width: 100%; height: 100vh; text-align: center; transition: 0.3s; justify-content: center; gap: 40px; }
-            .nav-links.active { left: 0; }
-            .hamburger { display: block; }
-            .hamburger.active .bar:nth-child(2) { opacity: 0; }
-            .hamburger.active .bar:nth-child(1) { transform: translateY(8px) rotate(45deg); }
-            .hamburger.active .bar:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
-            #cursor-glow { display: none; }
+            .navbar { width: calc(100% - 40px); padding: 15px 20px; }
+            .nav-links { display: none; }
+            .section-title { font-size: 2rem; }
             .gallery-display-panel { height: 40vh; }
-            .category-nav { gap: 10px; }
-            .category-btn { padding: 8px 16px; font-size: 0.9em; }
+            .gallery-info-panel { border-left: none; border-top: 1px solid #fff; padding-left: 0; padding-top: 20px; }
         }
     </style>
-    
-    <script>
-        (function() {
-            const savedTheme = localStorage.getItem('selectedTheme') || 'theme-green';
-            document.documentElement.className = savedTheme;
-        })();
-    </script>
 </head>
 <body> 
-    <script>document.body.className = document.documentElement.className;</script>
-
-    <div id="preloader">
-        <div class="rocket-container">            
-            <svg xmlns="http://www.w3.org/2000/svg" width="800px" height="800px" viewBox="0 0 1024 1024" class="icon" version="1.1">
-                <path d="M512 301.2m-10 0a10 10 0 1 0 20 0 10 10 0 1 0-20 0Z" fill="var(--secondary-color)"/>
-                <path d="M400.3 744.5c2.1-0.7 4.1-1.4 6.2-2-2 0.6-4.1 1.3-6.2 2z m0 0c2.1-0.7 4.1-1.4 6.2-2-2 0.6-4.1 1.3-6.2 2z" fill="var(--text-color-light)"/>
-                <path d="M511.8 256.6c24.4 0 44.2 19.8 44.2 44.2S536.2 345 511.8 345s-44.2-19.8-44.2-44.2 19.9-44.2 44.2-44.2m0-20c-35.5 0-64.2 28.7-64.2 64.2s28.7 64.2 64.2 64.2 64.2-28.7 64.2-64.2-28.7-64.2-64.2-64.2z" fill="var(--secondary-color)"/>
-                <path d="M730.7 529.5c0.4-8.7 0.6-17.4 0.6-26.2 0-179.6-86.1-339.1-219.3-439.5-133.1 100.4-219.2 259.9-219.2 439.5 0 8.8 0.2 17.5 0.6 26.1-56 56-90.6 133.3-90.6 218.7 0 61.7 18 119.1 49.1 167.3 30.3-49.8 74.7-90.1 127.7-115.3 39-18.6 82.7-29 128.8-29 48.3 0 93.9 11.4 134.3 31.7 52.5 26.3 96.3 67.7 125.6 118.4 33.4-49.4 52.9-108.9 52.9-173.1 0-85.4-34.6-162.6-90.5-218.6zM351.1 383.4c9.2-37.9 22.9-74.7 40.6-109.5a502.1 502.1 0 0 1 63.6-95.9c17.4-20.6 36.4-39.9 56.8-57.5 20.4 17.6 39.4 36.9 56.8 57.5 24.8 29.5 46.2 61.8 63.6 95.9 17.7 34.8 31.4 71.6 40.6 109.5 8.7 35.8 13.5 72.7 14.2 109.9C637.4 459 577 438.9 512 438.9c-65 0-125.3 20.1-175.1 54.4 0.7-37.2 5.5-74.1 14.2-109.9z m-90.6 449.2c-9.1-27-13.7-55.5-13.7-84.4 0-35.8 7-70.6 20.8-103.2 8.4-19.8 19-38.4 31.9-55.5 9.7 61.5 29.5 119.7 57.8 172.6-36.4 17.8-69 41.6-96.8 70.5z m364.2-85.3c-0.7-0.3-1.5-0.5-2.2-0.8-0.4-0.2-0.9-0.3-1.3-0.5-0.6-0.2-1.3-0.5-1.9-0.7-0.8-0.3-1.5-0.5-2.3-0.8-0.8-0.3-1.5-0.5-2.3-0.7l-0.9-0.3c-1-0.3-2.1-0.7-3.1-1-1.2-0.4-2.4-0.7-3.5-1.1l-3-0.9c-0.2-0.1-0.4-0.1-0.7-0.2-1.1-0.3-2.3-0.7-3.4-1-1.2-0.3-2.4-0.6-3.5-0.9l-3.6-0.9-3.6-0.9c-1-0.3-2.1-0.5-3.1-0.7-1.2-0.3-2.4-0.5-3.6-0.8-1.3-0.3-2.5-0.6-3.8-0.8h-0.3c-0.9-0.2-1.9-0.4-2.8-0.6-0.4-0.1-0.7-0.1-1.1-0.2-1.1-0.2-2.2-0.4-3.4-0.6-1.2-0.2-2.4-0.4-3.6-0.7l-5.4-0.9c-0.9-0.1-1.9-0.3-2.8-0.4-0.8-0.1-1.6-0.3-2.5-0.4-2.6-0.4-5.1-0.7-7.7-1-1.2-0.1-2.3-0.3-3.5-0.4h-0.4c-0.9-0.1-1.8-0.2-2.8-0.3-1.1-0.1-2.1-0.2-3.2-0.3-1.7-0.2-3.4-0.3-5.1-0.4-0.8-0.1-1.5-0.1-2.3-0.2-0.9-0.1-1.9-0.1-2.8-0.2-0.4 0-0.8 0-1.2-0.1-1.1-0.1-2.1-0.1-3.2-0.2-0.5 0-1-0.1-1.5-0.1-1.3-0.1-2.6-0.1-3.9-0.1-0.8 0-1.5-0.1-2.3-0.1-1.2 0-2.4 0-3.5-0.1h-13.9c-2.3 0-4.6 0.1-6.9 0.2-0.9 0-1.9 0.1-2.8 0.1-0.8 0-1.5 0.1-2.3 0.1-1.4 0.1-2.8 0.2-4.1 0.3-1.4 0.1-2.7 0.2-4.1 0.3-1.4 0.1-2.7 0.2-4.1 0.4-0.6 0-1.2 0.1-1.8 0.2l-7.8 0.9c-1.1 0.1-2.1 0.3-3.2 0.4-1 0.1-2.1 0.3-3.1 0.4-3.2 0.5-6.4 0.9-9.5 1.5-0.7 0.1-1.4 0.2-2.1 0.4-0.9 0.1-1.7 0.3-2.6 0.5-1.1 0.2-2.3 0.4-3.4 0.6-0.9 0.2-1.7 0.3-2.6 0.5-0.4 0.1-0.8 0.1-1.1 0.2-0.7 0.1-1.4 0.3-2.1 0.4-1.2 0.3-2.4 0.5-3.6 0.8-1.2 0.3-2.4 0.5-3.6 0.8-0.2 0-0.4 0.1-0.6 0.1-0.5 0.1-1 0.2-1.5 0.4-1.1 0.3-2.3 0.6-3.5 0.9-1.3 0.3-2.5 0.6-3.8 1-0.4 0.1-0.9 0.2-1.4 0.4-1.3 0.4-2.7 0.7-4 1.1-1.5 0.4-3 0.9-4.6 1.3-1 0.3-2.1 0.6-3.1 1-2.1 0.6-4.1 1.3-6.2 2-0.7 0.2-1.4 0.5-2.1 0.7-15-27.5-27.4-56.4-37-86.2-11.7-36.1-19.2-73.6-22.5-111.6-0.6-6.7-1-13.3-1.3-20-0.1-1.2-0.1-2.4-0.1-3.6-0.1-1.2-0.1-2.4-0.1-3.6 0-1.2-0.1-2.4-0.1-3.7 18.8-14 39.2-25.8 61-35 36.1-15.3 74.5-23 114.1-23 39.6 0 78 7.8 114.1 23 21.8 9.2 42.2 20.9 61 35v0.1c0 1 0 1.9-0.1 2.9 0 1.4-0.1 2.8-0.1 4.3 0 0.7 0 1.3-0.1 2-0.1 1.8-0.1 3.5-0.2 5.3-0.3 6.7-0.8 13.3-1.3 20-3.3 38.5-11 76.5-23 113-9.7 30.3-22.3 59.4-37.6 87.1z m136.8 90.9a342.27 342.27 0 0 0-96.3-73.2c29.1-53.7 49.5-112.8 59.4-175.5 12.8 17.1 23.4 35.6 31.8 55.5 13.8 32.7 20.8 67.4 20.8 103.2 0 31-5.3 61.3-15.7 90z" fill="var(--text-color-light)"/>
-                <path d="M512 819.3c8.7 0 24.7 22.9 24.7 60.4s-16 60.4-24.7 60.4-24.7-22.9-24.7-60.4 16-60.4 24.7-60.4m0-20c-24.7 0-44.7 36-44.7 80.4 0 44.4 20 80.4 44.7 80.4s44.7-36 44.7-80.4c0-44.4-20-80.4-44.7-80.4z" fill="var(--secondary-color)"/>
-            </svg><p class="loading-text">Loading Robotics Gallery...</p>
-        </div>
-    </div>
 
     <div id="cursor-glow"></div>
 
     <nav class="navbar">
-        <a href="index.html" class="logo" aria-label="Back to homepage">BlueDarkUP</a>
+        <a href="index.html" class="logo">BLUEDARKUP.</a>
         <ul class="nav-links">
-            <li><a href="index.html#about" aria-label="Navigate to About Me section">关于我</a></li>
-            <li><a href="index.html#philosophy" aria-label="Navigate to My Philosophy section">我的理念</a></li>
-            <li><a href="index.html#articles" aria-label="Navigate to Selected Articles section">精选文章</a></li>
-            <li><a href="index.html#community" aria-label="Navigate to Community Contributions section">社区贡献</a></li>
-            <li><a href="index.html#projects" aria-label="Navigate to Open Source Projects section">开源项目</a></li>
-            <li><a href="index.html#robotics-contributions" class="active" aria-label="Navigate to Robotics Showcase section">机器人集锦</a></li>
-            <li><a href="index.html#tech-stack" aria-label="Navigate to Tech Stack section">技术栈</a></li>
-            <li><a href="index.html#contact" aria-label="Navigate to Contact Information section">联系</a></li>
+            <li><a href="index.html#about">About</a></li>
+            <li><a href="index.html#projects">Projects</a></li>
+            <li><a href="index.html#robotics-contributions" class="active">Gallery</a></li>
+            <li><a href="index.html#contact">Contact</a></li>
         </ul>
-        <div class="hamburger" aria-label="Toggle navigation menu" role="button" tabindex="0">
+        <div class="hamburger">
             <span class="bar"></span>
             <span class="bar"></span>
             <span class="bar"></span>
@@ -284,201 +200,213 @@
     </nav>
     
     <main class="container">
-        <section id="main-robotics-gallery-section">
-            <h2 class="section-title">我的机器人贡献集锦</h2>
-            <div class="category-nav">
-                <button class="category-btn" data-category="fll" aria-label="View FLL gallery">FLL</button>
+        <div class="section-header">
+            <p class="section-subtitle">Visual Archive</p>
+            <h1 class="section-title">Robotics Gallery</h1>
+        </div>
+
+        <div class="category-nav">
+            <button class="category-btn" data-category="fll">FLL AquaHunter</button>
+            <div class="ftc-wrapper">
+                <button class="category-btn" data-category="ftc-parent">FTC Series</button>
+                <div id="ftc-submenu" class="ftc-submenu">
+                    <button class="category-btn" data-category="ftc27570">Team 27570 (WR)</button>
+                    <button class="category-btn" data-category="ftcCommunity">Community</button>
+                </div>
+            </div>
+            <button class="category-btn" data-category="robomaster">RoboMaster</button>
+        </div>
+
+        <div class="gallery-layout">
+            <!-- Left Info Panel -->
+            <div class="gallery-info-panel">
                 <div>
-                    <button class="category-btn" data-category="ftc-parent" aria-label="View FTC galleries">FTC</button>
-                    <div id="ftc-submenu" class="ftc-submenu">
-                        <button class="category-btn" data-category="ftc27570" aria-label="View FTC Team 27570 gallery">27570 团队</button>
-                        <button class="category-btn" data-category="ftcCommunity" aria-label="View other FTC community contributions gallery">其他社区贡献</button>
-                    </div>
-                </div>
-                <button class="category-btn" data-category="robomaster" aria-label="View RoboMaster gallery">ROBOMASTER</button>
-            </div>
-
-            <div class="gallery-layout">
-                <div class="gallery-info-panel">
-                    <h3 id="gallery-title"></h3>
+                    <h2 id="gallery-title">Loading...</h2>
                     <p id="gallery-subtitle"></p>
-                    <div id="current-slide-info">
-                        <p id="slide-description"></p>
-                        <p id="slide-progress"></p>
+                </div>
+                <div class="slide-meta">
+                    <span id="slide-progress">01 / 05</span>
+                    <p id="slide-description"></p>
+                </div>
+            </div>
+
+            <!-- Right Display Panel -->
+            <div class="gallery-display-panel">
+                <!-- FLL -->
+                <div id="fll-gallery" class="gallery-content">
+                    <div class="gallery-slider-wrapper"></div>
+                    <div class="gallery-controls">
+                        <button class="control-button prev-slide" data-target="fll"><svg viewBox="0 0 24 24"><path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/></svg></button>
+                        <button class="control-button next-slide" data-target="fll"><svg viewBox="0 0 24 24"><path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6z"/></svg></button>
                     </div>
                 </div>
-
-                <div class="gallery-display-panel">
-                    <div id="fll-gallery" class="gallery-content">
-                        <div class="gallery-slider-wrapper"></div>
-                        <div class="gallery-controls">
-                            <button class="control-button prev-slide" data-target="fll" aria-label="Previous slide"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/></svg></button>
-                            <button class="control-button next-slide" data-target="fll" aria-label="Next slide"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6z"/></svg></button>
-                        </div>
+                <!-- FTC 27570 -->
+                <div id="ftc27570-gallery" class="gallery-content">
+                    <div class="gallery-slider-wrapper"></div>
+                    <div class="gallery-controls">
+                        <button class="control-button prev-slide" data-target="ftc27570"><svg viewBox="0 0 24 24"><path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/></svg></button>
+                        <button class="control-button next-slide" data-target="ftc27570"><svg viewBox="0 0 24 24"><path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6z"/></svg></button>
                     </div>
-                    <div id="ftc27570-gallery" class="gallery-content">
-                        <div class="gallery-slider-wrapper"></div>
-                        <div class="gallery-controls">
-                            <button class="control-button prev-slide" data-target="ftc27570" aria-label="Previous slide"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/></svg></button>
-                            <button class="control-button next-slide" data-target="ftc27570" aria-label="Next slide"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6z"/></svg></button>
-                        </div>
+                </div>
+                <!-- FTC Community -->
+                <div id="ftcCommunity-gallery" class="gallery-content">
+                    <div class="gallery-slider-wrapper"></div>
+                    <div class="gallery-controls">
+                         <button class="control-button prev-slide" data-target="ftcCommunity"><svg viewBox="0 0 24 24"><path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/></svg></button>
+                        <button class="control-button next-slide" data-target="ftcCommunity"><svg viewBox="0 0 24 24"><path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6z"/></svg></button>
                     </div>
-                    <div id="ftcCommunity-gallery" class="gallery-content">
-                        <div class="gallery-slider-wrapper"></div>
-                        <div class="gallery-controls">
-                             <button class="control-button prev-slide" data-target="ftcCommunity" aria-label="Previous slide"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/></svg></button>
-                            <button class="control-button next-slide" data-target="ftcCommunity" aria-label="Next slide"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6z"/></svg></button>
-                        </div>
-                    </div>
-                    <div id="robomaster-gallery" class="gallery-content">
-                        <div class="gallery-slider-wrapper"></div>
-                        <div class="gallery-controls">
-                            <button class="control-button prev-slide" data-target="robomaster" aria-label="Previous slide"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/></svg></button>
-                            <button class="control-button next-slide" data-target="robomaster" aria-label="Next slide"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6z"/></svg></button>
-                        </div>
+                </div>
+                <!-- RoboMaster -->
+                <div id="robomaster-gallery" class="gallery-content">
+                    <div class="gallery-slider-wrapper"></div>
+                    <div class="gallery-controls">
+                        <button class="control-button prev-slide" data-target="robomaster"><svg viewBox="0 0 24 24"><path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/></svg></button>
+                        <button class="control-button next-slide" data-target="robomaster"><svg viewBox="0 0 24 24"><path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6z"/></svg></button>
                     </div>
                 </div>
             </div>
-        </section>
+        </div>
     </main>
-    
-    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
     
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            const themeSelect = document.getElementById('theme-select');
-            if (themeSelect) {
-                const currentTheme = localStorage.getItem('selectedTheme') || 'theme-green';
-                themeSelect.value = currentTheme;
-                themeSelect.addEventListener('change', function(e) {
-                    localStorage.setItem('selectedTheme', e.target.value);
-                    document.body.style.transition = 'opacity 0.3s ease';
-                    document.body.style.opacity = '0';
-                    setTimeout(() => location.reload(), 300);
+            // Mobile Menu
+            const hamburger = document.querySelector('.hamburger');
+            const navLinks = document.querySelector('.nav-links');
+            if (hamburger) {
+                hamburger.addEventListener('click', () => {
+                    hamburger.classList.toggle('active');
+                    navLinks.classList.toggle('active'); // Needs corresponding CSS for mobile menu
                 });
             }
 
-            const hamburger = document.querySelector('.hamburger');
-            const navLinks = document.querySelector('.nav-links');
-            hamburger.addEventListener('click', () => {
-                hamburger.classList.toggle('active');
-                navLinks.classList.toggle('active');
-            });
-
+            // Cursor Glow
             const glow = document.getElementById('cursor-glow');
             if (glow) window.addEventListener('mousemove', (e) => { glow.style.left = e.clientX + 'px'; glow.style.top = e.clientY + 'px'; });
 
+            // Data
             const galleryInfoData = {
-                fll: { title: 'FLL (FIRST LEGO League) AquaHunter', subtitle: 'FLL 竞赛中自主水下机器人 AquaHunter 的开发与实践。' },
-                ftc27570: { title: 'FTC Team 27570', subtitle: '作为核心成员，我在 FTC 27570 团队的机器人设计、软件开发与竞赛实况。' },
-                ftcCommunity: { title: 'FTC 其他社区贡献', subtitle: '我为 FTC 社区其他队伍提供的技术支持和视觉系统开发。' },
-                robomaster: { title: 'ROBOMASTER 青年赛', subtitle: '在 RoboMaster 青年赛中，自主守卫机器人 RM-Hunter 的研发历程。' }
+                fll: { title: 'FLL AquaHunter', subtitle: '自主水下机器人系统 (Autonomous ROV)。基于 YOLOv8 的入侵物种追踪方案。' },
+                ftc27570: { title: 'FTC Team 27570 (WR)', subtitle: '324 分世界纪录赛季。北京第二场资格赛冠军联盟与启发奖第一名 (Inspire 1st)。' },
+                ftcCommunity: { title: 'Community Contribution', subtitle: '为 FTC 社区 (如19705/28119) 提供的技术支持、视觉 API 与开源工具。' },
+                robomaster: { title: 'RoboMaster RMYC', subtitle: '自主守卫机器人 (Sentry) 视觉自瞄与运动控制系统。' }
             };
 
             const galleryData = {
                 fll: [
-                    { type: 'image', src: 'images/fll/FLL-A.jpg', description: 'FLL 2025-2026 赛季乐高®教育FLL科创活动和国际赛事大中华区发布仪式暨 FLL大中华区合作伙伴答谢晚宴 大合影' },
-                    { type: 'video', youtubeId: 'q-FieT4VC1g', description: 'AquaHunter 刚刚将全部自动程序编写完成后录制的视频' },
-                    { type: 'image', src: 'images/fll/FLL-W.jpg', description: 'FLL 亚锦赛获得亚军 颁奖现场' },
-                    { type: 'image', src: 'images/fll/FLL-T.jpg', description: 'AquaHunter 完整自主任务视频展示，作为创新研究全场第一进行介绍。' },
-                    { type: 'image', src: 'images/fll/LIONFISHD.jpg', description: 'AquaHunter 模型推理画面' },
-                    { type: 'video', youtubeId: 'qpJmq-FBLdI', description: 'AquaHunter 模型视频' },
-                    { type: 'image', src: 'images/fll/FLL-S.jpg', description: 'FLL 创新研究贡献学生与老师在发布仪式晚宴中的合影。' }
+                    { type: 'image', src: 'images/fll/FLL-A.jpg', description: 'FLL 2025-2026 国际赛事大中华区发布仪式合影。' },
+                    { type: 'video', youtubeId: 'q-FieT4VC1g', description: 'AquaHunter 自主程序 Demo：首次实现全自动水下巡航。' },
+                    { type: 'image', src: 'images/fll/FLL-W.jpg', description: 'FLL 亚锦赛颁奖现场：荣获亚军。' },
+                    { type: 'image', src: 'images/fll/FLL-T.jpg', description: '创新研究展示：AquaHunter 视觉识别方案获得全场最高评价。' },
+                    { type: 'image', src: 'images/fll/LIONFISHD.jpg', description: 'YOLOv8 模型实时推理画面：准确识别狮子鱼。' },
+                    { type: 'video', youtubeId: 'qpJmq-FBLdI', description: 'AquaHunter 训练数据与模型表现视频。' },
+                    { type: 'image', src: 'images/fll/FLL-S.jpg', description: '发布仪式晚宴，与团队成员及导师合影。' }
                 ],
                 ftc27570: [
-                    { type: 'video', youtubeId: '5zU5Di1xkyc', description: '27570 机器人最终版本的超高精度视觉，甚至能识别潜水区铁杆。' },
-                    { type: 'video', youtubeId: '2otmbbGTOR8', description: '27570 机器人在上海三开发的自动驾驶，凭借此程序夺得控制奖晋级国赛。' }
+                    { type: 'video', youtubeId: '5zU5Di1xkyc', description: '27570 最终版本：超高精度视觉系统，可识别潜水区细微目标。' },
+                    { type: 'video', youtubeId: '2otmbbGTOR8', description: '上海资格赛版本：凭借稳健的自动驾驶程序夺得控制奖 (Control Award)。' }
                 ],
                 ftcCommunity: [
-                    { type: 'image', src: 'images/ftc/HOUSTONDEBUG.jpg', description: '为 FTC 19705 红心机器人开发的竞赛级视觉系统，在休斯顿世锦赛练习场地上进行测试。' },
-                    { type: 'video', youtubeId: '3emosyJK48Q', description: '19705 队在休斯顿世锦赛之前，测试的超高精度自动阶段挂杆视觉程序。' },
-                    { type: 'video', youtubeId: 'Xr-lSPC3_i0', description: '19705 队在休斯顿世锦赛之前，测试的超高精度自动阶段放框视觉程序。' },
-                    { type: 'video', youtubeId: 'L76KmLFFQG4', description: '19705 队在休斯顿世锦赛之前，测试的超高精度三种色彩的自动抓取。' },
-                    { type: 'video', youtubeId: '2ydu9OxluLw', description: '19705 队在休斯顿世锦赛使用我们视觉系统的实战录像，展示了其高稳定性和抓取速度。' },
-                    { type: 'image', src: 'images/ftc/HOUSTONT.jpg', description: 'FTC 19705 红心机器人在休斯顿世锦赛PLAYOFF取得平局。' },
-                    { type: 'image', src: 'images/ftc/HOUSTONW.jpg', description: 'FTC 19705 红心机器人在休斯顿世锦赛在PLAYOFF获胜。' },
-                    { type: 'video', youtubeId: 'lET75wiYy0s', description: '个人开发的数据标注Web APP Zero2YOLOYard，集成领先的实力分割 SAM2.1 融合 CSRT 传统跟踪器实现辅助标注以及超高精度全自动跟踪标注' },
-                    { type: 'video', youtubeId: 'vSaq8Gou4Eo', description: '个人开发的一个完整、标准化的 MLOps 流水线，旨在消除为 FTC 训练和部署自定义模型的复杂性。视频展示从TensorFlow环境配置到启动模型训练只使用了四分半的时间' },
-                    { type: 'video', youtubeId: 'y_3FqC9k9JI', description: '个人开发的一个完整、标准化的 MLOps 流水线，旨在消除为 FTC 训练和部署自定义模型的复杂性。视频展示了训练完成后利用模型检查点做最后的打包' },
-                    { type: 'image', src: 'images/ftc/119C.jpg', description: '为 FTC 新队伍 28119 进行技术讲解，分享视觉系统开发和机器人编程经验。' },
-                    { type: 'image', src: 'images/ftc/119T.jpg', description: '为 FTC 新队伍 28119 进行技术讲解，分享视觉系统开发和机器人编程经验。' },
-                    { type: 'image', src: 'images/ftc/119T2.jpg', description: '为 FTC 新队伍 28119 进行技术讲解，分享视觉系统开发和机器人编程经验。' }
+                    { type: 'image', src: 'images/ftc/HOUSTONDEBUG.jpg', description: '为 FTC 19705 开发的视觉系统在休斯顿世锦赛场地测试。' },
+                    { type: 'video', youtubeId: '3emosyJK48Q', description: '19705 世锦赛测试：自动阶段高精度挂杆。' },
+                    { type: 'video', youtubeId: 'Xr-lSPC3_i0', description: '19705 世锦赛测试：自动阶段精准放框。' },
+                    { type: 'video', youtubeId: 'L76KmLFFQG4', description: '19705 世锦赛测试：多色样本自动识别与抓取。' },
+                    { type: 'video', youtubeId: '2ydu9OxluLw', description: '19705 世锦赛实战录像：高稳定性视觉系统助力 Playoff 获胜。' },
+                    { type: 'image', src: 'images/ftc/HOUSTONT.jpg', description: 'FTC 19705 在休斯顿世锦赛 Playoff 取得平局。' },
+                    { type: 'image', src: 'images/ftc/HOUSTONW.jpg', description: 'FTC 19705 在休斯顿世锦赛 Playoff 获胜瞬间。' },
+                    { type: 'video', youtubeId: 'lET75wiYy0s', description: 'Zero2YOLOYard：集成了 SAM 2.1 的 AI 辅助数据标注工具演示。' },
+                    { type: 'video', youtubeId: 'vSaq8Gou4Eo', description: 'FTC MLOps：4分半钟内完成从环境配置到模型训练的全自动流水线。' },
+                    { type: 'video', youtubeId: 'y_3FqC9k9JI', description: 'FTC MLOps：模型检查点导出与打包演示。' },
+                    { type: 'image', src: 'images/ftc/119C.jpg', description: '为新队伍 28119 进行技术指导：视觉系统架构。' },
+                    { type: 'image', src: 'images/ftc/119T.jpg', description: '为 28119 队讲解 Java 机器人编程基础。' },
+                    { type: 'image', src: 'images/ftc/119T2.jpg', description: '与 28119 队进行技术交流与经验分享。' }
                 ],
                 robomaster: [
-                    { type: 'video', youtubeId: 'Ogi15fAEs1s', description: 'RoboMaster RMYC步兵机器人的自动程序，在自动结束之后对方基地血量减少三分之一。' },
-                    { type: 'video', youtubeId: 'p-A05wAB364', description: 'RoboMaster RMYC步兵机器人基于视觉识别的装甲板跟踪' },
-                    { type: 'video', youtubeId: 'vaegsY6iSEk', description: 'RoboMaster RMYC步兵机器人基于视觉识别的装甲板自瞄击打' },
-                    { type: 'image', src: 'images/robomaster/RMSHOOT.jpg', description: 'RM无人机的乒乓球发射器' }
+                    { type: 'video', youtubeId: 'Ogi15fAEs1s', description: 'RM-Hunter 步兵机器人：自动攻击逻辑实测，有效削减敌方基地血量。' },
+                    { type: 'video', youtubeId: 'p-A05wAB364', description: 'RM-Hunter 视觉系统：装甲板实时跟踪。' },
+                    { type: 'video', youtubeId: 'vaegsY6iSEk', description: 'RM-Hunter 视觉系统：高动态下的自瞄击打。' },
+                    { type: 'image', src: 'images/robomaster/RMSHOOT.jpg', description: 'RoboMaster 无人机挂载的乒乓球发射装置特写。' }
                 ]
             };
             
+            // UI References
             const categoryButtons = document.querySelectorAll('.category-btn');
-            const ftcParentButton = document.querySelector('[data-category="ftc-parent"]');
-            const ftcSubmenu = document.getElementById('ftc-submenu');
             const galleryContents = document.querySelectorAll('.gallery-content');
-            
             const galleryTitleEl = document.getElementById('gallery-title');
             const gallerySubtitleEl = document.getElementById('gallery-subtitle');
             const slideDescriptionEl = document.getElementById('slide-description');
             const slideProgressEl = document.getElementById('slide-progress');
+            const ftcSubmenu = document.getElementById('ftc-submenu');
 
             let currentGalleryState = {};
             let activeCategoryId = '';
 
+            // Video Control
             function stopAllVideos() {
                 document.querySelectorAll('.gallery-slide iframe').forEach(iframe => {
-                    if (iframe.contentWindow && typeof iframe.contentWindow.postMessage === 'function') {
+                    if (iframe.contentWindow) {
                         iframe.contentWindow.postMessage('{"event":"command","func":"pauseVideo","args":""}', '*');
                     }
                 });
             }
 
+            // Update Text Info with Animation
             function updateInfoPanel(categoryId) {
                 const info = galleryInfoData[categoryId];
                 if (!info) return;
 
-                galleryTitleEl.classList.add('fading-out');
-                gallerySubtitleEl.classList.add('fading-out');
+                const elements = [galleryTitleEl, gallerySubtitleEl, slideDescriptionEl, slideProgressEl];
+                elements.forEach(el => el.style.opacity = '0');
 
                 setTimeout(() => {
                     galleryTitleEl.textContent = info.title;
                     gallerySubtitleEl.textContent = info.subtitle;
-                    galleryTitleEl.classList.remove('fading-out');
-                    gallerySubtitleEl.classList.remove('fading-out');
+                    
+                    // Restore current slide info
+                    if(currentGalleryState[categoryId]) {
+                        const idx = currentGalleryState[categoryId].index;
+                        const slides = galleryData[categoryId];
+                        if(slides && slides[idx]) {
+                            slideDescriptionEl.textContent = slides[idx].description;
+                            slideProgressEl.textContent = `${String(idx + 1).padStart(2, '0')} / ${String(slides.length).padStart(2, '0')}`;
+                        }
+                    }
+                    elements.forEach(el => el.style.opacity = '1');
                 }, 300);
             }
 
+            // Render Slides
             function renderGallery(categoryId) {
                 const data = galleryData[categoryId];
                 const galleryWrapper = document.querySelector(`#${categoryId}-gallery .gallery-slider-wrapper`);
                 galleryWrapper.innerHTML = ''; 
 
                 if (!data || data.length === 0) {
-                    galleryWrapper.innerHTML = `<p style="color:var(--text-color-dark);">暂无内容。</p>`;
-                    slideDescriptionEl.textContent = '';
-                    slideProgressEl.textContent = '';
+                    galleryWrapper.innerHTML = `<p style="color:#666; position:absolute; top:50%; left:50%; transform:translate(-50%,-50%)">NO DATA.</p>`;
                     return;
                 }
 
-                data.forEach((item, index) => { // Add index here
+                data.forEach(item => {
                     const slide = document.createElement('div');
                     slide.className = 'gallery-slide';
                     if (item.type === 'image') {
-                        slide.innerHTML = `<img src="${item.src}" alt="${item.description}">`;
+                        slide.innerHTML = `<img src="${item.src}" alt="Gallery Image">`;
                     } else if (item.type === 'video') {
-                        slide.innerHTML = `<div class="video-embed"><iframe src="https://www.youtube.com/embed/${item.youtubeId}?enablejsapi=1&rel=0" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe></div>`;
+                        slide.innerHTML = `<iframe src="https://www.youtube.com/embed/${item.youtubeId}?enablejsapi=1&rel=0" allowfullscreen></iframe>`;
                     }
                     galleryWrapper.appendChild(slide);
                 });
 
-                if (currentGalleryState[categoryId] === undefined || currentGalleryState[categoryId].slides?.length !== data.length) {
-                     currentGalleryState[categoryId] = { index: 0 };
+                if (!currentGalleryState[categoryId] || currentGalleryState[categoryId].slides?.length !== data.length) {
+                     currentGalleryState[categoryId] = { index: 0, slides: galleryWrapper.querySelectorAll('.gallery-slide') };
+                } else {
+                    currentGalleryState[categoryId].slides = galleryWrapper.querySelectorAll('.gallery-slide');
                 }
-                currentGalleryState[categoryId].slides = galleryWrapper.querySelectorAll('.gallery-slide');
+                
                 updateGalleryDisplay(categoryId, true);
             }
 
-            // MODIFIED: Logic for 2D scrolling effect
+            // Slider Logic
             function updateGalleryDisplay(categoryId, isInitial = false) {
                 const state = currentGalleryState[categoryId];
                 if (!state || !state.slides || state.slides.length === 0) return;
@@ -488,16 +416,16 @@
                 const slides = state.slides;
                 const currentIndex = state.index;
             
-                // Loop through all slides and set their position based on the current index
                 slides.forEach((slide, i) => {
-                    const offset = i - currentIndex;
-                    slide.style.transform = `translateX(${offset * 100}%)`;
+                    slide.style.transform = `translateX(${(i - currentIndex) * 100}%)`;
                 });
             
-                slideDescriptionEl.textContent = galleryData[categoryId][currentIndex].description;
-                slideProgressEl.textContent = `(${currentIndex + 1} / ${slides.length})`;
+                // Update text instantly without fade if just sliding
+                if (!isInitial) {
+                    slideDescriptionEl.textContent = galleryData[categoryId][currentIndex].description;
+                    slideProgressEl.textContent = `${String(currentIndex + 1).padStart(2, '0')} / ${String(slides.length).padStart(2, '0')}`;
+                }
             }
-
 
             function navigateGallery(categoryId, direction) {
                 const state = currentGalleryState[categoryId];
@@ -506,6 +434,7 @@
                 updateGalleryDisplay(categoryId);
             }
 
+            // Switching Categories
             function showGallery(categoryId) {
                 if (activeCategoryId === categoryId) return;
                 activeCategoryId = categoryId;
@@ -516,28 +445,34 @@
                 galleryContents.forEach(content => {
                     content.classList.toggle('active', content.id === `${categoryId}-gallery`);
                 });
-                renderGallery(categoryId);
+                
+                // Only render if empty to save resources
+                if(!document.querySelector(`#${categoryId}-gallery .gallery-slide`)) {
+                    renderGallery(categoryId);
+                } else {
+                    updateGalleryDisplay(categoryId, true); // Refresh display
+                }
             }
 
+            // Button Events
             categoryButtons.forEach(button => {
                 button.addEventListener('click', function() {
                     const category = this.dataset.category;
 
-                    categoryButtons.forEach(btn => btn.classList.remove('active'));
-                    this.classList.add('active');
+                    // Handle styling
+                    document.querySelectorAll('.category-nav > .category-btn').forEach(btn => btn.classList.remove('active'));
+                    if (this.parentElement.classList.contains('ftc-submenu')) {
+                        document.querySelector('[data-category="ftc-parent"]').classList.add('active');
+                    } else if (category !== 'ftc-parent') {
+                        this.classList.add('active');
+                    }
 
                     if (category === 'ftc-parent') {
-                        ftcSubmenu.classList.toggle('show');
-                        if (ftcSubmenu.classList.contains('show')) {
-                            const firstSubItem = ftcSubmenu.querySelector('.category-btn');
-                            firstSubItem.classList.add('active');
-                            showGallery(firstSubItem.dataset.category);
-                        }
+                        // Toggle submenu visibility handled by CSS hover mostly, 
+                        // but logic here handles default selection
+                        const ftcDefault = 'ftc27570';
+                        showGallery(ftcDefault);
                     } else {
-                        ftcSubmenu.classList.remove('show');
-                        if (['ftc27570', 'ftcCommunity'].includes(category)) {
-                             ftcParentButton.classList.add('active');
-                        }
                         showGallery(category);
                     }
                 });
@@ -551,22 +486,8 @@
                 });
             });
 
-            document.addEventListener('keydown', function(e) {
-                if (activeCategoryId && galleryData[activeCategoryId] && galleryData[activeCategoryId].length > 1) {
-                    if (e.key === 'ArrowLeft') {
-                        navigateGallery(activeCategoryId, -1);
-                    } else if (e.key === 'ArrowRight') {
-                        navigateGallery(activeCategoryId, 1);
-                    }
-                }
-            });
-
+            // Initialize
             document.querySelector('.category-btn[data-category="fll"]').click();
-            document.getElementById('main-robotics-gallery-section').classList.add('is-visible');
-
-            window.addEventListener('load', () => {
-                setTimeout(() => document.getElementById('preloader')?.classList.add('loaded'), 500);
-            });
         });
     </script>
 </body>
