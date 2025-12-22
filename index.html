@@ -53,7 +53,7 @@
             transform: translate(-50%, -50%); transition: opacity 0.3s;
         }
 
-        /* 导航栏 */
+        /* 导航栏 - 修正：移除边框，恢复简洁风格 */
         .navbar {
             position: fixed; top: 0; left: 0; width: 100%; 
             padding: 20px 40px;
@@ -62,7 +62,12 @@
             display: flex; justify-content: space-between; align-items: center;
             z-index: 1000;
         }
-        .logo { font-family: 'Exo 2'; font-weight: 800; font-size: 1.4rem; text-decoration: none; color: #fff; letter-spacing: 2px; text-transform: uppercase; border: 1px solid #fff; padding: 5px 10px; }
+        /* Logo 样式已还原 */
+        .logo { 
+            font-family: 'Exo 2'; font-weight: 800; font-size: 1.5rem; 
+            text-decoration: none; color: #fff; letter-spacing: 1px; 
+            /* border: 1px solid #fff; padding: 5px 10px;  <-- 已删除此行 */
+        }
         .nav-links { display: flex; gap: 40px; list-style: none; }
         .nav-links a { 
             text-decoration: none; color: var(--text-dim); font-size: 0.8rem; 
@@ -78,7 +83,7 @@
         /* 通用容器 */
         .container { max-width: 1300px; margin: 0 auto; padding: 120px 40px; position: relative; z-index: 2; }
 
-        /* 标题样式 - 线条穿插风格 */
+        /* 标题样式 */
         .section-header {
             display: flex; align-items: flex-end; margin-bottom: 60px; padding-bottom: 20px;
             border-bottom: 1px solid var(--border-main); position: relative;
@@ -95,7 +100,7 @@
             text-transform: uppercase; letter-spacing: 4px; margin-bottom: 5px;
         }
 
-        /* HERO SECTION - Staggered Layout */
+        /* HERO SECTION */
         #hero {
             min-height: 100vh; display: flex; align-items: center; justify-content: center;
             position: relative; padding: 100px 5%;
@@ -123,7 +128,22 @@
             font-family: 'Exo 2'; font-size: clamp(3rem, 7vw, 6rem); 
             line-height: 0.95; font-weight: 800; letter-spacing: -2px; text-transform: uppercase;
         }
-        #hero h1 .highlight { -webkit-text-stroke: 1px #fff; color: transparent; display: block; }
+        /* 几何碎片文字特效 */
+        .geo-char-wrapper { display: inline-block; position: relative; cursor: default; margin: 0 2px; }
+        .geo-base { opacity: 0; pointer-events: none; }
+        .geo-layer {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            color: #fff; transition: all 0.6s cubic-bezier(0.2, 0.8, 0.2, 1); user-select: none;
+        }
+        .layer-1 { clip-path: polygon(0 0, 100% 0, 80% 40%, 20% 40%); z-index: 2; }
+        .layer-2 { clip-path: polygon(20% 60%, 80% 60%, 100% 100%, 0% 100%); z-index: 2; }
+        .layer-3 { clip-path: polygon(0 50%, 20% 40%, 80% 40%, 100% 50%, 80% 60%, 20% 60%); z-index: 3; text-shadow: 0 0 5px rgba(255,255,255,0.8); }
+        .layer-4 { clip-path: inset(45% 0 45% 0); opacity: 0.5; z-index: 1; }
+        
+        .geo-char-wrapper:hover .layer-1 { transform: translateY(-6px) scale(1.05); color: #d4d4d4; }
+        .geo-char-wrapper:hover .layer-2 { transform: translateY(6px) scale(1.05); color: #d4d4d4; }
+        .geo-char-wrapper:hover .layer-3 { transform: scale(0.9) rotate(5deg); color: #fff; text-shadow: 0 0 15px rgba(255,255,255,1); }
+        .geo-char-wrapper:hover .layer-4 { transform: scaleX(1.5); opacity: 0.8; color: var(--text-dim); }
 
         .hero-content-box {
             grid-column: 2 / 3;
@@ -272,6 +292,8 @@
             .g-display { border-right: none; border-bottom: 1px solid var(--border-main); }
             .nav-links { display: none; }
             .section-title { font-size: 2.2rem; }
+            .geo-base { opacity: 1; }
+            .geo-layer { display: none; }
         }
     </style>
 </head>
@@ -297,9 +319,9 @@
                 <span class="hero-tag">2025-26 SEASON UPDATE</span>
                 <h1>
                     Lead Developer<br>
-                    <span class="highlight">of World Record Team</span>
+                    <!-- 几何文字特效挂载点 -->
+                    <span class="highlight" id="geo-text">of World Record Team</span>
                 </h1>
-                <!-- Decor -->
                 <div class="corner-deco tl"></div><div class="corner-deco br"></div>
             </div>
             <div class="hero-content-box reveal">
@@ -479,7 +501,7 @@
             <div class="card-grid">
                 <div class="card" style="border-color: #fff;">
                     <h3><a href="https://grizzly-treatment-ac4.notion.site/PID-257969a5284d80acb2e8c16696312fad" target="_blank">L8: 控制艺术：PID 通用调试指南</a></h3>
-                    <p>深入浅出地讲解PID原理，结合图形化分析，提供一套通用的参数整定方法论。</p>
+                    <p>深入浅出地讲解PID原理，结合图形化分析，提供一套通用的、不依赖特定硬件的参数整定方法论。</p>
                     <div class="card-footer"><span class="tag hot">Hot 🔥</span><span class="tag">Control Theory</span></div>
                 </div>
                 <div class="card">
@@ -696,6 +718,38 @@
         // --- Animations & Init ---
         window.onload = function() {
             renderSlide();
+            
+            // Geometric Text Splitter
+            const initGeometricText = () => {
+                const target = document.getElementById('geo-text');
+                if (!target) return;
+                const text = target.innerText;
+                target.innerHTML = '';
+                text.split('').forEach(char => {
+                    if (char === ' ') {
+                        const space = document.createElement('span');
+                        space.innerHTML = '&nbsp;';
+                        target.appendChild(space);
+                        return;
+                    }
+                    const wrapper = document.createElement('span');
+                    wrapper.className = 'geo-char-wrapper';
+                    const base = document.createElement('span');
+                    base.className = 'geo-base';
+                    base.innerText = char;
+                    wrapper.appendChild(base);
+                    for (let i = 1; i <= 4; i++) {
+                        const layer = document.createElement('span');
+                        layer.className = `geo-layer layer-${i}`;
+                        layer.innerText = char;
+                        const randomDelay = Math.random() * 0.2;
+                        layer.style.transitionDelay = `${randomDelay}s`;
+                        wrapper.appendChild(layer);
+                    }
+                    target.appendChild(wrapper);
+                });
+            };
+            initGeometricText();
             
             // Reveal Animation
             const reveal = () => {
