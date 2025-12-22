@@ -3,836 +3,326 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Jiang (BlueDarkUP) - 全栈开发者 & AI 机器人工程师</title>
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🔑</text></svg>">
-    <meta name="description" content="Jiang (BlueDarkUP) 的个人作品集，一位专注于全栈开发与 AI 机器人工程的学生开发者。展示了我的开源项目、技术文章以及在 FTC 机器人竞赛中的贡献。">
-    <meta name="author" content="Jiang (BlueDarkUP)">
+    <title>Jiang (BlueDarkUP) | Full-Stack & Robotics Engineer</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🏴‍☠️</text></svg>">
+    <meta name="description" content="Jiang (BlueDarkUP) 的个人作品集。FTC世界纪录保持者，全栈开发者，致力于 AI 与机器人工程。">
+    
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@v2.15.1/devicon.min.css">
-    <!-- 引入现代化字体 -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@600;700&family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@300;600;800&family=Inter:wght@200;400;600&display=swap" rel="stylesheet">
 
     <style>
-        /* 
-        ==========================================================================
-        Theme Palettes - 保持原有配色，但在细节上增强对比度
-        ========================================================================== 
-        */
-        body.theme-green {
-            --primary-color: #0f1c18; /* 更深邃 */
-            --primary-color-transparent: rgba(15, 28, 24, 0.85);
-            --primary-color-darker: #080f0d;
-            --secondary-color: #58C27D;
-            --secondary-color-transparent-1: rgba(88, 194, 125, 0.08);
-            --secondary-color-transparent-2: rgba(88, 194, 125, 0.15);
-            --secondary-color-transparent-4: rgba(88, 194, 125, 0.4);
-            --secondary-color-transparent-5: rgba(88, 194, 125, 0.5);
-            --secondary-color-transparent-gradient: rgba(88, 194, 125, 0.05);
-            --card-bg: rgba(26, 46, 40, 0.4);
-            --card-border: rgba(88, 194, 125, 0.2);
-            --text-color-light: #E3EBE7;
-            --text-color-dark: #8fa099;
-            --cta-hover-text-color: #0f1c18;
-        }
-    
-        /* 这里的其他主题你可以保留原样，为了节省篇幅，我只展示Theme-green作为示例，
-           逻辑是增加 --card-bg 和 --card-border 变量来实现现代化卡片 */
-        /* ... 其他主题代码保持不变，建议给每个主题添加 --card-bg 和 --card-border ... */
-        
-        /* 为了演示效果，这里复用原有的颜色逻辑作为 fallback */
-        body:not(.theme-green) {
-            --card-bg: var(--secondary-color-transparent-1);
-            --card-border: var(--secondary-color-transparent-2);
-        }
-
-        /* 
-        ==========================================================================
-        Modern UI Styles
-        ========================================================================== 
-        */
-    
         :root {
-            --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
-            --font-header: 'Exo 2', sans-serif;
-            --background-light: var(--secondary-color-transparent-1);
-            --border-radius-lg: 16px;
-            --border-radius-sm: 8px;
-            --transition-smooth: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            --bg-color: #000000;
+            --bg-secondary: #0a0a0a;
+            --text-primary: #ffffff;
+            --text-secondary: #a1a1a1;
+            --accent: #ffffff;
+            --glass-border: rgba(255, 255, 255, 0.1);
+            --glass-bg: rgba(255, 255, 255, 0.03);
+            --transition: all 0.5s cubic-bezier(0.19, 1, 0.22, 1);
         }
-    
-        html { scroll-behavior: smooth; }
-    
-        body {
-            font-family: var(--font-sans);
-            background: linear-gradient(180deg, var(--primary-color) 0%, var(--primary-color-darker) 100%);
-            background-attachment: fixed;
-            color: var(--text-color-light);
-            margin: 0; padding: 0; line-height: 1.7;
-            transition: background-color 0.3s ease, color 0.3s ease;
-        }
-    
-        /* Preloader Styles (Keep unchanged) */
-        #preloader { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: var(--primary-color); z-index: 9999; display: flex; justify-content: center; align-items: center; transition: opacity 0.8s ease-in-out, visibility 0.8s ease-in-out; visibility: visible; opacity: 1; will-change: opacity, visibility; }
-        #preloader.loaded { opacity: 0; visibility: hidden; pointer-events: none; }
-        .rocket-container { text-align: center; animation: takeOff 2.6s ease-in-out forwards; will-change: transform, opacity; }
-        .rocket-container svg { width: 150px; height: 150px; margin-bottom: 20px; }
-        .loading-text { color: var(--text-color-dark); font-size: 1.2em; letter-spacing: 2px; opacity: 0; animation: fadeInText 1s ease-in 0.5s forwards; }
-        @keyframes takeOff { 0% { transform: translateY(60px); opacity: 0; } 25% { transform: translateY(0); opacity: 1; } 80% { transform: translateY(0); opacity: 1; } 100% { transform: translateY(-120px); opacity: 0; } }
-        @keyframes fadeInText { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
-    
-        body::before { content: ''; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 250 250' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E"); opacity: 0.04; pointer-events: none; z-index: 0; }
-        #cursor-glow { pointer-events: none; position: fixed; top: 0; left: 0; width: 600px; height: 600px; border-radius: 50%; background: radial-gradient(circle, var(--secondary-color-transparent-gradient), transparent 60%); transform: translate(-50%, -50%); transition: top 0.1s ease-out, left 0.1s ease-out; z-index: 0; }
-        ::-webkit-scrollbar { width: 8px; }
-        ::-webkit-scrollbar-track { background: var(--primary-color); }
-        ::-webkit-scrollbar-thumb { background-color: var(--secondary-color); border-radius: 10px; opacity: 0.7; }
-        ::-webkit-scrollbar-thumb:hover { background-color: var(--text-color-light); }
-    
-        .container { max-width: 1100px; margin: 0 auto; padding: 0 40px; position: relative; z-index: 1; }
-    
-        /* Modern Floating Navbar */
-        .navbar {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 12px 30px;
-            position: fixed;
-            width: calc(100% - 80px); /* Slightly narrower */
-            max-width: 1200px;
-            left: 50%;
-            transform: translateX(-50%);
-            top: 20px; /* Floating from top */
-            background-color: var(--primary-color-transparent);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            z-index: 1000;
-            transition: all 0.3s ease-in-out;
-            border-radius: 50px; /* Pill shape */
-            border: 1px solid var(--secondary-color-transparent-2);
-        }
-        
-        .navbar.scrolled {
-            top: 10px;
-            padding: 10px 30px;
-            background-color: rgba(var(--primary-color), 0.95);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-            border-color: var(--secondary-color-transparent-4);
-        }
-    
-        .logo {
-            font-family: var(--font-header);
-            font-weight: 700;
-            font-size: 1.5em;
-            color: var(--text-color-light);
-            text-decoration: none;
-            z-index: 1001;
-            letter-spacing: -0.5px;
-        }
-    
-        .nav-links { list-style: none; display: flex; gap: 30px; margin: 0; padding: 0; }
-        .nav-links a {
-            color: var(--text-color-light);
-            text-decoration: none;
-            transition: color 0.3s ease;
-            font-size: 0.9em;
-            font-weight: 600;
-            position: relative;
-            padding: 5px 0;
-            opacity: 0.8;
-        }
-        .nav-links a:hover { color: var(--secondary-color); opacity: 1; }
-        .nav-links a::after {
-            content: '';
-            position: absolute;
-            width: 100%; height: 2px;
-            background-color: var(--secondary-color);
-            bottom: -2px; left: 0;
-            transform: scaleX(0);
-            transform-origin: right;
-            transition: transform 0.3s ease-in-out;
-        }
-        .nav-links a:hover::after { transform: scaleX(1); transform-origin: left; }
-    
-        .hamburger { display: none; cursor: pointer; z-index: 1001; }
-        .hamburger .bar { display: block; width: 25px; height: 2px; margin: 6px auto; transition: all 0.3s ease-in-out; background-color: var(--text-color-light); border-radius: 2px; }
-        
-        section { padding: 140px 0; min-height: auto; }
-        
-        .fade-in { opacity: 0; transform: translateY(30px); transition: opacity 0.8s ease-out, transform 0.8s cubic-bezier(0.25, 1, 0.5, 1); will-change: transform, opacity; }
-        .fade-in.is-visible { opacity: 1; transform: translateY(0); }
-    
-        .section-title {
-            font-family: var(--font-header);
-            font-size: 2.8em;
-            margin-bottom: 60px;
-            position: relative;
-            display: inline-block;
-            color: var(--text-color-light);
-            letter-spacing: -1px;
-        }
-        .section-title::after {
-            content: ''; display: block; width: 60px; height: 4px;
-            background: linear-gradient(90deg, var(--secondary-color), transparent);
-            margin-top: 15px; border-radius: 2px;
-        }
-    
-        /* Hero Section Optimized */
-        #hero {
-            display: flex; flex-direction: column; justify-content: center;
-            min-height: 100vh; padding-top: 0; position: relative; overflow: hidden;
-        }
-        #particles-js { position: absolute; width: 100%; height: 100%; top: 0; left: 0; z-index: 0; }
-        #hero .container { z-index: 1; }
-        #hero h1 { font-family: var(--font-header); font-size: clamp(40px, 8vw, 90px); margin: 0; color: var(--text-color-light); line-height: 1.1; font-weight: 700; }
-        #hero .highlight {
-            color: transparent;
-            background: linear-gradient(90deg, var(--secondary-color), #fff);
-            -webkit-background-clip: text;
-            background-clip: text;
-        }
-        #hero p.subtitle { font-size: 1.3em; color: var(--text-color-dark); max-width: 650px; margin-top: 25px; font-weight: 300; }
-    
-        .cta-button {
-            display: inline-block;
-            padding: 16px 32px;
-            background-color: transparent;
-            border: 1px solid var(--secondary-color);
-            color: var(--secondary-color);
-            text-decoration: none;
-            border-radius: 50px;
-            margin-top: 40px;
-            font-weight: 600;
-            transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-            font-size: 1.05em;
-            position: relative;
-            overflow: hidden;
-            z-index: 1;
-        }
-        .cta-button::before {
-            content: ''; position: absolute; top: 0; left: 0; width: 0; height: 100%;
-            background-color: var(--secondary-color); z-index: -1;
-            transition: width 0.3s ease;
-        }
-        .cta-button:hover { color: var(--cta-hover-text-color); box-shadow: 0 10px 20px rgba(0,0,0,0.2); transform: translateY(-2px); }
-        .cta-button:hover::before { width: 100%; }
-    
-        .about-content { display: grid; grid-template-columns: 2fr 1fr; gap: 60px; align-items: flex-start; }
-        .about-content p { max-width: 650px; font-size: 1.15em; color: var(--text-color-dark); margin-bottom: 20px; }
-        .milestones ul { list-style: none; padding: 0; }
-        .milestones li { padding-left: 25px; position: relative; margin-bottom: 12px; color: var(--text-color-dark); }
-        .milestones li::before { content: '▹'; position: absolute; left: 0; color: var(--secondary-color); font-weight: bold; }
-        .milestones h4 { color: var(--text-color-light); margin-bottom: 20px; font-family: var(--font-header); }
-    
-        /* Modern Cards (Bento Grid Style) */
-        .card-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
-            gap: 25px;
-        }
-        .card {
-            background-color: var(--card-bg, rgba(255,255,255,0.03));
-            backdrop-filter: blur(10px);
-            padding: 30px;
-            border-radius: var(--border-radius-lg);
-            display: flex; flex-direction: column;
-            border: 1px solid var(--card-border, rgba(255,255,255,0.05));
-            transition: var(--transition-smooth);
-            opacity: 0; transform: translateY(20px); will-change: transform, opacity;
-            position: relative;
-            overflow: hidden;
-        }
-        .card.is-visible { opacity: 1; transform: translateY(0); }
-        .card:hover {
-            transform: translateY(-8px);
-            background-color: rgba(255,255,255,0.05); /* Slight brighten */
-            border-color: var(--secondary-color-transparent-5);
-            box-shadow: 0 20px 40px -10px rgba(0,0,0,0.4);
-        }
-        .card h3 { margin-top: 0; font-family: var(--font-header); margin-bottom: 15px; font-size: 1.4em; }
-        .card h3 a { color: var(--text-color-light); text-decoration: none; transition: color 0.2s; }
-        .card h3 a::after { content: ' ↗'; opacity: 0; transform: translate(-5px, 5px); transition: all 0.3s ease; display: inline-block; font-size: 0.8em; }
-        .card:hover h3 a::after { opacity: 1; transform: translate(0, 0); }
-        .card:hover h3 a { color: var(--secondary-color); }
-        
-        .card p { font-size: 1em; color: var(--text-color-dark); flex-grow: 1; margin-bottom: 20px; }
-        .card h4 { color: var(--text-color-light); margin-top: 0; font-size: 1.2em; font-family: var(--font-header); }
-    
-        .card-footer { margin-top: auto; display: flex; flex-wrap: wrap; gap: 8px; }
-        .tag {
-            background-color: var(--secondary-color-transparent-1);
-            color: var(--secondary-color);
-            padding: 6px 12px;
-            border-radius: 20px;
-            font-size: 0.85em;
-            font-weight: 500;
-            border: 1px solid var(--secondary-color-transparent-2);
-        }
-        
-        .tech-category h4 { color: var(--secondary-color); margin-top: 30px; margin-bottom: 20px; font-family: var(--font-header); font-size: 1.2em; }
-        .tech-grid { display: flex; flex-wrap: wrap; gap: 15px; }
-        .tech-item {
-            background-color: var(--background-light);
-            padding: 10px 20px;
-            border-radius: var(--border-radius-sm);
-            display: inline-flex; align-items: center; gap: 12px;
-            font-size: 1em; font-weight: 500;
-            border: 1px solid transparent;
-            transition: all 0.3s ease;
-        }
-        .tech-item:hover { border-color: var(--secondary-color-transparent-5); transform: translateY(-2px); }
-        .tech-item i, .tech-item svg { font-size: 1.4em; color: var(--text-color-light); }
-    
-        #contact { text-align: center; max-width: 800px; margin: 0 auto; }
-        #contact p { max-width: 600px; margin: 20px auto 50px; color: var(--text-color-dark); font-size: 1.2em; }
-        .contact-links a { margin: 0 15px; display: inline-block; transition: transform 0.3s ease; padding: 10px; border-radius: 50%; background-color: var(--background-light); }
-        .contact-links a:hover { transform: translateY(-5px); background-color: var(--secondary-color); }
-        .contact-links svg { width: 28px; height: 28px; fill: var(--text-color-light); transition: fill 0.3s ease; display: block; }
-        .contact-links a:hover svg { fill: var(--cta-hover-text-color); }
-        
-        footer { text-align: center; padding: 40px 0; font-size: 0.9em; color: var(--text-color-dark); border-top: 1px solid var(--secondary-color-transparent-1); margin-top: 50px; }
-        footer a { color: var(--text-color-light); text-decoration: none; transition: color 0.3s ease; }
-        footer a:hover { color: var(--secondary-color); }
-    
-        .theme-switcher { margin-bottom: 20px; display: flex; justify-content: center; align-items: center; gap: 10px; }
-        .theme-switcher select {
-            background-color: transparent; color: var(--text-color-light);
-            border: 1px solid var(--secondary-color-transparent-4);
-            padding: 6px 12px; border-radius: 20px;
-            font-family: var(--font-sans); font-size: 0.9em; cursor: pointer;
-        }
-        .theme-switcher select:focus { outline: none; border-color: var(--secondary-color); }
-    
-        .back-to-top {
-            position: fixed; bottom: 30px; right: 30px;
-            background-color: var(--primary-color);
-            border: 1px solid var(--secondary-color);
-            color: var(--secondary-color);
-            width: 45px; height: 45px; border-radius: 50%;
-            display: flex; align-items: center; justify-content: center;
-            cursor: pointer; opacity: 0; visibility: hidden;
-            transition: all 0.3s; z-index: 999;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
-        }
-        .back-to-top:hover { background-color: var(--secondary-color); color: var(--cta-hover-text-color); transform: translateY(-3px); }
-        .back-to-top.visible { opacity: 1; visibility: visible; }
-        .back-to-top::after { content: '↑'; font-size: 1.5em; font-weight: bold; }
-    
-        @media (max-width: 768px) {
-            .navbar { width: calc(100% - 40px); top: 10px; padding: 12px 20px; border-radius: 12px; }
-            .about-content { grid-template-columns: 1fr; }
-            .nav-links { position: fixed; left: -100%; top: 0; flex-direction: column; background-color: var(--primary-color); width: 100%; height: 100vh; text-align: center; transition: 0.3s; justify-content: center; gap: 40px; z-index: 999; }
-            .nav-links.active { left: 0; }
-            .nav-links a { font-size: 1.4em; }
-            .hamburger { display: block; }
-            .hamburger.active .bar:nth-child(2) { opacity: 0; }
-            .hamburger.active .bar:nth-child(1) { transform: translateY(8px) rotate(45deg); }
-            .hamburger.active .bar:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
-            #cursor-glow, #particles-js { display: none; }
-            .section-title { font-size: 2.2em; }
-        }
-    </style>
-    
-    <script>
-        (function() {
-            const savedTheme = localStorage.getItem('selectedTheme') || 'theme-green';
-            document.documentElement.className = savedTheme;
-        })();
-    </script>
-</head>
-<body class=""> 
-    
-    <script>document.body.className = document.documentElement.className;</script>
 
-    <!-- Preloader (SVG code omitted for brevity but preserved) -->
-    <div id="preloader">
-        <div class="rocket-container">
-            <!-- Rocket SVG Here (Keep original SVG) -->
-            <svg xmlns="http://www.w3.org/2000/svg" width="800px" height="800px" viewBox="0 0 1024 1024" class="icon" version="1.1">
-                <path d="M512 301.2m-10 0a10 10 0 1 0 20 0 10 10 0 1 0-20 0Z" fill="var(--secondary-color)"/>
-                <path d="M400.3 744.5c2.1-0.7 4.1-1.4 6.2-2-2 0.6-4.1 1.3-6.2 2z m0 0c2.1-0.7 4.1-1.4 6.2-2-2 0.6-4.1 1.3-6.2 2z" fill="var(--text-color-light)"/>
-                <path d="M511.8 256.6c24.4 0 44.2 19.8 44.2 44.2S536.2 345 511.8 345s-44.2-19.8-44.2-44.2 19.9-44.2 44.2-44.2m0-20c-35.5 0-64.2 28.7-64.2 64.2s28.7 64.2 64.2 64.2 64.2-28.7 64.2-64.2-28.7-64.2-64.2-64.2z" fill="var(--secondary-color)"/>
-                <path d="M730.7 529.5c0.4-8.7 0.6-17.4 0.6-26.2 0-179.6-86.1-339.1-219.3-439.5-133.1 100.4-219.2 259.9-219.2 439.5 0 8.8 0.2 17.5 0.6 26.1-56 56-90.6 133.3-90.6 218.7 0 61.7 18 119.1 49.1 167.3 30.3-49.8 74.7-90.1 127.7-115.3 39-18.6 82.7-29 128.8-29 48.3 0 93.9 11.4 134.3 31.7 52.5 26.3 96.3 67.7 125.6 118.4 33.4-49.4 52.9-108.9 52.9-173.1 0-85.4-34.6-162.6-90.5-218.6zM351.1 383.4c9.2-37.9 22.9-74.7 40.6-109.5a502.1 502.1 0 0 1 63.6-95.9c17.4-20.6 36.4-39.9 56.8-57.5 20.4 17.6 39.4 36.9 56.8 57.5 24.8 29.5 46.2 61.8 63.6 95.9 17.7 34.8 31.4 71.6 40.6 109.5 8.7 35.8 13.5 72.7 14.2 109.9C637.4 459 577 438.9 512 438.9c-65 0-125.3 20.1-175.1 54.4 0.7-37.2 5.5-74.1 14.2-109.9z m-90.6 449.2c-9.1-27-13.7-55.5-13.7-84.4 0-35.8 7-70.6 20.8-103.2 8.4-19.8 19-38.4 31.9-55.5 9.7 61.5 29.5 119.7 57.8 172.6-36.4 17.8-69 41.6-96.8 70.5z m364.2-85.3c-0.7-0.3-1.5-0.5-2.2-0.8-0.4-0.2-0.9-0.3-1.3-0.5-0.6-0.2-1.3-0.5-1.9-0.7-0.8-0.3-1.5-0.5-2.3-0.8-0.8-0.3-1.5-0.5-2.3-0.7l-0.9-0.3c-1-0.3-2.1-0.7-3.1-1-1.2-0.4-2.4-0.7-3.5-1.1l-3-0.9c-0.2-0.1-0.4-0.1-0.7-0.2-1.1-0.3-2.3-0.7-3.4-1-1.2-0.3-2.4-0.6-3.5-0.9l-3.6-0.9-3.6-0.9c-1-0.3-2.1-0.5-3.1-0.7-1.2-0.3-2.4-0.5-3.6-0.8-1.3-0.3-2.5-0.6-3.8-0.8h-0.3c-0.9-0.2-1.9-0.4-2.8-0.6-0.4-0.1-0.7-0.1-1.1-0.2-1.1-0.2-2.2-0.4-3.4-0.6-1.2-0.2-2.4-0.4-3.6-0.7l-5.4-0.9c-0.9-0.1-1.9-0.3-2.8-0.4-0.8-0.1-1.6-0.3-2.5-0.4-2.6-0.4-5.1-0.7-7.7-1-1.2-0.1-2.3-0.3-3.5-0.4h-0.4c-0.9-0.1-1.8-0.2-2.8-0.3-1.1-0.1-2.1-0.2-3.2-0.3-1.7-0.2-3.4-0.3-5.1-0.4-0.8-0.1-1.5-0.1-2.3-0.2-0.9-0.1-1.9-0.1-2.8-0.2-0.4 0-0.8 0-1.2-0.1-1.1-0.1-2.1-0.1-3.2-0.2-0.5 0-1-0.1-1.5-0.1-1.3-0.1-2.6-0.1-3.9-0.1-0.8 0-1.5-0.1-2.3-0.1-1.2 0-2.4 0-3.5-0.1h-13.9c-2.3 0-4.6 0.1-6.9 0.2-0.9 0-1.9 0.1-2.8 0.1-0.8 0-1.5 0.1-2.3 0.1-1.4 0.1-2.8 0.2-4.1 0.3-1.4 0.1-2.7 0.2-4.1 0.3-1.4 0.1-2.7 0.2-4.1 0.4-0.6 0-1.2 0.1-1.8 0.2l-7.8 0.9c-1.1 0.1-2.1 0.3-3.2 0.4-1 0.1-2.1 0.3-3.1 0.4-3.2 0.5-6.4 0.9-9.5 1.5-0.7 0.1-1.4 0.2-2.1 0.4-0.9 0.1-1.7 0.3-2.6 0.5-1.1 0.2-2.3 0.4-3.4 0.6-0.9 0.2-1.7 0.3-2.6 0.5-0.4 0.1-0.8 0.1-1.1 0.2-0.7 0.1-1.4 0.3-2.1 0.4-1.2 0.3-2.4 0.5-3.6 0.8-1.2 0.3-2.4 0.5-3.6 0.8-0.2 0-0.4 0.1-0.6 0.1-0.5 0.1-1 0.2-1.5 0.4-1.1 0.3-2.3 0.6-3.5 0.9-1.3 0.3-2.5 0.6-3.8 1-0.4 0.1-0.9 0.2-1.4 0.4-1.3 0.4-2.7 0.7-4 1.1-1.5 0.4-3 0.9-4.6 1.3-1 0.3-2.1 0.6-3.1 1-2.1 0.6-4.1 1.3-6.2 2-0.7 0.2-1.4 0.5-2.1 0.7-15-27.5-27.4-56.4-37-86.2-11.7-36.1-19.2-73.6-22.5-111.6-0.6-6.7-1-13.3-1.3-20-0.1-1.2-0.1-2.4-0.1-3.6-0.1-1.2-0.1-2.4-0.1-3.6 0-1.2-0.1-2.4-0.1-3.7 18.8-14 39.2-25.8 61-35 36.1-15.3 74.5-23 114.1-23 39.6 0 78 7.8 114.1 23 21.8 9.2 42.2 20.9 61 35v0.1c0 1 0 1.9-0.1 2.9 0 1.4-0.1 2.8-0.1 4.3 0 0.7 0 1.3-0.1 2-0.1 1.8-0.1 3.5-0.2 5.3-0.3 6.7-0.8 13.3-1.3 20-3.3 38.5-11 76.5-23 113-9.7 30.3-22.3 59.4-37.6 87.1z m136.8 90.9a342.27 342.27 0 0 0-96.3-73.2c29.1-53.7 49.5-112.8 59.4-175.5 12.8 17.1 23.4 35.6 31.8 55.5 13.8 32.7 20.8 67.4 20.8 103.2 0 31-5.3 61.3-15.7 90z" fill="var(--text-color-light)"/>
-                <path d="M512 819.3c8.7 0 24.7 22.9 24.7 60.4s-16 60.4-24.7 60.4-24.7-22.9-24.7-60.4 16-60.4 24.7-60.4m0-20c-24.7 0-44.7 36-44.7 80.4 0 44.4 20 80.4 44.7 80.4s44.7-36 44.7-80.4c0-44.4-20-80.4-44.7-80.4z" fill="var(--secondary-color)"/>
-            </svg>
-            <p class="loading-text">Building the Future...</p>
-        </div>
-    </div>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-primary);
+            font-family: 'Inter', -apple-system, sans-serif;
+            line-height: 1.6;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* 极简噪声背景 */
+        body::before {
+            content: '';
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+            opacity: 0.03; pointer-events: none; z-index: 10;
+        }
+
+        /* 自定义光标追踪 */
+        #cursor-glow {
+            position: fixed; width: 400px; height: 400px;
+            background: radial-gradient(circle, rgba(255,255,255,0.08) 0%, transparent 70%);
+            border-radius: 50%; pointer-events: none; z-index: 0;
+            transform: translate(-50%, -50%); transition: opacity 0.3s;
+        }
+
+        /* 导航栏 */
+        .navbar {
+            position: fixed; top: 0; width: 100%; padding: 30px 60px;
+            display: flex; justify-content: space-between; align-items: center;
+            z-index: 1000; transition: var(--transition);
+        }
+        .navbar.scrolled { padding: 20px 60px; background: rgba(0,0,0,0.8); backdrop-filter: blur(20px); border-bottom: 1px solid var(--glass-border); }
+        .logo { font-family: 'Exo 2'; font-weight: 800; font-size: 1.5rem; letter-spacing: -1px; text-decoration: none; color: #fff; }
+        .nav-links { display: flex; gap: 40px; list-style: none; }
+        .nav-links a { text-decoration: none; color: var(--text-secondary); font-size: 0.85rem; font-weight: 600; text-transform: uppercase; letter-spacing: 2px; transition: var(--transition); }
+        .nav-links a:hover { color: var(--text-primary); }
+
+        /* Hero Section */
+        #hero {
+            height: 100vh; display: flex; align-items: center; padding: 0 10%;
+            position: relative; overflow: hidden;
+        }
+        .hero-content { position: relative; z-index: 2; max-width: 900px; }
+        .hero-tag { font-size: 0.9rem; color: var(--text-secondary); letter-spacing: 5px; margin-bottom: 20px; text-transform: uppercase; }
+        #hero h1 { font-family: 'Exo 2'; font-size: clamp(3rem, 8vw, 6rem); line-height: 1; margin-bottom: 30px; font-weight: 800; letter-spacing: -2px; }
+        .highlight { color: #fff; text-shadow: 0 0 30px rgba(255,255,255,0.2); }
+        .hero-subtitle { font-size: 1.25rem; color: var(--text-secondary); max-width: 600px; font-weight: 200; }
+
+        /* 通用布局 */
+        .container { max-width: 1200px; margin: 0 auto; padding: 100px 40px; }
+        .section-title { font-family: 'Exo 2'; font-size: 3rem; margin-bottom: 60px; font-weight: 800; letter-spacing: -1px; position: relative; }
+        .section-title::after { content: ''; display: block; width: 40px; height: 2px; background: #fff; margin-top: 15px; }
+
+        /* 核心成就卡片 (World Record Highlight) */
+        .record-banner {
+            background: #fff; color: #000; padding: 60px; border-radius: 4px;
+            display: flex; justify-content: space-between; align-items: center; margin-bottom: 100px;
+        }
+        .record-info h2 { font-family: 'Exo 2'; font-size: 3.5rem; margin-bottom: 5px; }
+        .record-info p { text-transform: uppercase; letter-spacing: 3px; font-weight: 700; opacity: 0.7; }
+
+        /* 网格布局 */
+        .card-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 30px; }
+        .card {
+            background: var(--glass-bg); border: 1px solid var(--glass-border);
+            padding: 40px; transition: var(--transition); position: relative;
+        }
+        .card:hover { background: rgba(255,255,255,0.07); border-color: rgba(255,255,255,0.4); transform: translateY(-10px); }
+        .card h3 { font-family: 'Exo 2'; font-size: 1.5rem; margin-bottom: 15px; }
+        .card p { color: var(--text-secondary); font-size: 0.95rem; }
+        .tag { display: inline-block; padding: 4px 12px; border: 1px solid var(--glass-border); font-size: 0.7rem; margin: 10px 5px 0 0; text-transform: uppercase; letter-spacing: 1px; }
+
+        /* 里程碑列表 */
+        .milestone-list { list-style: none; }
+        .milestone-item {
+            padding: 25px 0; border-bottom: 1px solid var(--glass-border);
+            display: flex; justify-content: space-between; align-items: center;
+        }
+        .m-year { font-family: 'Exo 2'; font-weight: 800; font-size: 1.2rem; color: var(--text-secondary); width: 120px; }
+        .m-content { flex: 1; }
+        .m-title { font-weight: 600; font-size: 1.1rem; }
+        .m-desc { color: var(--text-secondary); font-size: 0.9rem; }
+
+        /* 按钮 */
+        .btn {
+            display: inline-block; padding: 18px 40px; border: 1px solid #fff;
+            color: #fff; text-decoration: none; font-size: 0.8rem; font-weight: 700;
+            text-transform: uppercase; letter-spacing: 2px; transition: var(--transition);
+            margin-top: 40px;
+        }
+        .btn:hover { background: #fff; color: #000; }
+
+        /* 粒子背景容器 */
+        #particles-js { position: absolute; width: 100%; height: 100%; top: 0; left: 0; z-index: 1; opacity: 0.4; }
+
+        /* 响应式 */
+        @media (max-width: 768px) {
+            .navbar { padding: 20px; }
+            .nav-links { display: none; }
+            .record-banner { flex-direction: column; text-align: center; padding: 40px 20px; }
+            .section-title { font-size: 2rem; }
+        }
+
+        /* 动画 */
+        .reveal { opacity: 0; transform: translateY(30px); transition: all 0.8s ease-out; }
+        .reveal.active { opacity: 1; transform: translateY(0); }
+    </style>
+</head>
+<body>
 
     <div id="cursor-glow"></div>
 
     <nav class="navbar">
-        <a href="#hero" class="logo">BlueDarkUP</a>
+        <a href="#" class="logo">BLUEDARKUP.</a>
         <ul class="nav-links">
-            <li><a href="#about">关于我</a></li>
-            <li><a href="#philosophy">我的理念</a></li>
-            <li><a href="#articles">精选文章</a></li>
-            <li><a href="#community">社区贡献</a></li>
-            <li><a href="#projects">开源项目</a></li>
-            <li><a href="#robotics-contributions">机器人集锦</a></li>
-            <li><a href="#tech-stack">技术栈</a></li>
-            <li><a href="#contact">联系</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#achievements">Achievements</a></li>
+            <li><a href="#projects">Projects</a></li>
+            <li><a href="#contact">Contact</a></li>
         </ul>
-        <div class="hamburger">
-            <span class="bar"></span>
-            <span class="bar"></span>
-            <span class="bar"></span>
-        </div>
     </nav>
-    
+
     <section id="hero">
         <div id="particles-js"></div>
-        <div class="container">
-            <div class="fade-in">
-                <p style="color: var(--secondary-color); font-size: 1.1em; margin-bottom: 10px; font-weight: 600;">Hi, my name is</p>
-                <h1>Jiang (BlueDarkUP)</h1>
-                <h1 class="highlight">全栈开发者 & AI 机器人工程师</h1>
-                <p class="subtitle">构建从想法到部署的端到端系统，致力于用技术解决现实世界难题。</p>
-                <a href="https://github.com/BlueDarkUP" target="_blank" class="cta-button">查看我的开源项目</a>
-            </div>
+        <div class="hero-content">
+            <p class="hero-tag reveal">Grade 12 | Robotics & Dev</p>
+            <h1 class="reveal">Building the <br><span class="highlight">Autonomous Future.</span></h1>
+            <p class="hero-subtitle reveal">Jiang (BlueDarkUP). 专注于全栈开发与 AI 机器人工程。目前致力于构建从高精算法到物理实现的闭环系统。</p>
+            <a href="#projects" class="btn reveal">View Portfolio</a>
         </div>
     </section>
 
     <main class="container">
-
-        <section id="about" class="fade-in">
-            <h2 class="section-title">关于我</h2>
-            <div class="about-content">
-                <div>
-                    <p>我是一名来自北京市八一学校 Grade 11 的学生，也是机器人竞赛团队 <strong>FTC Team 27570</strong> 的核心成员。我对人工智能/机器学习、机器人学和全栈开发充满热情。</p>
-                    <p>我的工程理念是超越单纯的“写代码”，专注于“构建工具”和系统。我坚信系统性思维的力量，致力于打造可复用、可扩展、易于维护的解决方案，将复杂的想法转化为现实世界中稳定可靠的系统。</p>
-                </div>
-                <div class="milestones">
-                    <h4>荣誉与里程碑</h4>
-                    <ul>
-                        <li>FTC 设计奖第一名 (Design Award), 2024-2025 赛季</li>
-                        <li>FTC 思维奖第三名 (Think Award), 2024-2025 赛季</li>
-                        <li>FTC 控制奖 (Control Award), 2024-2025 赛季</li>
-                        <li>FTC 中国区总决赛晋级者</li>
-                        <li>北京市金鹏科技论坛项目二等奖</li>
-                        <li>FTC 休斯顿世锦赛特邀技术贡献者</li>
-                        <li>CSDN 机器人与计算机视觉领域博主</li>
-                    </ul>
-                </div>
-            </div>
-        </section>
         
-        <section id="philosophy" class="fade-in">
-            <h2 class="section-title">我的理念与愿景</h2>
+        <!-- 世界纪录展示区 -->
+        <div class="record-banner reveal">
+            <div class="record-info">
+                <p>FTC World Record Holder</p>
+                <h2>324 POINTS.</h2>
+            </div>
+            <div class="record-info" style="text-align: right;">
+                <p>2025-26 Season</p>
+                <h2 style="font-size: 2rem;">WINNING ALLIANCE CAPTAIN</h2>
+            </div>
+        </div>
+
+        <!-- 关于我 & 里程碑 -->
+        <section id="about" style="display: grid; grid-template-columns: 1fr 1fr; gap: 80px; margin-bottom: 150px;">
+            <div class="reveal">
+                <h2 class="section-title">About Me</h2>
+                <p style="font-size: 1.1rem; color: var(--text-secondary); margin-bottom: 30px;">
+                    我是来自北京市八一学校的高中生，FTC Team 27570 的核心成员。在 2025-2026 赛季中，我们不仅夺得了北京资格赛的冠军联盟，更以 **324 分** 刷新了该赛季的世界纪录。
+                </p>
+                <p style="color: var(--text-secondary);">
+                    我的技术栈涵盖了从底层的视觉感知（OpenCV/YOLO）到高层控制算法（PID/RoadRunner），再到云端部署的全栈流程。我追求的是超越功能的“工程艺术”：极致的性能与优雅的代码架构。
+                </p>
+            </div>
+            <div class="reveal">
+                <h2 class="section-title">Milestones</h2>
+                <ul class="milestone-list">
+                    <li class="milestone-item">
+                        <span class="m-year">2025-26</span>
+                        <div class="m-content">
+                            <p class="m-title">FTC 启发奖第一名 (Inspire Award 1st)</p>
+                            <p class="m-desc">北京第二场资格赛，赛季最高荣誉。</p>
+                        </div>
+                    </li>
+                    <li class="milestone-item">
+                        <span class="m-year">2025-26</span>
+                        <div class="m-content">
+                            <p class="m-title">世界纪录保持者 (World Record - 324 pts)</p>
+                            <p class="m-desc">北京资格赛现场创造，展现极致自动化效率。</p>
+                        </div>
+                    </li>
+                    <li class="milestone-item">
+                        <span class="m-year">2024-25</span>
+                        <div class="m-content">
+                            <p class="m-title">FTC 控制奖 & 设计奖 (Control / Design Award)</p>
+                            <p class="m-desc">多赛季技术沉淀，核心算法贡献者。</p>
+                        </div>
+                    </li>
+                    <li class="milestone-item">
+                        <span class="m-year">GLOBAL</span>
+                        <div class="m-content">
+                            <p class="m-title">休斯顿世锦赛特邀技术贡献</p>
+                            <p class="m-desc">为 19705 队开发高性能竞赛级视觉系统。</p>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- 开源项目 -->
+        <section id="projects">
+            <h2 class="section-title">Featured Projects</h2>
             <div class="card-grid">
-                <div class="card">
-                    <h4><span style="color: var(--secondary-color); margin-right: 10px;">Q1:</span> 您为什么对机器人和 AI 充满热情？</h4>
-                    <p>
-                        对我而言，AI 与机器人的最大魅力在于它们是<strong>连接虚拟世界与物理世界的桥梁</strong>。我的热情始于一个简单的生活观察：初中校门口一个即使无车也漫长等待的红绿灯。为此，我编写了第一个视觉程序——“基于OpenCV的行人检测系统”，旨在动态调整信号灯时长，这个项目也荣幸地获得了北京市金鹏科技论坛二等奖。
-                    </p>
-                </div>
-                <div class="card">
-                    <h4><span style="color: var(--secondary-color); margin-right: 10px;">Q2:</span> 您认为好的软件工程是怎样的？</h4>
-                    <p>
-                        我追求的不仅是“能用”的代码，更是<strong>优雅、可读、可维护的工程艺术</strong>。这意味着深思熟虑的命名、高度模块化的结构和清晰的文档。在 FTC 团队项目中，我主导了代码架构的重构，将视觉、控制、导航等核心模块完全解耦。
-                    </p>
-                </div>
-                <div class="card">
-                    <h4><span style="color: var(--secondary-color); margin-right: 10px;">Q3:</span> 您希望未来用技术解决什么样的问题？</h4>
-                    <p>
-                        我的长期愿景是成为一名“**工具的创造者**”。我发现，许多创想难以落地，并非因为缺乏智慧，而是被繁琐的底层技术流程所束缚。因此，我希望能继续构建更多像 <code>Zero-to-YOLO-Yard</code> 这样的工具，降低技术门槛，让更多人聚焦于创造本身。
-                    </p>
-                </div>
-            </div>
-        </section>
-        
-        <section id="articles" class="fade-in">
-            <h2 class="section-title">精选技术文章与教程</h2>
-            <div class="card-grid">
-                <!-- 新增文章: PID 指南 -->
-                <div class="card" style="border-color: var(--secondary-color-transparent-4); background-color: var(--secondary-color-transparent-1);">
-                    <h3><a href="https://grizzly-treatment-ac4.notion.site/PID-257969a5284d80acb2e8c16696312fad" target="_blank">课程 8: 机器人控制艺术：PID 通用调试指南</a></h3>
-                    <p>深入浅出地讲解PID原理，结合图形化分析，提供一套通用的、不依赖特定硬件的参数整定方法论。从理论到实战，掌握闭环控制的核心。</p>
-                    <div class="card-footer">
-                        <span class="tag">Control Theory</span><span class="tag">PID</span><span class="tag">Data Analysis</span><span class="tag">New 🔥</span>
+                <div class="card reveal">
+                    <span class="tag">Production</span>
+                    <h3>FTC 27570 DECODE Season</h3>
+                    <p>包含了创造世界纪录的核心算法。实现了基于状态机的多任务并行控制与高精视觉抓取，是整个赛季的技术基石。</p>
+                    <div>
+                        <span class="tag">Java</span><span class="tag">RoadRunner</span><span class="tag">OpenCV</span>
                     </div>
                 </div>
-
-                <div class="card">
-                    <h3><a href="https://grizzly-treatment-ac4.notion.site/FTC-27570-TeleOp-250969a5284d8075b144dca6f421e9b8?pvs=73" target="_blank">课程 1: 你的第一个竞赛级 TeleOp</a></h3>
-                    <p>学习 LinearOpMode 的基本结构，如何映射硬件，并为Mecanum底盘实现稳健的驱动控制。</p>
-                    <div class="card-footer">
-                        <span class="tag">硬件映射</span><span class="tag">场地中心驱动</span><span class="tag">状态机</span>
+                <div class="card reveal">
+                    <span class="tag">AI Tool</span>
+                    <h3>Zero-to-YOLO-Yard</h3>
+                    <p>集成了 SAM 模型的本地化标注平台。将数据标注效率提升 800%，助力新选手快速部署视觉模型。</p>
+                    <div>
+                        <span class="tag">Python</span><span class="tag">Flask</span><span class="tag">SAM 2.1</span>
                     </div>
                 </div>
-                <div class="card">
-                    <h3><a href="https://grizzly-treatment-ac4.notion.site/FTC-27570-250969a5284d8098bb35c9c637ac0fa3?pvs=73" target="_blank">课程 2: 集成 Road Runner 的高级 TeleOp</a></h3>
-                    <p>学习如何将 Road Runner 集成到 TeleOp 中，实现强大的半自动功能，如“一键返回”。</p>
-                    <div class="card-footer">
-                        <span class="tag">Road Runner</span><span class="tag">Pose2d</span><span class="tag">运动序列</span>
+                <div class="card reveal">
+                    <span class="tag">Robotics</span>
+                    <h3>FLL AquaHunter</h3>
+                    <p>水下机器人自主识别系统。利用 YOLOv8 实时追踪入侵物种，实现水下环境的闭环视觉伺服控制。</p>
+                    <div>
+                        <span class="tag">YOLOv8</span><span class="tag">SORT</span><span class="tag">Serial</span>
                     </div>
                 </div>
-                 <div class="card">
-                    <h3><a href="https://grizzly-treatment-ac4.notion.site/FTC-27570-API-250969a5284d8039bb4ee5f524f3279f?pvs=73" target="_blank">课程 3: 构建视觉 API (入门)</a></h3>
-                    <p>介绍如何设计一个独立的视觉系统。本课程涵盖了可被任何 OpMode 使用的视觉管线的初始架构。</p>
-                    <div class="card-footer">
-                        <span class="tag">API 设计</span><span class="tag">OpenCvPipeline</span><span class="tag">颜色分割</span>
-                    </div>
-                </div>
-                <div class="card">
-                    <h3><a href="https://grizzly-treatment-ac4.notion.site/FTC-27570-API-250969a5284d808380a8ea220da47436?pvs=73" target="_blank">课程 4: 生产级视觉系统架构</a></h3>
-                    <p>一堂关于软件架构的大师课，将初始API重构为一个高度模块化、可维护的强大系统。</p>
-                    <div class="card-footer">
-                        <span class="tag">SoC</span><span class="tag">配置管理</span><span class="tag">运动学建模</span>
-                    </div>
-                </div>
-                <div class="card">
-                    <h3><a href="https://grizzly-treatment-ac4.notion.site/FTC-27570-250969a5284d802eabe6de3f2173870d?pvs=73" target="_blank">课程 5: FLL AquaHunter (自主ROV)</a></h3>
-                    <p>学习如何从零开始构建一个完整的单脚本AI系统，涵盖实时对象跟踪和水下机器人的视觉伺服。</p>
-                    <div class="card-footer">
-                        <span class="tag">YOLOv8</span><span class="tag">SORT算法</span><span class="tag">串口通信</span>
-                    </div>
-                </div>
-                <div class="card">
-                    <h3><a href="https://grizzly-treatment-ac4.notion.site/FTC-27570-AI-250969a5284d80aa8ccfe5e2bc11e73e?pvs=73" target="_blank">课程 6: 构建你自己的数据引擎</a></h3>
-                    <p>学习如何架构和构建一个用于管理整个机器学习数据生命周期的全栈Web应用。</p>
-                    <div class="card-footer">
-                        <span class="tag">Flask</span><span class="tag">SQLite</span><span class="tag">REST API</span><span class="tag">SAM 2.1</span>
-                    </div>
-                </div>
-                <div class="card">
-                    <h3><a href="https://grizzly-treatment-ac4.notion.site/FTC-27570-AI-250969a5284d8001ab71c9365a4827e8?pvs=73" target="_blank">课程 7: 打造你自己的AI工厂</a></h3>
-                    <p>创建一个标准化、自动化和可复现的MLOps流水线，用于训练和部署FTC兼容的模型。</p>
-                    <div class="card-footer">
-                        <span class="tag">MLOps</span><span class="tag">自动化</span><span class="tag">模型量化</span><span class="tag">TFLite</span>
+                <div class="card reveal">
+                    <span class="tag">Utility</span>
+                    <h3>FTC-Easy-TFLITE</h3>
+                    <p>标准化的 MLOps 流水线，实现了移动端目标的训练、量化与一键部署，降低了 AI 进赛场的门槛。</p>
+                    <div>
+                        <span class="tag">TensorFlow</span><span class="tag">TFLite</span><span class="tag">Python</span>
                     </div>
                 </div>
             </div>
-        </section>
-        
-        <section id="community" class="fade-in">
-            <h2 class="section-title">社区贡献与影响力</h2>
-            <div class="card-grid">
-                <div class="card">
-                    <h3>开源工具的普惠价值</h3>
-                    <p>我开发的 `FTC-Easy-TFLITE` 和 `Zero-to-YOLO-Yard` 等工具，通过 CSDN 等平台帮助了许多非竞赛背景的开发者，简化了 AI 模型的训练与数据标注流程，致力于降低技术门槛。</p>
-                </div>
-                <div class="card">
-                    <h3>知识分享与技术布道</h3>
-                    <p>我坚信分享是技术进步的催化剂。通过撰写深度技术文章、开源全部核心代码，以及为新队伍（如 28119 队）提供技术讲解，我希望将实战中积累的知识回馈给社区。</p>
-                </div>
-                <div class="card">
-                    <h3>跨团队与跨赛事协作</h3>
-                    <p>为 FTC 19705 (红心机器人) 开发的视觉系统助力其在休斯顿世锦赛取得佳绩。同时，将技术经验成功应用于 FLL 水下机器人及 RoboMaster 青年赛项目中，探索技术融合创新。</p>
-                </div>
+            <div style="text-align: center; margin-top: 60px;">
+                <a href="https://github.com/BlueDarkUP" target="_blank" class="btn">View All on GitHub</a>
             </div>
         </section>
 
-        <section id="projects" class="fade-in">
-            <h2 class="section-title">开源项目</h2>
-            <div class="card-grid">
-                <!-- 新增项目: DECODE -->
-                <div class="card" style="border: 1px solid var(--secondary-color-transparent-5);">
-                    <h3><a href="https://github.com/BlueDarkUP/FTC-27570-DECODE" target="_blank">FTC 27570 DECODE Season</a></h3>
-                    <p>FTC DECODE 赛季 27570 战队的完整代码库。包含针对特定场地任务的自动化策略、优化的底盘控制算法以及状态机架构的实践。</p>
-                    <div class="card-footer">
-                        <span class="tag">Java</span><span class="tag">FTC</span><span class="tag">Robotics</span><span class="tag">New 🔥</span>
-                    </div>
-                </div>
-
-                <div class="card">
-                    <h3><a href="https://github.com/BlueDarkUP/FTC-27570-INTOTHEDEEP-WRC" target="_blank">FTC 27570 Team Code (WRC)</a></h3>
-                    <p>27570队赛季核心代码库。<b>亮点:</b> 集成了先进的自主导航、L3级辅助驾驶和智能视觉抓取系统，作为赛季总结和技术沉淀，为社区提供参考和学习。</p>
-                    <div class="card-footer">
-                        <span class="tag">Java</span><span class="tag">FTC SDK</span><span class="tag">RoadRunner</span>
-                    </div>
-                </div>
-                <div class="card">
-                    <h3><a href="https://github.com/BlueDarkUP/FTC-INTO-THE-DEEP-VISION-for-19705" target="_blank">Vision System for FTC 19705</a></h3>
-                    <p>为红心机器人19705队开发的竞赛级视觉系统。<b>亮点:</b> 在休斯顿世锦赛实战验证，实现平均2秒/次的抓取速度与高稳定性。</p>
-                    <div class="card-footer">
-                        <span class="tag">Java</span><span class="tag">FTC</span><span class="tag">OpenCV</span>
-                    </div>
-                </div>
-                <div class="card">
-                    <h3><a href="https://github.com/BlueDarkUP/FTC-27570-INTO-THE-DEEP" target="_blank">FTC 27570 Team Archive</a></h3>
-                    <p>27570队的赛季公开代码库，记录了荣获设计奖和控制奖的历程。<b>亮点:融合自动驾驶和第一版视觉，是赢得控制奖的关键。</b> </p>
-                    <div class="card-footer">
-                        <span class="tag">Java</span><span class="tag">FTC</span><span class="tag">Archive</span>
-                    </div>
-                </div>
-                <div class="card">
-                    <h3><a href="https://github.com/BlueDarkUP/Zero-to-YOLO-Yard" target="_blank">Zero-to-YOLO-Yard</a></h3>
-                    <p>一个本地化的图像标注平台，集成了 SAM 模型。<b>亮点:</b> 将数据标注时间从平均每张图2分钟缩短到15秒，效率提升8倍。</p>
-                    <div class="card-footer">
-                        <span class="tag">Python</span><span class="tag">Flask</span><span class="tag">SAM</span>
-                    </div>
-                </div>
-                <div class="card">
-                    <h3><a href="https://github.com/BlueDarkUP/FTC-Easy-TFLITE" target="_blank">FTC-Easy-TFLITE</a></h3>
-                    <p>一个本地 MLOps 流水线，实现了 TFLite 物体检测模型的自动化训练、量化和部署。<b>亮点:</b> 降低了在FTC等嵌入式环境中使用AI模型的门槛。</p>
-                    <div class="card-footer">
-                        <span class="tag">Python</span><span class="tag">TensorFlow</span><span class="tag">MLOps</span>
-                    </div>
-                </div>
-                 <div class="card">
-                    <h3><a href="https://github.com/BlueDarkUP/Easy-YOLO-Augmenter" target="_blank">Easy-YOLO-Augmenter</a></h3>
-                    <p>一个直观的桌面应用，无需编码即可增强YOLO格式的图像数据集。<b>亮点:</b> 基于多进程并行处理，由Albumentations驱动。</p>
-                    <div class="card-footer">
-                        <span class="tag">Python</span><span class="tag">PyQt5</span><span class="tag">CV</span>
-                    </div>
-                </div>
-                <div class="card">
-                    <h3><a href="https://github.com/BlueDarkUP/Yolo2TFRecord" target="_blank">Yolo2TFRecord</a></h3>
-                    <p>一个将YOLO格式标注数据集转换为TFRecord格式的Python脚本。<b>亮点:</b> 自动解析`data.yaml`，自动创建目录结构。</p>
-                    <div class="card-footer">
-                        <span class="tag">Python</span><span class="tag">TensorFlow</span><span class="tag">Tool</span>
-                    </div>
-                </div>
-                <div class="card">
-                    <h3><a href="https://github.com/BlueDarkUP/FLL-AquaHunter" target="_blank">FLL-AquaHunter</a></h3>
-                    <p>用于 FLL 竞赛的水下机器人 (ROV)，能够自主识别、追踪并抓取狮子鱼。<b>亮点:</b> 将AI视觉应用于解决入侵物种问题的真实场景。</p>
-                    <div class="card-footer">
-                        <span class="tag">Python</span><span class="tag">YOLOv8</span><span class="tag">SORT</span>
-                    </div>
-                </div>
-                <div class="card">
-                    <h3><a href="https://github.com/BlueDarkUP/AIRS-RM-2025" target="_blank">RM-Hunter (RMYC)</a></h3>
-                    <p>为 RoboMaster 青年赛设计的自主守卫机器人。<b>亮点:</b> 成功将在FTC和FLL项目中积累的视觉自瞄与PID控制算法迁移应用。</p>
-                    <div class="card-footer">
-                        <span class="tag">Python</span><span class="tag">OpenCV</span><span class="tag">PID Control</span>
-                    </div>
-                </div>
-                <div class="card">
-                    <h3><a href="https://github.com/BlueDarkUP/Scanventory" target="_blank">Scanventory</a></h3>
-                    <p>一款专为国企设计的开源固定资产盘点安卓应用。<b>亮点:</b> 通过手机扫码盘点，支持Excel导入导出，所有数据本地处理。</p>
-                    <div class="card-footer">
-                        <span class="tag">Android</span><span class="tag">Kotlin</span><span class="tag">Jetpack Compose</span>
-                    </div>
-                </div>
-                <div class="card">
-                    <h3><a href="https://github.com/BlueDarkUP/FTC-Servo-Angle-Control" target="_blank">FTC-Servo-Angle-Control (CSP)</a></h3>
-                    <p>一个用于FTC Java编程的即插即用工具，让您能用直观的角度而非小数来控制舵机。<b>亮点:</b> 简化配置，让舵机控制更直观。</p>
-                    <div class="card-footer">
-                        <span class="tag">Java</span><span class="tag">FTC</span><span class="tag">Library</span>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- 机器人贡献入口 -->
-        <section id="robotics-contributions" class="fade-in" style="text-align: center; padding: 100px 0;">
-            <div style="background: var(--card-bg); padding: 50px; border-radius: var(--border-radius-lg); border: 1px solid var(--card-border);">
-                <h2 class="section-title" style="margin: 0 auto 30px;">探索我的机器人贡献</h2>
-                <p style="color: var(--text-color-dark); max-width: 600px; margin: 0 auto 40px; font-size: 1.1em;">在这里，您将看到我在各类机器人竞赛中，从设计到实现的视觉之旅，包括FLL水下机器人、FTC竞赛以及RoboMaster青年赛的精彩瞬间。</p>
-                <a href="robotics-gallery.html" class="cta-button">进入机器人集锦</a>
-            </div>
-        </section>
-
-        <section id="tech-stack" class="fade-in">
-            <h2 class="section-title">技术栈</h2>
-            <div class="tech-category">
-                <h4>精通 (Proficient)</h4>
-                <div class="tech-grid">
-                    <span class="tech-item"><i class="devicon-python-plain"></i> Python</span>
-                    <span class="tech-item"><i class="devicon-java-plain"></i> Java</span>
-                    <span class="tech-item"><i class="devicon-tensorflow-original"></i> TensorFlow</span>
-                    <span class="tech-item"><i class="devicon-opencv-plain"></i> OpenCV</span>
-                    <span class="tech-item"><i class="devicon-git-plain"></i> Git</span>
-                </div>
-            </div>
-            <div class="tech-category">
-                <h4>熟练 (Experienced)</h4>
-                <div class="tech-grid">
-                    <span class="tech-item"><i class="devicon-cplusplus-plain"></i> C++</span>
-                    <span class="tech-item"><i class="devicon-bash-plain"></i> Bash</span>
-                    <span class="tech-item"><i class="devicon-pytorch-plain"></i> PyTorch</span>
-                    <span class="tech-item"><i class="devicon-flask-original"></i> Flask</span>
-                    <span class="tech-item"><i class="devicon-docker-plain"></i> Docker</span>
-                    <span class="tech-item"><i class="devicon-androidstudio-plain"></i> Android Studio</span>
-                </div>
-            </div>
-            <div class="tech-category">
-                <h4>了解 (Familiar with)</h4>
-                <div class="tech-grid">
-                    <span class="tech-item"><i class="devicon-javascript-plain"></i> JavaScript</span>
-                    <span class="tech-item"><i class="devicon-sqlite-plain"></i> SQLite</span>
-                    <span class="tech-item">REST API</span>
-                    <span class="tech-item"><i class="devicon-anaconda-original"></i> Conda</span>
-                </div>
-            </div>
-        </section>
-
-        <section id="contact" class="fade-in">
-            <h2 class="section-title" style="margin: 0 auto;">联系方式</h2>
-            <p>我对新的机遇和挑战总是充满热情。欢迎随时通过以下方式与我交流、探讨技术或寻求合作！</p>
-            <div class="contact-links">
-                <a href="https://github.com/BlueDarkUP" target="_blank" title="GitHub" aria-label="访问我的GitHub主页">
-                    <svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><title>GitHub</title><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.12-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.665 1.653.255 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
-                </a>
-                <a href="mailto:BlueDarkUP@Gmail.com" target="_blank" title="Email" aria-label="给我发送电子邮件">
-                    <svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><title>Email</title><path d="M22 6c0-1.1-.9-2-2-2H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6zm-2 0l-8 5-8-5h16zm0 12H4V8l8 5 8-5v10z"/></svg>
-                </a>
-                <a href="https://www.youtube.com/@BlueDarkUP" target="_blank" title="YouTube" aria-label="访问我的YouTube频道">
-                     <svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><title>YouTube</title><path d="M21.582 7.336c-.2-.736-.77-1.306-1.506-1.506C18.66 5.5 12 5.5 12 5.5s-6.66 0-8.076.33c-.736.2-1.306.77-1.506 1.506C2.088 8.752 2 12 2 12s.088 3.248.418 4.664c.2.736.77 1.306 1.506 1.506C5.34 18.5 12 18.5 12 18.5s6.66 0 8.076-.33c.736-.2 1.306.77 1.506-1.506C21.912 15.248 22 12 22 12s-.088-3.248-.418-4.664zM9.75 14.885V9.115l4.985 2.885-4.985 2.885z"/></svg>
-                </a>
-                <a href="https://blog.csdn.net/weixin_55053322?type=blog" target="_blank" title="CSDN" aria-label="访问我的CSDN博客">
-                    <svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><title>CSDN</title><path d="M6.217 13.408c.447.18 1.379.359 2.132.359.812 0 1.264-.247 1.3-.632.033-.35-.299-.398-1.216-.637-1.267-.342-2.075-.871-1.996-1.717.092-.982 1.286-1.724 3.118-1.724.893 0 1.759.069 2.208.231l-.154 1.238c-.291-.112-1.406-.266-2.16-.266-.765 0-1.16.265-1.188.555-.034.367.363.385 1.356.676 1.345.376 1.933.905 1.856 1.725C11.382 14.18 10.308 15 8.163 15 7.27 15 6.5 14.821 6.076 14.641L6.217 13.408 6.217 13.408zM18.821 9.366c4.884-1.017 5.305.811 5.154 2.428l-.284 2.992h-1.55l.259-2.729c.056-.601.405-1.776-1.281-1.732-.584.016-.873.104-.873.104s-.051.726-.112 1.263l-.294 3.095h-1.52l.302-3.05C18.622 11.736 18.821 9.366 18.821 9.366zM12.653 9.224c.349-.042.884-.084 1.621-.084 1.23 0 2.225.236 2.841.734.553.464.921 1.214.819 2.302-.094 1.012-.57 1.721-1.264 2.159-.635.413-1.434.59-2.637.59-.709 0-1.385-.042-1.9-.126L12.653 9.224 12.653 9.224zM13.669 13.69c.119.025.274.051.582.051 1.231 0 2.098-.668 2.185-1.607.127-1.358-.643-1.832-1.94-1.824-.168 0-.401 0-.525.025L13.669 13.69 13.669 13.69zM5.335 14.813C5.043 14.924 4.439 15 3.595 15c-2.427 0-3.737-1.254-3.583-2.913C.198 10.112 2.139 9 4.264 9c.823 0 1.308.073 1.762.195L5.88 10.526c-.302-.112-1.01-.215-1.583-.215-1.25 0-2.312.41-2.434 1.707-.109 1.16.637 1.714 2.044 1.714.49 0 1.212-.077 1.545-.189C5.452 13.544 5.335 14.813 5.335 14.813z"/></svg>
-                </a>
-                <a href="https://space.bilibili.com/1778652739" target="_blank" title="Bilibili" aria-label="访问我的Bilibili空间">
-                    <svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><title>Bilibili</title><path d="M18.223 3.086a1.25 1.25 0 0 1 0 1.768L17.08 5.996h1.17A3.75 3.75 0 0 1 22 9.747v7.5a3.75 3.75 0 0 1-3.75 3.75H5.75A3.75 3.75 0 0 1 2 17.247v-7.5a3.75 3.75 0 0 1 3.75-3.75h1.166L5.775 4.855a1.25 1.25 0 1 1 1.767-1.768l2.652 2.652c.079.079.145.165.198.257h3.213c.053-.092.12-.18.199-.258l2.651-2.652a1.25 1.25 0 0 1 1.768 0zm.027 5.42H5.75a1.25 1.25 0 0 0-1.247 1.157l-.003.094v7.5c0 .659.51 1.199 1.157 1.246l.093.004h12.5a1.25 1.25 0 0 0 1.247-1.157l.003-.093v-7.5c0-.69-.56-1.25-1.25-1.25zm-10 2.5c.69 0 1.25.56 1.25 1.25v1.25a1.25 1.25 0 1 1-2.5 0v-1.25c0-.69.56-1.25 1.25-1.25zm7.5 0c.69 0 1.25.56 1.25 1.25v1.25a1.25 1.25 0 1 1-2.5 0v-1.25c0-.69.56-1.25 1.25-1.25z"/></svg>
-                </a>
+        <!-- 联系 -->
+        <section id="contact" style="text-align: center; padding: 150px 0;">
+            <h2 class="section-title" style="margin: 0 auto 40px;">Let's Connect.</h2>
+            <p style="color: var(--text-secondary); max-width: 500px; margin: 0 auto 50px;">
+                无论是关于 FTC 技术交流，还是软件开发合作，欢迎随时联系。
+            </p>
+            <div style="display: flex; justify-content: center; gap: 30px;">
+                <a href="mailto:BlueDarkUP@Gmail.com" class="logo" style="font-size: 1rem;">EMAIL</a>
+                <a href="https://github.com/BlueDarkUP" class="logo" style="font-size: 1rem;">GITHUB</a>
+                <a href="https://blog.csdn.net/weixin_55053322" class="logo" style="font-size: 1rem;">CSDN</a>
             </div>
         </section>
 
     </main>
-    
-    <a class="back-to-top" aria-label="返回页面顶部"></a>
-    
-    <footer>
-        <div class="theme-switcher">
-            <label for="theme-select">Theme:</label>
-            <select id="theme-select">
-                <option value="theme-green">Forest Breath</option>
-                <option value="theme-blue">Deep Sea Geek</option>
-                <option value="theme-orange">Molten Gold Sunset</option>
-                <option value="theme-bordeaux">Bordeaux Red</option>
-                <option value="theme-aurora">Aurora Dream</option>
-                <option value="theme-oasis">Desert Oasis</option>
-                <option value="theme-soda">Summer Soda</option>
-                <option value="theme-dopamine">Dopamine Party</option>
-                <option value="theme-gray">Cyber Obsidian</option>
-            </select>
-        </div>
-        <p>
-            Designed & Built by 
-            <a href="https://github.com/BlueDarkUP" target="_blank">Jiang (BlueDarkUP)</a>
-        </p>
+
+    <footer style="padding: 60px; border-top: 1px solid var(--glass-border); text-align: center; font-size: 0.7rem; color: var(--text-secondary); letter-spacing: 2px;">
+        DESIGNED BY BLUEDARKUP © 2025. WORLD RECORD HOLDER EDITION.
     </footer>
 
-    <!-- Keep JS Logic unchanged, except minor tweaks if needed -->
     <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
-    
     <script>
-        window.addEventListener('load', function() {
-            const themeSelect = document.getElementById('theme-select');
-            const currentTheme = localStorage.getItem('selectedTheme') || 'theme-green';
-            
-            if (themeSelect) {
-                themeSelect.value = currentTheme;
-            }
-
-            themeSelect.addEventListener('change', function(e) {
-                const newTheme = e.target.value;
-                localStorage.setItem('selectedTheme', newTheme);
-                document.body.style.opacity = '0';
-                setTimeout(() => location.reload(), 300);
-            });
-
-            const hamburger = document.querySelector('.hamburger');
-            const navLinks = document.querySelector('.nav-links');
-            const navLinksItems = document.querySelectorAll('.nav-links li a');
-
-            hamburger.addEventListener('click', () => {
-                hamburger.classList.toggle('active');
-                navLinks.classList.toggle('active');
-            });
-
-            navLinksItems.forEach(link => {
-                link.addEventListener('click', () => {
-                    if (navLinks.classList.contains('active')) {
-                        hamburger.classList.remove('active');
-                        navLinks.classList.remove('active');
-                    }
-                });
-            });
-
-            const backToTopButton = document.querySelector('.back-to-top');
-            const navbar = document.querySelector('.navbar');
-
-            window.addEventListener('scroll', () => {
-                if (window.pageYOffset > 300) {
-                    backToTopButton.classList.add('visible');
-                } else {
-                    backToTopButton.classList.remove('visible');
-                }
-                
-                if (window.pageYOffset > 50) {
-                    navbar.classList.add('scrolled');
-                } else {
-                    navbar.classList.remove('scrolled');
-                }
-            });
-            
-            backToTopButton.addEventListener('click', (e) => {
-                e.preventDefault();
-                window.scrollTo({
-                    top: 0,
-                    behavior: 'smooth'
-                });
-            });
-
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        if (entry.target.classList.contains('card-grid')) {
-                            const cards = entry.target.querySelectorAll('.card');
-                            cards.forEach((card, index) => {
-                                setTimeout(() => {
-                                    card.classList.add('is-visible');
-                                }, index * 100);
-                            });
-                        } else {
-                            entry.target.classList.add('is-visible');
-                        }
-                        observer.unobserve(entry.target);
-                    }
-                });
-            }, {
-                threshold: 0.1
-            });
-
-            const animatedElements = document.querySelectorAll('.fade-in, .card-grid');
-            animatedElements.forEach(element => {
-                observer.observe(element);
-            });
-
-            const glow = document.getElementById('cursor-glow');
-            if (glow) {
-                window.addEventListener('mousemove', (e) => {
-                    glow.style.left = e.clientX + 'px';
-                    glow.style.top = e.clientY + 'px';
-                });
-            }
-
-            const getCssValue = (variable) => {
-                return getComputedStyle(document.documentElement).getPropertyValue(variable).trim();
-            };
-
-            if (document.getElementById('particles-js')) {
-                const particleColor = getCssValue('--secondary-color');
-                
-                particlesJS('particles-js', {
-                    "particles": {
-                        "number": { "value": 80, "density": { "enable": true, "value_area": 800 } },
-                        "color": { "value": particleColor },
-                        "shape": { "type": "circle" },
-                        "opacity": { "value": 0.6, "random": true, "anim": { "enable": true, "speed": 0.5, "opacity_min": 0.1, "sync": false } },
-                        "size": { "value": 3, "random": true },
-                        "line_linked": { "enable": true, "distance": 150, "color": particleColor, "opacity": 0.2, "width": 1 },
-                        "move": { "enable": true, "speed": 1, "direction": "none", "random": false, "straight": false, "out_mode": "out", "bounce": false }
-                    },
-                    "interactivity": {
-                        "detect_on": "canvas",
-                        "events": { "onhover": { "enable": true, "mode": "grab" }, "onclick": { "enable": true, "mode": "push" }, "resize": true },
-                        "modes": { "grab": { "distance": 140, "line_linked": { "opacity": 0.4 } }, "push": { "particles_nb": 4 } }
-                    },
-                    "retina_detect": true
-                });
+        // 粒子背景配置
+        particlesJS('particles-js', {
+            "particles": {
+                "number": { "value": 50 },
+                "color": { "value": "#ffffff" },
+                "shape": { "type": "circle" },
+                "opacity": { "value": 0.2 },
+                "size": { "value": 1 },
+                "line_linked": { "enable": true, "distance": 150, "color": "#ffffff", "opacity": 0.1, "width": 1 },
+                "move": { "enable": true, "speed": 1 }
+            },
+            "interactivity": {
+                "events": { "onhover": { "enable": true, "mode": "grab" } }
             }
         });
 
-        const preloader = document.getElementById('preloader');
-        window.addEventListener('load', function() {
-            setTimeout(() => {
-                if (preloader) {
-                    preloader.classList.add('loaded');
+        // 滚动显示动画
+        const reveal = () => {
+            const reveals = document.querySelectorAll('.reveal');
+            reveals.forEach(el => {
+                const windowHeight = window.innerHeight;
+                const elementTop = el.getBoundingClientRect().top;
+                if (elementTop < windowHeight - 100) {
+                    el.classList.add('active');
                 }
-            }, 2000); 
+            });
+        };
+        window.addEventListener('scroll', reveal);
+        window.onload = reveal;
+
+        // 导航栏背景变化
+        window.addEventListener('scroll', () => {
+            const nav = document.querySelector('.navbar');
+            if (window.scrollY > 50) nav.classList.add('scrolled');
+            else nav.classList.remove('scrolled');
+        });
+
+        // 光标追踪
+        const glow = document.getElementById('cursor-glow');
+        document.addEventListener('mousemove', e => {
+            glow.style.left = e.clientX + 'px';
+            glow.style.top = e.clientY + 'px';
         });
     </script>
 </body>
