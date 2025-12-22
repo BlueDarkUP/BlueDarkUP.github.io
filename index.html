@@ -15,7 +15,7 @@
     <style>
         /* 
         ==========================================================================
-        THEME: TECHNICAL BLUEPRINT (FINAL)
+        THEME: TECHNICAL BLUEPRINT (FINAL - WIREFRAME EDITION)
         ========================================================================== 
         */
         :root {
@@ -53,7 +53,7 @@
             transform: translate(-50%, -50%); transition: opacity 0.3s;
         }
 
-        /* 导航栏 - 修正：移除边框，恢复简洁风格 */
+        /* 导航栏 */
         .navbar {
             position: fixed; top: 0; left: 0; width: 100%; 
             padding: 20px 40px;
@@ -62,11 +62,9 @@
             display: flex; justify-content: space-between; align-items: center;
             z-index: 1000;
         }
-        /* Logo 样式已还原 */
         .logo { 
             font-family: 'Exo 2'; font-weight: 800; font-size: 1.5rem; 
             text-decoration: none; color: #fff; letter-spacing: 1px; 
-            /* border: 1px solid #fff; padding: 5px 10px;  <-- 已删除此行 */
         }
         .nav-links { display: flex; gap: 40px; list-style: none; }
         .nav-links a { 
@@ -128,22 +126,58 @@
             font-family: 'Exo 2'; font-size: clamp(3rem, 7vw, 6rem); 
             line-height: 0.95; font-weight: 800; letter-spacing: -2px; text-transform: uppercase;
         }
-        /* 几何碎片文字特效 */
-        .geo-char-wrapper { display: inline-block; position: relative; cursor: default; margin: 0 2px; }
-        .geo-base { opacity: 0; pointer-events: none; }
+        
+        /* 
+           ==========================================================================
+           [NEW] WIREFRAME STACK TEXT EFFECT (线框堆叠特效)
+           ========================================================================== 
+        */
+        .geo-char-wrapper {
+            display: inline-block; position: relative;
+            cursor: default; margin: 0 1px;
+            /* 保证包裹器有大小，但不显示溢出 */
+        }
+
+        /* 基础层 (Layer 0): 实心白字 */
+        .geo-base {
+            position: relative; z-index: 10;
+            color: #fff;
+            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        /* 线框层 (Layers): 绝对定位，只有描边，无填充 */
         .geo-layer {
             position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-            color: #fff; transition: all 0.6s cubic-bezier(0.2, 0.8, 0.2, 1); user-select: none;
+            color: transparent; /* 文字透明 */
+            -webkit-text-stroke: 1.5px rgba(255, 255, 255, 0.5); /* 白色描边 */
+            pointer-events: none;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            z-index: 1;
+            opacity: 0; /* 默认隐藏，悬浮时出现 */
         }
-        .layer-1 { clip-path: polygon(0 0, 100% 0, 80% 40%, 20% 40%); z-index: 2; }
-        .layer-2 { clip-path: polygon(20% 60%, 80% 60%, 100% 100%, 0% 100%); z-index: 2; }
-        .layer-3 { clip-path: polygon(0 50%, 20% 40%, 80% 40%, 100% 50%, 80% 60%, 20% 60%); z-index: 3; text-shadow: 0 0 5px rgba(255,255,255,0.8); }
-        .layer-4 { clip-path: inset(45% 0 45% 0); opacity: 0.5; z-index: 1; }
-        
-        .geo-char-wrapper:hover .layer-1 { transform: translateY(-6px) scale(1.05); color: #d4d4d4; }
-        .geo-char-wrapper:hover .layer-2 { transform: translateY(6px) scale(1.05); color: #d4d4d4; }
-        .geo-char-wrapper:hover .layer-3 { transform: scale(0.9) rotate(5deg); color: #fff; text-shadow: 0 0 15px rgba(255,255,255,1); }
-        .geo-char-wrapper:hover .layer-4 { transform: scaleX(1.5); opacity: 0.8; color: var(--text-dim); }
+
+        /* 悬浮交互：堆叠展开 */
+        .geo-char-wrapper:hover .geo-base {
+            transform: translate(-3px, -3px); /* 基础层向左上浮起 */
+            color: #fff;
+        }
+
+        .geo-char-wrapper:hover .layer-1 {
+            opacity: 1;
+            transform: translate(0px, 0px); /* 中间层不动，作为基准 */
+            -webkit-text-stroke: 1px rgba(255, 255, 255, 0.8);
+        }
+
+        .geo-char-wrapper:hover .layer-2 {
+            opacity: 1;
+            transform: translate(4px, 4px); /* 底层向右下沉降 */
+            -webkit-text-stroke: 1px rgba(255, 255, 255, 0.3); /* 颜色更淡，制造景深 */
+        }
+
+        /* 移动端优化 */
+        @media (max-width: 768px) {
+            .geo-layer { display: none; } /* 移动端不显示复杂特效 */
+        }
 
         .hero-content-box {
             grid-column: 2 / 3;
