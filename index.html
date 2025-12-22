@@ -16,19 +16,19 @@
     <style>
         /* 
         ==========================================================================
-        THEME: MONOCHROME OBSIDIAN (FIXED & CLEAN)
+        THEME: MONOCHROME OBSIDIAN (REFINED EDITION)
         ========================================================================== 
         */
         :root {
             --bg-deep: #050505;
             --bg-card: #0f0f0f;
             --text-main: #ffffff;
-            --text-body: #cccccc;
-            --text-dim: #888888;
-            --border-color: rgba(255, 255, 255, 0.12);
-            --border-hover: rgba(255, 255, 255, 0.4);
+            --text-body: #cccccc;        /* 提高正文亮度，确保清晰 */
+            --text-dim: #999999;         /* 辅助文字调亮 */
+            --border-color: rgba(255, 255, 255, 0.15);
+            --border-hover: rgba(255, 255, 255, 0.5);
             --accent-glow: rgba(255, 255, 255, 0.05);
-            --transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            --transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -79,13 +79,16 @@
         /* 通用布局 */
         .container { max-width: 1200px; margin: 0 auto; padding: 120px 20px; position: relative; z-index: 1; }
         
+        /* 修复：增加 padding-left 解决标题与竖线太近的问题 */
         .section-title { 
             font-family: 'Exo 2'; font-size: 2.5rem; font-weight: 800; margin-bottom: 50px; 
-            border-left: 4px solid #fff; padding-left: 20px; line-height: 1; color: #fff;
+            border-left: 4px solid #fff; 
+            padding-left: 30px; /* 增加到 30px */
+            line-height: 1; color: #fff;
         }
         .section-title span { 
             display: block; font-size: 0.85rem; color: var(--text-dim); 
-            letter-spacing: 3px; text-transform: uppercase; margin-bottom: 8px; 
+            letter-spacing: 3px; text-transform: uppercase; margin-bottom: 12px; 
             font-weight: 500; font-family: 'Inter', sans-serif; 
         }
 
@@ -208,13 +211,19 @@
         .g-counter { font-family: 'Exo 2'; color: var(--text-dim); margin-bottom: 10px; font-size: 0.8rem; letter-spacing: 2px; }
         .g-title { font-family: 'Exo 2'; font-size: 1.8rem; font-weight: 700; margin-bottom: 15px; line-height: 1.2; color: #fff; }
         .g-desc { font-size: 0.95rem; color: var(--text-body); line-height: 1.6; }
-        .g-controls { display: flex; gap: 15px; margin-top: 40px; }
+        
+        /* 修复：增加 Gap 解决箭头太近问题 */
+        .g-controls { display: flex; gap: 40px; margin-top: 40px; } /* Gap increased to 40px */
+        
+        /* 修复：优化按钮样式，使其看起来更像按钮 */
         .g-btn {
-            width: 50px; height: 50px; border: 1px solid rgba(255,255,255,0.2); background: transparent;
+            width: 50px; height: 50px; 
+            border: 1px solid rgba(255,255,255,0.3); 
+            background: rgba(255,255,255,0.05); /* 添加微弱背景 */
             color: #fff; cursor: pointer; display: flex; align-items: center; justify-content: center;
-            transition: 0.3s;
+            transition: all 0.3s;
         }
-        .g-btn:hover { background: #fff; color: #000; border-color: #fff; }
+        .g-btn:hover { background: #fff; color: #000; border-color: #fff; box-shadow: 0 0 15px rgba(255,255,255,0.3); }
 
         /* Footer */
         footer { 
@@ -265,7 +274,7 @@
             <span class="hero-tag reveal">Grade 12 | 2025-26 Season Update</span>
             <h1 class="reveal">Architecting the<br>Autonomous Future.</h1>
             <p class="reveal" style="color: var(--text-body); font-size: 1.15rem; max-width: 650px; margin-bottom: 40px;">
-                Jiang (BlueDarkUP). FTC 世界纪录保持者 (324分) & 冠军联盟队长。
+                Jiang (BlueDarkUP). FTC 世界纪录保持者 (324分) & 冠军联盟成员。
                 <br>构建从底层算法到物理实现的端到端机器人系统，致力于用技术解决现实挑战。
             </p>
             <div class="reveal">
@@ -351,7 +360,8 @@
                     <div style="text-align: right;">
                         <p class="wr-label">Winning Alliance</p>
                         <h2 style="font-size: 2.2rem;">INSPIRE AWARD 1ST</h2>
-                        <p class="wr-sub">CAPTAIN OF ALLIANCE 2</p>
+                        <!-- 修正：改为 WINNING ALLIANCE MEMBER -->
+                        <p class="wr-sub">WINNING ALLIANCE MEMBER</p>
                     </div>
                 </div>
 
@@ -406,6 +416,7 @@
                             <p class="g-desc" id="gallery-item-desc">Select a category to view the archive.</p>
                         </div>
                         <div class="g-controls">
+                            <!-- 箭头间距已优化 -->
                             <button class="g-btn" onclick="changeSlide(-1)" aria-label="Previous Slide"><svg viewBox="0 0 24 24"><path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/></svg></button>
                             <button class="g-btn" onclick="changeSlide(1)" aria-label="Next Slide"><svg viewBox="0 0 24 24"><path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6z"/></svg></button>
                         </div>
