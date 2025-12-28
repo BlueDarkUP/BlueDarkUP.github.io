@@ -5,30 +5,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Jiang (BlueDarkUP) | Lead Developer of WR Team</title>
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🏴‍☠️</text></svg>">
-    
-    <!-- Libraries -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@v2.15.1/devicon.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@300;500;700;800&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
-
     <style>
-        /* 
-        ==========================================================================
-        THEME: TECHNICAL BLUEPRINT (FINAL DEFINITIVE EDITION)
-        ========================================================================== 
-        */
         :root {
             --bg-deep: #050505;
-            --bg-grid: #111111;
+            --bg-grid: #0f0f0f;
             --text-main: #ffffff;
             --text-body: #d4d4d4;        
             --text-dim: #888888;         
-            --border-main: rgba(255, 255, 255, 0.25);
+            --border-main: rgba(255, 255, 255, 0.15);
             --transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-            
-            /* [修改] 引入强调色 */
-            --accent: #00f0ff; 
+            --accent: #2E9AFF; 
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -40,49 +30,55 @@
             font-family: 'Inter', system-ui, -apple-system, sans-serif;
             line-height: 1.6;
             overflow-x: hidden;
-            /* 工程网格背景 */
             background-image: 
                 linear-gradient(var(--bg-grid) 1px, transparent 1px),
                 linear-gradient(90deg, var(--bg-grid) 1px, transparent 1px);
-            background-size: 40px 40px;
+            background-size: 50px 50px;
             background-position: center top;
-            position: relative; /* 为扫描线定位 */
+            position: relative;
         }
 
-        /* [修改] 背景扫描线动画 */
+        #bg-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            pointer-events: none;
+        }
+
         .scan-line {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
-            height: 5px;
+            height: 2px;
             background: linear-gradient(to right, transparent, var(--accent), transparent);
-            opacity: 0.1;
+            opacity: 0.3;
             z-index: 0;
-            animation: scan 8s linear infinite;
+            animation: scan 6s linear infinite;
             pointer-events: none;
         }
 
         @keyframes scan {
             0% { top: -10%; opacity: 0; }
-            10% { opacity: 0.1; }
-            90% { opacity: 0.1; }
+            10% { opacity: 0.3; }
+            90% { opacity: 0.3; }
             100% { top: 110%; opacity: 0; }
         }
 
-        /* 鼠标光晕 */
         #cursor-glow {
-            position: fixed; width: 500px; height: 500px;
-            background: radial-gradient(circle, rgba(255,255,255,0.03) 0%, transparent 70%);
+            position: fixed; width: 600px; height: 600px;
+            background: radial-gradient(circle, rgba(46, 154, 255, 0.04) 0%, transparent 60%);
             border-radius: 50%; pointer-events: none; z-index: 0;
             transform: translate(-50%, -50%); transition: opacity 0.3s;
         }
 
-        /* 导航栏 */
         .navbar {
             position: fixed; top: 0; left: 0; width: 100%; 
             padding: 20px 40px;
-            background: rgba(5, 5, 5, 0.9); backdrop-filter: blur(10px);
+            background: rgba(5, 5, 5, 0.85); backdrop-filter: blur(12px);
             border-bottom: 1px solid var(--border-main);
             display: flex; justify-content: space-between; align-items: center;
             z-index: 1000;
@@ -96,22 +92,20 @@
         }
         .nav-links a:hover { color: #fff; }
         .nav-links a::after {
-            content: ''; position: absolute; bottom: -5px; left: 0; width: 0; height: 1px; 
-            background: var(--accent); /* [修改] Hover 下划线用强调色 */
+            content: ''; position: absolute; bottom: -5px; left: 0; width: 0; height: 2px; 
+            background: var(--accent);
             transition: width 0.3s;
         }
         .nav-links a:hover::after { width: 100%; }
 
-        /* 通用容器 */
         .container { max-width: 1300px; margin: 0 auto; padding: 120px 40px; position: relative; z-index: 2; }
 
-        /* 标题样式 - 线条穿插风格 */
         .section-header {
             display: flex; align-items: flex-end; margin-bottom: 60px; padding-bottom: 20px;
             border-bottom: 1px solid var(--border-main); position: relative;
         }
         .section-header::after {
-            content: ''; position: absolute; bottom: -1px; left: 0; width: 60px; height: 3px; background: #fff;
+            content: ''; position: absolute; bottom: -1px; left: 0; width: 60px; height: 3px; background: var(--accent);
         }
         .section-title { 
             font-family: 'Exo 2'; font-size: 3rem; font-weight: 800; line-height: 0.8; 
@@ -122,7 +116,6 @@
             text-transform: uppercase; letter-spacing: 4px; margin-bottom: 5px;
         }
 
-        /* HERO SECTION */
         #hero {
             min-height: 100vh; display: flex; align-items: center; justify-content: center;
             position: relative; padding: 100px 5%;
@@ -136,20 +129,20 @@
             grid-column: 1 / 3; 
             z-index: 2;
             border: 1px solid var(--border-main);
-            background: rgba(5,5,5,0.85);
+            background: rgba(5,5,5,0.6);
             padding: 60px;
             position: relative;
             margin-right: 10%; 
-            backdrop-filter: blur(5px); /* [修改] 增加磨砂质感 */
+            backdrop-filter: blur(8px);
         }
-        .corner-deco { position: absolute; width: 10px; height: 10px; border: 2px solid #fff; transition: 0.3s; }
-        .hero-title-box:hover .corner-deco { width: 100%; height: 100%; opacity: 0.1; }
+        .corner-deco { position: absolute; width: 10px; height: 10px; border: 2px solid var(--accent); transition: 0.3s; opacity: 0.5; }
+        .hero-title-box:hover .corner-deco { width: 100%; height: 100%; opacity: 0.2; }
         .tl { top: -1px; left: -1px; border-right: none; border-bottom: none; }
         .br { bottom: -1px; right: -1px; border-left: none; border-top: none; }
 
         .hero-tag { 
-            display: inline-block; font-size: 0.8rem; letter-spacing: 4px; color: var(--text-dim); 
-            text-transform: uppercase; margin-bottom: 20px; border-bottom: 1px solid var(--text-dim); padding-bottom: 5px;
+            display: inline-block; font-size: 0.8rem; letter-spacing: 4px; color: var(--accent); 
+            text-transform: uppercase; margin-bottom: 20px; border-bottom: 1px solid var(--accent); padding-bottom: 5px; font-weight: 600;
         }
         #hero h1 { 
             font-family: 'Exo 2'; font-size: clamp(3rem, 7vw, 6rem); 
@@ -164,10 +157,10 @@
             margin-left: -50px; 
             z-index: 3;
             background: #000;
-            border: 1px solid #fff; 
+            border: 1px solid var(--border-main); 
             padding: 40px;
             display: flex; flex-direction: column; justify-content: center;
-            box-shadow: -20px 20px 0px rgba(255,255,255,0.05);
+            box-shadow: -20px 20px 0px rgba(46, 154, 255, 0.05);
         }
         
         .hero-desc { font-size: 1.1rem; color: var(--text-body); margin-bottom: 30px; font-weight: 400; }
@@ -184,21 +177,25 @@
             content: ''; position: absolute; top: 0; left: -100%; width: 100%; height: 100%;
             background: #fff; transition: all 0.3s; z-index: -1;
         }
-        .btn-main:hover { color: #000; border-color: var(--accent); } /* [修改] Hover 边框变色 */
-        .btn-main:hover::before { left: 0; background: var(--accent); } /* [修改] Hover 背景变色 */
+        .btn-main:hover { color: #000; border-color: var(--accent); }
+        .btn-main:hover::before { left: 0; background: var(--accent); }
 
-        /* World Record Banner */
         .wr-banner {
-            background: #ffffff; color: #000000; padding: 50px 70px; 
+            background: linear-gradient(135deg, #111, #0a0a0a); 
+            color: #fff; padding: 50px 70px; 
             display: flex; justify-content: space-between; align-items: center; 
-            margin-top: 50px; border-radius: 2px;
+            margin-top: 50px; border: 1px solid var(--border-main);
             transition: transform 0.3s;
+            position: relative;
+            overflow: hidden;
         }
-        .wr-banner:hover { transform: scale(1.01); }
+        .wr-banner::before {
+            content: ''; position: absolute; top: 0; left: 0; width: 2px; height: 100%; background: var(--accent);
+        }
+        .wr-banner:hover { transform: translateY(-5px); border-color: var(--accent); }
         .wr-score-group { flex: 1; }
         .wr-score-group .small-label { text-transform: uppercase; letter-spacing: 2px; font-weight: 700; opacity: 0.5; font-size: 0.85rem; margin-bottom: 10px; display: block; }
         
-        /* [修改] 核心分数样式：发光 + 强调色 */
         .wr-score-group .big-val { 
             font-family: 'Exo 2'; 
             font-size: 5.5rem; 
@@ -208,18 +205,17 @@
             margin-bottom: 10px; 
             display: block; 
             color: var(--accent);
-            text-shadow: 0 0 20px rgba(0, 240, 255, 0.4); 
-            min-width: 300px; /* 防止动画时宽度跳动 */
+            text-shadow: 0 0 40px rgba(46, 154, 255, 0.3); 
+            min-width: 300px;
         }
         
         .wr-score-group .sub-label { font-size: 1.2rem; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; }
 
-        .wr-awards-group { text-align: right; border-left: 1px solid rgba(0,0,0,0.1); padding-left: 50px; }
+        .wr-awards-group { text-align: right; border-left: 1px solid var(--border-main); padding-left: 50px; }
         .wr-awards-group .small-label { text-transform: uppercase; letter-spacing: 1px; font-weight: 700; opacity: 0.6; font-size: 0.85rem; margin-bottom: 8px; display: block; }
-        .wr-awards-group .award-title { font-family: 'Exo 2'; font-size: 2.2rem; font-weight: 800; letter-spacing: -1px; margin-bottom: 5px; display: block; }
-        .wr-awards-group .member-tag { font-size: 0.9rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; opacity: 0.9; }
+        .wr-awards-group .award-title { font-family: 'Exo 2'; font-size: 2.2rem; font-weight: 800; letter-spacing: -1px; margin-bottom: 5px; display: block; color: #fff; }
+        .wr-awards-group .member-tag { font-size: 0.9rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: var(--text-body); }
 
-        /* Video Grid (Facade Pattern) */
         .video-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0; margin-top: 50px; border: 1px solid var(--border-main); }
         .video-card { padding: 0; position: relative; border-right: 1px solid var(--border-main); }
         .video-card:last-child { border-right: none; }
@@ -228,7 +224,6 @@
             display: flex; justify-content: space-between; font-family: 'Exo 2'; font-weight: 700; font-size: 0.9rem; color: var(--text-dim);
         }
         
-        /* [修改] 视频懒加载样式 */
         .video-wrapper { position: relative; padding-bottom: 56.25%; height: 0; background: #000; overflow: hidden; cursor: pointer; }
         .video-wrapper iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none; }
         
@@ -236,17 +231,24 @@
             position: absolute; top: 0; left: 0; width: 100%; height: 100%;
             background-size: cover; background-position: center;
             display: flex; align-items: center; justify-content: center;
-            transition: transform 0.3s;
+            transition: transform 0.5s;
         }
-        .video-facade:hover { transform: scale(1.02); }
-        .play-btn {
-            width: 60px; height: 60px; background: rgba(0,0,0,0.7); border: 2px solid var(--accent);
-            border-radius: 50%; display: flex; align-items: center; justify-content: center;
-            color: var(--accent); font-size: 24px; pointer-events: none;
-            box-shadow: 0 0 15px rgba(0, 240, 255, 0.3);
+        .video-facade:hover { transform: scale(1.05); }
+        .video-facade::after {
+            content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.3); transition: 0.3s;
         }
+        .video-facade:hover::after { background: rgba(0,0,0,0.1); }
 
-        /* About Layout */
+        .play-btn {
+            width: 70px; height: 70px; 
+            background: rgba(5,5,5,0.8); border: 1px solid var(--accent);
+            border-radius: 50%; display: flex; align-items: center; justify-content: center;
+            color: var(--accent); font-size: 24px; pointer-events: none; z-index: 2;
+            box-shadow: 0 0 20px rgba(46, 154, 255, 0.2);
+            transition: 0.3s;
+        }
+        .video-facade:hover .play-btn { transform: scale(1.1); background: var(--accent); color: #000; box-shadow: 0 0 30px rgba(46, 154, 255, 0.6); }
+
         .split-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; margin-top: 60px; }
         .text-block p { margin-bottom: 25px; color: var(--text-body); }
         
@@ -255,25 +257,23 @@
             padding: 25px 0; border-bottom: 1px solid var(--border-main); 
             display: grid; grid-template-columns: 120px 1fr; align-items: baseline;
         }
-        .m-year { font-family: 'Exo 2'; color: var(--text-dim); font-weight: 700; }
+        .m-year { font-family: 'Exo 2'; color: var(--accent); font-weight: 700; opacity: 0.8; }
         .m-title { font-weight: 700; color: #fff; margin-bottom: 5px; display: block; }
         .m-desc { font-size: 0.9rem; color: var(--text-dim); }
 
-        /* Philosophy Grid */
         .philosophy-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 40px; }
         .philo-card {
-            border: 1px solid var(--border-main); padding: 30px; position: relative; transition: 0.3s;
+            border: 1px solid var(--border-main); padding: 30px; position: relative; transition: 0.3s; background: rgba(255,255,255,0.01);
         }
-        .philo-card:hover { border-color: var(--accent); transform: translate(-5px, -5px); box-shadow: 5px 5px 0px rgba(0, 240, 255, 0.1); }
+        .philo-card:hover { border-color: var(--accent); transform: translateY(-5px); background: rgba(46, 154, 255, 0.05); }
         .philo-q { 
             font-family: 'Exo 2'; font-weight: 700; font-size: 1.1rem; color: #fff; 
             margin-bottom: 20px; padding-bottom: 15px; border-bottom: 1px dashed var(--border-main);
         }
 
-        /* Visual Archive */
         #gallery-section {
-            border-top: 1px solid #fff; border-bottom: 1px solid #fff;
-            background: #0a0a0a; padding: 80px 0; margin: 120px 0;
+            border-top: 1px solid var(--border-main); border-bottom: 1px solid var(--border-main);
+            background: #080808; padding: 80px 0; margin: 120px 0;
         }
         .gallery-tabs {
             display: flex; gap: 2px; margin-bottom: 40px; background: var(--border-main); padding: 1px;
@@ -283,7 +283,7 @@
             font-family: 'Exo 2'; font-weight: 700; font-size: 0.9rem; cursor: pointer;
             text-transform: uppercase; letter-spacing: 1px; transition: 0.3s; padding: 20px 0;
         }
-        .g-tab.active, .g-tab:hover { background: #1a1a1a; color: var(--accent); }
+        .g-tab.active, .g-tab:hover { background: #111; color: var(--accent); }
         
         .gallery-viewer { display: grid; grid-template-columns: 2fr 1fr; gap: 0; border: 1px solid var(--border-main); }
         .g-display {
@@ -295,35 +295,33 @@
         .g-info { padding: 40px; display: flex; flex-direction: column; justify-content: space-between; }
         .g-controls { display: flex; gap: 40px; margin-top: 40px; }
         .g-btn {
-            width: 60px; height: 60px; border: 1px solid #fff; background: rgba(255,255,255,0.05);
+            width: 60px; height: 60px; border: 1px solid var(--border-main); background: rgba(255,255,255,0.02);
             color: #fff; cursor: pointer; transition: 0.3s; display: flex; align-items: center; justify-content: center;
         }
-        .g-btn:hover { background: #fff; color: #000; }
+        .g-btn:hover { background: var(--accent); color: #fff; border-color: var(--accent); }
 
-        /* Card Grid (Bento) */
         .card-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
         .card {
-            border: 1px solid var(--border-main); padding: 30px; background: #050505;
+            border: 1px solid var(--border-main); padding: 30px; background: #0a0a0a;
             transition: all 0.3s; position: relative;
         }
         .card::after {
             content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-            border: 1px solid var(--accent); opacity: 0; transform: translate(5px, 5px); transition: 0.3s; pointer-events: none;
+            border: 1px solid var(--accent); opacity: 0; transform: scale(0.98); transition: 0.3s; pointer-events: none;
         }
-        .card:hover { transform: translate(-5px, -5px); border-color: var(--accent); }
-        .card:hover::after { opacity: 1; transform: translate(5px, 5px); }
+        .card:hover { transform: translateY(-5px); border-color: transparent; }
+        .card:hover::after { opacity: 1; transform: scale(1); }
         
         .card h3 { font-family: 'Exo 2'; font-size: 1.2rem; margin-bottom: 15px; color: #fff; }
-        .card h3 a { text-decoration: none; color: inherit; }
+        .card h3 a { text-decoration: none; color: inherit; transition: color 0.3s; }
+        .card:hover h3 a { color: var(--accent); }
         .card-footer { margin-top: 30px; padding-top: 15px; border-top: 1px dashed var(--border-main); display: flex; align-items: center; gap: 15px; flex-wrap: wrap; }
         .tag { font-size: 0.7rem; color: var(--text-dim); text-transform: uppercase; font-weight: 600; }
-        .tag.hot { color: var(--accent); text-shadow: 0 0 5px rgba(0, 240, 255, 0.5); }
+        .tag.hot { color: var(--accent); text-shadow: 0 0 10px rgba(46, 154, 255, 0.4); }
         
-        /* [修改] DevIcon 样式 */
         .devicon-icon { font-size: 1.4rem; color: var(--text-dim); transition: 0.3s; }
         .card:hover .devicon-icon { color: #fff; }
 
-        /* Compact Footer */
         footer { 
             padding: 30px 0 40px; text-align: center; 
             border-top: 1px solid var(--border-main); margin-top: 60px; background: #000;
@@ -338,10 +336,9 @@
             background: rgba(255,255,255,0.02);
         }
         .social-btn svg { width: 16px; height: 16px; fill: currentColor; }
-        .social-btn:hover { border-color: var(--accent); color: var(--accent); background: rgba(0, 240, 255, 0.1); transform: translateY(-2px); }
+        .social-btn:hover { border-color: var(--accent); color: var(--accent); background: rgba(46, 154, 255, 0.1); transform: translateY(-2px); }
         .copyright { font-size: 0.7rem; color: var(--text-dim); letter-spacing: 1px; opacity: 0.6; }
 
-        /* Animations */
         .reveal { opacity: 0; transform: translateY(20px); transition: all 0.6s ease; }
         .reveal.active { opacity: 1; transform: translateY(0); }
 
@@ -354,18 +351,15 @@
             .nav-links { display: none; }
             .section-title { font-size: 2.2rem; }
             .wr-banner { flex-direction: column; text-align: center; gap: 20px; padding: 30px; }
-            .wr-awards-group { border-left: none; padding-left: 0; border-top: 1px solid rgba(0,0,0,0.1); padding-top: 20px; width: 100%; }
+            .wr-awards-group { border-left: none; padding-left: 0; border-top: 1px solid var(--border-main); padding-top: 20px; width: 100%; text-align: center; }
         }
     </style>
 </head>
 <body>
 
-    <!-- [修改] 修复粒子容器位置和层级 -->
-    <div id="particles-js" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 1; pointer-events: none;"></div>
+    <canvas id="bg-canvas"></canvas>
     
-    <!-- [修改] 增加扫描线 -->
     <div class="scan-line"></div>
-
     <div id="cursor-glow"></div>
 
     <nav class="navbar">
@@ -380,7 +374,6 @@
         </ul>
     </nav>
 
-    <!-- HERO SECTION -->
     <section id="hero">
         <div class="hero-grid">
             <div class="hero-title-box reveal">
@@ -408,7 +401,6 @@
 
     <main class="container">
         
-        <!-- ABOUT -->
         <section id="about" class="reveal">
             <div class="section-header">
                 <h2 class="section-title">About Me</h2>
@@ -442,7 +434,6 @@
                             <span class="m-year">2024-25</span>
                             <div>
                                 <span class="m-title">Design Award 1st & Control Award 1st</span>
-                                <!-- [修改] 补充 Think Award 2nd 信息 -->
                                 <span class="m-desc">荣获 Think Award 2nd。凭借卓越的机械设计与算法统治赛场。</span>
                             </div>
                         </li>
@@ -458,7 +449,6 @@
             </div>
         </section>
 
-        <!-- RECORD -->
         <section id="record" class="reveal" style="margin-top: 120px;">
             <div class="section-header">
                 <h2 class="section-title">Performance</h2>
@@ -468,7 +458,6 @@
             <div class="wr-banner">
                 <div class="wr-score-group">
                     <span class="small-label">BEIJING QUALIFIER #2</span>
-                    <!-- [修改] 添加 id 用于数字滚动动画 -->
                     <span class="big-val" id="score-counter">0</span>
                     <span class="sub-label">WORLD RECORD SCORE</span>
                 </div>
@@ -480,7 +469,6 @@
             </div>
 
             <div class="video-grid">
-                <!-- [修改] 视频懒加载结构 (Facade Pattern) -->
                 <div class="video-card">
                     <div class="video-header">
                         <span>MATCH 4 (WORLD RECORD)</span>
@@ -506,7 +494,6 @@
             </div>
         </section>
 
-        <!-- PHILOSOPHY -->
         <section id="philosophy" class="reveal" style="margin-top: 120px;">
             <div class="section-header">
                 <h2 class="section-title">Philosophy</h2>
@@ -528,7 +515,6 @@
             </div>
         </section>
 
-        <!-- VISUAL ARCHIVE -->
         <section id="gallery-section" class="reveal">
             <div class="container" style="padding: 0;">
                 <div class="section-header" style="border-bottom: none;">
@@ -545,7 +531,6 @@
 
                 <div class="gallery-viewer">
                     <div class="g-display" id="gallery-display">
-                        <!-- Content -->
                     </div>
                     <div class="g-info">
                         <div>
@@ -562,7 +547,6 @@
             </div>
         </section>
 
-        <!-- KNOWLEDGE (FULL 8 ARTICLES) -->
         <section id="articles" class="reveal" style="margin-top: 150px;">
             <div class="section-header">
                 <h2 class="section-title">Knowledge</h2>
@@ -612,80 +596,67 @@
             </div>
         </section>
 
-        <!-- PORTFOLIO (FULL 12 PROJECTS) -->
         <section id="projects" class="reveal" style="margin-top: 150px;">
             <div class="section-header">
                 <h2 class="section-title">Portfolio</h2>
                 <span class="section-subtitle">Open Source</span>
             </div>
             <div class="card-grid">
-                <!-- P1 -->
                 <div class="card" style="border-color: #fff;">
                     <h3><a href="https://github.com/BlueDarkUP/FTC-27570-DECODE" target="_blank">FTC 27570 DECODE (WR)</a></h3>
                     <p>FTC DECODE 赛季 27570 战队的完整代码库。包含324分世界纪录的核心算法、全自动状态机与视觉抓取逻辑。</p>
                     <div class="card-footer"><span class="tag hot">WR Code</span><i class="devicon-icon devicon-java-plain"></i></div>
                 </div>
-                <!-- P2 -->
                 <div class="card">
                     <h3><a href="https://github.com/BlueDarkUP/FTC-27570-INTOTHEDEEP-WRC" target="_blank">FTC 27570 Team Code (WRC)</a></h3>
                     <p>集成 L3 级辅助驾驶和智能视觉抓取系统，作为赛季总结和技术沉淀，为社区提供参考。</p>
                     <div class="card-footer"><i class="devicon-icon devicon-java-plain"></i><span class="tag">RoadRunner</span></div>
                 </div>
-                <!-- P3 -->
                 <div class="card">
                     <h3><a href="https://github.com/BlueDarkUP/FTC-INTO-THE-DEEP-VISION-for-19705" target="_blank">Vision System 19705</a></h3>
                     <p>为 19705 队开发的竞赛级视觉系统。在休斯顿世锦赛实战验证，实现平均2秒/次的抓取速度。</p>
                     <div class="card-footer"><i class="devicon-icon devicon-opencv-plain"></i><i class="devicon-icon devicon-java-plain"></i></div>
                 </div>
-                <!-- P4 -->
                 <div class="card">
                     <h3><a href="https://github.com/BlueDarkUP/Zero-to-YOLO-Yard" target="_blank">Zero-to-YOLO-Yard</a></h3>
                     <p>集成 SAM 模型的本地数据标注平台。将数据标注时间从平均2分钟缩短到15秒，效率提升8倍。</p>
                     <div class="card-footer"><i class="devicon-icon devicon-python-plain"></i><span class="tag">SAM 2.1</span></div>
                 </div>
-                <!-- P5 -->
                 <div class="card">
                     <h3><a href="https://github.com/BlueDarkUP/FTC-Easy-TFLITE" target="_blank">FTC-Easy-TFLITE</a></h3>
                     <p>本地 MLOps 流水线，实现了 TFLite 物体检测模型的自动化训练、量化和部署。</p>
                     <div class="card-footer"><i class="devicon-icon devicon-tensorflow-original"></i><span class="tag">MLOps</span></div>
                 </div>
-                <!-- P6 -->
                 <div class="card">
                     <h3><a href="https://github.com/BlueDarkUP/Easy-YOLO-Augmenter" target="_blank">Easy-YOLO-Augmenter</a></h3>
                     <p>直观的桌面应用，无需编码即可增强YOLO格式的图像数据集。基于多进程并行处理。</p>
                     <div class="card-footer"><i class="devicon-icon devicon-python-plain"></i><span class="tag">PyQt5</span></div>
                 </div>
-                <!-- P7 -->
                 <div class="card">
                     <h3><a href="https://github.com/BlueDarkUP/Yolo2TFRecord" target="_blank">Yolo2TFRecord</a></h3>
                     <p>将 YOLO 格式标注数据集转换为 TFRecord 格式的 Python 脚本，自动解析配置。</p>
                     <div class="card-footer"><span class="tag">Utility</span><i class="devicon-icon devicon-python-plain"></i></div>
                 </div>
-                <!-- P8 -->
                 <div class="card">
                     <h3><a href="https://github.com/BlueDarkUP/FLL-AquaHunter" target="_blank">FLL-AquaHunter</a></h3>
                     <p>FLL 水下机器人 (ROV) 视觉系统，自主识别、追踪并抓取狮子鱼。解决真实场景问题。</p>
                     <div class="card-footer"><span class="tag">YOLOv8</span><span class="tag">SORT</span></div>
                 </div>
-                <!-- P9 -->
                 <div class="card">
                     <h3><a href="https://github.com/BlueDarkUP/AIRS-RM-2025" target="_blank">RM-Hunter (RMYC)</a></h3>
                     <p>RoboMaster 青年赛自主守卫机器人。将在 FTC 积累的视觉自瞄与 PID 控制算法迁移应用。</p>
                     <div class="card-footer"><i class="devicon-icon devicon-cplusplus-plain"></i><span class="tag">Vision</span></div>
                 </div>
-                <!-- P10 -->
                 <div class="card">
                     <h3><a href="https://github.com/BlueDarkUP/Scanventory" target="_blank">Scanventory</a></h3>
                     <p>专为国企设计的开源固定资产盘点安卓应用。手机扫码盘点，纯本地数据处理。</p>
                     <div class="card-footer"><i class="devicon-icon devicon-android-plain"></i><i class="devicon-icon devicon-kotlin-plain"></i></div>
                 </div>
-                <!-- P11 -->
                 <div class="card">
                     <h3><a href="https://github.com/BlueDarkUP/FTC-Servo-Angle-Control" target="_blank">FTC-Servo-Angle-Control</a></h3>
                     <p>即插即用工具，让 FTC 开发者能用直观的角度（而非小数）来控制舵机。</p>
                     <div class="card-footer"><span class="tag">Library</span><i class="devicon-icon devicon-java-plain"></i></div>
                 </div>
-                <!-- P12 -->
                 <div class="card">
                     <h3><a href="https://github.com/BlueDarkUP/FTC-27570-INTO-THE-DEEP" target="_blank">FTC 27570 Archive</a></h3>
                     <p>27570队的赛季早期代码库。融合了自动驾驶和第一版视觉，是赢得控制奖的关键。</p>
@@ -696,36 +667,24 @@
 
     </main>
 
-    <!-- FOOTER -->
     <footer>
         <div class="footer-content">
             <div class="social-links">
-                <!-- Email -->
                 <a href="mailto:BlueDarkUP@Gmail.com" class="social-btn" title="Email" aria-label="Email">
                     <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
                 </a>
-                
-                <!-- GitHub -->
                 <a href="https://github.com/BlueDarkUP" target="_blank" class="social-btn" title="GitHub" aria-label="GitHub">
                     <svg viewBox="0 0 24 24"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.12-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.665 1.653.255 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
                 </a>
-
-                <!-- CSDN -->
                 <a href="https://blog.csdn.net/weixin_55053322" target="_blank" class="social-btn" title="CSDN" aria-label="CSDN">
                     <svg viewBox="0 0 24 24"><path d="M2.8,7.3h1.8c0.6,0,1.1,0.2,1.5,0.6c0.4,0.4,0.6,0.9,0.6,1.5c0,0.6-0.2,1.1-0.6,1.5C5.7,11.3,5.2,11.5,4.6,11.5H2.8V7.3z M2.8,12.7h1.9c0.7,0,1.2,0.2,1.7,0.6c0.4,0.4,0.7,1,0.7,1.6c0,0.7-0.2,1.2-0.7,1.7c-0.4,0.4-1,0.6-1.7,0.6H2.8V12.7z M0.8,5.3h3.9c1.2,0,2.1,0.3,2.9,1c0.7,0.6,1.1,1.5,1.1,2.5c0,0.8-0.2,1.5-0.6,2.1c-0.4,0.6-1,1-1.7,1.3c0.9,0.2,1.6,0.7,2.1,1.3c0.5,0.7,0.8,1.5,0.8,2.4c0,1.1-0.4,2-1.2,2.7c-0.8,0.7-1.8,1-3.1,1H0.8V5.3z M13.4,19.7c-1.3,0-2.4-0.4-3.3-1.3c-0.9-0.9-1.3-2-1.3-3.4s0.4-2.5,1.3-3.4c0.9-0.9,2-1.3,3.3-1.3c0.9,0,1.8,0.2,2.5,0.7l-0.8,1.6c-0.5-0.3-1.1-0.5-1.7-0.5c-0.7,0-1.3,0.2-1.8,0.7c-0.5,0.5-0.7,1.1-0.7,1.9s0.2,1.5,0.7,1.9c0.5,0.5,1.1,0.7,1.8,0.7c0.7,0,1.3-0.2,1.8-0.6l0.8,1.6C15.2,19.4,14.4,19.7,13.4,19.7z M19.4,12.2h1.9c1.6,0,2.8,0.4,3.7,1.1c0.9,0.7,1.3,1.8,1.3,3.1c0,1.4-0.4,2.4-1.3,3.2c-0.9,0.7-2.1,1.1-3.7,1.1h-3.8v-8.5H19.4z M19.4,18.7h1.8c1,0,1.7-0.2,2.2-0.6c0.5-0.4,0.7-1,0.7-1.8c0-0.8-0.2-1.4-0.7-1.8c-0.5-0.4-1.2-0.6-2.2-0.6h-1.8V18.7z"/></svg>
                 </a>
-
-                <!-- Bilibili -->
                 <a href="https://b23.tv/uS269Ud" target="_blank" class="social-btn" title="Bilibili" aria-label="Bilibili">
                     <svg viewBox="0 0 24 24"><path d="M17.813 4.653h.854c1.51.054 2.769.746 3.792 2.073 1.023 1.327 1.535 2.872 1.535 4.636 0 1.764-.512 3.309-1.535 4.636-1.023 1.327-2.282 2.019-3.778 2.073H5.319c-1.496-.054-2.755-.746-3.778-2.073C.518 14.671.006 13.126.006 11.362c0-1.764.512-3.309 1.535-4.636C2.564 5.399 3.823 4.707 5.319 4.653h.868L4.301 2.083 6.098.804l1.83 2.614h8.144l1.83-2.614 1.797 1.279L17.813 4.653zM10.02 9.204H8.337v4.444h1.683V9.204zm5.643 0h-1.683v4.444h1.683V9.204z"/></svg>
                 </a>
-
-                <!-- YouTube -->
                 <a href="https://www.youtube.com/@BlueDarkUP" target="_blank" class="social-btn" title="YouTube" aria-label="YouTube">
                     <svg viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
                 </a>
-
-                <!-- Xiaohongshu -->
                 <a href="https://www.xiaohongshu.com/user/profile/649af09a000000002a0355b1" target="_blank" class="social-btn" title="Xiaohongshu" aria-label="Xiaohongshu">
                     <svg viewBox="0 0 24 24"><path d="M18 2H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zM6 4h5v8l-2.5-1.5L6 12V4z"/></svg>
                 </a>
@@ -734,9 +693,80 @@
         </div>
     </footer>
 
-    <!-- Scripts -->
-    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
     <script>
+        const canvas = document.getElementById('bg-canvas');
+        const ctx = canvas.getContext('2d');
+        let width, height;
+        let particles = [];
+        const particleCount = 70;
+        const connectionDistance = 150;
+
+        function resize() {
+            width = canvas.width = window.innerWidth;
+            height = canvas.height = window.innerHeight;
+        }
+
+        class Particle {
+            constructor() {
+                this.x = Math.random() * width;
+                this.y = Math.random() * height;
+                this.vx = (Math.random() - 0.5) * 0.5;
+                this.vy = (Math.random() - 0.5) * 0.5;
+                this.size = Math.random() * 2 + 1;
+            }
+
+            update() {
+                this.x += this.vx;
+                this.y += this.vy;
+                if (this.x < 0 || this.x > width) this.vx *= -1;
+                if (this.y < 0 || this.y > height) this.vy *= -1;
+            }
+
+            draw() {
+                ctx.fillStyle = 'rgba(255, 255, 255, 0.5)';
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fill();
+            }
+        }
+
+        function initParticles() {
+            particles = [];
+            for (let i = 0; i < particleCount; i++) {
+                particles.push(new Particle());
+            }
+        }
+
+        function animateParticles() {
+            ctx.clearRect(0, 0, width, height);
+            
+            for (let i = 0; i < particles.length; i++) {
+                particles[i].update();
+                particles[i].draw();
+                
+                for (let j = i + 1; j < particles.length; j++) {
+                    const dx = particles[i].x - particles[j].x;
+                    const dy = particles[i].y - particles[j].y;
+                    const dist = Math.sqrt(dx * dx + dy * dy);
+                    
+                    if (dist < connectionDistance) {
+                        ctx.strokeStyle = `rgba(255, 255, 255, ${0.15 - dist/connectionDistance * 0.15})`;
+                        ctx.lineWidth = 1;
+                        ctx.beginPath();
+                        ctx.moveTo(particles[i].x, particles[i].y);
+                        ctx.lineTo(particles[j].x, particles[j].y);
+                        ctx.stroke();
+                    }
+                }
+            }
+            requestAnimationFrame(animateParticles);
+        }
+
+        window.addEventListener('resize', resize);
+        resize();
+        initParticles();
+        animateParticles();
+
         const galleryData = {
             ftc27570: [
                 { type: 'video', src: 'https://www.youtube.com/embed/9MBhbXIvH68', title: 'Match 4: World Record (324 Pts)', desc: '北京资格赛，全程自动化完美配合，刷新赛季世界纪录。' },
@@ -763,17 +793,15 @@
         let currentCategory = 'ftc27570';
         let currentIndex = 0;
 
-        // [修改] 视频懒加载函数 (Facade Pattern)
         function loadVideo(element) {
             const iframe = document.createElement('iframe');
             iframe.setAttribute('src', element.getAttribute('data-src'));
             iframe.setAttribute('frameborder', '0');
             iframe.setAttribute('allow', 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture');
             iframe.setAttribute('allowfullscreen', 'true');
-            // 清空内容并替换为 iframe
             element.innerHTML = '';
             element.appendChild(iframe);
-            element.removeAttribute('onclick'); // 防止重复点击
+            element.removeAttribute('onclick');
         }
 
         function renderSlide() {
@@ -798,7 +826,6 @@
             renderSlide();
         }
 
-        // [修改] 数字滚动动画函数
         function animateValue(obj, start, end, duration) {
             let startTimestamp = null;
             const step = (timestamp) => {
@@ -815,28 +842,12 @@
         }
 
         window.onload = function() {
-            // [修改] 粒子初始化
-            particlesJS('particles-js', {
-                "particles": {
-                    "number": { "value": 60 },
-                    "color": { "value": "#ffffff" },
-                    "opacity": { "value": 0.05 },
-                    "size": { "value": 2 },
-                    "line_linked": { "enable": true, "distance": 150, "color": "#ffffff", "opacity": 0.02, "width": 1 },
-                    "move": { "enable": true, "speed": 0.5 }
-                }
-            });
-
             renderSlide();
-            
-            // [修改] Scroll Reveal & 数字动画逻辑
             const observerOptions = { threshold: 0.2 };
             const observer = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
                         entry.target.classList.add('active');
-                        
-                        // 触发数字滚动
                         if (entry.target.querySelector('#score-counter') && !entry.target.classList.contains('counted')) {
                             animateValue(document.getElementById('score-counter'), 0, 324, 2000);
                             entry.target.classList.add('counted');
@@ -847,11 +858,10 @@
 
             document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
             
-            // 鼠标光晕
             const glow = document.getElementById('cursor-glow');
             document.addEventListener('mousemove', e => { 
                 requestAnimationFrame(() => {
-                    glow.style.transform = `translate(${e.clientX - 250}px, ${e.clientY - 250}px)`;
+                    glow.style.transform = `translate(${e.clientX}px, ${e.clientY}px)`;
                 });
             });
         }
