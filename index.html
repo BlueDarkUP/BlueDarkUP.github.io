@@ -26,6 +26,9 @@
             --text-dim: #888888;         
             --border-main: rgba(255, 255, 255, 0.25);
             --transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            
+            /* [修改] 引入强调色 */
+            --accent: #00f0ff; 
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -43,6 +46,28 @@
                 linear-gradient(90deg, var(--bg-grid) 1px, transparent 1px);
             background-size: 40px 40px;
             background-position: center top;
+            position: relative; /* 为扫描线定位 */
+        }
+
+        /* [修改] 背景扫描线动画 */
+        .scan-line {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(to right, transparent, var(--accent), transparent);
+            opacity: 0.1;
+            z-index: 0;
+            animation: scan 8s linear infinite;
+            pointer-events: none;
+        }
+
+        @keyframes scan {
+            0% { top: -10%; opacity: 0; }
+            10% { opacity: 0.1; }
+            90% { opacity: 0.1; }
+            100% { top: 110%; opacity: 0; }
         }
 
         /* 鼠标光晕 */
@@ -71,7 +96,9 @@
         }
         .nav-links a:hover { color: #fff; }
         .nav-links a::after {
-            content: ''; position: absolute; bottom: -5px; left: 0; width: 0; height: 1px; background: #fff; transition: width 0.3s;
+            content: ''; position: absolute; bottom: -5px; left: 0; width: 0; height: 1px; 
+            background: var(--accent); /* [修改] Hover 下划线用强调色 */
+            transition: width 0.3s;
         }
         .nav-links a:hover::after { width: 100%; }
 
@@ -95,7 +122,7 @@
             text-transform: uppercase; letter-spacing: 4px; margin-bottom: 5px;
         }
 
-        /* HERO SECTION - 交叉错落布局 */
+        /* HERO SECTION */
         #hero {
             min-height: 100vh; display: flex; align-items: center; justify-content: center;
             position: relative; padding: 100px 5%;
@@ -105,7 +132,6 @@
             width: 100%; max-width: 1400px; position: relative;
         }
         
-        /* 标题框 */
         .hero-title-box {
             grid-column: 1 / 3; 
             z-index: 2;
@@ -114,8 +140,8 @@
             padding: 60px;
             position: relative;
             margin-right: 10%; 
+            backdrop-filter: blur(5px); /* [修改] 增加磨砂质感 */
         }
-        /* 装饰性边角 */
         .corner-deco { position: absolute; width: 10px; height: 10px; border: 2px solid #fff; transition: 0.3s; }
         .hero-title-box:hover .corner-deco { width: 100%; height: 100%; opacity: 0.1; }
         .tl { top: -1px; left: -1px; border-right: none; border-bottom: none; }
@@ -132,7 +158,6 @@
         }
         #hero h1 .highlight { -webkit-text-stroke: 1px #fff; color: transparent; display: block; }
 
-        /* 内容框 - 错位叠加 */
         .hero-content-box {
             grid-column: 2 / 3;
             margin-top: -40px; 
@@ -159,18 +184,34 @@
             content: ''; position: absolute; top: 0; left: -100%; width: 100%; height: 100%;
             background: #fff; transition: all 0.3s; z-index: -1;
         }
-        .btn-main:hover { color: #000; }
-        .btn-main:hover::before { left: 0; }
+        .btn-main:hover { color: #000; border-color: var(--accent); } /* [修改] Hover 边框变色 */
+        .btn-main:hover::before { left: 0; background: var(--accent); } /* [修改] Hover 背景变色 */
 
         /* World Record Banner */
         .wr-banner {
             background: #ffffff; color: #000000; padding: 50px 70px; 
             display: flex; justify-content: space-between; align-items: center; 
             margin-top: 50px; border-radius: 2px;
+            transition: transform 0.3s;
         }
+        .wr-banner:hover { transform: scale(1.01); }
         .wr-score-group { flex: 1; }
         .wr-score-group .small-label { text-transform: uppercase; letter-spacing: 2px; font-weight: 700; opacity: 0.5; font-size: 0.85rem; margin-bottom: 10px; display: block; }
-        .wr-score-group .big-val { font-family: 'Exo 2'; font-size: 5.5rem; line-height: 0.8; font-weight: 800; letter-spacing: -4px; margin-bottom: 10px; display: block; }
+        
+        /* [修改] 核心分数样式：发光 + 强调色 */
+        .wr-score-group .big-val { 
+            font-family: 'Exo 2'; 
+            font-size: 5.5rem; 
+            line-height: 0.8; 
+            font-weight: 800; 
+            letter-spacing: -4px; 
+            margin-bottom: 10px; 
+            display: block; 
+            color: var(--accent);
+            text-shadow: 0 0 20px rgba(0, 240, 255, 0.4); 
+            min-width: 300px; /* 防止动画时宽度跳动 */
+        }
+        
         .wr-score-group .sub-label { font-size: 1.2rem; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; }
 
         .wr-awards-group { text-align: right; border-left: 1px solid rgba(0,0,0,0.1); padding-left: 50px; }
@@ -178,7 +219,7 @@
         .wr-awards-group .award-title { font-family: 'Exo 2'; font-size: 2.2rem; font-weight: 800; letter-spacing: -1px; margin-bottom: 5px; display: block; }
         .wr-awards-group .member-tag { font-size: 0.9rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; opacity: 0.9; }
 
-        /* Video Grid */
+        /* Video Grid (Facade Pattern) */
         .video-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0; margin-top: 50px; border: 1px solid var(--border-main); }
         .video-card { padding: 0; position: relative; border-right: 1px solid var(--border-main); }
         .video-card:last-child { border-right: none; }
@@ -186,8 +227,24 @@
             padding: 15px 20px; border-bottom: 1px solid var(--border-main);
             display: flex; justify-content: space-between; font-family: 'Exo 2'; font-weight: 700; font-size: 0.9rem; color: var(--text-dim);
         }
-        .video-wrapper { position: relative; padding-bottom: 56.25%; height: 0; background: #000; }
+        
+        /* [修改] 视频懒加载样式 */
+        .video-wrapper { position: relative; padding-bottom: 56.25%; height: 0; background: #000; overflow: hidden; cursor: pointer; }
         .video-wrapper iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none; }
+        
+        .video-facade {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background-size: cover; background-position: center;
+            display: flex; align-items: center; justify-content: center;
+            transition: transform 0.3s;
+        }
+        .video-facade:hover { transform: scale(1.02); }
+        .play-btn {
+            width: 60px; height: 60px; background: rgba(0,0,0,0.7); border: 2px solid var(--accent);
+            border-radius: 50%; display: flex; align-items: center; justify-content: center;
+            color: var(--accent); font-size: 24px; pointer-events: none;
+            box-shadow: 0 0 15px rgba(0, 240, 255, 0.3);
+        }
 
         /* About Layout */
         .split-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; margin-top: 60px; }
@@ -207,13 +264,13 @@
         .philo-card {
             border: 1px solid var(--border-main); padding: 30px; position: relative; transition: 0.3s;
         }
-        .philo-card:hover { border-color: #fff; transform: translate(-5px, -5px); box-shadow: 5px 5px 0px rgba(255,255,255,0.1); }
+        .philo-card:hover { border-color: var(--accent); transform: translate(-5px, -5px); box-shadow: 5px 5px 0px rgba(0, 240, 255, 0.1); }
         .philo-q { 
             font-family: 'Exo 2'; font-weight: 700; font-size: 1.1rem; color: #fff; 
             margin-bottom: 20px; padding-bottom: 15px; border-bottom: 1px dashed var(--border-main);
         }
 
-        /* Visual Archive - Tab Console Style */
+        /* Visual Archive */
         #gallery-section {
             border-top: 1px solid #fff; border-bottom: 1px solid #fff;
             background: #0a0a0a; padding: 80px 0; margin: 120px 0;
@@ -226,7 +283,7 @@
             font-family: 'Exo 2'; font-weight: 700; font-size: 0.9rem; cursor: pointer;
             text-transform: uppercase; letter-spacing: 1px; transition: 0.3s; padding: 20px 0;
         }
-        .g-tab.active, .g-tab:hover { background: #1a1a1a; color: #fff; }
+        .g-tab.active, .g-tab:hover { background: #1a1a1a; color: var(--accent); }
         
         .gallery-viewer { display: grid; grid-template-columns: 2fr 1fr; gap: 0; border: 1px solid var(--border-main); }
         .g-display {
@@ -243,7 +300,7 @@
         }
         .g-btn:hover { background: #fff; color: #000; }
 
-        /* Card Grid (Bento) - 线框风格 */
+        /* Card Grid (Bento) */
         .card-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
         .card {
             border: 1px solid var(--border-main); padding: 30px; background: #050505;
@@ -251,16 +308,20 @@
         }
         .card::after {
             content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-            border: 1px solid #fff; opacity: 0; transform: translate(5px, 5px); transition: 0.3s; pointer-events: none;
+            border: 1px solid var(--accent); opacity: 0; transform: translate(5px, 5px); transition: 0.3s; pointer-events: none;
         }
-        .card:hover { transform: translate(-5px, -5px); border-color: #fff; }
+        .card:hover { transform: translate(-5px, -5px); border-color: var(--accent); }
         .card:hover::after { opacity: 1; transform: translate(5px, 5px); }
         
         .card h3 { font-family: 'Exo 2'; font-size: 1.2rem; margin-bottom: 15px; color: #fff; }
         .card h3 a { text-decoration: none; color: inherit; }
-        .card-footer { margin-top: 30px; padding-top: 15px; border-top: 1px dashed var(--border-main); display: flex; gap: 10px; flex-wrap: wrap; }
+        .card-footer { margin-top: 30px; padding-top: 15px; border-top: 1px dashed var(--border-main); display: flex; align-items: center; gap: 15px; flex-wrap: wrap; }
         .tag { font-size: 0.7rem; color: var(--text-dim); text-transform: uppercase; font-weight: 600; }
-        .tag.hot { color: #fff; }
+        .tag.hot { color: var(--accent); text-shadow: 0 0 5px rgba(0, 240, 255, 0.5); }
+        
+        /* [修改] DevIcon 样式 */
+        .devicon-icon { font-size: 1.4rem; color: var(--text-dim); transition: 0.3s; }
+        .card:hover .devicon-icon { color: #fff; }
 
         /* Compact Footer */
         footer { 
@@ -277,7 +338,7 @@
             background: rgba(255,255,255,0.02);
         }
         .social-btn svg { width: 16px; height: 16px; fill: currentColor; }
-        .social-btn:hover { border-color: #fff; color: #fff; background: rgba(255,255,255,0.1); transform: translateY(-2px); }
+        .social-btn:hover { border-color: var(--accent); color: var(--accent); background: rgba(0, 240, 255, 0.1); transform: translateY(-2px); }
         .copyright { font-size: 0.7rem; color: var(--text-dim); letter-spacing: 1px; opacity: 0.6; }
 
         /* Animations */
@@ -298,6 +359,12 @@
     </style>
 </head>
 <body>
+
+    <!-- [修改] 修复粒子容器位置和层级 -->
+    <div id="particles-js" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 1; pointer-events: none;"></div>
+    
+    <!-- [修改] 增加扫描线 -->
+    <div class="scan-line"></div>
 
     <div id="cursor-glow"></div>
 
@@ -322,7 +389,6 @@
                     Lead Developer<br>
                     <span class="highlight">of World Record Team</span>
                 </h1>
-                <!-- Decor -->
                 <div class="corner-deco tl"></div><div class="corner-deco br"></div>
             </div>
             <div class="hero-content-box reveal">
@@ -352,7 +418,7 @@
                 <div class="text-block">
                     <p>我是一名来自北京市八一学校 Grade 12 的学生，也是机器人竞赛团队 <strong>FTC Team 27570</strong> 的核心成员与技术负责人。我对人工智能、机器学习、计算机视觉以及全栈开发充满热情。</p>
                     <p>在 2025-2026 赛季中，我主导了机器人控制系统的架构重构，带领队伍刷新了赛季世界纪录，并夺得了北京资格赛的冠军联盟。我的工程理念超越了单纯的“写代码”，而是专注于“构建系统”——将复杂的想法转化为稳定、可复用、极致高效的工程解决方案。</p>
-                    <p style="border-left: 2px solid #fff; padding-left: 15px; color: #fff;">
+                    <p style="border-left: 2px solid var(--accent); padding-left: 15px; color: #fff;">
                         我致力于技术普惠，已累计为来自世界各地的 <strong>20 余支队伍</strong> 提供技术支持与指导，并开发了 Zero-to-YOLO-Yard 等工具来降低 AI 技术门槛。
                     </p>
                 </div>
@@ -376,7 +442,8 @@
                             <span class="m-year">2024-25</span>
                             <div>
                                 <span class="m-title">Design Award 1st & Control Award 1st</span>
-                                <span class="m-desc">同时荣获 Think Award 3rd。凭借卓越的机械设计与算法统治赛场。</span>
+                                <!-- [修改] 补充 Think Award 2nd 信息 -->
+                                <span class="m-desc">荣获 Think Award 2nd。凭借卓越的机械设计与算法统治赛场。</span>
                             </div>
                         </li>
                         <li class="milestone-item">
@@ -401,7 +468,8 @@
             <div class="wr-banner">
                 <div class="wr-score-group">
                     <span class="small-label">BEIJING QUALIFIER #2</span>
-                    <span class="big-val">324 POINTS</span>
+                    <!-- [修改] 添加 id 用于数字滚动动画 -->
+                    <span class="big-val" id="score-counter">0</span>
                     <span class="sub-label">WORLD RECORD SCORE</span>
                 </div>
                 <div class="wr-awards-group">
@@ -412,13 +480,16 @@
             </div>
 
             <div class="video-grid">
+                <!-- [修改] 视频懒加载结构 (Facade Pattern) -->
                 <div class="video-card">
                     <div class="video-header">
                         <span>MATCH 4 (WORLD RECORD)</span>
                         <span>FULL REPLAY</span>
                     </div>
                     <div class="video-wrapper">
-                        <iframe src="https://www.youtube.com/embed/9MBhbXIvH68?rel=0" allowfullscreen></iframe>
+                        <div class="video-facade" data-src="https://www.youtube.com/embed/9MBhbXIvH68?autoplay=1" style="background-image: url('https://img.youtube.com/vi/9MBhbXIvH68/maxresdefault.jpg');" onclick="loadVideo(this)">
+                            <div class="play-btn">▶</div>
+                        </div>
                     </div>
                 </div>
                 <div class="video-card">
@@ -427,7 +498,9 @@
                         <span>80 PTS AUTO</span>
                     </div>
                     <div class="video-wrapper">
-                        <iframe src="https://www.youtube.com/embed/4sGTzN58i5w?rel=0" allowfullscreen></iframe>
+                         <div class="video-facade" data-src="https://www.youtube.com/embed/4sGTzN58i5w?autoplay=1" style="background-image: url('https://img.youtube.com/vi/4sGTzN58i5w/maxresdefault.jpg');" onclick="loadVideo(this)">
+                            <div class="play-btn">▶</div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -499,22 +572,22 @@
                 <div class="card" style="border-color: #fff;">
                     <h3><a href="https://grizzly-treatment-ac4.notion.site/PID-257969a5284d80acb2e8c16696312fad" target="_blank">L8: 控制艺术：PID 通用调试指南</a></h3>
                     <p>深入浅出地讲解PID原理，结合图形化分析，提供一套通用的参数整定方法论。</p>
-                    <div class="card-footer"><span class="tag hot">Hot 🔥</span><span class="tag">Control Theory</span></div>
+                    <div class="card-footer"><span class="tag hot">Hot 🔥</span><i class="devicon-icon devicon-cplusplus-plain"></i><span class="tag">Control Theory</span></div>
                 </div>
                 <div class="card">
                     <h3><a href="https://grizzly-treatment-ac4.notion.site/FTC-27570-TeleOp-250969a5284d8075b144dca6f421e9b8" target="_blank">L1: 你的第一个竞赛级 TeleOp</a></h3>
                     <p>学习 LinearOpMode 的基本结构，如何映射硬件，并为Mecanum底盘实现稳健的驱动控制。</p>
-                    <div class="card-footer"><span class="tag">Java</span><span class="tag">Basics</span></div>
+                    <div class="card-footer"><i class="devicon-icon devicon-java-plain"></i><span class="tag">Basics</span></div>
                 </div>
                 <div class="card">
                     <h3><a href="https://grizzly-treatment-ac4.notion.site/FTC-27570-250969a5284d8098bb35c9c637ac0fa3" target="_blank">L2: 集成 Road Runner 的高级控制</a></h3>
                     <p>学习如何将 Road Runner 集成到 TeleOp 中，实现强大的半自动功能，如“一键返回”。</p>
-                    <div class="card-footer"><span class="tag">Motion Profiling</span></div>
+                    <div class="card-footer"><i class="devicon-icon devicon-java-plain"></i><span class="tag">Motion Profiling</span></div>
                 </div>
                 <div class="card">
                     <h3><a href="https://grizzly-treatment-ac4.notion.site/FTC-27570-API-250969a5284d8039bb4ee5f524f3279f" target="_blank">L3: 构建视觉 API (入门)</a></h3>
                     <p>介绍如何设计一个独立的视觉系统。涵盖 OpenCvPipeline 架构与简单的颜色分割算法。</p>
-                    <div class="card-footer"><span class="tag">OpenCV</span><span class="tag">API Design</span></div>
+                    <div class="card-footer"><i class="devicon-icon devicon-opencv-plain"></i><i class="devicon-icon devicon-java-plain"></i></div>
                 </div>
                 <div class="card">
                     <h3><a href="https://grizzly-treatment-ac4.notion.site/FTC-27570-API-250969a5284d808380a8ea220da47436" target="_blank">L4: 生产级视觉系统架构</a></h3>
@@ -524,17 +597,17 @@
                 <div class="card">
                     <h3><a href="https://grizzly-treatment-ac4.notion.site/FTC-27570-250969a5284d802eabe6de3f2173870d" target="_blank">L5: FLL AquaHunter (自主ROV)</a></h3>
                     <p>学习如何从零开始构建一个完整的单脚本AI系统，涵盖水下机器人的视觉伺服。</p>
-                    <div class="card-footer"><span class="tag">Python</span><span class="tag">AI</span></div>
+                    <div class="card-footer"><i class="devicon-icon devicon-python-plain"></i><span class="tag">AI</span></div>
                 </div>
                 <div class="card">
                     <h3><a href="https://grizzly-treatment-ac4.notion.site/FTC-27570-AI-250969a5284d80aa8ccfe5e2bc11e73e" target="_blank">L6: 构建你自己的数据引擎</a></h3>
                     <p>学习如何架构和构建一个用于管理整个机器学习数据生命周期的全栈Web应用。</p>
-                    <div class="card-footer"><span class="tag">Full Stack</span><span class="tag">Flask</span></div>
+                    <div class="card-footer"><i class="devicon-icon devicon-flask-original"></i><span class="tag">Full Stack</span></div>
                 </div>
                 <div class="card">
                     <h3><a href="https://grizzly-treatment-ac4.notion.site/FTC-27570-AI-250969a5284d8001ab71c9365a4827e8" target="_blank">L7: 打造你自己的AI工厂</a></h3>
                     <p>创建一个标准化、自动化和可复现的MLOps流水线，用于训练和部署FTC兼容的模型。</p>
-                    <div class="card-footer"><span class="tag">MLOps</span><span class="tag">TFLite</span></div>
+                    <div class="card-footer"><i class="devicon-icon devicon-tensorflow-original"></i><span class="tag">MLOps</span></div>
                 </div>
             </div>
         </section>
@@ -550,43 +623,43 @@
                 <div class="card" style="border-color: #fff;">
                     <h3><a href="https://github.com/BlueDarkUP/FTC-27570-DECODE" target="_blank">FTC 27570 DECODE (WR)</a></h3>
                     <p>FTC DECODE 赛季 27570 战队的完整代码库。包含324分世界纪录的核心算法、全自动状态机与视觉抓取逻辑。</p>
-                    <div class="card-footer"><span class="tag hot">WR Code</span><span class="tag">Java</span></div>
+                    <div class="card-footer"><span class="tag hot">WR Code</span><i class="devicon-icon devicon-java-plain"></i></div>
                 </div>
                 <!-- P2 -->
                 <div class="card">
                     <h3><a href="https://github.com/BlueDarkUP/FTC-27570-INTOTHEDEEP-WRC" target="_blank">FTC 27570 Team Code (WRC)</a></h3>
                     <p>集成 L3 级辅助驾驶和智能视觉抓取系统，作为赛季总结和技术沉淀，为社区提供参考。</p>
-                    <div class="card-footer"><span class="tag">Java</span><span class="tag">RoadRunner</span></div>
+                    <div class="card-footer"><i class="devicon-icon devicon-java-plain"></i><span class="tag">RoadRunner</span></div>
                 </div>
                 <!-- P3 -->
                 <div class="card">
                     <h3><a href="https://github.com/BlueDarkUP/FTC-INTO-THE-DEEP-VISION-for-19705" target="_blank">Vision System 19705</a></h3>
                     <p>为 19705 队开发的竞赛级视觉系统。在休斯顿世锦赛实战验证，实现平均2秒/次的抓取速度。</p>
-                    <div class="card-footer"><span class="tag">OpenCV</span><span class="tag">Java</span></div>
+                    <div class="card-footer"><i class="devicon-icon devicon-opencv-plain"></i><i class="devicon-icon devicon-java-plain"></i></div>
                 </div>
                 <!-- P4 -->
                 <div class="card">
                     <h3><a href="https://github.com/BlueDarkUP/Zero-to-YOLO-Yard" target="_blank">Zero-to-YOLO-Yard</a></h3>
                     <p>集成 SAM 模型的本地数据标注平台。将数据标注时间从平均2分钟缩短到15秒，效率提升8倍。</p>
-                    <div class="card-footer"><span class="tag">Python</span><span class="tag">SAM 2.1</span><span class="tag">AI Tool</span></div>
+                    <div class="card-footer"><i class="devicon-icon devicon-python-plain"></i><span class="tag">SAM 2.1</span></div>
                 </div>
                 <!-- P5 -->
                 <div class="card">
                     <h3><a href="https://github.com/BlueDarkUP/FTC-Easy-TFLITE" target="_blank">FTC-Easy-TFLITE</a></h3>
                     <p>本地 MLOps 流水线，实现了 TFLite 物体检测模型的自动化训练、量化和部署。</p>
-                    <div class="card-footer"><span class="tag">TensorFlow</span><span class="tag">MLOps</span></div>
+                    <div class="card-footer"><i class="devicon-icon devicon-tensorflow-original"></i><span class="tag">MLOps</span></div>
                 </div>
                 <!-- P6 -->
                 <div class="card">
                     <h3><a href="https://github.com/BlueDarkUP/Easy-YOLO-Augmenter" target="_blank">Easy-YOLO-Augmenter</a></h3>
                     <p>直观的桌面应用，无需编码即可增强YOLO格式的图像数据集。基于多进程并行处理。</p>
-                    <div class="card-footer"><span class="tag">PyQt5</span><span class="tag">Albumentations</span></div>
+                    <div class="card-footer"><i class="devicon-icon devicon-python-plain"></i><span class="tag">PyQt5</span></div>
                 </div>
                 <!-- P7 -->
                 <div class="card">
                     <h3><a href="https://github.com/BlueDarkUP/Yolo2TFRecord" target="_blank">Yolo2TFRecord</a></h3>
                     <p>将 YOLO 格式标注数据集转换为 TFRecord 格式的 Python 脚本，自动解析配置。</p>
-                    <div class="card-footer"><span class="tag">Utility</span><span class="tag">Python</span></div>
+                    <div class="card-footer"><span class="tag">Utility</span><i class="devicon-icon devicon-python-plain"></i></div>
                 </div>
                 <!-- P8 -->
                 <div class="card">
@@ -598,19 +671,19 @@
                 <div class="card">
                     <h3><a href="https://github.com/BlueDarkUP/AIRS-RM-2025" target="_blank">RM-Hunter (RMYC)</a></h3>
                     <p>RoboMaster 青年赛自主守卫机器人。将在 FTC 积累的视觉自瞄与 PID 控制算法迁移应用。</p>
-                    <div class="card-footer"><span class="tag">RoboMaster</span><span class="tag">Vision</span></div>
+                    <div class="card-footer"><i class="devicon-icon devicon-cplusplus-plain"></i><span class="tag">Vision</span></div>
                 </div>
                 <!-- P10 -->
                 <div class="card">
                     <h3><a href="https://github.com/BlueDarkUP/Scanventory" target="_blank">Scanventory</a></h3>
                     <p>专为国企设计的开源固定资产盘点安卓应用。手机扫码盘点，纯本地数据处理。</p>
-                    <div class="card-footer"><span class="tag">Android</span><span class="tag">Kotlin</span></div>
+                    <div class="card-footer"><i class="devicon-icon devicon-android-plain"></i><i class="devicon-icon devicon-kotlin-plain"></i></div>
                 </div>
                 <!-- P11 -->
                 <div class="card">
                     <h3><a href="https://github.com/BlueDarkUP/FTC-Servo-Angle-Control" target="_blank">FTC-Servo-Angle-Control</a></h3>
                     <p>即插即用工具，让 FTC 开发者能用直观的角度（而非小数）来控制舵机。</p>
-                    <div class="card-footer"><span class="tag">Library</span><span class="tag">Java</span></div>
+                    <div class="card-footer"><span class="tag">Library</span><i class="devicon-icon devicon-java-plain"></i></div>
                 </div>
                 <!-- P12 -->
                 <div class="card">
@@ -666,23 +739,23 @@
     <script>
         const galleryData = {
             ftc27570: [
-                { type: 'video', src: '9MBhbXIvH68', title: 'Match 4: World Record (324 Pts)', desc: '北京资格赛，全程自动化完美配合，刷新赛季世界纪录。' },
-                { type: 'video', src: '4sGTzN58i5w', title: 'Match 11: Auto Record (80 Pts)', desc: '展示单机 80 分的极限自动阶段程序。' },
-                { type: 'video', src: '5zU5Di1xkyc', title: '27570 最终视觉系统 Demo', desc: '超高精度视觉系统，支撑自动抓取。' }
+                { type: 'video', src: 'https://www.youtube.com/embed/9MBhbXIvH68', title: 'Match 4: World Record (324 Pts)', desc: '北京资格赛，全程自动化完美配合，刷新赛季世界纪录。' },
+                { type: 'video', src: 'https://www.youtube.com/embed/4sGTzN58i5w', title: 'Match 11: Auto Record (80 Pts)', desc: '展示单机 80 分的极限自动阶段程序。' },
+                { type: 'video', src: 'https://www.youtube.com/embed/5zU5Di1xkyc', title: '27570 最终视觉系统 Demo', desc: '超高精度视觉系统，支撑自动抓取。' }
             ],
             fll: [
-                { type: 'video', src: 'q-FieT4VC1g', title: 'AquaHunter 自动巡航', desc: '自主水下机器人全自动程序测试成功。' },
+                { type: 'video', src: 'https://www.youtube.com/embed/q-FieT4VC1g', title: 'AquaHunter 自动巡航', desc: '自主水下机器人全自动程序测试成功。' },
                 { type: 'image', src: 'images/fll/FLL-W.jpg', title: 'FLL 亚锦赛亚军', desc: '团队在 FLL 亚洲锦标赛中的颁奖时刻。' },
                 { type: 'image', src: 'images/fll/LIONFISHD.jpg', title: '水下视觉推理', desc: 'YOLOv8 模型在水下环境实时识别入侵物种狮子鱼。' }
             ],
             ftcCommunity: [
                 { type: 'image', src: 'images/ftc/HOUSTONW.jpg', title: '休斯顿世锦赛实录', desc: '为 19705 红心机器人提供核心视觉架构支持。' },
-                { type: 'video', src: '3emosyJK48Q', title: '世锦赛：高精度挂杆', desc: '19705 队在休斯顿世锦赛之前的测试录像。' },
-                { type: 'video', src: 'lET75wiYy0s', title: 'Zero2YOLOYard 工具', desc: '集成了 SAM 2.1 的 AI 辅助数据标注工具，大幅提升生产力。' },
+                { type: 'video', src: 'https://www.youtube.com/embed/3emosyJK48Q', title: '世锦赛：高精度挂杆', desc: '19705 队在休斯顿世锦赛之前的测试录像。' },
+                { type: 'video', src: 'https://www.youtube.com/embed/lET75wiYy0s', title: 'Zero2YOLOYard 工具', desc: '集成了 SAM 2.1 的 AI 辅助数据标注工具，大幅提升生产力。' },
                 { type: 'image', src: 'images/ftc/119T.jpg', title: '社区教学：28119', desc: '为新队伍 28119 进行技术讲解，分享视觉系统开发经验。' }
             ],
             robomaster: [
-                { type: 'video', src: 'vaegsY6iSEk', title: 'RM-Hunter 自瞄系统', desc: '步兵机器人基于视觉识别的装甲板自动瞄准与击打。' },
+                { type: 'video', src: 'https://www.youtube.com/embed/vaegsY6iSEk', title: 'RM-Hunter 自瞄系统', desc: '步兵机器人基于视觉识别的装甲板自动瞄准与击打。' },
                 { type: 'image', src: 'images/robomaster/RMSHOOT.jpg', title: '无人机发射装置', desc: 'RoboMaster 无人机挂载的定制乒乓球发射器特写。' }
             ]
         };
@@ -690,11 +763,24 @@
         let currentCategory = 'ftc27570';
         let currentIndex = 0;
 
+        // [修改] 视频懒加载函数 (Facade Pattern)
+        function loadVideo(element) {
+            const iframe = document.createElement('iframe');
+            iframe.setAttribute('src', element.getAttribute('data-src'));
+            iframe.setAttribute('frameborder', '0');
+            iframe.setAttribute('allow', 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture');
+            iframe.setAttribute('allowfullscreen', 'true');
+            // 清空内容并替换为 iframe
+            element.innerHTML = '';
+            element.appendChild(iframe);
+            element.removeAttribute('onclick'); // 防止重复点击
+        }
+
         function renderSlide() {
             const data = galleryData[currentCategory];
             const item = data[currentIndex];
             const display = document.getElementById('gallery-display');
-            display.innerHTML = item.type === 'video' ? `<iframe src="https://www.youtube.com/embed/${item.src}?rel=0" allowfullscreen></iframe>` : `<img src="${item.src}" alt="${item.title}">`;
+            display.innerHTML = item.type === 'video' ? `<iframe src="${item.src}?rel=0" allowfullscreen></iframe>` : `<img src="${item.src}" alt="${item.title}">`;
             document.getElementById('gallery-item-title').textContent = item.title;
             document.getElementById('gallery-item-desc').textContent = item.desc;
             document.getElementById('gallery-counter').textContent = `${String(currentIndex + 1).padStart(2,'0')} / ${String(data.length).padStart(2,'0')}`;
@@ -712,15 +798,62 @@
             renderSlide();
         }
 
+        // [修改] 数字滚动动画函数
+        function animateValue(obj, start, end, duration) {
+            let startTimestamp = null;
+            const step = (timestamp) => {
+                if (!startTimestamp) startTimestamp = timestamp;
+                const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+                obj.innerHTML = Math.floor(progress * (end - start) + start);
+                if (progress < 1) {
+                    window.requestAnimationFrame(step);
+                } else {
+                    obj.innerHTML = end; 
+                }
+            };
+            window.requestAnimationFrame(step);
+        }
+
         window.onload = function() {
-            renderSlide();
-            const reveal = () => document.querySelectorAll('.reveal').forEach(el => {
-                if(el.getBoundingClientRect().top < window.innerHeight - 50) el.classList.add('active');
+            // [修改] 粒子初始化
+            particlesJS('particles-js', {
+                "particles": {
+                    "number": { "value": 60 },
+                    "color": { "value": "#ffffff" },
+                    "opacity": { "value": 0.05 },
+                    "size": { "value": 2 },
+                    "line_linked": { "enable": true, "distance": 150, "color": "#ffffff", "opacity": 0.02, "width": 1 },
+                    "move": { "enable": true, "speed": 0.5 }
+                }
             });
-            window.addEventListener('scroll', reveal); reveal();
-            particlesJS('particles-js', { "particles": { "number": { "value": 40 }, "color": { "value": "#ffffff" }, "opacity": { "value": 0.1 }, "size": { "value": 1 }, "line_linked": { "enable": true, "distance": 150, "color": "#ffffff", "opacity": 0.05, "width": 1 }, "move": { "enable": true, "speed": 1 } } });
+
+            renderSlide();
+            
+            // [修改] Scroll Reveal & 数字动画逻辑
+            const observerOptions = { threshold: 0.2 };
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('active');
+                        
+                        // 触发数字滚动
+                        if (entry.target.querySelector('#score-counter') && !entry.target.classList.contains('counted')) {
+                            animateValue(document.getElementById('score-counter'), 0, 324, 2000);
+                            entry.target.classList.add('counted');
+                        }
+                    }
+                });
+            }, observerOptions);
+
+            document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+            
+            // 鼠标光晕
             const glow = document.getElementById('cursor-glow');
-            document.addEventListener('mousemove', e => { glow.style.left = e.clientX + 'px'; glow.style.top = e.clientY + 'px'; });
+            document.addEventListener('mousemove', e => { 
+                requestAnimationFrame(() => {
+                    glow.style.transform = `translate(${e.clientX - 250}px, ${e.clientY - 250}px)`;
+                });
+            });
         }
     </script>
 </body>
